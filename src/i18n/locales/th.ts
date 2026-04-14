@@ -809,5 +809,7 @@ export default {
     'Relay Reviews': 'รีวิวรีเลย์',
     'New Message': 'ข้อความใหม่',
     'npub, hex key, or username': 'npub, hex key หรือชื่อผู้ใช้',
+    '~{{count}} min read_one': 'อ่านประมาณ {{count}} นาที',
+    '~{{count}} min read_other': 'อ่านประมาณ {{count}} นาที',
   }
 }

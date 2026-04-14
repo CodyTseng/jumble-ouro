@@ -815,5 +815,7 @@ export default {
     'Relay Reviews': '릴레이 리뷰',
     'New Message': '새 메시지',
     'npub, hex key, or username': 'npub, hex 키 또는 사용자 이름',
+    '~{{count}} min read_one': '약 {{count}}분 분량',
+    '~{{count}} min read_other': '약 {{count}}분 분량',
   }
 }

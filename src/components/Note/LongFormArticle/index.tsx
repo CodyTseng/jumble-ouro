@@ -4,9 +4,11 @@ import HighlightButton from '@/components/HighlightButton'
 import PostEditor from '@/components/PostEditor'
 import { getLongFormArticleMetadataFromEvent } from '@/lib/event-metadata'
 import { toNote, toNoteList, toProfile } from '@/lib/link'
+import { estimateReadingMinutes } from '@/lib/reading-time'
 import { ExternalLink } from 'lucide-react'
 import { Event, kinds } from 'nostr-tools'
 import { useMemo, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import NostrNode from './NostrNode'
@@ -20,8 +22,10 @@ export default function LongFormArticle({
   event: Event
   className?: string
 }) {
+  const { t } = useTranslation()
   const { push } = useSecondaryPage()
   const metadata = useMemo(() => getLongFormArticleMetadataFromEvent(event), [event])
+  const readingMinutes = useMemo(() => estimateReadingMinutes(event.content), [event.content])
   const contentRef = useRef<HTMLDivElement>(null)
   const [showHighlightEditor, setShowHighlightEditor] = useState(false)
   const [selectedText, setSelectedText] = useState('')
@@ -94,6 +98,9 @@ export default function LongFormArticle({
         className={`overflow-wrap-anywhere prose prose-zinc max-w-none break-words dark:prose-invert ${className || ''}`}
       >
         <h1 className="break-words">{metadata.title}</h1>
+        <div className="not-prose mb-4 text-sm text-muted-foreground">
+          {t('~{{count}} min read', { count: readingMinutes })}
+        </div>
         {metadata.summary && (
           <blockquote>
             <p className="whitespace-pre-line break-words">{metadata.summary}</p>

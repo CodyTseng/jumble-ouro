@@ -818,5 +818,7 @@ export default {
     'Relay Reviews': 'Relay vélemények',
     'New Message': 'Új üzenet',
     'npub, hex key, or username': 'npub, hex kulcs vagy felhasználónév',
+    '~{{count}} min read_one': '~{{count}} perces olvasmány',
+    '~{{count}} min read_other': '~{{count}} perces olvasmány',
   }
 }

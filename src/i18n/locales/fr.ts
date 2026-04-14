@@ -831,5 +831,7 @@ export default {
     'Relay Reviews': 'Avis sur les relais',
     'New Message': 'Nouveau message',
     'npub, hex key, or username': "npub, clé hex ou nom d'utilisateur",
+    '~{{count}} min read_one': '~{{count}} min de lecture',
+    '~{{count}} min read_other': '~{{count}} min de lecture',
   }
 }

@@ -791,5 +791,7 @@ export default {
     'Relay Reviews': '中繼評價',
     'New Message': '新訊息',
     'npub, hex key, or username': 'npub、hex key 或使用者名稱',
+    '~{{count}} min read_one': '約 {{count}} 分鐘閱讀',
+    '~{{count}} min read_other': '約 {{count}} 分鐘閱讀',
   }
 }

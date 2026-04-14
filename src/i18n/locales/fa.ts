@@ -822,5 +822,7 @@ export default {
     'Relay Reviews': 'بررسی رله‌ها',
     'New Message': 'پیام جدید',
     'npub, hex key, or username': 'npub، کلید hex یا نام کاربری',
+    '~{{count}} min read_one': '~{{count}} دقیقه مطالعه',
+    '~{{count}} min read_other': '~{{count}} دقیقه مطالعه',
   }
 }

@@ -815,5 +815,7 @@ export default {
     'Relay Reviews': 'Relay Reviews',
     'New Message': 'New Message',
     'npub, hex key, or username': 'npub, hex key, or username',
+    '~{{count}} min read_one': '~{{count}} min read',
+    '~{{count}} min read_other': '~{{count}} min read',
   }
 }

@@ -823,5 +823,7 @@ export default {
     'Relay Reviews': 'रिले समीक्षाएँ',
     'New Message': 'नया संदेश',
     'npub, hex key, or username': 'npub, hex कुंजी, या उपयोगकर्ता नाम',
+    '~{{count}} min read_one': '~{{count}} मिनट पढ़ें',
+    '~{{count}} min read_other': '~{{count}} मिनट पढ़ें',
   }
 }
