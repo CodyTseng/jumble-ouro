@@ -817,5 +817,16 @@ export default {
     'npub, hex key, or username': 'npub, hex key, or username',
     '~{{count}} min read_one': '~{{count}} min read',
     '~{{count}} min read_other': '~{{count}} min read',
+    'Welcome to Jumble Ouro': 'Welcome to Jumble Ouro',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.',
+    'How to propose a feature': 'How to propose a feature',
+    'Open a new GitHub issue describing the feature you want to see.':
+      'Open a new GitHub issue describing the feature you want to see.',
+    'How to vote on proposals': 'How to vote on proposals',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.',
+    'Open GitHub issues': 'Open GitHub issues',
+    "Let's go": "Let's go",
   }
 }

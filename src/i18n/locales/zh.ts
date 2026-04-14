@@ -798,5 +798,16 @@ export default {
     'npub, hex key, or username': 'npub、hex key 或用户名',
     '~{{count}} min read_one': '约 {{count}} 分钟阅读',
     '~{{count}} min read_other': '约 {{count}} 分钟阅读',
+    'Welcome to Jumble Ouro': '欢迎来到 Jumble Ouro',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro 是一款由社区驱动的 Nostr 客户端。以 GitHub issue 形式提交的功能提案，在社区投票通过后会被自动实现。',
+    'How to propose a feature': '如何提议新功能',
+    'Open a new GitHub issue describing the feature you want to see.':
+      '在 GitHub 上新建一个 issue，描述你希望看到的功能。',
+    'How to vote on proposals': '如何为提案投票',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      '在已有的 GitHub issue 上点 👍。获得足够票数的提案会被自动实现。',
+    'Open GitHub issues': '打开 GitHub issues',
+    "Let's go": '出发',
   }
 }

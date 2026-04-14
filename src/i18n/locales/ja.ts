@@ -823,5 +823,16 @@ export default {
     'npub, hex key, or username': 'npub、hexキー、またはユーザー名',
     '~{{count}} min read_one': '約{{count}}分で読めます',
     '~{{count}} min read_other': '約{{count}}分で読めます',
+    'Welcome to Jumble Ouro': 'Jumble Ouro へようこそ',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro はコミュニティ主導の Nostr クライアントです。GitHub の issue として提出された機能提案は、コミュニティの投票を得ると自動的に実装されます。',
+    'How to propose a feature': '機能を提案する方法',
+    'Open a new GitHub issue describing the feature you want to see.':
+      '追加してほしい機能を説明する新しい GitHub issue を作成してください。',
+    'How to vote on proposals': '提案に投票する方法',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      '既存の GitHub issue に 👍 でリアクションしてください。十分な票を得た提案は自動的に実装されます。',
+    'Open GitHub issues': 'GitHub issue を開く',
+    "Let's go": 'はじめよう',
   }
 }

@@ -811,5 +811,16 @@ export default {
     'npub, hex key, or username': 'npub, hex key หรือชื่อผู้ใช้',
     '~{{count}} min read_one': 'อ่านประมาณ {{count}} นาที',
     '~{{count}} min read_other': 'อ่านประมาณ {{count}} นาที',
+    'Welcome to Jumble Ouro': 'ยินดีต้อนรับสู่ Jumble Ouro',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro เป็นไคลเอนต์ Nostr ที่ขับเคลื่อนโดยชุมชน ข้อเสนอฟีเจอร์ที่ส่งเป็น issue บน GitHub จะถูกพัฒนาโดยอัตโนมัติเมื่อชุมชนลงคะแนนให้',
+    'How to propose a feature': 'วิธีเสนอฟีเจอร์',
+    'Open a new GitHub issue describing the feature you want to see.':
+      'เปิด issue ใหม่บน GitHub เพื่ออธิบายฟีเจอร์ที่คุณอยากเห็น',
+    'How to vote on proposals': 'วิธีลงคะแนนให้กับข้อเสนอ',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      'กด 👍 บน issue ที่มีอยู่ใน GitHub ข้อเสนอที่ได้รับคะแนนเพียงพอจะถูกสร้างขึ้นโดยอัตโนมัติ',
+    'Open GitHub issues': 'เปิด issues บน GitHub',
+    "Let's go": 'ไปกันเลย',
   }
 }

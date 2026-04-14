@@ -817,5 +817,16 @@ export default {
     'npub, hex key, or username': 'npub, hex 키 또는 사용자 이름',
     '~{{count}} min read_one': '약 {{count}}분 분량',
     '~{{count}} min read_other': '약 {{count}}분 분량',
+    'Welcome to Jumble Ouro': 'Jumble Ouro에 오신 것을 환영합니다',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro는 커뮤니티가 주도하는 Nostr 클라이언트입니다. GitHub 이슈로 제출된 기능 제안은 커뮤니티 투표로 선정되면 자동으로 구현됩니다.',
+    'How to propose a feature': '기능 제안 방법',
+    'Open a new GitHub issue describing the feature you want to see.':
+      '원하는 기능을 설명하는 새 GitHub 이슈를 열어보세요.',
+    'How to vote on proposals': '제안에 투표하는 방법',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      '기존 GitHub 이슈에 👍로 반응하세요. 충분한 표를 얻은 제안은 자동으로 구현됩니다.',
+    'Open GitHub issues': 'GitHub 이슈 열기',
+    "Let's go": '시작하기',
   }
 }

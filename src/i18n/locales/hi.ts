@@ -825,5 +825,16 @@ export default {
     'npub, hex key, or username': 'npub, hex कुंजी, या उपयोगकर्ता नाम',
     '~{{count}} min read_one': '~{{count}} मिनट पढ़ें',
     '~{{count}} min read_other': '~{{count}} मिनट पढ़ें',
+    'Welcome to Jumble Ouro': 'Jumble Ouro में आपका स्वागत है',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro एक समुदाय-संचालित Nostr क्लाइंट है। GitHub issues के रूप में भेजे गए फीचर प्रस्ताव, जब समुदाय उनके पक्ष में वोट करता है, स्वचालित रूप से लागू किए जाते हैं।',
+    'How to propose a feature': 'फीचर का प्रस्ताव कैसे दें',
+    'Open a new GitHub issue describing the feature you want to see.':
+      'जिस फीचर को आप देखना चाहते हैं, उसका वर्णन करते हुए एक नया GitHub issue खोलें।',
+    'How to vote on proposals': 'प्रस्तावों पर वोट कैसे दें',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      'किसी मौजूदा GitHub issue पर 👍 से प्रतिक्रिया दें। पर्याप्त वोट पाने वाले प्रस्ताव स्वचालित रूप से बनाए जाते हैं।',
+    'Open GitHub issues': 'GitHub issues खोलें',
+    "Let's go": 'चलिए शुरू करें',
   }
 }
