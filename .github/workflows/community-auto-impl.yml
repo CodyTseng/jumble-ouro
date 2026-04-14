@@ -62,10 +62,19 @@ jobs:
             raw.githubusercontent.com:443
             user-images.githubusercontent.com:443
             private-user-images.githubusercontent.com:443
+            gist.github.com:443
+            gist.githubusercontent.com:443
             registry.npmjs.org:443
+            www.npmjs.com:443
             api.anthropic.com:443
             statsig.anthropic.com:443
             developer.mozilla.org:443
+            react.dev:443
+            vitejs.dev:443
+            tailwindcss.com:443
+            www.typescriptlang.org:443
+            nostr-nips.com:443
+            nips.nostr.com:443
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -325,7 +334,7 @@ jobs:
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: |
-            --allowedTools Read,Write,Glob,Grep
+            --allowedTools Read,Write,Glob,Grep,WebFetch
           prompt: |
             You are preparing a spec for a community issue on the Jumble Ouro Nostr client.
 
@@ -335,6 +344,12 @@ jobs:
             point at local paths. You MUST open every local image path with the Read tool to
             actually see the screenshots — they often carry load-bearing context (mockups,
             error screenshots, before/after comparisons, repro recordings).
+
+            If the thread links to URLs that are clearly load-bearing for understanding the
+            request (related GitHub issues / PRs / commits / files, gists, NIPs, framework
+            docs), use WebFetch to read them. Don't fetch every link — only the ones the
+            discussion actually depends on. The runner has an egress allowlist, so unusual
+            hosts may be blocked; that's expected, just move on if a fetch fails.
 
             Your task:
             1. Read the ENTIRE thread, including every referenced image. Discussion often
@@ -409,7 +424,7 @@ jobs:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
           claude_args: |
             --model claude-opus-4-6
-            --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch
+            --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch,WebFetch
           prompt: |
             You are implementing a community issue for the Jumble Ouro Nostr client.
 
