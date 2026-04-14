@@ -1,0 +1,686 @@
+name: Community Auto-Implementation
+
+# Daily job that picks the top-voted community feature request and asks
+# the AI coding agent to implement it. See CONTRIBUTING.md for the full flow.
+#
+# The workflow is split into four stages so that a failure in validation
+# or merge does not force the agent to re-run from scratch. If validation
+# fails, re-run the failed job only from the Actions UI.
+#
+#   1. implement  — select issue, agent synth + implement, push, open PR
+#   2. validate   — parallel matrix: lint, typecheck, build, test
+#   3. merge      — synchronous squash merge + close the loop on the issue
+#   4. on-failure — runs on any upstream failure, labels issue ai-failed
+
+on:
+  schedule:
+    # 20:00 UTC every day. Adjust as you like.
+    - cron: '0 20 * * *'
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: "Force-process this issue number (bypasses score threshold)"
+        required: false
+        type: string
+
+concurrency:
+  group: community-auto-impl
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+  id-token: write
+
+jobs:
+  # ====================================================================
+  # Job 1: implement
+  # Runs the expensive work: agent synth + implement, push, open PR.
+  # Exposes outputs consumed by all downstream jobs.
+  # ====================================================================
+  implement:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      skip: ${{ steps.select.outputs.skip }}
+      issue_number: ${{ steps.select.outputs.issue_number }}
+      issue_title: ${{ steps.select.outputs.issue_title }}
+      branch: ${{ steps.branch.outputs.name }}
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+            objects.githubusercontent.com:443
+            codeload.github.com:443
+            uploads.github.com:443
+            raw.githubusercontent.com:443
+            user-images.githubusercontent.com:443
+            private-user-images.githubusercontent.com:443
+            registry.npmjs.org:443
+            api.anthropic.com:443
+            statsig.anthropic.com:443
+            developer.mozilla.org:443
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # ------------------------------------------------------------------
+      # Pick the eligible top-voted issue (or the one forced via
+      # workflow_dispatch), fetch its full discussion + images, and
+      # write .ai-spec-raw.md + .ai-images/ for the agent to consume.
+      # ------------------------------------------------------------------
+      - name: Select issue and build raw spec
+        id: select
+        uses: actions/github-script@v7
+        env:
+          FORCED_ISSUE: ${{ github.event.inputs.issue_number }}
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+
+            const OWNER = context.repo.owner;
+            const REPO = context.repo.repo;
+            const MIN_SCORE = 5;
+            const EXCLUDE_LABELS = new Set([
+              'ai-in-progress',
+              'ai-implemented',
+              'ai-failed',
+              'needs-discussion',
+              'wontfix',
+            ]);
+            const IMAGE_HOST_ALLOWLIST = [
+              'user-images.githubusercontent.com',
+              'github.com', // /user-attachments/assets/...
+              'raw.githubusercontent.com',
+              'private-user-images.githubusercontent.com',
+            ];
+            const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
+
+            const forced = (process.env.FORCED_ISSUE || '').trim();
+
+            // ---- pick issue ----
+            let chosen = null;
+            if (forced) {
+              core.info(`Forced issue via workflow_dispatch: #${forced}`);
+              const { data } = await github.rest.issues.get({
+                owner: OWNER, repo: REPO, issue_number: Number(forced),
+              });
+              if (data.state !== 'open') {
+                core.setOutput('skip', 'true');
+                core.warning(`Issue #${forced} is not open — skipping.`);
+                return;
+              }
+              chosen = data;
+            } else {
+              const issues = await github.paginate(github.rest.issues.listForRepo, {
+                owner: OWNER, repo: REPO,
+                state: 'open',
+                labels: 'feature-request',
+                per_page: 100,
+              });
+              const scored = issues
+                .filter((i) => !i.pull_request)
+                .filter((i) => !(i.labels || []).some((l) => {
+                  const name = typeof l === 'string' ? l : l.name;
+                  return EXCLUDE_LABELS.has(name);
+                }))
+                .map((i) => ({
+                  issue: i,
+                  score: (i.reactions?.['+1'] || 0) - (i.reactions?.['-1'] || 0),
+                }))
+                .sort((a, b) => b.score - a.score);
+
+              if (scored.length === 0 || scored[0].score < MIN_SCORE) {
+                core.info(`No eligible issue: top score = ${scored[0]?.score ?? 0}, need ≥ ${MIN_SCORE}.`);
+                core.setOutput('skip', 'true');
+                return;
+              }
+              chosen = scored[0].issue;
+              core.info(`Picked #${chosen.number} "${chosen.title}" with score ${scored[0].score}`);
+            }
+
+            const issueNumber = chosen.number;
+            const score = (chosen.reactions?.['+1'] || 0) - (chosen.reactions?.['-1'] || 0);
+
+            // ---- fetch all comments ----
+            const comments = await github.paginate(github.rest.issues.listComments, {
+              owner: OWNER, repo: REPO, issue_number: issueNumber, per_page: 100,
+            });
+
+            // ---- compose raw spec markdown ----
+            const lines = [];
+            lines.push(`# Issue #${issueNumber}: ${chosen.title}`);
+            lines.push('');
+            lines.push(`- Author: @${chosen.user?.login ?? 'unknown'}`);
+            lines.push(`- Created: ${chosen.created_at}`);
+            lines.push(`- Net score (👍 − 👎): ${score}`);
+            lines.push(`- URL: ${chosen.html_url}`);
+            lines.push('');
+            lines.push('## Original body');
+            lines.push('');
+            lines.push(chosen.body || '_(empty)_');
+            lines.push('');
+            if (comments.length > 0) {
+              lines.push(`## Discussion (${comments.length} comment${comments.length === 1 ? '' : 's'})`);
+              lines.push('');
+              for (const c of comments) {
+                lines.push(`### @${c.user?.login ?? 'unknown'} — ${c.created_at}`);
+                lines.push('');
+                lines.push(c.body || '_(empty)_');
+                lines.push('');
+              }
+            } else {
+              lines.push('## Discussion');
+              lines.push('');
+              lines.push('_No comments yet._');
+              lines.push('');
+            }
+            let raw = lines.join('\n');
+
+            // ---- extract + download images ----
+            fs.mkdirSync('.ai-images', { recursive: true });
+            const mdImg = /!\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
+            const htmlImg = /<img[^>]+src=["']([^"']+)["'][^>]*>/gi;
+            const urls = new Set();
+            for (const m of raw.matchAll(mdImg)) urls.add(m[1]);
+            for (const m of raw.matchAll(htmlImg)) urls.add(m[1]);
+
+            let idx = 0;
+            for (const url of urls) {
+              idx += 1;
+              let host;
+              try { host = new URL(url).host; } catch { host = null; }
+              if (!host || !IMAGE_HOST_ALLOWLIST.includes(host)) {
+                raw = raw.split(url).join(`${url} [image not fetched: host not allowlisted]`);
+                continue;
+              }
+              try {
+                const res = await fetch(url, { redirect: 'follow' });
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const buf = Buffer.from(await res.arrayBuffer());
+                if (buf.length > MAX_IMAGE_BYTES) {
+                  raw = raw.split(url).join(`${url} [image too large, skipped]`);
+                  continue;
+                }
+                const ct = res.headers.get('content-type') || '';
+                const ext = ct.includes('png') ? 'png'
+                  : ct.includes('jpeg') || ct.includes('jpg') ? 'jpg'
+                  : ct.includes('gif') ? 'gif'
+                  : ct.includes('webp') ? 'webp'
+                  : (path.extname(new URL(url).pathname) || '.bin').slice(1) || 'bin';
+                const local = `.ai-images/${idx}.${ext}`;
+                fs.writeFileSync(local, buf);
+                raw = raw.split(url).join(local);
+                core.info(`Downloaded ${url} -> ${local} (${buf.length} bytes)`);
+              } catch (err) {
+                raw = raw.split(url).join(`${url} [image fetch failed: ${err.message}]`);
+              }
+            }
+
+            fs.writeFileSync('.ai-spec-raw.md', raw);
+
+            core.setOutput('skip', 'false');
+            core.setOutput('issue_number', String(issueNumber));
+            core.setOutput('issue_title', chosen.title);
+            core.setOutput('score', String(score));
+
+      - name: Short-circuit if nothing to do
+        if: steps.select.outputs.skip == 'true'
+        run: |
+          echo "No eligible issue today. Exiting cleanly."
+          exit 0
+
+      - name: Mark issue in-progress
+        if: steps.select.outputs.skip != 'true'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+          SCORE: ${{ steps.select.outputs.score }}
+        with:
+          script: |
+            const n = Number(process.env.ISSUE_NUMBER);
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n, labels: ['ai-in-progress'],
+            });
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n,
+              body: `🤖 The AI agent is starting work on this request (net score: ${process.env.SCORE}).\n\nYou can follow progress in the [Actions tab](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}). A pull request will be opened automatically when ready.`,
+            });
+
+      - name: Create working branch
+        id: branch
+        if: steps.select.outputs.skip != 'true'
+        env:
+          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+        run: |
+          git config user.name "jumble-ai-bot"
+          git config user.email "jumble-ai-bot@users.noreply.github.com"
+          BRANCH="ai/issue-${ISSUE_NUMBER}"
+          git checkout -B "$BRANCH"
+          echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
+          echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        if: steps.select.outputs.skip != 'true'
+        run: npm ci
+
+      # ------------------------------------------------------------------
+      # Phase A — the agent reads the full thread (including images) and
+      # produces .ai-spec-final.md. No source edits allowed here.
+      # ------------------------------------------------------------------
+      - name: Agent phase A — synthesize spec
+        if: steps.select.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --allowedTools Read,Write,Glob,Grep
+          prompt: |
+            You are preparing a spec for a community feature request on the Jumble Ouro Nostr client.
+
+            Read `.ai-spec-raw.md` — it contains the original issue body and every comment in
+            chronological order, with authors and timestamps. Image attachments referenced in
+            the thread have been pre-downloaded to `.ai-images/` and the markdown rewritten to
+            point at local paths. You MUST open every local image path with the Read tool to
+            actually see the screenshots — they often carry load-bearing context (mockups,
+            error screenshots, before/after comparisons).
+
+            Your task:
+            1. Read the ENTIRE thread, including every referenced image. Discussion often
+               contains the real requirements — clarifications, agreed scope reductions,
+               rejected approaches, and edge cases that are not in the opening post.
+            2. If the thread shows unresolved disagreement on core scope, or the request is
+               still ambiguous after reading all comments, write `.ai-abort` with a short
+               reason ("unresolved discussion: <what>") and STOP.
+            3. Otherwise, write a consolidated spec to `.ai-spec-final.md` with this exact structure:
+
+                   # <refined title>
+                   ## Goal
+                   ## Rationale
+                   ## Acceptance criteria
+                   ## Out of scope
+                   ## Open questions resolved in thread
+
+               Base every section on what the thread actually says. Do not invent requirements
+               that were never discussed.
+
+            In this phase you may ONLY write `.ai-spec-final.md` or `.ai-abort`. Do not touch
+            `src/**` or any other project files. Do not run git commands.
+
+      - name: Abort if the agent flagged the request
+        if: steps.select.outputs.skip != 'true'
+        run: |
+          if [ -f .ai-abort ]; then
+            echo "Agent aborted (phase A):"
+            cat .ai-abort
+            exit 1
+          fi
+          if [ ! -f .ai-spec-final.md ]; then
+            echo "Phase A did not produce .ai-spec-final.md"
+            exit 1
+          fi
+          echo "Synthesized spec:"
+          cat .ai-spec-final.md
+
+      # ------------------------------------------------------------------
+      # Phase B — the agent implements the feature against the final spec.
+      # ------------------------------------------------------------------
+      - name: Agent phase B — implement
+        if: steps.select.outputs.skip != 'true'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --model claude-opus-4-6
+            --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch
+          prompt: |
+            You are implementing a community feature request for the Jumble Ouro Nostr client.
+
+            Read CLAUDE.md first for project conventions.
+
+            The authoritative requirement is `.ai-spec-final.md` — a spec synthesized from the
+            full GitHub issue discussion. Treat it as the single source of truth. The raw issue
+            and comments are also available in `.ai-spec-raw.md` for reference only; if the
+            two disagree, the final spec wins.
+
+            ================================================================
+            INTERNATIONALIZATION — MANDATORY, NOT OPTIONAL
+            ================================================================
+            Jumble is a multi-language app. For EVERY new user-facing string you add
+            (labels, buttons, tooltips, placeholders, toast messages, error messages,
+            empty states, menu items, headings — literally any text a user will read):
+
+            1. NEVER hardcode English (or any natural language) text in a component.
+               Always route it through `t('your.key')` via `useTranslation` from
+               `react-i18next`.
+
+            2. Add the new key to `src/i18n/locales/en.ts` — APPENDED TO THE END of
+               the file. Never insert keys in the middle, never reorder, never
+               modify existing keys.
+
+            3. Add the SAME key to every other locale file under `src/i18n/locales/`:
+               ar, de, es, fa, fr, hi, hu, it, ja, ko, pl, pt-BR, pt-PT, ru, th,
+               zh, zh-TW. Again, appended to the end.
+
+               Translate each one to your best ability. Imperfect translations can
+               be improved later by human contributors; missing translations cannot.
+               Use surrounding entries in each file as a style/tone reference.
+               Do not leave any locale file with only the English fallback.
+
+            4. If the spec adds more than ~10 new strings and translating them all
+               would balloon the change, STILL translate them all — i18n coverage
+               is more important than commit size. Split into multiple commits if
+               helpful.
+
+            Failing to internationalize a new string is treated as a lint failure
+            and the downstream validate job will block the PR.
+
+            ================================================================
+            HARD CONSTRAINTS — must not violate
+            ================================================================
+            - Do NOT modify anything under `.github/**` (CI workflows, issue templates, action configs).
+              This protects the automation itself from self-modification.
+            - Do NOT edit `package-lock.json` by hand — if deps change, run `npm install` and let npm update it.
+            - Do NOT add or rotate any secrets, env var defaults, or files named like `*.key`, `*.pem`, `.env*`.
+            - Do NOT commit `.ai-spec-raw.md`, `.ai-spec-final.md`, `.ai-images/`, or `.ai-abort` — they are audit artifacts.
+
+            ================================================================
+            SOFT GUIDANCE — prefer, but may deviate with justification
+            ================================================================
+            - Prefer minimal, scoped changes. If adding a new npm dependency, justify it in the commit message
+              and prefer well-maintained packages.
+            - When touching `src/services/` (especially client/signing/key-related code), be extra careful
+              — these handle user keys and relay I/O. Small surface-area edits are fine; large rewrites should abort.
+            - If the request is ambiguous, would require >500 LOC of source code (i18n locale additions do NOT
+              count toward this budget), or touches security-sensitive signing paths in a non-trivial way,
+              STOP and write a file `.ai-abort` with the reason — do not attempt.
+            - Commit in logical chunks with clear messages using git from the Bash tool.
+
+            ================================================================
+            VALIDATION — must all pass before you stop
+            ================================================================
+              npm run lint
+              npx tsc --noEmit
+              npm run build
+              npm run test
+
+            When done, the working tree should be clean except for your committed changes on the current branch.
+
+      - name: Abort if the agent flagged implementation
+        if: steps.select.outputs.skip != 'true'
+        run: |
+          if [ -f .ai-abort ]; then
+            echo "Agent aborted (phase B):"
+            cat .ai-abort
+            exit 1
+          fi
+
+      # ------------------------------------------------------------------
+      # Ensure the agent actually committed something and that no audit
+      # artifacts leaked into the commit history.
+      # ------------------------------------------------------------------
+      - name: Verify commits and scrub artifacts
+        if: steps.select.outputs.skip != 'true'
+        run: |
+          set -e
+          COMMITS=$(git rev-list --count origin/${{ github.event.repository.default_branch }}..HEAD)
+          if [ "$COMMITS" = "0" ]; then
+            echo "The agent made no commits on the branch."
+            exit 1
+          fi
+          if git log origin/${{ github.event.repository.default_branch }}..HEAD --name-only --pretty=format: \
+             | grep -E '^(\.ai-spec-raw\.md|\.ai-spec-final\.md|\.ai-abort|\.ai-images/)' ; then
+            echo "Audit artifacts leaked into commits — failing."
+            exit 1
+          fi
+
+      # ------------------------------------------------------------------
+      # Hard denylist: refuse to push if the agent touched CI configs,
+      # secrets, or env files. Enforces the soft prompt constraints at the
+      # CI level so a prompt-injected agent cannot silently self-modify the
+      # automation or exfiltrate credentials via commit.
+      # ------------------------------------------------------------------
+      - name: Reject sensitive path changes
+        if: steps.select.outputs.skip != 'true'
+        run: |
+          set -e
+          FORBIDDEN=$(git diff --name-only \
+              "origin/${{ github.event.repository.default_branch }}...HEAD" \
+            | grep -E '^\.github/|\.key$|\.pem$|(^|/)\.env(\.|$)' \
+            || true)
+          if [ -n "$FORBIDDEN" ]; then
+            echo "The agent touched forbidden paths:"
+            echo "$FORBIDDEN"
+            echo
+            echo "Refusing to push. These paths are off-limits for the automation:"
+            echo "  - .github/**           (self-modification of CI)"
+            echo "  - *.key / *.pem        (private keys)"
+            echo "  - .env*                (environment / secrets)"
+            exit 1
+          fi
+          echo "No sensitive paths touched — OK to push."
+
+      - name: Push branch
+        if: steps.select.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$BRANCH"
+
+      - name: Open PR
+        if: steps.select.outputs.skip != 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+          BASE: ${{ github.event.repository.default_branch }}
+        run: |
+          set -e
+          EXISTING_PR=$(gh pr list --head "$BRANCH" --base "$BASE" --state open --json number --jq '.[0].number // empty')
+          if [ -n "$EXISTING_PR" ]; then
+            echo "PR #$EXISTING_PR already open for $BRANCH — updated by force-push, skipping create."
+            exit 0
+          fi
+          REFINED_TITLE=$(awk '/^# /{sub(/^# */,""); print; exit}' .ai-spec-final.md)
+          if [ -z "$REFINED_TITLE" ]; then
+            REFINED_TITLE="${{ steps.select.outputs.issue_title }}"
+          fi
+          PR_TITLE="${REFINED_TITLE} (#${ISSUE_NUMBER})"
+          {
+            echo "Closes #${ISSUE_NUMBER}"
+            echo
+            echo "🤖 Auto-implemented by an AI coding agent from a community request."
+            echo
+            echo "## Synthesized spec"
+            echo
+            cat .ai-spec-final.md
+          } > .ai-pr-body.md
+          gh pr create \
+            --title "$PR_TITLE" \
+            --body-file .ai-pr-body.md \
+            --label ai-generated \
+            --base "$BASE" \
+            --head "$BRANCH"
+
+      - name: Post synthesized spec to issue
+        if: steps.select.outputs.skip != 'true'
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+        with:
+          script: |
+            const fs = require('fs');
+            const n = Number(process.env.ISSUE_NUMBER);
+            const spec = fs.readFileSync('.ai-spec-final.md', 'utf8');
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n,
+              body: `✅ The AI agent has opened a pull request implementing this request. It will be merged once lint, typecheck, build, and test all pass.\n\n<details><summary>Synthesized spec used for implementation</summary>\n\n${spec}\n\n</details>`,
+            });
+
+      - name: Upload audit artifacts
+        if: always() && steps.select.outputs.skip != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ai-audit-${{ steps.select.outputs.issue_number }}
+          path: |
+            .ai-spec-raw.md
+            .ai-spec-final.md
+            .ai-abort
+            .ai-images/
+          if-no-files-found: ignore
+          retention-days: 30
+
+      - name: Push failed branch for human inspection
+        if: failure() && steps.select.outputs.skip != 'true' && env.BRANCH != ''
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git push --force "https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git" "$BRANCH" || true
+
+  # ====================================================================
+  # Job 2: validate
+  # Parallel matrix. Each check re-runs independently if failed, so a
+  # bad lint does not force the agent to re-run phase B.
+  # ====================================================================
+  validate:
+    needs: implement
+    if: needs.implement.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Lint
+            command: npm run lint
+          - name: Typecheck
+            command: npx tsc --noEmit
+          - name: Build
+            command: npm run build
+          - name: Test
+            command: npm run test
+    name: validate / ${{ matrix.name }}
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+            codeload.github.com:443
+            objects.githubusercontent.com:443
+            registry.npmjs.org:443
+
+      - name: Checkout AI branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.implement.outputs.branch }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: ${{ matrix.name }}
+        run: ${{ matrix.command }}
+
+  # ====================================================================
+  # Job 3: merge
+  # Synchronous squash merge (no --auto). Requires no branch protection.
+  # ====================================================================
+  merge:
+    needs: [implement, validate]
+    if: needs.implement.outputs.skip != 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+
+      - name: Merge PR and relabel issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          BRANCH: ${{ needs.implement.outputs.branch }}
+          ISSUE_NUMBER: ${{ needs.implement.outputs.issue_number }}
+        run: |
+          set -e
+          gh pr merge "$BRANCH" --repo "$REPO" --squash --delete-branch
+          gh issue edit "$ISSUE_NUMBER" --repo "$REPO" --remove-label ai-in-progress --add-label ai-implemented || true
+
+  # ====================================================================
+  # Job 4: on-failure
+  # Catches failures from implement / validate / merge and flips the
+  # issue to ai-failed with a pointer to the failing run.
+  # ====================================================================
+  on-failure:
+    needs: [implement, validate, merge]
+    if: |
+      always()
+      && needs.implement.outputs.skip != 'true'
+      && needs.implement.outputs.issue_number != ''
+      && (needs.implement.result == 'failure'
+          || needs.validate.result == 'failure'
+          || needs.merge.result == 'failure')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: block
+          allowed-endpoints: >
+            api.github.com:443
+            github.com:443
+
+      - name: Mark issue failed
+        uses: actions/github-script@v7
+        env:
+          ISSUE_NUMBER: ${{ needs.implement.outputs.issue_number }}
+          FAILED_STAGE: >-
+            ${{ needs.implement.result == 'failure' && 'implement'
+                || needs.validate.result == 'failure' && 'validate'
+                || 'merge' }}
+        with:
+          script: |
+            const n = Number(process.env.ISSUE_NUMBER);
+            const stage = process.env.FAILED_STAGE;
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n,
+              body: `❌ Auto-implementation failed at the **${stage}** stage. See [the run log](${runUrl}) for details. A human maintainer will take a look.\n\nYou can also re-run only the failed job from the Actions UI if the fix is trivial (e.g., a flaky test).`,
+            });
+            await github.rest.issues.removeLabel({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n, name: 'ai-in-progress',
+            }).catch(() => {});
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner, repo: context.repo.repo,
+              issue_number: n, labels: ['ai-failed'],
+            });

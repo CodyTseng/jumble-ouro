@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Community discussion on Nostr
+    url: https://jumble.social
+    about: For general questions or discussion, please reach out on Nostr rather than opening an issue.

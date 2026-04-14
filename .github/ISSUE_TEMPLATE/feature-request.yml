@@ -1,0 +1,28 @@
+name: Feature Request
+description: Propose a feature or improvement for Jumble Ouro.
+title: "[Feature]: "
+labels:
+  - feature-request
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The community votes with 👍 / 👎. Each day the top request (net score ≥ 5) is picked up and implemented automatically by an AI coding agent. Comments on this issue are read as part of the spec — clarifications there matter.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What do you want Jumble Ouro to do? Add any context, motivation, or screenshots that help explain it. Drag images directly into this field.
+      placeholder: |
+        Describe the feature here.
+
+        Screenshots / mockups welcome.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true

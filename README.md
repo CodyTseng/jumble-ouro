@@ -1,32 +1,42 @@
 <div align="center">
   <picture>
-    <img src="./resources/logo-light.svg" alt="Jumble Logo" width="400" />
+    <img src="./resources/logo-light.svg" alt="Jumble Ouro Logo" width="400" />
   </picture>
   <p>logo designed by <a href="http://wolfertdan.com/">Daniel David</a></p>
 </div>
 
-# Jumble
+# Jumble Ouro
 
-A user-friendly Nostr client for exploring relay feeds
+**Jumble Ouro** (or just **ouro**) is a user-friendly Nostr client for exploring relay feeds, originally forked from [Jumble](https://github.com/CodyTseng/jumble) and now developed as an independent project. The twist: every feature in ouro is proposed, voted on, and implemented end-to-end by an AI coding agent, with no humans in the loop for the happy path.
 
-Experience Jumble at [https://jumble.social](https://jumble.social)
+The name comes from _ouroboros_ — the project feeds itself: community ideas in, shipped code out, repeat.
 
-## Forks
+## 🤖 Fully Automated Community Co-Creation
 
-> Some interesting forks of Jumble.
+You don't need to write code to shape Jumble Ouro — just tell us what you want and vote. Everything from spec to merge is automated.
 
-- [https://fevela.me/](https://fevela.me/) - by [@daniele](https://jumble.social/users/npub10000003zmk89narqpczy4ff6rnuht2wu05na7kpnh3mak7z2tqzsv8vwqk)
-- [https://x21.com/](https://x21.com/) - by [@Karnage](https://jumble.social/users/npub1r0rs5q2gk0e3dk3nlc7gnu378ec6cnlenqp8a3cjhyzu6f8k5sgs4sq9ac)
-- [https://jumble.imwald.eu/](https://jumble.imwald.eu/) Repo: [Silberengel/jumble](https://github.com/Silberengel/jumble) - by [@Silberengel](https://jumble.social/users/npub1l5sga6xg72phsz5422ykujprejwud075ggrr3z2hwyrfgr7eylqstegx9z)
+1. **Propose** — Open a [Feature Request](../../issues/new?template=feature-request.yml). Describe the problem, attach screenshots or mockups if helpful.
+2. **Vote** — React with 👍 to support and 👎 to oppose any open request. The score is `👍 − 👎`.
+3. **Watch it ship** — Every day at 20:00 UTC, the open feature request with the highest net score (≥ 5) is automatically picked up by the AI agent, implemented, tested, and merged to `master` if all checks pass.
+
+No triage meetings, no roadmap committee — the issue tracker _is_ the roadmap, and votes are the only currency.
+
+**[→ See the most-wanted requests, ranked by votes](../../issues?q=is%3Aissue+is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc)**
+
+For the full rules, label meanings, and what the agent will or won't touch, see [CONTRIBUTING.md](./CONTRIBUTING.md).
+
+## Relationship to Jumble
+
+Jumble Ouro started as a fork of [Jumble](https://github.com/CodyTseng/jumble) but is now an independent project — it does not track Jumble as an upstream, and the two codebases are expected to diverge over time. Anything that proves itself in ouro is fair game for Jumble to cherry-pick back: good features, bug fixes, refactors. If you're looking for the stable, maintainer-curated client, use Jumble at [https://jumble.social](https://jumble.social); if you want to vote features into existence, you're in the right place.
 
 ## Run Locally
 
 ```bash
 # Clone this repository
-git clone https://github.com/CodyTseng/jumble.git
+git clone https://github.com/CodyTseng/jumble-ouro.git
 
 # Go into the repository
-cd jumble
+cd jumble-ouro
 
 # Install dependencies
 npm install
@@ -39,32 +49,16 @@ npm run dev
 
 ```bash
 # Clone this repository
-git clone https://github.com/CodyTseng/jumble.git
+git clone https://github.com/CodyTseng/jumble-ouro.git
 
 # Go into the repository
-cd jumble
+cd jumble-ouro
 
 # Run the docker compose
 docker compose up --build -d
 ```
 
 After finishing, access: http://localhost:8089
-
-## Community mode (Optional)
-
-If you want to run Jumble in community mode (with pre-configured relay sets and relays), you can set the following environment variables in a `.env` file at the root of the project:
-
-- `VITE_COMMUNITY_RELAY_SETS`: Environment variable. Set the default relay sets for Jumble. Multiple relay sets can be configured. If configured, the first preset group will be displayed to visitors by default upon opening. Visitors cannot delete relay sets preset by administrators. This is ideal for communities wishing to host their own Jumble instances or for setting default feeds for family members. Examples:
-
-```
-VITE_COMMUNITY_RELAY_SETS=[{"id": "example.com", "name": "The Example Feed", "relayUrls": ["wss://relay.example.com/", "wss://relay.example.org/"]},{"id": "dailynews", "name": "News", "relayUrls": ["wss://news.example.com/", "wss://news.example.org/"]}]
-```
-
-- `VITE_COMMUNITY_RELAYS`: Environment variable. Set additional default relays for Jumble. Multiple relays can be configured, separated by commas. These relays will be added to the preset relay sets and cannot be removed by visitors. Examples:
-
-```
-VITE_COMMUNITY_RELAYS="wss://relay.example.com/,wss://relay.example.org/"
-```
 
 ## Sponsors
 
