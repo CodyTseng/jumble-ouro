@@ -21,7 +21,7 @@ export default function AboutInfoDialog({ children }: { children: React.ReactNod
       <div>
         Source code:{' '}
         <a
-          href="https://github.com/CodyTseng/jumble"
+          href="https://github.com/CodyTseng/jumble-ouro"
           target="_blank"
           rel="noreferrer"
           className="text-primary hover:underline"

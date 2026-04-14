@@ -33,7 +33,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
           <p className="max-w-md text-center text-lg">
             Sorry for the inconvenience. If you don't mind helping, you can{' '}
             <a
-              href="https://github.com/CodyTseng/jumble/issues/new"
+              href="https://github.com/CodyTseng/jumble-ouro/issues/new"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary underline"
