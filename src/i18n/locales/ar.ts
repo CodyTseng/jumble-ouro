@@ -810,5 +810,16 @@ export default {
     'npub, hex key, or username': 'npub أو مفتاح hex أو اسم المستخدم',
     '~{{count}} min read_one': '~{{count}} دقيقة قراءة',
     '~{{count}} min read_other': '~{{count}} دقائق قراءة',
+    'Welcome to Jumble Ouro': 'مرحبًا بك في Jumble Ouro',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro هو عميل Nostr يقوده المجتمع. يتم تنفيذ اقتراحات الميزات المقدمة كإصدارات GitHub تلقائيًا عندما يصوت المجتمع لصالحها.',
+    'How to propose a feature': 'كيفية اقتراح ميزة',
+    'Open a new GitHub issue describing the feature you want to see.':
+      'افتح إصدارًا جديدًا على GitHub يصف الميزة التي تريد رؤيتها.',
+    'How to vote on proposals': 'كيفية التصويت على الاقتراحات',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      'تفاعل بـ 👍 على إصدار GitHub موجود. يتم تنفيذ الاقتراحات التي تحصل على أصوات كافية تلقائيًا.',
+    'Open GitHub issues': 'افتح إصدارات GitHub',
+    "Let's go": 'هيا بنا',
   }
 }

@@ -793,5 +793,16 @@ export default {
     'npub, hex key, or username': 'npub、hex key 或使用者名稱',
     '~{{count}} min read_one': '約 {{count}} 分鐘閱讀',
     '~{{count}} min read_other': '約 {{count}} 分鐘閱讀',
+    'Welcome to Jumble Ouro': '歡迎來到 Jumble Ouro',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'Jumble Ouro 是一款由社群驅動的 Nostr 用戶端。以 GitHub issue 形式提交的功能提案，在社群投票通過後會自動實作。',
+    'How to propose a feature': '如何提出新功能',
+    'Open a new GitHub issue describing the feature you want to see.':
+      '在 GitHub 上建立一個新的 issue，描述你想看到的功能。',
+    'How to vote on proposals': '如何為提案投票',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      '在現有的 GitHub issue 上按 👍。獲得足夠票數的提案會自動實作。',
+    'Open GitHub issues': '開啟 GitHub issues',
+    "Let's go": '出發吧',
   }
 }

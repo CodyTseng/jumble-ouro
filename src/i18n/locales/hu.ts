@@ -820,5 +820,16 @@ export default {
     'npub, hex key, or username': 'npub, hex kulcs vagy felhasználónév',
     '~{{count}} min read_one': '~{{count}} perces olvasmány',
     '~{{count}} min read_other': '~{{count}} perces olvasmány',
+    'Welcome to Jumble Ouro': 'Üdvözlünk a Jumble Ouro-ban',
+    'Jumble Ouro is a community-driven Nostr client. Feature proposals submitted as GitHub issues are automatically implemented when the community votes for them.':
+      'A Jumble Ouro egy közösség által vezérelt Nostr kliens. A GitHub issue-ként beküldött funkciójavaslatokat automatikusan megvalósítjuk, ha a közösség rájuk szavaz.',
+    'How to propose a feature': 'Hogyan javasolj funkciót',
+    'Open a new GitHub issue describing the feature you want to see.':
+      'Nyiss egy új GitHub issue-t, amelyben leírod a kívánt funkciót.',
+    'How to vote on proposals': 'Hogyan szavazz a javaslatokra',
+    'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.':
+      'Reagálj 👍 ikonnal egy meglévő GitHub issue-ra. Az elegendő szavazatot kapott javaslatok automatikusan megvalósulnak.',
+    'Open GitHub issues': 'GitHub issue-k megnyitása',
+    "Let's go": 'Gyerünk',
   }
 }
