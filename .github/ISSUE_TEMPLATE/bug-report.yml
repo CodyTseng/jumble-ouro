@@ -1,0 +1,29 @@
+name: Bug Report
+description: Report a bug or unexpected behavior in Jumble Ouro.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The community votes with 👍 / 👎. Each day the top-voted issue (net score ≥ 5) is picked up and addressed automatically by an AI coding agent. Comments on this issue are read as part of the spec — clarifications, repro steps, and screenshots posted later all matter.
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What went wrong, what you expected instead, and how to reproduce it. Drag screenshots or recordings directly into this field.
+      placeholder: |
+        What happened:
+        What I expected:
+        Steps to reproduce:
+        Environment (browser / OS / Jumble Ouro version):
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before you submit
+      options:
+        - label: I have searched existing issues and this is not a duplicate.
+          required: true

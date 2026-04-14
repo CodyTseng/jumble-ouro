@@ -46,6 +46,7 @@ jobs:
       skip: ${{ steps.select.outputs.skip }}
       issue_number: ${{ steps.select.outputs.issue_number }}
       issue_title: ${{ steps.select.outputs.issue_title }}
+      issue_kind: ${{ steps.select.outputs.kind }}
       branch: ${{ steps.branch.outputs.name }}
     steps:
       - name: Harden runner
@@ -112,8 +113,19 @@ jobs:
 
             const forced = (process.env.FORCED_ISSUE || '').trim();
 
+            // Map a label set to our internal kind. Returns null if neither
+            // label is present (used to skip forced issues that aren't a
+            // feature/bug, and to defensively filter the listing).
+            const kindFromLabels = (labels) => {
+              const names = (labels || []).map((l) => (typeof l === 'string' ? l : l.name));
+              if (names.includes('feature-request')) return 'feature';
+              if (names.includes('bug')) return 'bug';
+              return null;
+            };
+
             // ---- pick issue ----
             let chosen = null;
+            let chosenKind = null;
             if (forced) {
               core.info(`Forced issue via workflow_dispatch: #${forced}`);
               const { data } = await github.rest.issues.get({
@@ -124,23 +136,44 @@ jobs:
                 core.warning(`Issue #${forced} is not open — skipping.`);
                 return;
               }
+              chosenKind = kindFromLabels(data.labels);
+              if (!chosenKind) {
+                core.setOutput('skip', 'true');
+                core.warning(`Issue #${forced} has neither 'feature-request' nor 'bug' label — skipping.`);
+                return;
+              }
               chosen = data;
             } else {
-              const issues = await github.paginate(github.rest.issues.listForRepo, {
+              // GitHub's `labels` filter is AND-semantics, so fetch each kind
+              // separately and merge into a single scored pool.
+              const fetchByLabel = (label) => github.paginate(github.rest.issues.listForRepo, {
                 owner: OWNER, repo: REPO,
                 state: 'open',
-                labels: 'feature-request',
+                labels: label,
                 per_page: 100,
               });
-              const scored = issues
-                .filter((i) => !i.pull_request)
-                .filter((i) => !(i.labels || []).some((l) => {
+              const [features, bugs] = await Promise.all([
+                fetchByLabel('feature-request'),
+                fetchByLabel('bug'),
+              ]);
+              const seen = new Set();
+              const pool = [];
+              for (const i of [...features, ...bugs]) {
+                if (i.pull_request) continue;
+                if (seen.has(i.number)) continue;
+                seen.add(i.number);
+                const kind = kindFromLabels(i.labels);
+                if (!kind) continue;
+                if ((i.labels || []).some((l) => {
                   const name = typeof l === 'string' ? l : l.name;
                   return EXCLUDE_LABELS.has(name);
-                }))
-                .map((i) => ({
-                  issue: i,
-                  score: (i.reactions?.['+1'] || 0) - (i.reactions?.['-1'] || 0),
+                })) continue;
+                pool.push({ issue: i, kind });
+              }
+              const scored = pool
+                .map((p) => ({
+                  ...p,
+                  score: (p.issue.reactions?.['+1'] || 0) - (p.issue.reactions?.['-1'] || 0),
                 }))
                 .sort((a, b) => b.score - a.score);
 
@@ -150,7 +183,8 @@ jobs:
                 return;
               }
               chosen = scored[0].issue;
-              core.info(`Picked #${chosen.number} "${chosen.title}" with score ${scored[0].score}`);
+              chosenKind = scored[0].kind;
+              core.info(`Picked #${chosen.number} "${chosen.title}" (${chosenKind}) with score ${scored[0].score}`);
             }
 
             const issueNumber = chosen.number;
@@ -237,6 +271,7 @@ jobs:
             core.setOutput('issue_number', String(issueNumber));
             core.setOutput('issue_title', chosen.title);
             core.setOutput('score', String(score));
+            core.setOutput('kind', chosenKind);
 
       - name: Short-circuit if nothing to do
         if: steps.select.outputs.skip == 'true'
@@ -292,23 +327,32 @@ jobs:
           claude_args: |
             --allowedTools Read,Write,Glob,Grep
           prompt: |
-            You are preparing a spec for a community feature request on the Jumble Ouro Nostr client.
+            You are preparing a spec for a community issue on the Jumble Ouro Nostr client.
 
             Read `.ai-spec-raw.md` — it contains the original issue body and every comment in
             chronological order, with authors and timestamps. Image attachments referenced in
             the thread have been pre-downloaded to `.ai-images/` and the markdown rewritten to
             point at local paths. You MUST open every local image path with the Read tool to
             actually see the screenshots — they often carry load-bearing context (mockups,
-            error screenshots, before/after comparisons).
+            error screenshots, before/after comparisons, repro recordings).
 
             Your task:
             1. Read the ENTIRE thread, including every referenced image. Discussion often
                contains the real requirements — clarifications, agreed scope reductions,
-               rejected approaches, and edge cases that are not in the opening post.
-            2. If the thread shows unresolved disagreement on core scope, or the request is
+               rejected approaches, edge cases, and reproduction details that are not in
+               the opening post.
+            2. Decide whether the issue is best handled as a **feature** (the user wants new
+               behavior the app does not yet have) or a **bug fix** (something already exists
+               and is broken or behaves wrong). The GitHub label is a hint, not authoritative
+               — users mislabel sometimes. Trust what the thread actually describes.
+            3. If the thread shows unresolved disagreement on core scope, or the request is
                still ambiguous after reading all comments, write `.ai-abort` with a short
-               reason ("unresolved discussion: <what>") and STOP.
-            3. Otherwise, write a consolidated spec to `.ai-spec-final.md` with this exact structure:
+               reason ("unresolved discussion: <what>") and STOP. For bugs, also abort if
+               there is no plausible reproduction or root cause signal at all.
+            4. Otherwise, write a consolidated spec to `.ai-spec-final.md` using exactly ONE
+               of the two templates below. Do not mix them.
+
+               For a **feature**:
 
                    # <refined title>
                    ## Goal
@@ -317,8 +361,25 @@ jobs:
                    ## Out of scope
                    ## Open questions resolved in thread
 
+               For a **bug fix**:
+
+                   # <refined title>
+                   ## Summary of the bug
+                   ## Reproduction steps
+                   ## Root cause hypothesis
+                   ## Fix approach
+                   ## Acceptance criteria
+                   ## Regression risk
+                   ## Out of scope
+
+               If you chose a template that disagrees with the GitHub label (e.g. the issue
+               was labeled `bug` but you concluded it's actually a feature request), add a
+               one-line note immediately after the title: `> Note: handled as <feature|bug
+               fix> despite the \`<label>\` label, because <reason>.`
+
                Base every section on what the thread actually says. Do not invent requirements
-               that were never discussed.
+               or root causes that were never discussed — for a bug, a hypothesis grounded in
+               the code you'll inspect later is fine, but flag it as a hypothesis.
 
             In this phase you may ONLY write `.ai-spec-final.md` or `.ai-abort`. Do not touch
             `src/**` or any other project files. Do not run git commands.
@@ -350,7 +411,7 @@ jobs:
             --model claude-opus-4-6
             --allowedTools Read,Write,Edit,Glob,Grep,Bash,WebSearch
           prompt: |
-            You are implementing a community feature request for the Jumble Ouro Nostr client.
+            You are implementing a community issue for the Jumble Ouro Nostr client.
 
             Read CLAUDE.md first for project conventions.
 
@@ -358,6 +419,12 @@ jobs:
             full GitHub issue discussion. Treat it as the single source of truth. The raw issue
             and comments are also available in `.ai-spec-raw.md` for reference only; if the
             two disagree, the final spec wins.
+
+            The spec's section structure tells you whether this is a feature or a bug fix.
+            For a bug fix, prefer the smallest correct change that resolves the root cause —
+            avoid drive-by refactors in adjacent code, and call out in the commit message any
+            place where you suspected the same bug class might exist elsewhere but chose not
+            to touch.
 
             ================================================================
             INTERNATIONALIZATION — MANDATORY, NOT OPTIONAL
@@ -500,7 +567,14 @@ jobs:
           if [ -z "$REFINED_TITLE" ]; then
             REFINED_TITLE="${{ steps.select.outputs.issue_title }}"
           fi
-          PR_TITLE="${REFINED_TITLE} (#${ISSUE_NUMBER})"
+          KIND="${{ steps.select.outputs.kind }}"
+          LABEL_ARGS=(--label ai-generated)
+          if [ "$KIND" = "bug" ]; then
+            PR_TITLE="fix: ${REFINED_TITLE} (#${ISSUE_NUMBER})"
+            LABEL_ARGS+=(--label bug)
+          else
+            PR_TITLE="${REFINED_TITLE} (#${ISSUE_NUMBER})"
+          fi
           {
             echo "Closes #${ISSUE_NUMBER}"
             echo
@@ -513,7 +587,7 @@ jobs:
           gh pr create \
             --title "$PR_TITLE" \
             --body-file .ai-pr-body.md \
-            --label ai-generated \
+            "${LABEL_ARGS[@]}" \
             --base "$BASE" \
             --head "$BRANCH"
 
