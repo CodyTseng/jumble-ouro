@@ -821,5 +821,7 @@ export default {
     'Relay Reviews': 'リレーレビュー',
     'New Message': '新しいメッセージ',
     'npub, hex key, or username': 'npub、hexキー、またはユーザー名',
+    '~{{count}} min read_one': '約{{count}}分で読めます',
+    '~{{count}} min read_other': '約{{count}}分で読めます',
   }
 }

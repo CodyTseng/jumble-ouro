@@ -808,5 +808,7 @@ export default {
     'Relay Reviews': 'مراجعات الريلاي',
     'New Message': 'رسالة جديدة',
     'npub, hex key, or username': 'npub أو مفتاح hex أو اسم المستخدم',
+    '~{{count}} min read_one': '~{{count}} دقيقة قراءة',
+    '~{{count}} min read_other': '~{{count}} دقائق قراءة',
   }
 }

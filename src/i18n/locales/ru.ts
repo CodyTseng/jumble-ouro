@@ -827,5 +827,7 @@ export default {
     'Relay Reviews': 'Отзывы о реле',
     'New Message': 'Новое сообщение',
     'npub, hex key, or username': 'npub, hex-ключ или имя пользователя',
+    '~{{count}} min read_one': '~{{count}} мин. чтения',
+    '~{{count}} min read_other': '~{{count}} мин. чтения',
   }
 }
