@@ -1,0 +1,82 @@
+import NormalFeed from '@/components/NormalFeed'
+import { Button } from '@/components/ui/button'
+import { SPECIAL_FEED_ID } from '@/constants'
+import { usePrimaryPage } from '@/PageManager'
+import { useFollowList } from '@/providers/FollowListProvider'
+import { useNostr } from '@/providers/NostrProvider'
+import client from '@/services/client.service'
+import { TFeedSubRequest } from '@/types'
+import { Search, UserPlus } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+export default function FollowingFeed() {
+  const { t } = useTranslation()
+  const { pubkey } = useNostr()
+  const { followingSet } = useFollowList()
+  const { navigate } = usePrimaryPage()
+  const [subRequests, setSubRequests] = useState<TFeedSubRequest[]>([])
+  const [hasFollowings, setHasFollowings] = useState<boolean | null>(null)
+  const [refreshCount, setRefreshCount] = useState(0)
+  const initializedRef = useRef(false)
+
+  useEffect(() => {
+    if (initializedRef.current) return
+
+    async function init() {
+      if (!pubkey) {
+        setSubRequests([])
+        setHasFollowings(null)
+        return
+      }
+
+      const followings = await client.fetchFollowings(pubkey)
+      setHasFollowings(followings.length > 0)
+      setSubRequests(await client.generateSubRequestsForPubkeys([pubkey, ...followings], pubkey))
+
+      if (followings.length) {
+        initializedRef.current = true
+      }
+    }
+
+    init()
+  }, [pubkey, followingSet, refreshCount])
+
+  // Show empty state when user has no followings
+  if (hasFollowings === false && subRequests.length > 0) {
+    return (
+      <div className="flex min-h-[60vh] flex-col items-center justify-center px-6 text-center">
+        <UserPlus size={64} className="mb-4 text-muted-foreground" strokeWidth={1.5} />
+        <h2 className="mb-2 text-2xl font-semibold">{t('Welcome to Jumble!')}</h2>
+        <p className="mb-6 max-w-md text-muted-foreground">
+          {t(
+            'Your feed is empty because you are not following anyone yet. Start by exploring interesting content and following users you like!'
+          )}
+        </p>
+        <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row">
+          <Button size="lg" onClick={() => navigate('search')} className="w-full">
+            <Search className="size-5" />
+            {t('Explore')}
+          </Button>
+          <Button size="lg" variant="outline" onClick={() => navigate('search')} className="w-full">
+            <Search className="size-5" />
+            {t('Search Users')}
+          </Button>
+        </div>
+      </div>
+    )
+  }
+
+  return (
+    <NormalFeed
+      feedId={SPECIAL_FEED_ID.FOLLOWING}
+      subRequests={subRequests}
+      onRefresh={() => {
+        initializedRef.current = false
+        setRefreshCount((count) => count + 1)
+      }}
+      isMainFeed
+      isPubkeyFeed
+    />
+  )
+}

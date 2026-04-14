@@ -1,0 +1,48 @@
+import { SPECIAL_FEED_ID } from '@/constants'
+import { getDefaultRelayUrls, getSearchRelayUrls } from '@/lib/relay'
+import { TSearchParams } from '@/types'
+import NormalFeed from '../NormalFeed'
+import Profile from '../Profile'
+import { ProfileListBySearch } from '../ProfileListBySearch'
+import Relay from '../Relay'
+import TrendingNotes from '../TrendingNotes'
+
+export default function SearchResult({ searchParams }: { searchParams: TSearchParams | null }) {
+  if (!searchParams) {
+    return <TrendingNotes />
+  }
+  if (searchParams.type === 'profile') {
+    return <Profile id={searchParams.search} />
+  }
+  if (searchParams.type === 'profiles') {
+    return <ProfileListBySearch search={searchParams.search} />
+  }
+  if (searchParams.type === 'notes') {
+    return (
+      <NormalFeed
+        feedId={SPECIAL_FEED_ID.SEARCH}
+        subRequests={[{ urls: getSearchRelayUrls(), filter: { search: searchParams.search } }]}
+        showRelayCloseReason
+      />
+    )
+  }
+  if (searchParams.type === 'hashtag') {
+    return (
+      <NormalFeed
+        feedId={SPECIAL_FEED_ID.HASHTAG}
+        subRequests={[{ urls: getDefaultRelayUrls(), filter: { '#t': [searchParams.search] } }]}
+        showRelayCloseReason
+      />
+    )
+  }
+  if (searchParams.type === 'nak') {
+    return (
+      <NormalFeed
+        feedId={SPECIAL_FEED_ID.NAK}
+        subRequests={[searchParams.request]}
+        showRelayCloseReason
+      />
+    )
+  }
+  return <Relay url={searchParams.search} />
+}

@@ -1,0 +1,924 @@
+import { ApplicationDataKey, EMBEDDED_EVENT_REGEX, ExtendedKind, POLL_TYPE } from '@/constants'
+import client from '@/services/client.service'
+import customEmojiService from '@/services/custom-emoji.service'
+import mediaUpload from '@/services/media-upload.service'
+import {
+  TDraftEvent,
+  TEmoji,
+  TMailboxRelay,
+  TMailboxRelayScope,
+  TPollCreateData,
+  TRelaySet
+} from '@/types'
+import { sha256 } from '@noble/hashes/sha2'
+import dayjs from 'dayjs'
+import { Event, kinds, nip19 } from 'nostr-tools'
+import {
+  getReplaceableCoordinate,
+  getReplaceableCoordinateFromEvent,
+  getRootTag,
+  isProtectedEvent,
+  isReplaceableEvent
+} from './event'
+import { determineExternalContentKind } from './external-content'
+import { randomString } from './random'
+import { generateBech32IdFromETag, tagNameEquals } from './tag'
+
+const draftEventCache: Map<string, string> = new Map()
+
+export function deleteDraftEventCache(draftEvent: TDraftEvent) {
+  const key = generateDraftEventCacheKey(draftEvent)
+  draftEventCache.delete(key)
+}
+
+function setDraftEventCache(baseDraft: Omit<TDraftEvent, 'created_at'>): TDraftEvent {
+  const cacheKey = generateDraftEventCacheKey(baseDraft)
+  const cache = draftEventCache.get(cacheKey)
+  if (cache) {
+    return JSON.parse(cache)
+  }
+  const draftEvent = { ...baseDraft, created_at: dayjs().unix() }
+  draftEventCache.set(cacheKey, JSON.stringify(draftEvent))
+
+  return draftEvent
+}
+
+function generateDraftEventCacheKey(draft: Omit<TDraftEvent, 'created_at'>) {
+  const str = JSON.stringify({
+    content: draft.content,
+    kind: draft.kind,
+    tags: draft.tags
+  })
+
+  const encoder = new TextEncoder()
+  const data = encoder.encode(str)
+  const hashBuffer = sha256(data)
+  const hashArray = Array.from(new Uint8Array(hashBuffer))
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('')
+}
+
+// https://github.com/nostr-protocol/nips/blob/master/25.md
+export function createReactionDraftEvent(event: Event, emoji: TEmoji | string = '+'): TDraftEvent {
+  const tags: string[][] = []
+  tags.push(buildETag(event.id, event.pubkey))
+  tags.push(buildPTag(event.pubkey))
+  if (event.kind !== kinds.ShortTextNote) {
+    tags.push(buildKTag(event.kind))
+  }
+
+  if (isReplaceableEvent(event.kind)) {
+    tags.push(buildATag(event))
+  }
+
+  let content: string
+  if (typeof emoji === 'string') {
+    content = emoji
+  } else {
+    content = `:${emoji.shortcode}:`
+    tags.push(buildEmojiTag(emoji))
+  }
+
+  return {
+    kind: kinds.Reaction,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createExternalContentReactionDraftEvent(
+  externalContent: string,
+  emoji: TEmoji | string = '+'
+): TDraftEvent {
+  const tags: string[][] = []
+  tags.push(buildITag(externalContent))
+  const kind = determineExternalContentKind(externalContent)
+  if (kind) {
+    tags.push(buildKTag(kind))
+  }
+
+  let content: string
+  if (typeof emoji === 'string') {
+    content = emoji
+  } else {
+    content = `:${emoji.shortcode}:`
+    tags.push(buildEmojiTag(emoji))
+  }
+
+  return {
+    kind: ExtendedKind.EXTERNAL_CONTENT_REACTION,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+// https://github.com/nostr-protocol/nips/blob/master/18.md
+export function createRepostDraftEvent(event: Event): TDraftEvent {
+  const isProtected = isProtectedEvent(event)
+  const tags = [buildETag(event.id, event.pubkey), buildPTag(event.pubkey)]
+
+  if (event.kind === kinds.ShortTextNote) {
+    return {
+      kind: kinds.Repost,
+      content: isProtected ? '' : JSON.stringify(event),
+      tags,
+      created_at: dayjs().unix()
+    }
+  }
+
+  tags.push(buildKTag(event.kind))
+
+  const isReplaceable = isReplaceableEvent(event.kind)
+  if (isReplaceable) {
+    tags.push(buildATag(event))
+  }
+
+  return {
+    kind: kinds.GenericRepost,
+    content: isProtected || isReplaceable ? '' : JSON.stringify(event),
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export async function createShortTextNoteDraftEvent(
+  content: string,
+  mentions: string[],
+  options: {
+    parentEvent?: Event
+    addClientTag?: boolean
+    protectedEvent?: boolean
+    isNsfw?: boolean
+  } = {}
+): Promise<TDraftEvent> {
+  const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(content)
+  const { quoteTags, rootTag, parentTag } = await extractRelatedEventIds(
+    transformedEmojisContent,
+    options.parentEvent
+  )
+  const hashtags = extractHashtags(transformedEmojisContent)
+
+  const tags = emojiTags.concat(hashtags.map((hashtag) => buildTTag(hashtag)))
+
+  // imeta tags
+  const images = extractImagesFromContent(transformedEmojisContent)
+  if (images && images.length) {
+    tags.push(...generateImetaTags(images))
+  }
+
+  // q tags
+  tags.push(...quoteTags)
+
+  // thread tags
+  if (rootTag) {
+    tags.push(rootTag)
+  }
+
+  if (parentTag) {
+    tags.push(parentTag)
+  }
+
+  // p tags
+  tags.push(...mentions.map((pubkey) => buildPTag(pubkey)))
+
+  if (options.addClientTag) {
+    tags.push(buildClientTag())
+  }
+
+  if (options.isNsfw) {
+    tags.push(buildNsfwTag())
+  }
+
+  if (options.protectedEvent) {
+    tags.push(buildProtectedTag())
+  }
+
+  const baseDraft = {
+    kind: kinds.ShortTextNote,
+    content: transformedEmojisContent,
+    tags
+  }
+  return setDraftEventCache(baseDraft)
+}
+
+// https://github.com/nostr-protocol/nips/blob/master/51.md
+export function createRelaySetDraftEvent(relaySet: Omit<TRelaySet, 'aTag'>): TDraftEvent {
+  return {
+    kind: kinds.Relaysets,
+    content: '',
+    tags: [
+      buildDTag(relaySet.id),
+      buildTitleTag(relaySet.name),
+      ...relaySet.relayUrls.map((url) => buildRelayTag(url))
+    ],
+    created_at: dayjs().unix()
+  }
+}
+
+export async function createCommentDraftEvent(
+  content: string,
+  parentStuff: Event | string,
+  mentions: string[],
+  options: {
+    addClientTag?: boolean
+    protectedEvent?: boolean
+    isNsfw?: boolean
+  } = {}
+): Promise<TDraftEvent> {
+  const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(content)
+  const {
+    quoteTags,
+    rootEventId,
+    rootCoordinateTag,
+    rootKind,
+    rootPubkey,
+    rootUrl,
+    parentEvent,
+    externalContent
+  } = await extractCommentMentions(transformedEmojisContent, parentStuff)
+  const hashtags = extractHashtags(transformedEmojisContent)
+
+  const tags = emojiTags.concat(hashtags.map((hashtag) => buildTTag(hashtag))).concat(quoteTags)
+
+  const images = extractImagesFromContent(transformedEmojisContent)
+  if (images && images.length) {
+    tags.push(...generateImetaTags(images))
+  }
+
+  tags.push(
+    ...mentions
+      .filter((pubkey) => pubkey !== parentEvent?.pubkey)
+      .map((pubkey) => buildPTag(pubkey))
+  )
+
+  if (rootCoordinateTag) {
+    tags.push(rootCoordinateTag)
+  } else if (rootEventId) {
+    tags.push(buildETag(rootEventId, rootPubkey, '', true))
+  }
+  if (rootPubkey) {
+    tags.push(buildPTag(rootPubkey, true))
+  }
+  if (rootKind) {
+    tags.push(buildKTag(rootKind, true))
+  }
+  if (rootUrl) {
+    tags.push(buildITag(rootUrl, true))
+  }
+  tags.push(
+    ...(parentEvent
+      ? [
+          isReplaceableEvent(parentEvent.kind)
+            ? buildATag(parentEvent)
+            : buildETag(parentEvent.id, parentEvent.pubkey),
+          buildPTag(parentEvent.pubkey)
+        ]
+      : externalContent
+        ? [buildITag(externalContent)]
+        : [])
+  )
+  const parentKind = parentEvent
+    ? parentEvent.kind
+    : externalContent
+      ? determineExternalContentKind(externalContent)
+      : undefined
+  if (parentKind) {
+    tags.push(buildKTag(parentKind))
+  }
+
+  if (options.addClientTag) {
+    tags.push(buildClientTag())
+  }
+
+  if (options.isNsfw) {
+    tags.push(buildNsfwTag())
+  }
+
+  if (options.protectedEvent) {
+    tags.push(buildProtectedTag())
+  }
+
+  const baseDraft = {
+    kind: ExtendedKind.COMMENT,
+    content: transformedEmojisContent,
+    tags
+  }
+  return setDraftEventCache(baseDraft)
+}
+
+// https://github.com/nostr-protocol/nips/blob/master/84.md
+export function createHighlightDraftEvent(
+  highlightedText: string,
+  comment: string = '',
+  sourceEvent: Event,
+  mentions: string[],
+  options: {
+    addClientTag?: boolean
+    protectedEvent?: boolean
+    isNsfw?: boolean
+  } = {}
+): TDraftEvent {
+  const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(comment)
+  const quoteTags = extractQuoteTags(comment)
+  const hashtags = extractHashtags(transformedEmojisContent)
+
+  const tags = emojiTags.concat(hashtags.map((hashtag) => buildTTag(hashtag)))
+
+  // imeta tags
+  const images = extractImagesFromContent(transformedEmojisContent)
+  if (images && images.length) {
+    tags.push(...generateImetaTags(images))
+  }
+
+  // q tags
+  tags.push(...quoteTags)
+
+  // p tags
+  tags.push(
+    ...mentions
+      .filter((pubkey) => pubkey !== sourceEvent.pubkey)
+      .map((pubkey) => ['p', pubkey, '', 'mention'])
+  )
+
+  // Add comment tag if comment exists
+  if (transformedEmojisContent) {
+    tags.push(['comment', transformedEmojisContent])
+  }
+
+  // Add source reference
+  const hint = client.getEventHint(sourceEvent.id)
+  if (isReplaceableEvent(sourceEvent.kind)) {
+    tags.push(['a', getReplaceableCoordinateFromEvent(sourceEvent), hint, 'source'])
+  } else {
+    tags.push(['e', sourceEvent.id, hint, 'source'])
+  }
+  tags.push(['p', sourceEvent.pubkey, '', 'author'])
+
+  if (options.addClientTag) {
+    tags.push(buildClientTag())
+  }
+
+  if (options.isNsfw) {
+    tags.push(buildNsfwTag())
+  }
+
+  if (options.protectedEvent) {
+    tags.push(buildProtectedTag())
+  }
+
+  const baseDraft = {
+    kind: kinds.Highlights,
+    content: highlightedText,
+    tags
+  }
+  return setDraftEventCache(baseDraft)
+}
+
+export function createRelayListDraftEvent(mailboxRelays: TMailboxRelay[]): TDraftEvent {
+  return {
+    kind: kinds.RelayList,
+    content: '',
+    tags: mailboxRelays.map(({ url, scope }) => buildRTag(url, scope)),
+    created_at: dayjs().unix()
+  }
+}
+
+export function createFollowListDraftEvent(tags: string[][], content?: string): TDraftEvent {
+  return {
+    kind: kinds.Contacts,
+    content: content ?? '',
+    created_at: dayjs().unix(),
+    tags
+  }
+}
+
+export function createMuteListDraftEvent(tags: string[][], content?: string): TDraftEvent {
+  return {
+    kind: kinds.Mutelist,
+    content: content ?? '',
+    created_at: dayjs().unix(),
+    tags
+  }
+}
+
+export function createProfileDraftEvent(content: string, tags: string[][] = []): TDraftEvent {
+  return {
+    kind: kinds.Metadata,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createFavoriteRelaysDraftEvent(
+  favoriteRelays: string[],
+  relaySetEventsOrATags: Event[] | string[][]
+): TDraftEvent {
+  const tags: string[][] = []
+  favoriteRelays.forEach((url) => {
+    tags.push(buildRelayTag(url))
+  })
+  relaySetEventsOrATags.forEach((eventOrATag) => {
+    if (Array.isArray(eventOrATag)) {
+      tags.push(eventOrATag)
+    } else {
+      tags.push(buildATag(eventOrATag))
+    }
+  })
+  return {
+    kind: ExtendedKind.FAVORITE_RELAYS,
+    content: '',
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createSeenNotificationsAtDraftEvent(): TDraftEvent {
+  return {
+    kind: kinds.Application,
+    content: 'Records read time to sync notification status across devices.',
+    tags: [buildDTag(ApplicationDataKey.NOTIFICATIONS_SEEN_AT)],
+    created_at: dayjs().unix()
+  }
+}
+
+export function createBookmarkDraftEvent(tags: string[][], content = ''): TDraftEvent {
+  return {
+    kind: kinds.BookmarkList,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createPinListDraftEvent(tags: string[][], content = ''): TDraftEvent {
+  return {
+    kind: kinds.Pinlist,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createUserEmojiListDraftEvent(tags: string[][], content = ''): TDraftEvent {
+  return {
+    kind: kinds.UserEmojiList,
+    content,
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createBlossomServerListDraftEvent(servers: string[]): TDraftEvent {
+  return {
+    kind: ExtendedKind.BLOSSOM_SERVER_LIST,
+    content: '',
+    tags: servers.map((server) => buildServerTag(server)),
+    created_at: dayjs().unix()
+  }
+}
+
+export async function createPollDraftEvent(
+  author: string,
+  question: string,
+  mentions: string[],
+  { isMultipleChoice, relays, options, endsAt }: TPollCreateData,
+  {
+    addClientTag,
+    isNsfw
+  }: {
+    addClientTag?: boolean
+    isNsfw?: boolean
+  } = {}
+): Promise<TDraftEvent> {
+  const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(question)
+  const { quoteTags } = await extractRelatedEventIds(transformedEmojisContent)
+  const hashtags = extractHashtags(transformedEmojisContent)
+
+  const tags = emojiTags.concat(hashtags.map((hashtag) => buildTTag(hashtag)))
+
+  // imeta tags
+  const images = extractImagesFromContent(transformedEmojisContent)
+  if (images && images.length) {
+    tags.push(...generateImetaTags(images))
+  }
+
+  // q tags
+  tags.push(...quoteTags)
+
+  // p tags
+  tags.push(...mentions.map((pubkey) => buildPTag(pubkey)))
+
+  const validOptions = options.filter((opt) => opt.trim())
+  tags.push(...validOptions.map((option) => ['option', randomString(9), option.trim()]))
+  tags.push(['polltype', isMultipleChoice ? POLL_TYPE.MULTIPLE_CHOICE : POLL_TYPE.SINGLE_CHOICE])
+
+  if (endsAt) {
+    tags.push(['endsAt', endsAt.toString()])
+  }
+
+  if (relays.length) {
+    relays.forEach((relay) => tags.push(buildRelayTag(relay)))
+  } else {
+    const relayList = await client.fetchRelayList(author)
+    relayList.read.slice(0, 4).forEach((relay) => {
+      tags.push(buildRelayTag(relay))
+    })
+  }
+
+  if (addClientTag) {
+    tags.push(buildClientTag())
+  }
+
+  if (isNsfw) {
+    tags.push(buildNsfwTag())
+  }
+
+  const baseDraft = {
+    content: transformedEmojisContent.trim(),
+    kind: ExtendedKind.POLL,
+    tags
+  }
+  return setDraftEventCache(baseDraft)
+}
+
+export function createPollResponseDraftEvent(
+  pollEvent: Event,
+  selectedOptionIds: string[]
+): TDraftEvent {
+  return {
+    content: '',
+    kind: ExtendedKind.POLL_RESPONSE,
+    tags: [
+      buildETag(pollEvent.id, pollEvent.pubkey),
+      buildPTag(pollEvent.pubkey),
+      ...selectedOptionIds.map((optionId) => buildResponseTag(optionId))
+    ],
+    created_at: dayjs().unix()
+  }
+}
+
+export function createDeletionRequestDraftEvent(event: Event): TDraftEvent {
+  const tags: string[][] = [buildKTag(event.kind)]
+  if (isReplaceableEvent(event.kind)) {
+    tags.push(['a', getReplaceableCoordinateFromEvent(event)])
+  } else {
+    tags.push(['e', event.id])
+  }
+
+  return {
+    kind: kinds.EventDeletion,
+    content: 'Request for deletion of the event.',
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createReportDraftEvent(event: Event, reason: string): TDraftEvent {
+  const tags: string[][] = []
+  if (event.kind === kinds.Metadata) {
+    tags.push(['p', event.pubkey, reason])
+  } else {
+    tags.push(['p', event.pubkey])
+    tags.push(['e', event.id, reason])
+    if (isReplaceableEvent(event.kind)) {
+      tags.push(['a', getReplaceableCoordinateFromEvent(event), reason])
+    }
+  }
+
+  return {
+    kind: kinds.Report,
+    content: '',
+    tags,
+    created_at: dayjs().unix()
+  }
+}
+
+export function createRelayReviewDraftEvent(
+  relay: string,
+  review: string,
+  stars: number
+): TDraftEvent {
+  return {
+    kind: ExtendedKind.RELAY_REVIEW,
+    content: review,
+    tags: [
+      ['d', relay],
+      ['rating', (stars / 5).toString()]
+    ],
+    created_at: dayjs().unix()
+  }
+}
+
+// https://github.com/nostr-protocol/nips/blob/master/43.md
+export function createJoinDraftEvent(inviteCode: string): TDraftEvent {
+  return {
+    kind: 28934,
+    created_at: Math.floor(Date.now() / 1000),
+    tags: [['claim', inviteCode], ['-']],
+    content: ''
+  }
+}
+
+export function createLeaveDraftEvent(): TDraftEvent {
+  return {
+    kind: 28936,
+    created_at: Math.floor(Date.now() / 1000),
+    tags: [['-']],
+    content: ''
+  }
+}
+
+export function createDmRelaysDraftEvent(relays: string[]): TDraftEvent {
+  const tags = relays.map((url) => ['relay', url])
+
+  return {
+    kind: ExtendedKind.DM_RELAYS,
+    content: '',
+    created_at: dayjs().unix(),
+    tags
+  }
+}
+
+function generateImetaTags(imageUrls: string[]) {
+  return imageUrls
+    .map((imageUrl) => {
+      const tag = mediaUpload.getImetaTagByUrl(imageUrl)
+      return tag ?? null
+    })
+    .filter(Boolean) as string[][]
+}
+
+async function extractRelatedEventIds(content: string, parentEvent?: Event) {
+  let rootTag: string[] | null = null
+  let parentTag: string[] | null = null
+
+  const quoteTags = extractQuoteTags(content)
+
+  if (parentEvent) {
+    const _rootTag = getRootTag(parentEvent)
+    if (_rootTag?.type === 'e') {
+      parentTag = buildETagWithMarker(parentEvent.id, parentEvent.pubkey, '', 'reply')
+
+      const [, rootEventHexId, hint, , rootEventPubkey] = _rootTag.tag
+      if (rootEventPubkey) {
+        rootTag = buildETagWithMarker(rootEventHexId, rootEventPubkey, hint, 'root')
+      } else {
+        const rootEventId = generateBech32IdFromETag(_rootTag.tag)
+        const rootEvent = rootEventId ? await client.fetchEvent(rootEventId) : undefined
+        rootTag = rootEvent
+          ? buildETagWithMarker(rootEvent.id, rootEvent.pubkey, hint, 'root')
+          : buildETagWithMarker(rootEventHexId, rootEventPubkey, hint, 'root')
+      }
+    } else if (_rootTag?.type === 'a') {
+      // Legacy
+      parentTag = buildETagWithMarker(parentEvent.id, parentEvent.pubkey, '', 'reply')
+      const [, coordinate, hint] = _rootTag.tag
+      rootTag = buildLegacyRootATag(coordinate, hint)
+    } else {
+      // reply to root event
+      rootTag = buildETagWithMarker(parentEvent.id, parentEvent.pubkey, '', 'root')
+    }
+  }
+
+  return {
+    quoteTags,
+    rootTag,
+    parentTag
+  }
+}
+
+async function extractCommentMentions(content: string, parentStuff: Event | string) {
+  const { parentEvent, externalContent } =
+    typeof parentStuff === 'string'
+      ? { parentEvent: undefined, externalContent: parentStuff }
+      : { parentEvent: parentStuff, externalContent: undefined }
+  const isComment =
+    parentEvent && [ExtendedKind.COMMENT, ExtendedKind.VOICE_COMMENT].includes(parentEvent.kind)
+  const rootCoordinateTag = parentEvent
+    ? isComment
+      ? parentEvent.tags.find(tagNameEquals('A'))
+      : isReplaceableEvent(parentEvent.kind)
+        ? buildATag(parentEvent, true)
+        : undefined
+    : undefined
+  const rootEventId = isComment ? parentEvent.tags.find(tagNameEquals('E'))?.[1] : parentEvent?.id
+  const rootKind = isComment
+    ? parentEvent.tags.find(tagNameEquals('K'))?.[1]
+    : parentEvent
+      ? parentEvent.kind
+      : determineExternalContentKind(parentStuff as string)
+  const rootPubkey = isComment
+    ? parentEvent.tags.find(tagNameEquals('P'))?.[1]
+    : parentEvent?.pubkey
+  const rootUrl = isComment ? parentEvent.tags.find(tagNameEquals('I'))?.[1] : externalContent
+
+  const quoteTags = extractQuoteTags(content)
+
+  return {
+    quoteTags,
+    rootEventId,
+    rootCoordinateTag,
+    rootKind,
+    rootPubkey,
+    rootUrl,
+    parentEvent,
+    externalContent
+  }
+}
+
+function extractQuoteTags(content: string) {
+  const quoteSet = new Set<string>()
+  const quoteTags: string[][] = []
+  const matches = content.match(EMBEDDED_EVENT_REGEX)
+  for (const m of matches || []) {
+    try {
+      const id = m.split(':')[1]
+      const { type, data } = nip19.decode(id)
+      if (type === 'nevent') {
+        const id = data.id
+        if (!quoteSet.has(id)) {
+          quoteSet.add(id)
+          const relay = data.relays?.[0] ?? client.getEventHint(id)
+          quoteTags.push(buildQTag(id, relay, data.author))
+        }
+      } else if (type === 'note') {
+        const id = data
+        if (!quoteSet.has(id)) {
+          quoteSet.add(id)
+          const relay = client.getEventHint(id)
+          quoteTags.push(buildQTag(id, relay))
+        }
+      } else if (type === 'naddr') {
+        const coordinate = getReplaceableCoordinate(data.kind, data.pubkey, data.identifier)
+        if (!quoteSet.has(coordinate)) {
+          quoteSet.add(coordinate)
+          const relay = data.relays?.[0]
+          quoteTags.push(buildQTag(coordinate, relay))
+        }
+      }
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  return quoteTags
+}
+
+function extractHashtags(content: string) {
+  const hashtags: string[] = []
+  const matches = content.match(/#[\p{L}\p{N}\p{M}]+/gu)
+  matches?.forEach((m) => {
+    const hashtag = m.slice(1).toLowerCase()
+    if (hashtag) {
+      hashtags.push(hashtag)
+    }
+  })
+  return hashtags
+}
+
+function extractImagesFromContent(content: string) {
+  return content.match(/https?:\/\/[^\s"']+\.(jpg|jpeg|png|gif|webp|heic)/gi)
+}
+
+export function transformCustomEmojisInContent(content: string) {
+  const emojiTags: string[][] = []
+  let processedContent = content
+  const matches = content.match(/:[a-zA-Z0-9]+:/g)
+
+  const emojiIdSet = new Set<string>()
+  matches?.forEach((m) => {
+    if (emojiIdSet.has(m)) return
+    emojiIdSet.add(m)
+
+    const emoji = customEmojiService.getEmojiById(m.slice(1, -1))
+    if (emoji) {
+      emojiTags.push(buildEmojiTag(emoji))
+      processedContent = processedContent.replace(new RegExp(m, 'g'), `:${emoji.shortcode}:`)
+    }
+  })
+
+  return {
+    emojiTags,
+    content: processedContent
+  }
+}
+
+export function buildATag(event: Event, upperCase: boolean = false) {
+  const coordinate = getReplaceableCoordinateFromEvent(event)
+  const hint = client.getEventHint(event.id)
+  return trimTagEnd([upperCase ? 'A' : 'a', coordinate, hint])
+}
+
+function buildDTag(identifier: string) {
+  return ['d', identifier]
+}
+
+export function buildETag(
+  eventHexId: string,
+  pubkey: string = '',
+  hint: string = '',
+  upperCase: boolean = false
+) {
+  if (!hint) {
+    hint = client.getEventHint(eventHexId)
+  }
+  return trimTagEnd([upperCase ? 'E' : 'e', eventHexId, hint, pubkey])
+}
+
+function buildETagWithMarker(
+  eventHexId: string,
+  pubkey: string = '',
+  hint: string = '',
+  marker: 'root' | 'reply' | '' = ''
+) {
+  if (!hint) {
+    hint = client.getEventHint(eventHexId)
+  }
+  return trimTagEnd(['e', eventHexId, hint, marker, pubkey])
+}
+
+function buildLegacyRootATag(coordinate: string, hint: string = '') {
+  if (!hint) {
+    const evt = client.getReplaeableEventFromCache(coordinate)
+    if (evt) {
+      hint = client.getEventHint(evt.id)
+    }
+  }
+  return trimTagEnd(['a', coordinate, hint, 'root'])
+}
+
+function buildITag(url: string, upperCase: boolean = false) {
+  return [upperCase ? 'I' : 'i', url]
+}
+
+function buildKTag(kind: number | string, upperCase: boolean = false) {
+  return [upperCase ? 'K' : 'k', kind.toString()]
+}
+
+function buildPTag(pubkey: string, upperCase: boolean = false) {
+  return [upperCase ? 'P' : 'p', pubkey]
+}
+
+function buildQTag(eventHexIdOrCoordinate: string, relay?: string, pubkey?: string) {
+  const tag: string[] = ['q', eventHexIdOrCoordinate]
+  if (!relay) {
+    return tag
+  }
+  tag.push(relay)
+  if (!pubkey) {
+    return tag
+  }
+  tag.push(pubkey)
+  return tag
+}
+
+function buildRTag(url: string, scope: TMailboxRelayScope) {
+  return scope !== 'both' ? ['r', url, scope] : ['r', url]
+}
+
+function buildTTag(hashtag: string) {
+  return ['t', hashtag]
+}
+
+function buildEmojiTag(emoji: TEmoji) {
+  return ['emoji', emoji.shortcode, emoji.url]
+}
+
+function buildTitleTag(title: string) {
+  return ['title', title]
+}
+
+function buildRelayTag(url: string) {
+  return ['relay', url]
+}
+
+function buildServerTag(url: string) {
+  return ['server', url]
+}
+
+function buildResponseTag(value: string) {
+  return ['response', value]
+}
+
+function buildClientTag() {
+  return ['client', 'jumble']
+}
+
+function buildNsfwTag() {
+  return ['content-warning', 'NSFW']
+}
+
+function buildProtectedTag() {
+  return ['-']
+}
+
+function trimTagEnd(tag: string[]) {
+  let endIndex = tag.length - 1
+  while (endIndex >= 0 && tag[endIndex] === '') {
+    endIndex--
+  }
+
+  return tag.slice(0, endIndex + 1)
+}

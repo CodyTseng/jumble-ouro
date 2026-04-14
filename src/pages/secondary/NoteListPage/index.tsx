@@ -1,0 +1,141 @@
+import { Favicon } from '@/components/Favicon'
+import NormalFeed from '@/components/NormalFeed'
+import { Button } from '@/components/ui/button'
+import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
+import { toProfileList } from '@/lib/link'
+import { fetchPubkeysFromDomain, getWellKnownNip05Url } from '@/lib/nip05'
+import { getDefaultRelayUrls, getSearchRelayUrls } from '@/lib/relay'
+import { useSecondaryPage } from '@/PageManager'
+import { useNostr } from '@/providers/NostrProvider'
+import client from '@/services/client.service'
+import { TFeedSubRequest } from '@/types'
+import { UserRound } from 'lucide-react'
+import React, { forwardRef, useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+
+const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
+  const { t } = useTranslation()
+  const { push } = useSecondaryPage()
+  const { pubkey } = useNostr()
+  const [title, setTitle] = useState<React.ReactNode>(null)
+  const [controls, setControls] = useState<React.ReactNode>(null)
+  const [data, setData] = useState<
+    | {
+        type: 'hashtag' | 'search'
+        kinds?: number[]
+      }
+    | {
+        type: 'domain'
+        domain: string
+        kinds?: number[]
+      }
+    | null
+  >(null)
+  const [subRequests, setSubRequests] = useState<TFeedSubRequest[]>([])
+
+  useEffect(() => {
+    const init = async () => {
+      const searchParams = new URLSearchParams(window.location.search)
+      const kinds = searchParams
+        .getAll('k')
+        .map((k) => parseInt(k))
+        .filter((k) => !isNaN(k))
+      const hashtag = searchParams.get('t')
+      if (hashtag) {
+        setData({ type: 'hashtag' })
+        setTitle(`# ${hashtag}`)
+        setSubRequests([
+          {
+            filter: { '#t': [hashtag], ...(kinds.length > 0 ? { kinds } : {}) },
+            urls: getDefaultRelayUrls()
+          }
+        ])
+        return
+      }
+      const search = searchParams.get('s')
+      if (search) {
+        setData({ type: 'search' })
+        setTitle(`${t('Search')}: ${search}`)
+        setSubRequests([
+          {
+            filter: { search, ...(kinds.length > 0 ? { kinds } : {}) },
+            urls: getSearchRelayUrls()
+          }
+        ])
+        return
+      }
+      const domain = searchParams.get('d')
+      if (domain) {
+        setTitle(
+          <div className="flex items-center gap-1">
+            {domain}
+            <Favicon domain={domain} className="h-5 w-5" />
+          </div>
+        )
+        const pubkeys = await fetchPubkeysFromDomain(domain)
+        setData({
+          type: 'domain',
+          domain
+        })
+        if (pubkeys.length) {
+          setSubRequests(await client.generateSubRequestsForPubkeys(pubkeys, pubkey))
+          setControls(
+            <Button
+              variant="ghost"
+              className="h-10 [&_svg]:size-3"
+              onClick={() => push(toProfileList({ domain }))}
+            >
+              {pubkeys.length.toLocaleString()} <UserRound />
+            </Button>
+          )
+        } else {
+          setSubRequests([])
+        }
+        return
+      }
+    }
+    init()
+  }, [])
+
+  let content: React.ReactNode = null
+  if (data?.type === 'domain' && subRequests.length === 0) {
+    content = (
+      <div className="w-full py-10 text-center">
+        <span className="text-muted-foreground">
+          {t('No pubkeys found from {url}', { url: getWellKnownNip05Url(data.domain) })}
+        </span>
+      </div>
+    )
+  } else if (data) {
+    let feedId: string
+    if (data.type === 'hashtag') {
+      feedId = 'hashtag'
+    } else if (data.type === 'domain') {
+      feedId = `domain-${data.domain}`
+    } else {
+      feedId = 'search'
+    }
+
+    content = (
+      <NormalFeed
+        feedId={feedId}
+        subRequests={subRequests}
+        disable24hMode={data.type !== 'domain'}
+      />
+    )
+  }
+
+  return (
+    <SecondaryPageLayout
+      ref={ref}
+      index={index}
+      title={title}
+      controls={controls}
+      displayScrollToTopButton
+    >
+      {content}
+    </SecondaryPageLayout>
+  )
+})
+NoteListPage.displayName = 'NoteListPage'
+export default NoteListPage
