@@ -1,5 +1,6 @@
 import dayjs from 'dayjs'
 import { useTranslation } from 'react-i18next'
+import { useMinuteTick } from '@/hooks/useMinuteTick'
 
 export function FormattedTimestamp({
   timestamp,
@@ -10,8 +11,12 @@ export function FormattedTimestamp({
   short?: boolean
   className?: string
 }) {
+  const absoluteTime = dayjs(timestamp * 1000)
+    .toDate()
+    .toLocaleString(undefined, { dateStyle: 'full', timeStyle: 'short' })
+
   return (
-    <span className={className}>
+    <span className={className} title={absoluteTime}>
       <FormattedTimestampContent timestamp={timestamp} short={short} />
     </span>
   )
@@ -29,6 +34,8 @@ function FormattedTimestampContent({
   const now = dayjs()
 
   const diffMonth = now.diff(time, 'month')
+  useMinuteTick(diffMonth < 2)
+
   if (diffMonth >= 2) {
     return t('date', { timestamp: time.valueOf() })
   }
