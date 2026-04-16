@@ -834,5 +834,7 @@ export default {
       '既存の GitHub issue に 👍 でリアクションしてください。十分な票を得た提案は自動的に実装されます。',
     'Open GitHub issues': 'GitHub issue を開く',
     "Let's go": 'はじめよう',
+    Copied: 'コピーしました',
+    Share: '共有',
   }
 }

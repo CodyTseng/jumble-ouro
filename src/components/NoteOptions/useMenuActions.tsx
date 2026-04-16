@@ -14,10 +14,10 @@ import {
   BellOff,
   Code,
   Copy,
-  Link,
   Pin,
   PinOff,
   SatelliteDish,
+  Share2,
   Trash2,
   TriangleAlert
 } from 'lucide-react'
@@ -168,6 +168,7 @@ export function useMenuActions({
         label: t('Copy event ID'),
         onClick: () => {
           navigator.clipboard.writeText(getNoteBech32Id(event))
+          toast.success(t('Copied'))
           closeDrawer()
         }
       },
@@ -176,14 +177,29 @@ export function useMenuActions({
         label: t('Copy user ID'),
         onClick: () => {
           navigator.clipboard.writeText(pubkeyToNpub(event.pubkey) ?? '')
+          toast.success(t('Copied'))
           closeDrawer()
         }
       },
       {
-        icon: Link,
-        label: t('Copy share link'),
-        onClick: () => {
-          navigator.clipboard.writeText(toJumbleNote(event))
+        icon: Share2,
+        label: t('Share'),
+        onClick: async () => {
+          const shareUrl = toJumbleNote(event)
+          if (navigator.share) {
+            try {
+              await navigator.share({ url: shareUrl })
+              closeDrawer()
+              return
+            } catch (err) {
+              if (err instanceof Error && err.name === 'AbortError') {
+                closeDrawer()
+                return
+              }
+            }
+          }
+          navigator.clipboard.writeText(shareUrl)
+          toast.success(t('Copied'))
           closeDrawer()
         }
       },
@@ -192,6 +208,7 @@ export function useMenuActions({
         label: t('Copy note content'),
         onClick: () => {
           navigator.clipboard.writeText(event.content)
+          toast.success(t('Copied'))
           closeDrawer()
         }
       },

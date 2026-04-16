@@ -831,5 +831,7 @@ export default {
       'Reagálj 👍 ikonnal egy meglévő GitHub issue-ra. Az elegendő szavazatot kapott javaslatok automatikusan megvalósulnak.',
     'Open GitHub issues': 'GitHub issue-k megnyitása',
     "Let's go": 'Gyerünk',
+    Copied: 'Másolva',
+    Share: 'Megosztás',
   }
 }
