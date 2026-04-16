@@ -23,6 +23,10 @@ No triage meetings, no roadmap committee — the issue tracker _is_ the roadmap,
 
 **[→ See the most-wanted requests, ranked by votes](../../issues?q=is%3Aissue+is%3Aopen+label%3Afeature-request+sort%3Areactions-%2B1-desc)**
 
+### 🧬 Self-Evolution
+
+When no community request meets the voting threshold, the agent doesn't idle — it enters **self-evolution mode**. It autonomously explores the codebase, identifies a small improvement (a new feature, a bug fix, or UX polish), creates an issue documenting the proposal, and implements it. The goal: continuously push Jumble Ouro toward being a better Nostr client — responsive, decentralized, user-friendly, and with a clean, unified UI. Self-proposed changes are labeled [`ai-self-proposed`](../../issues?q=label%3Aai-self-proposed) so you can always tell what came from the community and what the agent dreamed up on its own.
+
 For the full rules, label meanings, and what the agent will or won't touch, see [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Relationship to Jumble

@@ -41,12 +41,13 @@ jobs:
   # ====================================================================
   implement:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     outputs:
       skip: ${{ steps.select.outputs.skip }}
-      issue_number: ${{ steps.select.outputs.issue_number }}
-      issue_title: ${{ steps.select.outputs.issue_title }}
-      issue_kind: ${{ steps.select.outputs.kind }}
+      mode: ${{ steps.select.outputs.mode }}
+      issue_number: ${{ steps.self_issue.outputs.issue_number || steps.select.outputs.issue_number }}
+      issue_title: ${{ steps.self_issue.outputs.issue_title || steps.select.outputs.issue_title }}
+      issue_kind: ${{ steps.self_issue.outputs.kind || steps.select.outputs.kind }}
       branch: ${{ steps.branch.outputs.name }}
     steps:
       - name: Harden runner
@@ -187,8 +188,9 @@ jobs:
                 .sort((a, b) => b.score - a.score);
 
               if (scored.length === 0 || scored[0].score < MIN_SCORE) {
-                core.info(`No eligible issue: top score = ${scored[0]?.score ?? 0}, need ≥ ${MIN_SCORE}.`);
-                core.setOutput('skip', 'true');
+                core.info(`No eligible issue: top score = ${scored[0]?.score ?? 0}, need ≥ ${MIN_SCORE}. Entering self-evolution mode.`);
+                core.setOutput('skip', 'false');
+                core.setOutput('mode', 'self-evolution');
                 return;
               }
               chosen = scored[0].issue;
@@ -197,6 +199,7 @@ jobs:
             }
 
             const issueNumber = chosen.number;
+            core.setOutput('mode', 'community');
             const score = (chosen.reactions?.['+1'] || 0) - (chosen.reactions?.['-1'] || 0);
 
             // ---- fetch all comments ----
@@ -288,8 +291,227 @@ jobs:
           echo "No eligible issue today. Exiting cleanly."
           exit 0
 
+      # ------------------------------------------------------------------
+      # Self-evolution path: when no community issue meets the threshold,
+      # the agent autonomously explores the codebase and proposes a small
+      # improvement. The steps below produce the same outputs as the
+      # community path so that validate/merge/on-failure work unchanged.
+      # ------------------------------------------------------------------
+      - name: Fetch existing issues for dedup
+        if: steps.select.outputs.mode == 'self-evolution'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const OWNER = context.repo.owner;
+            const REPO = context.repo.repo;
+
+            // Fetch all open issues (any label) to avoid duplicating community requests
+            const openIssues = await github.paginate(github.rest.issues.listForRepo, {
+              owner: OWNER, repo: REPO,
+              state: 'open',
+              per_page: 100,
+            });
+
+            // Fetch recently closed ai-self-proposed issues to know what was already done
+            const closedSelfProposed = await github.paginate(github.rest.issues.listForRepo, {
+              owner: OWNER, repo: REPO,
+              state: 'closed',
+              labels: 'ai-self-proposed',
+              per_page: 30,
+              sort: 'created',
+              direction: 'desc',
+            });
+
+            const lines = ['# Existing Issues\n'];
+            lines.push('Do NOT propose anything that overlaps with these existing issues.\n');
+
+            lines.push('## Open Issues\n');
+            for (const issue of openIssues) {
+              if (issue.pull_request) continue;
+              const labels = (issue.labels || []).map(l => typeof l === 'string' ? l : l.name).join(', ');
+              const snippet = (issue.body || '').slice(0, 200).replace(/\n/g, ' ');
+              lines.push(`- #${issue.number} [${labels}]: ${issue.title}`);
+              lines.push(`  ${snippet}\n`);
+            }
+
+            lines.push('\n## Recently Closed Self-Proposed Issues\n');
+            lines.push('These were previously proposed by the AI agent. Do not repeat them.\n');
+            for (const issue of closedSelfProposed) {
+              const snippet = (issue.body || '').slice(0, 200).replace(/\n/g, ' ');
+              lines.push(`- #${issue.number}: ${issue.title}`);
+              lines.push(`  ${snippet}\n`);
+            }
+
+            fs.writeFileSync('.ai-existing-issues.md', lines.join('\n'));
+            core.info(`Wrote .ai-existing-issues.md with ${openIssues.length} open + ${closedSelfProposed.length} closed self-proposed issues`);
+
+      # ------------------------------------------------------------------
+      # Self-evolution: the agent explores the codebase and proposes a
+      # small improvement, then writes .ai-spec-final.md just like Phase A.
+      # ------------------------------------------------------------------
+      - name: Self-evolution agent — explore and propose
+        if: steps.select.outputs.mode == 'self-evolution'
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --model claude-opus-4-6
+            --allowedTools Read,Write,Glob,Grep,WebFetch,WebSearch
+          prompt: |
+            You are an autonomous improvement agent for Jumble Ouro, a community-driven
+            Nostr client. No community feature request met the voting threshold today, so
+            you have the opportunity to propose and implement a small improvement on your own.
+
+            Your north star: make Jumble a better Nostr client — responsive, decentralized,
+            user-friendly, and with a clean, unified UI. Think about what would attract new
+            users and keep existing ones coming back.
+
+            ## Step 1: Understand the project
+            Read CLAUDE.md for project conventions and architecture.
+
+            ## Step 2: Review existing issues
+            Read `.ai-existing-issues.md` — it lists every open issue in the repo (community
+            feature requests, bug reports, and past AI self-proposed issues) plus recently
+            closed self-proposed issues. You MUST NOT propose anything that overlaps with or
+            duplicates any of these.
+
+            ## Step 3: Explore the codebase
+            Browse the source code freely with Glob, Grep, and Read. Look for opportunities
+            in two broad categories:
+
+            **A. Features that attract and retain users** (high priority):
+            - Interactions or features that make users think "this client is cool / unique"
+            - Better social discovery (finding interesting people, content, or relays)
+            - Leveraging Nostr's decentralized nature for a differentiated experience
+            - Reducing friction for new users (onboarding, first-time experience)
+            - Creative use of existing Nostr NIPs that other clients don't do well
+            - Small delightful touches (animations, micro-interactions, smart defaults)
+
+            **B. Polishing the existing experience**:
+            - Real bugs (something visually broken, logically wrong, or crashes)
+            - UX polish (missing loading/error/empty states, poor mobile experience)
+            - Accessibility gaps (missing aria labels, keyboard navigation)
+            - Small enhancements aligned with already-supported NIPs
+
+            You may also use WebSearch to research what features popular Nostr clients
+            (Damus, Primal, Amethyst, Snort, Coracle) offer, or what NIPs could inspire
+            small improvements. Use WebFetch to read any relevant NIP specs if needed.
+
+            ## Step 4: Choose ONE improvement
+            Pick a single, small, concrete improvement. It must be:
+            - Achievable in under ~300 lines of source code changes (i18n doesn't count)
+            - Self-contained — no multi-PR dependency chains
+            - NOT something from `.ai-existing-issues.md`
+            - NOT a change to `.github/**`, secrets, or key/signing infrastructure
+            - NOT a vague refactor — it must have clear user-facing or developer-facing impact
+            - Concrete and actionable ("add loading skeleton to RelayPage feed" is good,
+              "improve performance" is bad)
+
+            ## Step 5: Write the spec
+            Write `.ai-spec-final.md` using the appropriate template:
+
+            For a **feature/improvement**:
+
+                # <title>
+                ## Goal
+                ## Rationale
+                ## Acceptance criteria
+                ## Out of scope
+                ## Implementation notes
+
+            For a **bug fix**:
+
+                # <title>
+                ## Summary of the bug
+                ## Reproduction steps
+                ## Root cause hypothesis
+                ## Fix approach
+                ## Acceptance criteria
+                ## Regression risk
+                ## Out of scope
+
+            ## Step 6: Write the proposal summary
+            Write `.ai-self-proposal.md` with exactly this format:
+
+                # <title>
+                Category: <bug|feature|polish|accessibility>
+
+                <2-3 sentence summary of what the improvement is and why it matters>
+
+            If you truly cannot find any meaningful improvement after thorough exploration
+            (unlikely), write `.ai-abort` with the reason and STOP.
+
+            In this phase you may ONLY write `.ai-spec-final.md`, `.ai-self-proposal.md`,
+            or `.ai-abort`. Do not touch `src/**` or any other project files.
+
+      - name: Abort if self-evolution agent flagged
+        if: steps.select.outputs.mode == 'self-evolution'
+        run: |
+          if [ -f .ai-abort ]; then
+            echo "Self-evolution agent aborted:"
+            cat .ai-abort
+            exit 1
+          fi
+          if [ ! -f .ai-spec-final.md ]; then
+            echo "Self-evolution agent did not produce .ai-spec-final.md"
+            exit 1
+          fi
+          if [ ! -f .ai-self-proposal.md ]; then
+            echo "Self-evolution agent did not produce .ai-self-proposal.md"
+            exit 1
+          fi
+          echo "Self-evolution spec:"
+          cat .ai-spec-final.md
+
+      - name: Create self-proposed issue
+        id: self_issue
+        if: steps.select.outputs.mode == 'self-evolution'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const proposal = fs.readFileSync('.ai-self-proposal.md', 'utf8');
+            const spec = fs.readFileSync('.ai-spec-final.md', 'utf8');
+
+            // Extract title from proposal (first # heading)
+            const titleMatch = proposal.match(/^#\s+(.+)/m);
+            const title = titleMatch ? titleMatch[1].trim() : 'AI self-proposed improvement';
+
+            // Extract category
+            const catMatch = proposal.match(/^Category:\s*(.+)/mi);
+            const category = catMatch ? catMatch[1].trim() : 'feature';
+
+            const { data: issue } = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: title,
+              body: [
+                '🤖 **Auto-proposed by the AI agent** (self-evolution mode)',
+                '',
+                proposal.replace(/^#\s+.+\n/, '').trim(),
+                '',
+                '---',
+                '',
+                '<details><summary>Full spec</summary>',
+                '',
+                spec,
+                '',
+                '</details>',
+                '',
+                `_This issue was created automatically because no community request met the voting threshold today. The agent identified this improvement autonomously. Follow progress in the [Actions tab](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId})._`,
+              ].join('\n'),
+              labels: ['ai-self-proposed', 'ai-in-progress'],
+            });
+
+            const kind = category === 'bug' ? 'bug' : 'feature';
+            core.setOutput('issue_number', String(issue.number));
+            core.setOutput('issue_title', title);
+            core.setOutput('kind', kind);
+            core.info(`Created self-proposed issue #${issue.number}: ${title} (${kind})`);
+
       - name: Mark issue in-progress
-        if: steps.select.outputs.skip != 'true'
+        if: steps.select.outputs.skip != 'true' && steps.select.outputs.mode == 'community'
         uses: actions/github-script@v7
         env:
           ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
@@ -311,11 +533,16 @@ jobs:
         id: branch
         if: steps.select.outputs.skip != 'true'
         env:
-          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+          ISSUE_NUMBER: ${{ steps.self_issue.outputs.issue_number || steps.select.outputs.issue_number }}
+          MODE: ${{ steps.select.outputs.mode }}
         run: |
           git config user.name "jumble-ai-bot"
           git config user.email "jumble-ai-bot@users.noreply.github.com"
-          BRANCH="ai/issue-${ISSUE_NUMBER}"
+          if [ "$MODE" = "self-evolution" ]; then
+            BRANCH="ai/self-${ISSUE_NUMBER}"
+          else
+            BRANCH="ai/issue-${ISSUE_NUMBER}"
+          fi
           git checkout -B "$BRANCH"
           echo "BRANCH=$BRANCH" >> "$GITHUB_ENV"
           echo "name=$BRANCH" >> "$GITHUB_OUTPUT"
@@ -329,7 +556,7 @@ jobs:
       # produces .ai-spec-final.md. No source edits allowed here.
       # ------------------------------------------------------------------
       - name: Agent phase A — synthesize spec
-        if: steps.select.outputs.skip != 'true'
+        if: steps.select.outputs.skip != 'true' && steps.select.outputs.mode == 'community'
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
@@ -400,7 +627,7 @@ jobs:
             `src/**` or any other project files. Do not run git commands.
 
       - name: Abort if the agent flagged the request
-        if: steps.select.outputs.skip != 'true'
+        if: steps.select.outputs.skip != 'true' && steps.select.outputs.mode == 'community'
         run: |
           if [ -f .ai-abort ]; then
             echo "Agent aborted (phase A):"
@@ -480,7 +707,7 @@ jobs:
               This protects the automation itself from self-modification.
             - Do NOT edit `package-lock.json` by hand — if deps change, run `npm install` and let npm update it.
             - Do NOT add or rotate any secrets, env var defaults, or files named like `*.key`, `*.pem`, `.env*`.
-            - Do NOT commit `.ai-spec-raw.md`, `.ai-spec-final.md`, `.ai-images/`, or `.ai-abort` — they are audit artifacts.
+            - Do NOT commit `.ai-spec-raw.md`, `.ai-spec-final.md`, `.ai-self-proposal.md`, `.ai-existing-issues.md`, `.ai-images/`, or `.ai-abort` — they are audit artifacts.
 
             ================================================================
             SOFT GUIDANCE — prefer, but may deviate with justification
@@ -527,7 +754,7 @@ jobs:
             exit 1
           fi
           if git log origin/${{ github.event.repository.default_branch }}..HEAD --name-only --pretty=format: \
-             | grep -E '^(\.ai-spec-raw\.md|\.ai-spec-final\.md|\.ai-abort|\.ai-images/)' ; then
+             | grep -E '^(\.ai-spec-raw\.md|\.ai-spec-final\.md|\.ai-abort|\.ai-self-proposal\.md|\.ai-existing-issues\.md|\.ai-images/)' ; then
             echo "Audit artifacts leaked into commits — failing."
             exit 1
           fi
@@ -569,7 +796,8 @@ jobs:
         if: steps.select.outputs.skip != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
+          ISSUE_NUMBER: ${{ steps.self_issue.outputs.issue_number || steps.select.outputs.issue_number }}
+          MODE: ${{ steps.select.outputs.mode }}
           BASE: ${{ github.event.repository.default_branch }}
         run: |
           set -e
@@ -580,25 +808,40 @@ jobs:
           fi
           REFINED_TITLE=$(awk '/^# /{sub(/^# */,""); print; exit}' .ai-spec-final.md)
           if [ -z "$REFINED_TITLE" ]; then
-            REFINED_TITLE="${{ steps.select.outputs.issue_title }}"
+            REFINED_TITLE="${{ steps.self_issue.outputs.issue_title || steps.select.outputs.issue_title }}"
           fi
-          KIND="${{ steps.select.outputs.kind }}"
+          KIND="${{ steps.self_issue.outputs.kind || steps.select.outputs.kind }}"
           LABEL_ARGS=(--label ai-generated)
+          if [ "$MODE" = "self-evolution" ]; then
+            LABEL_ARGS+=(--label ai-self-proposed)
+          fi
           if [ "$KIND" = "bug" ]; then
             PR_TITLE="fix: ${REFINED_TITLE} (#${ISSUE_NUMBER})"
             LABEL_ARGS+=(--label bug)
           else
             PR_TITLE="${REFINED_TITLE} (#${ISSUE_NUMBER})"
           fi
-          {
-            echo "Closes #${ISSUE_NUMBER}"
-            echo
-            echo "🤖 Auto-implemented by an AI coding agent from a community request."
-            echo
-            echo "## Synthesized spec"
-            echo
-            cat .ai-spec-final.md
-          } > .ai-pr-body.md
+          if [ "$MODE" = "self-evolution" ]; then
+            {
+              echo "Closes #${ISSUE_NUMBER}"
+              echo
+              echo "🤖 Auto-implemented by an AI coding agent (self-evolution mode)."
+              echo
+              echo "## Spec"
+              echo
+              cat .ai-spec-final.md
+            } > .ai-pr-body.md
+          else
+            {
+              echo "Closes #${ISSUE_NUMBER}"
+              echo
+              echo "🤖 Auto-implemented by an AI coding agent from a community request."
+              echo
+              echo "## Synthesized spec"
+              echo
+              cat .ai-spec-final.md
+            } > .ai-pr-body.md
+          fi
           gh pr create \
             --title "$PR_TITLE" \
             --body-file .ai-pr-body.md \
@@ -607,7 +850,7 @@ jobs:
             --head "$BRANCH"
 
       - name: Post synthesized spec to issue
-        if: steps.select.outputs.skip != 'true'
+        if: steps.select.outputs.skip != 'true' && steps.select.outputs.mode == 'community'
         uses: actions/github-script@v7
         env:
           ISSUE_NUMBER: ${{ steps.select.outputs.issue_number }}
@@ -626,10 +869,12 @@ jobs:
         if: always() && steps.select.outputs.skip != 'true'
         uses: actions/upload-artifact@v4
         with:
-          name: ai-audit-${{ steps.select.outputs.issue_number }}
+          name: ai-audit-${{ steps.self_issue.outputs.issue_number || steps.select.outputs.issue_number }}
           path: |
             .ai-spec-raw.md
             .ai-spec-final.md
+            .ai-self-proposal.md
+            .ai-existing-issues.md
             .ai-abort
             .ai-images/
           if-no-files-found: ignore

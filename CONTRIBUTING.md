@@ -42,6 +42,10 @@ Every day at 20:00 UTC, a GitHub Action runs and picks the **single** open featu
 
 If the request is ambiguous, controversial, or too large to attempt safely, the agent writes an abort note and the issue is labeled **`ai-failed`** for a human maintainer to look at.
 
+### Self-evolution mode
+
+When no community request meets the voting threshold, the agent enters **self-evolution mode**. Instead of idling, it autonomously explores the codebase, identifies a small improvement (a new feature, a bug fix, or a UX polish), creates a GitHub issue documenting the proposal, and implements it — all in the same daily run. These auto-proposed issues are labeled **`ai-self-proposed`** so you can easily tell them apart from community requests. The same validation pipeline (lint, typecheck, build, test) applies.
+
 ## Issue labels
 
 | Label              | Meaning                                                                                 |
@@ -52,6 +56,7 @@ If the request is ambiguous, controversial, or too large to attempt safely, the 
 | `ai-implemented`   | The agent has opened a PR and it was (or will be) auto-merged.                          |
 | `ai-failed`        | The auto-run failed. A human maintainer will investigate.                               |
 | `ai-generated`     | Applied to PRs authored by the AI agent.                                                |
+| `ai-self-proposed` | The AI agent proposed this improvement autonomously (self-evolution mode).               |
 | `wontfix`          | Rejected. The automation will never pick it up.                                         |
 
 ## What the agent will and won't touch
