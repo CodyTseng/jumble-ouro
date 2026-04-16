@@ -822,5 +822,7 @@ export default {
       'กด 👍 บน issue ที่มีอยู่ใน GitHub ข้อเสนอที่ได้รับคะแนนเพียงพอจะถูกสร้างขึ้นโดยอัตโนมัติ',
     'Open GitHub issues': 'เปิด issues บน GitHub',
     "Let's go": 'ไปกันเลย',
+    Copied: 'คัดลอกแล้ว',
+    Share: 'แชร์',
   }
 }

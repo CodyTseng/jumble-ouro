@@ -828,5 +828,7 @@ export default {
       '기존 GitHub 이슈에 👍로 반응하세요. 충분한 표를 얻은 제안은 자동으로 구현됩니다.',
     'Open GitHub issues': 'GitHub 이슈 열기',
     "Let's go": '시작하기',
+    Copied: '복사됨',
+    Share: '공유',
   }
 }

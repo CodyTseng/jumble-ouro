@@ -840,5 +840,7 @@ export default {
       'Reagisci con 👍 su una issue GitHub esistente. Le proposte con abbastanza voti vengono realizzate automaticamente.',
     'Open GitHub issues': 'Apri le issue GitHub',
     "Let's go": 'Andiamo',
+    Copied: 'Copiato',
+    Share: 'Condividi',
   }
 }

@@ -840,5 +840,7 @@ export default {
       'Zareaguj 👍 na istniejące issue na GitHubie. Propozycje z odpowiednią liczbą głosów są wdrażane automatycznie.',
     'Open GitHub issues': 'Otwórz issues na GitHubie',
     "Let's go": 'Zaczynajmy',
+    Copied: 'Skopiowano',
+    Share: 'Udostępnij',
   }
 }

@@ -804,5 +804,7 @@ export default {
       '在現有的 GitHub issue 上按 👍。獲得足夠票數的提案會自動實作。',
     'Open GitHub issues': '開啟 GitHub issues',
     "Let's go": '出發吧',
+    Copied: '已複製',
+    Share: '分享',
   }
 }

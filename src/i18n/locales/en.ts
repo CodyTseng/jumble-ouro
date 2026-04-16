@@ -828,5 +828,7 @@ export default {
       'React with a 👍 on an existing GitHub issue. Proposals with enough votes are built automatically.',
     'Open GitHub issues': 'Open GitHub issues',
     "Let's go": "Let's go",
+    Copied: 'Copied',
+    Share: 'Share',
   }
 }
