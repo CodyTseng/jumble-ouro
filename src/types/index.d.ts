@@ -72,6 +72,7 @@ export type TRelaySet = {
   aTag: string[]
   name: string
   relayUrls: string[]
+  image?: string
 }
 
 export type TConfig = {
