@@ -16,6 +16,7 @@ export default function RelaySetCard({
 }) {
   const { t } = useTranslation()
   const [expand, setExpand] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
   return (
     <div
@@ -30,7 +31,16 @@ export default function RelaySetCard({
       <div className="flex items-center justify-between gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-3">
           <div className="flex size-6 shrink-0 items-center justify-center">
-            <FolderClosed className="size-5" />
+            {relaySet.image && !imageError ? (
+              <img
+                src={relaySet.image}
+                alt={relaySet.name}
+                className="size-6 rounded-full object-cover"
+                onError={() => setImageError(true)}
+              />
+            ) : (
+              <FolderClosed className="size-5" />
+            )}
           </div>
           <div className="select-none truncate font-medium">{relaySet.name}</div>
         </div>
