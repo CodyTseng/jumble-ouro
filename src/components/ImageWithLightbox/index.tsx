@@ -80,7 +80,7 @@ export default function ImageWithLightbox({
           <div onClick={(e) => e.stopPropagation()}>
             <Lightbox
               index={index}
-              slides={[{ src: image.url }]}
+              slides={[{ src: image.url, alt: image.alt }]}
               plugins={[Zoom]}
               open={index >= 0}
               close={() => setIndex(-1)}

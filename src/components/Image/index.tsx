@@ -10,8 +10,8 @@ import { HTMLAttributes, useEffect, useMemo, useRef, useState } from 'react'
 import { thumbHashToDataURL } from 'thumbhash'
 
 export default function Image({
-  image: { url, blurHash, thumbHash, pubkey, dim },
-  alt,
+  image: { url, blurHash, thumbHash, pubkey, dim, alt: imageAlt },
+  alt = imageAlt,
   className = '',
   classNames = {},
   hideIfError = false,
