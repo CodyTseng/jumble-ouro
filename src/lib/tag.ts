@@ -53,7 +53,10 @@ export function getImetaInfoFromImetaTag(tag: string[], pubkey?: string): TImeta
   const imeta: Partial<TImetaInfo> = { pubkey }
 
   for (let i = 1; i < tag.length; i++) {
-    const [k, v] = tag[i].split(' ')
+    const spaceIndex = tag[i].indexOf(' ')
+    if (spaceIndex === -1) continue
+    const k = tag[i].substring(0, spaceIndex)
+    const v = tag[i].substring(spaceIndex + 1)
     switch (k) {
       case 'url':
         imeta.url = v
@@ -79,6 +82,9 @@ export function getImetaInfoFromImetaTag(tag: string[], pubkey?: string): TImeta
         }
         break
       }
+      case 'alt':
+        imeta.alt = v
+        break
     }
   }
 

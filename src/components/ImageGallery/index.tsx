@@ -27,7 +27,9 @@ export default function ImageGallery({
   const id = useMemo(() => `image-gallery-${randomString()}`, [])
   const { autoLoadMedia } = useContentPolicy()
   const [index, setIndex] = useState(-1)
-  const [slides, setSlides] = useState<{ src: string }[]>(images.map(({ url }) => ({ src: url })))
+  const [slides, setSlides] = useState<{ src: string; alt?: string }[]>(
+    images.map(({ url, alt }) => ({ src: url, alt }))
+  )
   useEffect(() => {
     if (index >= 0) {
       modalManager.register(id, () => {
@@ -41,21 +43,21 @@ export default function ImageGallery({
   useEffect(() => {
     const loadImages = async () => {
       const slides = await Promise.all(
-        images.map(({ url, pubkey }) => {
-          return new Promise<{ src: string }>((resolve) => {
+        images.map(({ url, pubkey, alt }) => {
+          return new Promise<{ src: string; alt?: string }>((resolve) => {
             const img = new window.Image()
             let validUrl = url
             img.onload = () => {
               blossomService.markAsSuccess(url, validUrl)
-              resolve({ src: validUrl })
+              resolve({ src: validUrl, alt })
             }
             img.onerror = () => {
               blossomService.tryNextUrl(url).then((nextUrl) => {
                 if (nextUrl) {
                   validUrl = nextUrl
-                  resolve({ src: validUrl })
+                  resolve({ src: validUrl, alt })
                 } else {
-                  resolve({ src: url })
+                  resolve({ src: url, alt })
                 }
               })
             }
@@ -67,7 +69,7 @@ export default function ImageGallery({
                   img.src = validUrl
                 })
                 .catch(() => {
-                  resolve({ src: url })
+                  resolve({ src: url, alt })
                 })
             } else {
               img.src = url

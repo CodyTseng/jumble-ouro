@@ -132,6 +132,7 @@ export type TImetaInfo = {
   thumbHash?: Uint8Array
   dim?: { width: number; height: number }
   pubkey?: string
+  alt?: string
 }
 
 export type TPublishOptions = {
