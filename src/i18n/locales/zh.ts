@@ -811,5 +811,18 @@ export default {
     "Let's go": '出发',
     Copied: '已复制',
     Share: '分享',
+    'Keyboard shortcuts': '键盘快捷键',
+    Navigation: '导航',
+    then: '然后',
+    'Go to Home': '前往首页',
+    'Go to Notifications': '前往通知',
+    'Go to DMs': '前往私信',
+    'Go to Profile': '前往个人资料',
+    'Go to Bookmarks': '前往书签',
+    'Go to Settings': '前往设置',
+    'Go to Search': '前往搜索',
+    Actions: '操作',
+    'New post': '发布新帖',
+    'Show keyboard shortcuts': '显示键盘快捷键',
   }
 }

@@ -837,5 +837,18 @@ export default {
     "Let's go": 'بزن بریم',
     Copied: 'کپی شد',
     Share: 'اشتراک‌گذاری',
+    'Keyboard shortcuts': 'میانبرهای صفحه‌کلید',
+    Navigation: 'ناوبری',
+    then: 'سپس',
+    'Go to Home': 'رفتن به خانه',
+    'Go to Notifications': 'رفتن به اعلان‌ها',
+    'Go to DMs': 'رفتن به پیام‌ها',
+    'Go to Profile': 'رفتن به نمایه',
+    'Go to Bookmarks': 'رفتن به نشانک‌ها',
+    'Go to Settings': 'رفتن به تنظیمات',
+    'Go to Search': 'رفتن به جستجو',
+    Actions: 'عملیات',
+    'New post': 'پست جدید',
+    'Show keyboard shortcuts': 'نمایش میانبرهای صفحه‌کلید',
   }
 }

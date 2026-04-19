@@ -824,5 +824,18 @@ export default {
     "Let's go": 'ไปกันเลย',
     Copied: 'คัดลอกแล้ว',
     Share: 'แชร์',
+    'Keyboard shortcuts': 'แป้นพิมพ์ลัด',
+    Navigation: 'การนำทาง',
+    then: 'แล้ว',
+    'Go to Home': 'ไปที่หน้าแรก',
+    'Go to Notifications': 'ไปที่การแจ้งเตือน',
+    'Go to DMs': 'ไปที่ข้อความ',
+    'Go to Profile': 'ไปที่โปรไฟล์',
+    'Go to Bookmarks': 'ไปที่บุ๊กมาร์ก',
+    'Go to Settings': 'ไปที่การตั้งค่า',
+    'Go to Search': 'ไปที่การค้นหา',
+    Actions: 'การดำเนินการ',
+    'New post': 'โพสต์ใหม่',
+    'Show keyboard shortcuts': 'แสดงแป้นพิมพ์ลัด',
   }
 }

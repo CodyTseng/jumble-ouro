@@ -806,5 +806,18 @@ export default {
     "Let's go": '出發吧',
     Copied: '已複製',
     Share: '分享',
+    'Keyboard shortcuts': '鍵盤快捷鍵',
+    Navigation: '導覽',
+    then: '然後',
+    'Go to Home': '前往首頁',
+    'Go to Notifications': '前往通知',
+    'Go to DMs': '前往私訊',
+    'Go to Profile': '前往個人檔案',
+    'Go to Bookmarks': '前往書籤',
+    'Go to Settings': '前往設定',
+    'Go to Search': '前往搜尋',
+    Actions: '操作',
+    'New post': '發佈新帖',
+    'Show keyboard shortcuts': '顯示鍵盤快捷鍵',
   }
 }

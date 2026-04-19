@@ -842,5 +842,18 @@ export default {
     "Let's go": 'Andiamo',
     Copied: 'Copiato',
     Share: 'Condividi',
+    'Keyboard shortcuts': 'Scorciatoie da tastiera',
+    Navigation: 'Navigazione',
+    then: 'poi',
+    'Go to Home': 'Vai alla Home',
+    'Go to Notifications': 'Vai alle Notifiche',
+    'Go to DMs': 'Vai ai Messaggi diretti',
+    'Go to Profile': 'Vai al Profilo',
+    'Go to Bookmarks': 'Vai ai Segnalibri',
+    'Go to Settings': 'Vai alle Impostazioni',
+    'Go to Search': 'Vai alla Ricerca',
+    Actions: 'Azioni',
+    'New post': 'Nuovo post',
+    'Show keyboard shortcuts': 'Mostra scorciatoie da tastiera',
   }
 }

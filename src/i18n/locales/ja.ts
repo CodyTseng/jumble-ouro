@@ -836,5 +836,18 @@ export default {
     "Let's go": 'はじめよう',
     Copied: 'コピーしました',
     Share: '共有',
+    'Keyboard shortcuts': 'キーボードショートカット',
+    Navigation: 'ナビゲーション',
+    then: '→',
+    'Go to Home': 'ホームへ移動',
+    'Go to Notifications': '通知へ移動',
+    'Go to DMs': 'DMへ移動',
+    'Go to Profile': 'プロフィールへ移動',
+    'Go to Bookmarks': 'ブックマークへ移動',
+    'Go to Settings': '設定へ移動',
+    'Go to Search': '検索へ移動',
+    Actions: 'アクション',
+    'New post': '新しい投稿',
+    'Show keyboard shortcuts': 'キーボードショートカットを表示',
   }
 }

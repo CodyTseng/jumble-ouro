@@ -842,5 +842,18 @@ export default {
     "Let's go": 'Поехали',
     Copied: 'Скопировано',
     Share: 'Поделиться',
+    'Keyboard shortcuts': 'Горячие клавиши',
+    Navigation: 'Навигация',
+    then: 'затем',
+    'Go to Home': 'Перейти на Главную',
+    'Go to Notifications': 'Перейти к Уведомлениям',
+    'Go to DMs': 'Перейти к Сообщениям',
+    'Go to Profile': 'Перейти к Профилю',
+    'Go to Bookmarks': 'Перейти к Закладкам',
+    'Go to Settings': 'Перейти к Настройкам',
+    'Go to Search': 'Перейти к Поиску',
+    Actions: 'Действия',
+    'New post': 'Новая запись',
+    'Show keyboard shortcuts': 'Показать горячие клавиши',
   }
 }
