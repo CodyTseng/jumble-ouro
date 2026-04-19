@@ -850,5 +850,18 @@ export default {
     "Let's go": 'Los geht’s',
     Copied: 'Kopiert',
     Share: 'Teilen',
+    'Keyboard shortcuts': 'Tastaturkürzel',
+    Navigation: 'Navigation',
+    then: 'dann',
+    'Go to Home': 'Zur Startseite',
+    'Go to Notifications': 'Zu Benachrichtigungen',
+    'Go to DMs': 'Zu Direktnachrichten',
+    'Go to Profile': 'Zum Profil',
+    'Go to Bookmarks': 'Zu Lesezeichen',
+    'Go to Settings': 'Zu Einstellungen',
+    'Go to Search': 'Zur Suche',
+    Actions: 'Aktionen',
+    'New post': 'Neuer Beitrag',
+    'Show keyboard shortcuts': 'Tastaturkürzel anzeigen',
   }
 }

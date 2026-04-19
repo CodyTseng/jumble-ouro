@@ -11,6 +11,10 @@ class PostEditorService extends EventTarget {
     return PostEditorService.instance
   }
 
+  openNewPost() {
+    this.dispatchEvent(new CustomEvent('open'))
+  }
+
   closeSuggestionPopup() {
     if (this.isSuggestionPopupOpen) {
       this.isSuggestionPopupOpen = false

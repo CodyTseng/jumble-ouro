@@ -830,5 +830,18 @@ export default {
     "Let's go": "Let's go",
     Copied: 'Copied',
     Share: 'Share',
+    'Keyboard shortcuts': 'Keyboard shortcuts',
+    Navigation: 'Navigation',
+    then: 'then',
+    'Go to Home': 'Go to Home',
+    'Go to Notifications': 'Go to Notifications',
+    'Go to DMs': 'Go to DMs',
+    'Go to Profile': 'Go to Profile',
+    'Go to Bookmarks': 'Go to Bookmarks',
+    'Go to Settings': 'Go to Settings',
+    'Go to Search': 'Go to Search',
+    Actions: 'Actions',
+    'New post': 'New post',
+    'Show keyboard shortcuts': 'Show keyboard shortcuts',
   }
 }

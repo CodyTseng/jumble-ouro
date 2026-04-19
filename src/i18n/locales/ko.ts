@@ -830,5 +830,18 @@ export default {
     "Let's go": '시작하기',
     Copied: '복사됨',
     Share: '공유',
+    'Keyboard shortcuts': '키보드 단축키',
+    Navigation: '탐색',
+    then: '→',
+    'Go to Home': '홈으로 이동',
+    'Go to Notifications': '알림으로 이동',
+    'Go to DMs': 'DM으로 이동',
+    'Go to Profile': '프로필로 이동',
+    'Go to Bookmarks': '북마크로 이동',
+    'Go to Settings': '설정으로 이동',
+    'Go to Search': '검색으로 이동',
+    Actions: '작업',
+    'New post': '새 게시물',
+    'Show keyboard shortcuts': '키보드 단축키 표시',
   }
 }

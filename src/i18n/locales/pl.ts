@@ -842,5 +842,18 @@ export default {
     "Let's go": 'Zaczynajmy',
     Copied: 'Skopiowano',
     Share: 'Udostępnij',
+    'Keyboard shortcuts': 'Skróty klawiaturowe',
+    Navigation: 'Nawigacja',
+    then: 'potem',
+    'Go to Home': 'Przejdź do Strony głównej',
+    'Go to Notifications': 'Przejdź do Powiadomień',
+    'Go to DMs': 'Przejdź do Wiadomości',
+    'Go to Profile': 'Przejdź do Profilu',
+    'Go to Bookmarks': 'Przejdź do Zakładek',
+    'Go to Settings': 'Przejdź do Ustawień',
+    'Go to Search': 'Przejdź do Wyszukiwania',
+    Actions: 'Akcje',
+    'New post': 'Nowy wpis',
+    'Show keyboard shortcuts': 'Pokaż skróty klawiaturowe',
   }
 }

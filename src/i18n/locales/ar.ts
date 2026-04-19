@@ -823,5 +823,18 @@ export default {
     "Let's go": 'هيا بنا',
     Copied: 'تم النسخ',
     Share: 'مشاركة',
+    'Keyboard shortcuts': 'اختصارات لوحة المفاتيح',
+    Navigation: 'التنقل',
+    then: 'ثم',
+    'Go to Home': 'الذهاب إلى الرئيسية',
+    'Go to Notifications': 'الذهاب إلى الإشعارات',
+    'Go to DMs': 'الذهاب إلى الرسائل',
+    'Go to Profile': 'الذهاب إلى الملف الشخصي',
+    'Go to Bookmarks': 'الذهاب إلى الإشارات المرجعية',
+    'Go to Settings': 'الذهاب إلى الإعدادات',
+    'Go to Search': 'الذهاب إلى البحث',
+    Actions: 'الإجراءات',
+    'New post': 'منشور جديد',
+    'Show keyboard shortcuts': 'عرض اختصارات لوحة المفاتيح',
   }
 }

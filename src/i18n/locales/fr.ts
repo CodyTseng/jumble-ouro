@@ -846,5 +846,18 @@ export default {
     "Let's go": "C'est parti",
     Copied: 'Copié',
     Share: 'Partager',
+    'Keyboard shortcuts': 'Raccourcis clavier',
+    Navigation: 'Navigation',
+    then: 'puis',
+    'Go to Home': "Aller à l'accueil",
+    'Go to Notifications': 'Aller aux notifications',
+    'Go to DMs': 'Aller aux messages directs',
+    'Go to Profile': 'Aller au profil',
+    'Go to Bookmarks': 'Aller aux signets',
+    'Go to Settings': 'Aller aux paramètres',
+    'Go to Search': 'Aller à la recherche',
+    Actions: 'Actions',
+    'New post': 'Nouveau post',
+    'Show keyboard shortcuts': 'Afficher les raccourcis clavier',
   }
 }

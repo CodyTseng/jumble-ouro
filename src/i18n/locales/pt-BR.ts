@@ -841,5 +841,18 @@ export default {
     "Let's go": 'Vamos lá',
     Copied: 'Copiado',
     Share: 'Compartilhar',
+    'Keyboard shortcuts': 'Atalhos de teclado',
+    Navigation: 'Navegação',
+    then: 'depois',
+    'Go to Home': 'Ir para Início',
+    'Go to Notifications': 'Ir para Notificações',
+    'Go to DMs': 'Ir para Mensagens diretas',
+    'Go to Profile': 'Ir para Perfil',
+    'Go to Bookmarks': 'Ir para Favoritos',
+    'Go to Settings': 'Ir para Configurações',
+    'Go to Search': 'Ir para Busca',
+    Actions: 'Ações',
+    'New post': 'Nova publicação',
+    'Show keyboard shortcuts': 'Mostrar atalhos de teclado',
   }
 }

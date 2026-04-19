@@ -842,5 +842,18 @@ export default {
     "Let's go": 'Vamos',
     Copied: 'Copiado',
     Share: 'Compartir',
+    'Keyboard shortcuts': 'Atajos de teclado',
+    Navigation: 'Navegación',
+    then: 'luego',
+    'Go to Home': 'Ir a Inicio',
+    'Go to Notifications': 'Ir a Notificaciones',
+    'Go to DMs': 'Ir a Mensajes directos',
+    'Go to Profile': 'Ir a Perfil',
+    'Go to Bookmarks': 'Ir a Marcadores',
+    'Go to Settings': 'Ir a Configuración',
+    'Go to Search': 'Ir a Búsqueda',
+    Actions: 'Acciones',
+    'New post': 'Nueva publicación',
+    'Show keyboard shortcuts': 'Mostrar atajos de teclado',
   }
 }

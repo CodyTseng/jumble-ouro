@@ -1,6 +1,8 @@
+import KeyboardShortcutsDialog from '@/components/KeyboardShortcutsDialog'
 import Sidebar from '@/components/Sidebar'
 import { cn } from '@/lib/utils'
 import { CurrentRelaysProvider } from '@/providers/CurrentRelaysProvider'
+import postEditor from '@/services/post-editor.service'
 import { TPageRef } from '@/types'
 import {
   cloneElement,
@@ -8,6 +10,7 @@ import {
   createRef,
   ReactNode,
   RefObject,
+  useCallback,
   useContext,
   useEffect,
   useRef,
@@ -82,21 +85,84 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
   const { themeSetting } = useTheme()
   const { enableSingleColumnLayout, sidebarCollapse } = useUserPreferences()
   const ignorePopStateRef = useRef(false)
+  const [shortcutsDialogOpen, setShortcutsDialogOpen] = useState(false)
+  const pendingPrefixRef = useRef<string | null>(null)
+  const prefixTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const clearPendingPrefix = useCallback(() => {
+    pendingPrefixRef.current = null
+    if (prefixTimeoutRef.current) {
+      clearTimeout(prefixTimeoutRef.current)
+      prefixTimeoutRef.current = null
+    }
+  }, [])
 
   useEffect(() => {
     if (isSmallScreen) return
+
+    const GO_MAP: Record<string, TPrimaryPageName> = {
+      h: 'home',
+      n: 'notifications',
+      d: 'dms',
+      p: 'profile',
+      b: 'bookmark',
+      s: 'settings'
+    }
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
         e.preventDefault()
         navigatePrimaryPage('search')
+        return
+      }
+
+      if (e.metaKey || e.ctrlKey || e.altKey) return
+
+      const tag = (e.target as HTMLElement)?.tagName
+      if (tag === 'INPUT' || tag === 'TEXTAREA' || (e.target as HTMLElement)?.isContentEditable) {
+        return
+      }
+
+      if (document.querySelector('[role="dialog"][data-state="open"]')) return
+
+      if (pendingPrefixRef.current === 'g') {
+        clearPendingPrefix()
+        const page = GO_MAP[e.key]
+        if (page) {
+          e.preventDefault()
+          navigatePrimaryPage(page)
+        }
+        return
+      }
+
+      switch (e.key) {
+        case '?':
+          e.preventDefault()
+          setShortcutsDialogOpen((v) => !v)
+          break
+        case 'n':
+          e.preventDefault()
+          postEditor.openNewPost()
+          break
+        case '/':
+          e.preventDefault()
+          navigatePrimaryPage('search')
+          break
+        case 'g':
+          e.preventDefault()
+          pendingPrefixRef.current = 'g'
+          prefixTimeoutRef.current = setTimeout(() => {
+            pendingPrefixRef.current = null
+          }, 1000)
+          break
       }
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => {
       window.removeEventListener('keydown', handleKeyDown)
+      clearPendingPrefix()
     }
-  }, [isSmallScreen])
+  }, [isSmallScreen, clearPendingPrefix])
 
   useEffect(() => {
     if (['/npub1', '/nprofile1'].some((prefix) => window.location.pathname.startsWith(prefix))) {
@@ -322,6 +388,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
               ))}
               {!bottomBarHidden && <BottomNavigationBar />}
               <TooManyRelaysAlertDialog />
+              <KeyboardShortcutsDialog open={shortcutsDialogOpen} onOpenChange={setShortcutsDialogOpen} />
               </div>
             </NotificationProvider>
           </CurrentRelaysProvider>
@@ -391,6 +458,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
                 </div>
               </div>
               <TooManyRelaysAlertDialog />
+              <KeyboardShortcutsDialog open={shortcutsDialogOpen} onOpenChange={setShortcutsDialogOpen} />
               <BackgroundAudio className="fixed bottom-20 right-0 z-50 w-80 overflow-hidden rounded-l-full rounded-r-none border shadow-lg" />
             </NotificationProvider>
           </CurrentRelaysProvider>

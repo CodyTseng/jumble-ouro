@@ -833,5 +833,18 @@ export default {
     "Let's go": 'Gyerünk',
     Copied: 'Másolva',
     Share: 'Megosztás',
+    'Keyboard shortcuts': 'Billentyűparancsok',
+    Navigation: 'Navigáció',
+    then: 'majd',
+    'Go to Home': 'Ugrás a Kezdőlapra',
+    'Go to Notifications': 'Ugrás az Értesítésekhez',
+    'Go to DMs': 'Ugrás az Üzenetekhez',
+    'Go to Profile': 'Ugrás a Profilhoz',
+    'Go to Bookmarks': 'Ugrás a Könyvjelzőkhöz',
+    'Go to Settings': 'Ugrás a Beállításokhoz',
+    'Go to Search': 'Ugrás a Kereséshez',
+    Actions: 'Műveletek',
+    'New post': 'Új bejegyzés',
+    'Show keyboard shortcuts': 'Billentyűparancsok megjelenítése',
   }
 }

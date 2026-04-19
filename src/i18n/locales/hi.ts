@@ -838,5 +838,18 @@ export default {
     "Let's go": 'चलिए शुरू करें',
     Copied: 'कॉपी हो गया',
     Share: 'साझा करें',
+    'Keyboard shortcuts': 'कीबोर्ड शॉर्टकट',
+    Navigation: 'नेविगेशन',
+    then: 'फिर',
+    'Go to Home': 'होम पर जाएं',
+    'Go to Notifications': 'सूचनाओं पर जाएं',
+    'Go to DMs': 'संदेशों पर जाएं',
+    'Go to Profile': 'प्रोफ़ाइल पर जाएं',
+    'Go to Bookmarks': 'बुकमार्क पर जाएं',
+    'Go to Settings': 'सेटिंग्स पर जाएं',
+    'Go to Search': 'खोज पर जाएं',
+    Actions: 'क्रियाएं',
+    'New post': 'नई पोस्ट',
+    'Show keyboard shortcuts': 'कीबोर्ड शॉर्टकट दिखाएं',
   }
 }
