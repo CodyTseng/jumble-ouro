@@ -50,35 +50,6 @@ jobs:
       issue_kind: ${{ steps.self_issue.outputs.kind || steps.select.outputs.kind }}
       branch: ${{ steps.branch.outputs.name }}
     steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-            objects.githubusercontent.com:443
-            codeload.github.com:443
-            uploads.github.com:443
-            raw.githubusercontent.com:443
-            user-images.githubusercontent.com:443
-            private-user-images.githubusercontent.com:443
-            gist.github.com:443
-            gist.githubusercontent.com:443
-            registry.npmjs.org:443
-            www.npmjs.com:443
-            api.anthropic.com:443
-            statsig.anthropic.com:443
-            claude.ai:443
-            *.claude.ai:443
-            developer.mozilla.org:443
-            react.dev:443
-            vitejs.dev:443
-            tailwindcss.com:443
-            www.typescriptlang.org:443
-            nostr-nips.com:443
-            nips.nostr.com:443
-
       - name: Checkout
         uses: actions/checkout@v4
         with:
@@ -913,17 +884,6 @@ jobs:
             command: npm run test
     name: validate / ${{ matrix.name }}
     steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-            codeload.github.com:443
-            objects.githubusercontent.com:443
-            registry.npmjs.org:443
-
       - name: Checkout AI branch
         uses: actions/checkout@v4
         with:
@@ -951,13 +911,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-
       - name: Merge PR and relabel issue
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -986,14 +939,6 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Harden runner
-        uses: step-security/harden-runner@v2
-        with:
-          egress-policy: block
-          allowed-endpoints: >
-            api.github.com:443
-            github.com:443
-
       - name: Mark issue failed
         uses: actions/github-script@v7
         env:
