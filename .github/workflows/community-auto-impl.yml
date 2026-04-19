@@ -70,6 +70,7 @@ jobs:
             api.anthropic.com:443
             statsig.anthropic.com:443
             claude.ai:443
+            *.claude.ai:443
             developer.mozilla.org:443
             react.dev:443
             vitejs.dev:443
