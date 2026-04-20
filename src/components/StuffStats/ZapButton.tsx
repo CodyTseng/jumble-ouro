@@ -30,6 +30,16 @@ export default function ZapButton({ stuff }: { stuff: Event | string }) {
       hasZapped: pubkey ? noteStats?.zaps?.some((zap) => zap.pubkey === pubkey) : false
     }
   }, [noteStats, pubkey])
+  const [popAnimating, setPopAnimating] = useState(false)
+  const prevHasZappedRef = useRef(hasZapped)
+
+  useEffect(() => {
+    if (hasZapped && !prevHasZappedRef.current) {
+      setPopAnimating(true)
+    }
+    prevHasZappedRef.current = hasZapped
+  }, [hasZapped])
+
   const [disable, setDisable] = useState(true)
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
   const isLongPressRef = useRef(false)
@@ -149,7 +159,12 @@ export default function ZapButton({ stuff }: { stuff: Event | string }) {
         {zapping ? (
           <Loader className="animate-spin" />
         ) : (
-          <Zap className={hasZapped ? 'fill-yellow-400' : ''} />
+          <span
+            className={popAnimating ? 'animate-action-pop' : ''}
+            onAnimationEnd={() => setPopAnimating(false)}
+          >
+            <Zap className={hasZapped ? 'fill-yellow-400' : ''} />
+          </span>
         )}
         {!!zapAmount && <div className="text-sm">{formatAmount(zapAmount)}</div>}
       </button>

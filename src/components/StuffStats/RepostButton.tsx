@@ -17,7 +17,7 @@ import { useUserTrust } from '@/providers/UserTrustProvider'
 import stuffStatsService from '@/services/stuff-stats.service'
 import { Loader, PencilLine, Repeat } from 'lucide-react'
 import { Event } from 'nostr-tools'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import PostEditor from '../PostEditor'
 import { formatCount } from './utils'
@@ -39,6 +39,15 @@ export default function RepostButton({ stuff }: { stuff: Event | string }) {
   const hasReposted = useMemo(() => {
     return pubkey ? noteStats?.repostPubkeySet?.has(pubkey) : false
   }, [noteStats, pubkey])
+  const [popAnimating, setPopAnimating] = useState(false)
+  const prevHasRepostedRef = useRef(hasReposted)
+
+  useEffect(() => {
+    if (hasReposted && !prevHasRepostedRef.current) {
+      setPopAnimating(true)
+    }
+    prevHasRepostedRef.current = hasReposted
+  }, [hasReposted])
 
   useEffect(() => {
     const filterReposts = async () => {
@@ -116,7 +125,16 @@ export default function RepostButton({ stuff }: { stuff: Event | string }) {
         }
       }}
     >
-      {reposting ? <Loader className="animate-spin" /> : <Repeat />}
+      {reposting ? (
+        <Loader className="animate-spin" />
+      ) : (
+        <span
+          className={popAnimating ? 'animate-action-pop' : ''}
+          onAnimationEnd={() => setPopAnimating(false)}
+        >
+          <Repeat />
+        </span>
+      )}
       {!!repostCount && <div className="text-sm">{formatCount(repostCount)}</div>}
     </button>
   )
