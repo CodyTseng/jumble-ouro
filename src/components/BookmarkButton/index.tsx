@@ -4,7 +4,7 @@ import { useBookmarks } from '@/providers/BookmarksProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import { BookmarkIcon, Loader } from 'lucide-react'
 import { Event } from 'nostr-tools'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
 export default function BookmarkButton({ stuff }: { stuff: Event | string }) {
@@ -23,6 +23,15 @@ export default function BookmarkButton({ stuff }: { stuff: Event | string }) {
       isReplaceable ? tag[0] === 'a' && tag[1] === eventKey : tag[0] === 'e' && tag[1] === eventKey
     )
   }, [bookmarkListEvent, event])
+  const [popAnimating, setPopAnimating] = useState(false)
+  const prevIsBookmarkedRef = useRef(isBookmarked)
+
+  useEffect(() => {
+    if (isBookmarked && !prevIsBookmarkedRef.current) {
+      setPopAnimating(true)
+    }
+    prevIsBookmarkedRef.current = isBookmarked
+  }, [isBookmarked])
 
   if (!accountPubkey) return null
 
@@ -60,7 +69,12 @@ export default function BookmarkButton({ stuff }: { stuff: Event | string }) {
       {updating ? (
         <Loader className="animate-spin" />
       ) : (
-        <BookmarkIcon className={isBookmarked ? 'fill-rose-400' : ''} />
+        <span
+          className={popAnimating ? 'animate-action-pop' : ''}
+          onAnimationEnd={() => setPopAnimating(false)}
+        >
+          <BookmarkIcon className={isBookmarked ? 'fill-rose-400' : ''} />
+        </span>
       )}
     </button>
   )

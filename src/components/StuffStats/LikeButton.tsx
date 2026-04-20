@@ -45,6 +45,15 @@ export default function LikeButton({ stuff }: { stuff: Event | string }) {
     const myLike = stats.likes?.find((like) => like.pubkey === pubkey)
     return myLike?.emoji
   }, [noteStats, pubkey])
+  const [popAnimating, setPopAnimating] = useState(false)
+  const prevMyLastEmojiRef = useRef(myLastEmoji)
+
+  useEffect(() => {
+    if (myLastEmoji && !prevMyLastEmojiRef.current) {
+      setPopAnimating(true)
+    }
+    prevMyLastEmojiRef.current = myLastEmoji
+  }, [myLastEmoji])
 
   useEffect(() => {
     const filterLikes = async () => {
@@ -152,7 +161,12 @@ export default function LikeButton({ stuff }: { stuff: Event | string }) {
         <Loader className="animate-spin" />
       ) : myLastEmoji ? (
         <>
-          <Emoji emoji={myLastEmoji} classNames={{ img: 'size-4' }} />
+          <span
+            className={popAnimating ? 'animate-action-pop' : ''}
+            onAnimationEnd={() => setPopAnimating(false)}
+          >
+            <Emoji emoji={myLastEmoji} classNames={{ img: 'size-4' }} />
+          </span>
           {!!likeCount && <div className="text-sm">{formatCount(likeCount)}</div>}
         </>
       ) : (
