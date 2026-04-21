@@ -23,6 +23,7 @@ import TextWithEmojis from '../TextWithEmojis'
 import TrustScoreBadge from '../TrustScoreBadge'
 import AvatarWithLightbox from './AvatarWithLightbox'
 import BannerWithLightbox from './BannerWithLightbox'
+import ExternalIdentities from './ExternalIdentities'
 import FollowedBy from './FollowedBy'
 import Followings from './Followings'
 import ProfileFeed from './ProfileFeed'
@@ -86,7 +87,8 @@ export default function Profile({ id }: { id?: string }) {
   }
   if (!profile) return <NotFound />
 
-  const { banner, username, about, pubkey, website, lightningAddress, sp, emojis } = profile
+  const { banner, username, about, pubkey, website, lightningAddress, sp, emojis, identities } =
+    profile
   return (
     <>
       <div>
@@ -182,6 +184,7 @@ export default function Profile({ id }: { id?: string }) {
                 </a>
               </div>
             )}
+            <ExternalIdentities identities={identities} />
             <div className="mt-2 flex items-center justify-between text-sm">
               <div className="flex items-center gap-4">
                 <Followings pubkey={pubkey} />

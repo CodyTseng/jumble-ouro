@@ -30,6 +30,7 @@ export type TProfile = {
   sp?: string
   created_at?: number
   emojis?: TEmoji[]
+  identities?: TExternalIdentity[]
 }
 export type TMailboxRelayScope = 'read' | 'write' | 'both'
 export type TMailboxRelay = {
@@ -257,4 +258,10 @@ export type TDmMessage = {
 export type TEncryptionKeypair = {
   privkey: Uint8Array
   pubkey: string
+}
+
+export type TExternalIdentity = {
+  platform: string
+  identity: string
+  proof?: string
 }
