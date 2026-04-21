@@ -1,5 +1,5 @@
 import { MAX_PINNED_NOTES, POLL_TYPE } from '@/constants'
-import { TEmoji, TPollType, TRelayList, TRelaySet } from '@/types'
+import { TEmoji, TExternalIdentity, TPollType, TRelayList, TRelaySet } from '@/types'
 import { Event, kinds } from 'nostr-tools'
 import { buildATag } from './draft-event'
 import { getReplaceableEventIdentifier } from './event'
@@ -61,6 +61,21 @@ export function getProfileFromEvent(event: Event) {
     // Extract emojis from emoji tags according to NIP-30
     const emojis = getEmojiInfosFromEmojiTags(event.tags)
 
+    // Extract external identities from i tags according to NIP-39
+    const identities: TExternalIdentity[] = []
+    for (const tag of event.tags) {
+      if (tag[0] !== 'i') continue
+      const platformIdentity = tag[1]
+      if (!platformIdentity) continue
+      const colonIndex = platformIdentity.indexOf(':')
+      if (colonIndex === -1) continue
+      identities.push({
+        platform: platformIdentity.slice(0, colonIndex),
+        identity: platformIdentity.slice(colonIndex + 1),
+        proof: tag[2] || undefined
+      })
+    }
+
     return {
       pubkey: event.pubkey,
       npub: pubkeyToNpub(event.pubkey) ?? '',
@@ -76,7 +91,8 @@ export function getProfileFromEvent(event: Event) {
       lightningAddress: getLightningAddressFromProfile(profileObj),
       sp: profileObj.sp,
       created_at: event.created_at,
-      emojis: emojis.length > 0 ? emojis : undefined
+      emojis: emojis.length > 0 ? emojis : undefined,
+      identities: identities.length > 0 ? identities : undefined
     }
   } catch (err) {
     console.error(event.content, err)
