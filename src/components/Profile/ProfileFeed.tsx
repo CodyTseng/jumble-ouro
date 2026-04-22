@@ -1,7 +1,7 @@
 import KindFilter from '@/components/KindFilter'
 import NoteList, { TNoteListRef } from '@/components/NoteList'
 import Tabs from '@/components/Tabs'
-import { MAX_PINNED_NOTES } from '@/constants'
+import { ExtendedKind, MAX_PINNED_NOTES } from '@/constants'
 import { getDefaultRelayUrls, getSearchRelayUrls } from '@/lib/relay'
 import { generateBech32IdFromETag } from '@/lib/tag'
 import { isTouchDevice } from '@/lib/utils'
@@ -40,6 +40,7 @@ export default function ProfileFeed({
     const _tabs = [
       { value: 'posts', label: 'Notes' },
       { value: 'postsAndReplies', label: 'Replies' },
+      { value: 'media', label: 'Media' },
       { value: 'articles', label: 'Articles' }
     ]
 
@@ -52,7 +53,18 @@ export default function ProfileFeed({
   const supportTouch = useMemo(() => isTouchDevice(), [])
   const noteListRef = useRef<TNoteListRef>(null)
   const isArticlesMode = listMode === 'articles'
-  const effectiveShowKinds = isArticlesMode ? [kinds.LongFormArticle] : temporaryShowKinds
+  const isMediaMode = listMode === 'media'
+  const effectiveShowKinds = isArticlesMode
+    ? [kinds.LongFormArticle]
+    : isMediaMode
+      ? [
+          ExtendedKind.PICTURE,
+          ExtendedKind.VIDEO,
+          ExtendedKind.SHORT_VIDEO,
+          ExtendedKind.ADDRESSABLE_NORMAL_VIDEO,
+          ExtendedKind.ADDRESSABLE_SHORT_VIDEO
+        ]
+      : temporaryShowKinds
 
   useEffect(() => {
     const initPinnedEventIds = async () => {
@@ -167,7 +179,7 @@ export default function ProfileFeed({
         options={
           <>
             {!supportTouch && <RefreshButton onClick={() => noteListRef.current?.refresh()} />}
-            {!isArticlesMode && (
+            {!isArticlesMode && !isMediaMode && (
               <KindFilter
                 feedId={feedId}
                 showKinds={temporaryShowKinds}
@@ -183,7 +195,7 @@ export default function ProfileFeed({
         showKinds={effectiveShowKinds}
         hideReplies={listMode === 'posts'}
         filterMutedNotes={false}
-        pinnedEventIds={listMode === 'you' || isArticlesMode || !!search ? [] : pinnedEventIds}
+        pinnedEventIds={listMode === 'you' || isArticlesMode || isMediaMode || !!search ? [] : pinnedEventIds}
         showNewNotesDirectly={myPubkey === pubkey}
       />
     </>
