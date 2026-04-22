@@ -99,7 +99,7 @@ class LocalStorageService {
     this.currentAccount = currentAccountStr ? JSON.parse(currentAccountStr) : null
     const noteListModeStr = window.localStorage.getItem(StorageKey.NOTE_LIST_MODE)
     this.noteListMode =
-      noteListModeStr && ['posts', 'postsAndReplies', '24h', 'articles'].includes(noteListModeStr)
+      noteListModeStr && ['posts', 'postsAndReplies', '24h', 'articles', 'media'].includes(noteListModeStr)
         ? (noteListModeStr as TNoteListMode)
         : 'posts'
     const lastReadNotificationTimeMapStr =
