@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils'
 import { useFavoriteRelays } from '@/providers/FavoriteRelaysProvider'
 import { useFeed } from '@/providers/FeedProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
+import { TRelaySet } from '@/types'
 import { ChevronDown, FolderClosed, Server, Star, UsersRound } from 'lucide-react'
 import { forwardRef, HTMLAttributes, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -108,20 +109,23 @@ const FeedSwitcherTrigger = forwardRef<
     const Inner = () => {
       if (feedInfo?.feedType === 'following') return <UsersRound />
       if (feedInfo?.feedType === 'pinned') return <Star />
-      if (feedInfo?.feedType === 'relays') return <FolderClosed />
+      if (feedInfo?.feedType === 'relays') {
+        if (activeRelaySet?.image) return <RelaySetTriggerIcon relaySet={activeRelaySet} />
+        return <FolderClosed />
+      }
       return <Server />
     }
 
     if (compact) {
       return (
-        <div className="flex items-center pl-1.5 [&_svg]:size-3.5">
+        <div className="flex items-center pl-1.5 [&_img]:size-3.5 [&_svg]:size-3.5">
           <Inner />
         </div>
       )
     }
 
     return <Inner />
-  }, [feedInfo, compact])
+  }, [feedInfo, compact, activeRelaySet])
 
   const clickable =
     !IS_COMMUNITY_MODE || COMMUNITY_RELAY_SETS.length + COMMUNITY_RELAYS.length > 1
@@ -152,3 +156,20 @@ const FeedSwitcherTrigger = forwardRef<
     </div>
   )
 })
+
+function RelaySetTriggerIcon({ relaySet }: { relaySet: TRelaySet }) {
+  const [imageError, setImageError] = useState(false)
+
+  if (relaySet.image && !imageError) {
+    return (
+      <img
+        src={relaySet.image}
+        alt={relaySet.name}
+        className="size-6 rounded-full object-cover"
+        onError={() => setImageError(true)}
+      />
+    )
+  }
+
+  return <FolderClosed />
+}
