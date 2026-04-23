@@ -4,6 +4,7 @@ import { Event } from 'nostr-tools'
 
 type TPostSettings = {
   isNsfw?: boolean
+  contentWarningReason?: string
   isPoll?: boolean
   pollCreateData?: TPollCreateData
   addClientTag?: boolean

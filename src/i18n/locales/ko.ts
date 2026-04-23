@@ -843,5 +843,9 @@ export default {
     Actions: '작업',
     'New post': '새 게시물',
     'Show keyboard shortcuts': '키보드 단축키 표시',
+    '⚠️ Content Warning': '⚠️ 콘텐츠 경고',
+    '⚠️ Content Warning: {{reason}}': '⚠️ 콘텐츠 경고: {{reason}}',
+    'Content Warning': '콘텐츠 경고',
+    'Reason (optional)': '사유 (선택사항)',
   }
 }

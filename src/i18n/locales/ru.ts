@@ -855,5 +855,9 @@ export default {
     Actions: 'Действия',
     'New post': 'Новая запись',
     'Show keyboard shortcuts': 'Показать горячие клавиши',
+    '⚠️ Content Warning': '⚠️ Предупреждение о содержании',
+    '⚠️ Content Warning: {{reason}}': '⚠️ Предупреждение о содержании: {{reason}}',
+    'Content Warning': 'Предупреждение о содержании',
+    'Reason (optional)': 'Причина (необязательно)',
   }
 }

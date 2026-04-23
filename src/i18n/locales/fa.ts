@@ -850,5 +850,9 @@ export default {
     Actions: 'عملیات',
     'New post': 'پست جدید',
     'Show keyboard shortcuts': 'نمایش میانبرهای صفحه‌کلید',
+    '⚠️ Content Warning': '⚠️ هشدار محتوا',
+    '⚠️ Content Warning: {{reason}}': '⚠️ هشدار محتوا: {{reason}}',
+    'Content Warning': 'هشدار محتوا',
+    'Reason (optional)': 'دلیل (اختیاری)',
   }
 }

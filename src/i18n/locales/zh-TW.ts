@@ -819,5 +819,9 @@ export default {
     Actions: '操作',
     'New post': '發佈新帖',
     'Show keyboard shortcuts': '顯示鍵盤快捷鍵',
+    '⚠️ Content Warning': '⚠️ 內容警告',
+    '⚠️ Content Warning: {{reason}}': '⚠️ 內容警告：{{reason}}',
+    'Content Warning': '內容警告',
+    'Reason (optional)': '原因（選填）',
   }
 }

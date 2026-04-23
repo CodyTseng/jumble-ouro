@@ -824,5 +824,9 @@ export default {
     Actions: '操作',
     'New post': '发布新帖',
     'Show keyboard shortcuts': '显示键盘快捷键',
+    '⚠️ Content Warning': '⚠️ 内容警告',
+    '⚠️ Content Warning: {{reason}}': '⚠️ 内容警告：{{reason}}',
+    'Content Warning': '内容警告',
+    'Reason (optional)': '原因（可选）',
   }
 }

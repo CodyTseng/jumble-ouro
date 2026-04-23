@@ -150,6 +150,7 @@ export async function createShortTextNoteDraftEvent(
     addClientTag?: boolean
     protectedEvent?: boolean
     isNsfw?: boolean
+    contentWarningReason?: string
   } = {}
 ): Promise<TDraftEvent> {
   const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(content)
@@ -187,7 +188,7 @@ export async function createShortTextNoteDraftEvent(
   }
 
   if (options.isNsfw) {
-    tags.push(buildNsfwTag())
+    tags.push(buildNsfwTag(options.contentWarningReason))
   }
 
   if (options.protectedEvent) {
@@ -224,6 +225,7 @@ export async function createCommentDraftEvent(
     addClientTag?: boolean
     protectedEvent?: boolean
     isNsfw?: boolean
+    contentWarningReason?: string
   } = {}
 ): Promise<TDraftEvent> {
   const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(content)
@@ -292,7 +294,7 @@ export async function createCommentDraftEvent(
   }
 
   if (options.isNsfw) {
-    tags.push(buildNsfwTag())
+    tags.push(buildNsfwTag(options.contentWarningReason))
   }
 
   if (options.protectedEvent) {
@@ -317,6 +319,7 @@ export function createHighlightDraftEvent(
     addClientTag?: boolean
     protectedEvent?: boolean
     isNsfw?: boolean
+    contentWarningReason?: string
   } = {}
 ): TDraftEvent {
   const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(comment)
@@ -360,7 +363,7 @@ export function createHighlightDraftEvent(
   }
 
   if (options.isNsfw) {
-    tags.push(buildNsfwTag())
+    tags.push(buildNsfwTag(options.contentWarningReason))
   }
 
   if (options.protectedEvent) {
@@ -486,10 +489,12 @@ export async function createPollDraftEvent(
   { isMultipleChoice, relays, options, endsAt }: TPollCreateData,
   {
     addClientTag,
-    isNsfw
+    isNsfw,
+    contentWarningReason
   }: {
     addClientTag?: boolean
     isNsfw?: boolean
+    contentWarningReason?: string
   } = {}
 ): Promise<TDraftEvent> {
   const { content: transformedEmojisContent, emojiTags } = transformCustomEmojisInContent(question)
@@ -532,7 +537,7 @@ export async function createPollDraftEvent(
   }
 
   if (isNsfw) {
-    tags.push(buildNsfwTag())
+    tags.push(buildNsfwTag(contentWarningReason))
   }
 
   const baseDraft = {
@@ -906,8 +911,8 @@ function buildClientTag() {
   return ['client', 'jumble']
 }
 
-function buildNsfwTag() {
-  return ['content-warning', 'NSFW']
+function buildNsfwTag(reason?: string) {
+  return ['content-warning', reason !== undefined ? reason : 'NSFW']
 }
 
 function buildProtectedTag() {
