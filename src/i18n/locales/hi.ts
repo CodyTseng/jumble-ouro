@@ -851,5 +851,9 @@ export default {
     Actions: 'क्रियाएं',
     'New post': 'नई पोस्ट',
     'Show keyboard shortcuts': 'कीबोर्ड शॉर्टकट दिखाएं',
+    '⚠️ Content Warning': '⚠️ सामग्री चेतावनी',
+    '⚠️ Content Warning: {{reason}}': '⚠️ सामग्री चेतावनी: {{reason}}',
+    'Content Warning': 'सामग्री चेतावनी',
+    'Reason (optional)': 'कारण (वैकल्पिक)',
   }
 }

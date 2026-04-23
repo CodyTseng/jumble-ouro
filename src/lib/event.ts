@@ -23,6 +23,12 @@ export function isNsfwEvent(event: Event) {
   )
 }
 
+export function getContentWarningReason(event: Event): string | null {
+  const tag = event.tags.find(([tagName]) => tagName === 'content-warning')
+  if (!tag) return null
+  return tag[1] ?? ''
+}
+
 export function isReplyNoteEvent(event: Event) {
   if ([ExtendedKind.COMMENT, ExtendedKind.VOICE_COMMENT].includes(event.kind)) {
     return true

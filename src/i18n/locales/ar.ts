@@ -836,5 +836,9 @@ export default {
     Actions: 'الإجراءات',
     'New post': 'منشور جديد',
     'Show keyboard shortcuts': 'عرض اختصارات لوحة المفاتيح',
+    '⚠️ Content Warning': '⚠️ تحذير بشأن المحتوى',
+    '⚠️ Content Warning: {{reason}}': '⚠️ تحذير بشأن المحتوى: {{reason}}',
+    'Content Warning': 'تحذير بشأن المحتوى',
+    'Reason (optional)': 'السبب (اختياري)',
   }
 }

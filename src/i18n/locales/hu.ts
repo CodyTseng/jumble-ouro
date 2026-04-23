@@ -846,5 +846,9 @@ export default {
     Actions: 'Műveletek',
     'New post': 'Új bejegyzés',
     'Show keyboard shortcuts': 'Billentyűparancsok megjelenítése',
+    '⚠️ Content Warning': '⚠️ Tartalmi figyelmeztetés',
+    '⚠️ Content Warning: {{reason}}': '⚠️ Tartalmi figyelmeztetés: {{reason}}',
+    'Content Warning': 'Tartalmi figyelmeztetés',
+    'Reason (optional)': 'Ok (opcionális)',
   }
 }

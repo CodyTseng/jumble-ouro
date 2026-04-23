@@ -1,3 +1,4 @@
+import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Slider } from '@/components/ui/slider'
 import { Switch } from '@/components/ui/switch'
@@ -12,6 +13,8 @@ export default function PostOptions({
   setAddClientTag,
   isNsfw,
   setIsNsfw,
+  contentWarningReason,
+  setContentWarningReason,
   minPow,
   setMinPow
 }: {
@@ -21,6 +24,8 @@ export default function PostOptions({
   setAddClientTag: Dispatch<SetStateAction<boolean>>
   isNsfw: boolean
   setIsNsfw: Dispatch<SetStateAction<boolean>>
+  contentWarningReason: string
+  setContentWarningReason: Dispatch<SetStateAction<string>>
   minPow: number
   setMinPow: Dispatch<SetStateAction<number>>
 }) {
@@ -39,6 +44,9 @@ export default function PostOptions({
 
   const onNsfwChange = (checked: boolean) => {
     setIsNsfw(checked)
+    if (!checked) {
+      setContentWarningReason('')
+    }
   }
 
   return (
@@ -58,14 +66,25 @@ export default function PostOptions({
         </div>
       </div>
 
-      <div className="flex items-center space-x-2">
-        <Label htmlFor="add-nsfw-tag">{t('NSFW')}</Label>
-        <Switch
-          id="add-nsfw-tag"
-          checked={isNsfw}
-          onCheckedChange={onNsfwChange}
-          disabled={posting}
-        />
+      <div className="space-y-2">
+        <div className="flex items-center space-x-2">
+          <Label htmlFor="add-nsfw-tag">{t('Content Warning')}</Label>
+          <Switch
+            id="add-nsfw-tag"
+            checked={isNsfw}
+            onCheckedChange={onNsfwChange}
+            disabled={posting}
+          />
+        </div>
+        {isNsfw && (
+          <Input
+            value={contentWarningReason}
+            onChange={(e) => setContentWarningReason(e.target.value)}
+            placeholder={t('Reason (optional)')}
+            disabled={posting}
+            className="h-8 text-sm"
+          />
+        )}
       </div>
 
       <div className="grid gap-4 pb-4">

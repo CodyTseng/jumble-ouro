@@ -837,5 +837,9 @@ export default {
     Actions: 'การดำเนินการ',
     'New post': 'โพสต์ใหม่',
     'Show keyboard shortcuts': 'แสดงแป้นพิมพ์ลัด',
+    '⚠️ Content Warning': '⚠️ คำเตือนเนื้อหา',
+    '⚠️ Content Warning: {{reason}}': '⚠️ คำเตือนเนื้อหา: {{reason}}',
+    'Content Warning': 'คำเตือนเนื้อหา',
+    'Reason (optional)': 'เหตุผล (ไม่บังคับ)',
   }
 }

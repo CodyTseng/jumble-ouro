@@ -843,5 +843,9 @@ export default {
     Actions: 'Actions',
     'New post': 'New post',
     'Show keyboard shortcuts': 'Show keyboard shortcuts',
+    '⚠️ Content Warning': '⚠️ Content Warning',
+    '⚠️ Content Warning: {{reason}}': '⚠️ Content Warning: {{reason}}',
+    'Content Warning': 'Content Warning',
+    'Reason (optional)': 'Reason (optional)',
   }
 }

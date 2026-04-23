@@ -855,5 +855,9 @@ export default {
     Actions: 'Acciones',
     'New post': 'Nueva publicación',
     'Show keyboard shortcuts': 'Mostrar atajos de teclado',
+    '⚠️ Content Warning': '⚠️ Advertencia de contenido',
+    '⚠️ Content Warning: {{reason}}': '⚠️ Advertencia de contenido: {{reason}}',
+    'Content Warning': 'Advertencia de contenido',
+    'Reason (optional)': 'Motivo (opcional)',
   }
 }

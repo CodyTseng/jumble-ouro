@@ -60,6 +60,7 @@ export default function PostContent({
   const [addClientTag, setAddClientTag] = useState(false)
   const [mentions, setMentions] = useState<string[]>([])
   const [isNsfw, setIsNsfw] = useState(false)
+  const [contentWarningReason, setContentWarningReason] = useState('')
   const [isPoll, setIsPoll] = useState(false)
   const [isProtectedEvent, setIsProtectedEvent] = useState(false)
   const [additionalRelayUrls, setAdditionalRelayUrls] = useState<string[]>([])
@@ -113,6 +114,7 @@ export default function PostContent({
       })
       if (cachedSettings) {
         setIsNsfw(cachedSettings.isNsfw ?? false)
+        setContentWarningReason(cachedSettings.contentWarningReason ?? '')
         setIsPoll(cachedSettings.isPoll ?? false)
         setPollCreateData(
           cachedSettings.pollCreateData ?? {
@@ -130,12 +132,13 @@ export default function PostContent({
       { defaultContent, parentStuff },
       {
         isNsfw,
+        contentWarningReason,
         isPoll,
         pollCreateData,
         addClientTag
       }
     )
-  }, [defaultContent, parentStuff, isNsfw, isPoll, pollCreateData, addClientTag])
+  }, [defaultContent, parentStuff, isNsfw, contentWarningReason, isPoll, pollCreateData, addClientTag])
 
   const postingRef = useRef(false)
 
@@ -157,7 +160,8 @@ export default function PostContent({
           pubkey,
           addClientTag,
           isProtectedEvent,
-          isNsfw
+          isNsfw,
+          contentWarningReason
         })
 
         const _additionalRelayUrls = [...additionalRelayUrls]
@@ -387,6 +391,8 @@ export default function PostContent({
         setAddClientTag={setAddClientTag}
         isNsfw={isNsfw}
         setIsNsfw={setIsNsfw}
+        contentWarningReason={contentWarningReason}
+        setContentWarningReason={setContentWarningReason}
         minPow={minPow}
         setMinPow={setMinPow}
       />
@@ -420,6 +426,7 @@ async function createDraftEvent({
   addClientTag,
   isProtectedEvent,
   isNsfw,
+  contentWarningReason,
   highlightedText
 }: {
   parentStuff: Event | string | undefined
@@ -431,6 +438,7 @@ async function createDraftEvent({
   addClientTag: boolean
   isProtectedEvent: boolean
   isNsfw: boolean
+  contentWarningReason: string
   highlightedText?: string
 }) {
   const { parentEvent, externalContent } =
@@ -442,7 +450,8 @@ async function createDraftEvent({
     return createHighlightDraftEvent(highlightedText, text, parentEvent, mentions, {
       addClientTag,
       protectedEvent: isProtectedEvent,
-      isNsfw
+      isNsfw,
+      contentWarningReason
     })
   }
 
@@ -450,14 +459,16 @@ async function createDraftEvent({
     return await createCommentDraftEvent(text, parentStuff, mentions, {
       addClientTag,
       protectedEvent: isProtectedEvent,
-      isNsfw
+      isNsfw,
+      contentWarningReason
     })
   }
 
   if (isPoll) {
     return await createPollDraftEvent(pubkey, text, mentions, pollCreateData, {
       addClientTag,
-      isNsfw
+      isNsfw,
+      contentWarningReason
     })
   }
 
@@ -465,6 +476,7 @@ async function createDraftEvent({
     parentEvent,
     addClientTag,
     protectedEvent: isProtectedEvent,
-    isNsfw
+    isNsfw,
+    contentWarningReason
   })
 }
