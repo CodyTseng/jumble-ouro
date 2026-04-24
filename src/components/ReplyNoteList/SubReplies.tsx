@@ -10,7 +10,7 @@ import { useCallback, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import ReplyNote from '../ReplyNote'
 
-export default function SubReplies({ parentKey }: { parentKey: string }) {
+export default function SubReplies({ parentKey, opPubkey }: { parentKey: string; opPubkey?: string }) {
   const { t } = useTranslation()
   const { push } = useSecondaryPage()
   const { autoLoadProfilePicture } = useContentPolicy()
@@ -115,6 +115,7 @@ export default function SubReplies({ parentKey }: { parentKey: string }) {
                   className={cn('w-0 flex-1', autoLoadProfilePicture ? 'pl-10' : 'pl-7')}
                   hideThreadGuide={!autoLoadProfilePicture}
                   event={reply}
+                  opPubkey={opPubkey}
                   parentEventId={_parentKey !== parentKey ? _parentEventId : undefined}
                   onClickParent={() => {
                     if (!_parentKey) return

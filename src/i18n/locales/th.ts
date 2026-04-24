@@ -841,5 +841,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ คำเตือนเนื้อหา: {{reason}}',
     'Content Warning': 'คำเตือนเนื้อหา',
     'Reason (optional)': 'เหตุผล (ไม่บังคับ)',
+    OP: 'OP',
   }
 }

@@ -19,13 +19,13 @@ const TABS = [
   { value: 'quotes', label: 'Quotes' }
 ]
 
-export default function NoteInteractions({ event }: { event: Event }) {
+export default function NoteInteractions({ event, opPubkey }: { event: Event; opPubkey?: string }) {
   const [type, setType] = useState<TTabValue>('replies')
 
   let list
   switch (type) {
     case 'replies':
-      list = <ReplyNoteList stuff={event} />
+      list = <ReplyNoteList stuff={event} opPubkey={opPubkey} />
       break
     case 'quotes':
       list = <QuoteList stuff={event} />

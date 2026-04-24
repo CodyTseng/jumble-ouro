@@ -828,5 +828,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ 内容警告：{{reason}}',
     'Content Warning': '内容警告',
     'Reason (optional)': '原因（可选）',
+    OP: 'OP',
   }
 }

@@ -859,5 +859,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ Ostrzeżenie o treści: {{reason}}',
     'Content Warning': 'Ostrzeżenie o treści',
     'Reason (optional)': 'Powód (opcjonalnie)',
+    OP: 'OP',
   }
 }

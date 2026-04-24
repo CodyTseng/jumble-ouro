@@ -28,6 +28,7 @@ import Username from '../Username'
 
 export default function ReplyNote({
   event,
+  opPubkey,
   parentEventId,
   onClickParent = () => {},
   highlight = false,
@@ -35,6 +36,7 @@ export default function ReplyNote({
   className = ''
 }: {
   event: Event
+  opPubkey?: string
   parentEventId?: string
   onClickParent?: () => void
   highlight?: boolean
@@ -133,6 +135,11 @@ export default function ReplyNote({
                   />
                   <TrustScoreBadge pubkey={event.pubkey} className="!size-3.5" />
                   <ClientTag event={event} />
+                  {opPubkey && event.pubkey === opPubkey && (
+                    <span className="shrink-0 rounded px-1 text-[10px] font-bold leading-normal bg-primary/15 text-primary">
+                      {t('OP')}
+                    </span>
+                  )}
                 </div>
                 <div className="flex items-center gap-1 text-sm text-muted-foreground">
                   <Nip05 pubkey={event.pubkey} append="·" />
