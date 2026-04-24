@@ -823,5 +823,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ 內容警告：{{reason}}',
     'Content Warning': '內容警告',
     'Reason (optional)': '原因（選填）',
+    OP: 'OP',
   }
 }

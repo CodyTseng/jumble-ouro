@@ -840,5 +840,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ تحذير بشأن المحتوى: {{reason}}',
     'Content Warning': 'تحذير بشأن المحتوى',
     'Reason (optional)': 'السبب (اختياري)',
+    OP: 'OP',
   }
 }

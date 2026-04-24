@@ -847,5 +847,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ 콘텐츠 경고: {{reason}}',
     'Content Warning': '콘텐츠 경고',
     'Reason (optional)': '사유 (선택사항)',
+    OP: 'OP',
   }
 }

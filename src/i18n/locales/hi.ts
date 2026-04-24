@@ -855,5 +855,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ सामग्री चेतावनी: {{reason}}',
     'Content Warning': 'सामग्री चेतावनी',
     'Reason (optional)': 'कारण (वैकल्पिक)',
+    OP: 'OP',
   }
 }

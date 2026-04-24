@@ -850,5 +850,6 @@ export default {
     '⚠️ Content Warning: {{reason}}': '⚠️ Tartalmi figyelmeztetés: {{reason}}',
     'Content Warning': 'Tartalmi figyelmeztetés',
     'Reason (optional)': 'Ok (opcionális)',
+    OP: 'OP',
   }
 }
