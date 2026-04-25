@@ -824,5 +824,7 @@ export default {
     'Content Warning': '內容警告',
     'Reason (optional)': '原因（選填）',
     OP: 'OP',
+    'Recent search': '最近搜尋',
+    'Clear all': '清除全部',
   }
 }

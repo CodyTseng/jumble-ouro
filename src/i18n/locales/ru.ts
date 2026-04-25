@@ -860,5 +860,7 @@ export default {
     'Content Warning': 'Предупреждение о содержании',
     'Reason (optional)': 'Причина (необязательно)',
     OP: 'OP',
+    'Recent search': 'Недавний поиск',
+    'Clear all': 'Очистить все',
   }
 }

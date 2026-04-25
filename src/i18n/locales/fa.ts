@@ -855,5 +855,7 @@ export default {
     'Content Warning': 'هشدار محتوا',
     'Reason (optional)': 'دلیل (اختیاری)',
     OP: 'OP',
+    'Recent search': 'جستجوی اخیر',
+    'Clear all': 'پاک کردن همه',
   }
 }

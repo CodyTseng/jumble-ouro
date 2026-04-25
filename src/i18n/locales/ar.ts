@@ -841,5 +841,7 @@ export default {
     'Content Warning': 'تحذير بشأن المحتوى',
     'Reason (optional)': 'السبب (اختياري)',
     OP: 'OP',
+    'Recent search': 'بحث حديث',
+    'Clear all': 'مسح الكل',
   }
 }

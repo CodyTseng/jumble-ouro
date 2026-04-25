@@ -27,6 +27,7 @@ import {
   TNsfwDisplayPolicy,
   TProfilePictureAutoLoadPolicy,
   TRelaySet,
+  TSearchHistoryItem,
   TThemeSetting,
   TTranslationServiceConfig
 } from '@/types'
@@ -81,6 +82,7 @@ class LocalStorageService {
   private dmBackwardCursorMap: Record<string, number> = {}
   private processedSyncRequestIds: string[] = []
   private disableNotificationSync: boolean = false
+  private searchHistory: TSearchHistoryItem[] = []
 
   constructor() {
     if (!LocalStorageService.instance) {
@@ -455,6 +457,18 @@ class LocalStorageService {
 
     this.disableNotificationSync =
       window.localStorage.getItem(StorageKey.DISABLE_NOTIFICATION_SYNC) === 'true'
+
+    const searchHistoryStr = window.localStorage.getItem(StorageKey.SEARCH_HISTORY)
+    if (searchHistoryStr) {
+      try {
+        const arr = JSON.parse(searchHistoryStr)
+        if (Array.isArray(arr)) {
+          this.searchHistory = arr
+        }
+      } catch {
+        // Invalid JSON, use default
+      }
+    }
 
     // Clean up deprecated data
     window.localStorage.removeItem(StorageKey.PINNED_PUBKEYS)
@@ -982,6 +996,28 @@ class LocalStorageService {
   setDisableNotificationSync(disable: boolean) {
     this.disableNotificationSync = disable
     window.localStorage.setItem(StorageKey.DISABLE_NOTIFICATION_SYNC, disable.toString())
+  }
+
+  getSearchHistory(): TSearchHistoryItem[] {
+    return this.searchHistory
+  }
+
+  addSearchHistoryItem(item: TSearchHistoryItem) {
+    this.searchHistory = [
+      item,
+      ...this.searchHistory.filter((h) => !(h.type === item.type && h.search === item.search))
+    ].slice(0, 8)
+    window.localStorage.setItem(StorageKey.SEARCH_HISTORY, JSON.stringify(this.searchHistory))
+  }
+
+  removeSearchHistoryItem(index: number) {
+    this.searchHistory = this.searchHistory.filter((_, i) => i !== index)
+    window.localStorage.setItem(StorageKey.SEARCH_HISTORY, JSON.stringify(this.searchHistory))
+  }
+
+  clearSearchHistory() {
+    this.searchHistory = []
+    window.localStorage.setItem(StorageKey.SEARCH_HISTORY, JSON.stringify(this.searchHistory))
   }
 }
 

@@ -842,5 +842,7 @@ export default {
     'Content Warning': 'คำเตือนเนื้อหา',
     'Reason (optional)': 'เหตุผล (ไม่บังคับ)',
     OP: 'OP',
+    'Recent search': 'การค้นหาล่าสุด',
+    'Clear all': 'ล้างทั้งหมด',
   }
 }

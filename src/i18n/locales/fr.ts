@@ -864,5 +864,7 @@ export default {
     'Content Warning': 'Avertissement de contenu',
     'Reason (optional)': 'Raison (facultatif)',
     OP: 'OP',
+    'Recent search': 'Recherche récente',
+    'Clear all': 'Tout effacer',
   }
 }

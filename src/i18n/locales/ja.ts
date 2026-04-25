@@ -854,5 +854,7 @@ export default {
     'Content Warning': 'コンテンツ警告',
     'Reason (optional)': '理由（任意）',
     OP: 'OP',
+    'Recent search': '最近の検索',
+    'Clear all': 'すべてクリア',
   }
 }

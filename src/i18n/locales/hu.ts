@@ -851,5 +851,7 @@ export default {
     'Content Warning': 'Tartalmi figyelmeztetés',
     'Reason (optional)': 'Ok (opcionális)',
     OP: 'OP',
+    'Recent search': 'Legutóbbi keresés',
+    'Clear all': 'Összes törlése',
   }
 }

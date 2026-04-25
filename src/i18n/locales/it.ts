@@ -860,5 +860,7 @@ export default {
     'Content Warning': 'Avviso sul contenuto',
     'Reason (optional)': 'Motivo (facoltativo)',
     OP: 'OP',
+    'Recent search': 'Ricerca recente',
+    'Clear all': 'Cancella tutto',
   }
 }

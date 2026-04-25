@@ -848,5 +848,7 @@ export default {
     'Content Warning': 'Content Warning',
     'Reason (optional)': 'Reason (optional)',
     OP: 'OP',
+    'Recent search': 'Recent search',
+    'Clear all': 'Clear all',
   }
 }
