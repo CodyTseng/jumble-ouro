@@ -868,5 +868,7 @@ export default {
     'Content Warning': 'Inhaltswarnung',
     'Reason (optional)': 'Grund (optional)',
     OP: 'OP',
+    'Recent search': 'Letzte Suche',
+    'Clear all': 'Alle löschen',
   }
 }

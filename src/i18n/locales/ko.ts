@@ -848,5 +848,7 @@ export default {
     'Content Warning': '콘텐츠 경고',
     'Reason (optional)': '사유 (선택사항)',
     OP: 'OP',
+    'Recent search': '최근 검색',
+    'Clear all': '모두 지우기',
   }
 }

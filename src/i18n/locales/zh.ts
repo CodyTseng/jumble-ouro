@@ -829,5 +829,7 @@ export default {
     'Content Warning': '内容警告',
     'Reason (optional)': '原因（可选）',
     OP: 'OP',
+    'Recent search': '最近搜索',
+    'Clear all': '清除全部',
   }
 }

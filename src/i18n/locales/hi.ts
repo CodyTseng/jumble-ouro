@@ -856,5 +856,7 @@ export default {
     'Content Warning': 'सामग्री चेतावनी',
     'Reason (optional)': 'कारण (वैकल्पिक)',
     OP: 'OP',
+    'Recent search': 'हाल की खोज',
+    'Clear all': 'सभी हटाएं',
   }
 }

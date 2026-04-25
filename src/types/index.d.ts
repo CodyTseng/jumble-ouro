@@ -210,6 +210,12 @@ export type TSearchParams =
       input?: string
     }
 
+export type TSearchHistoryItem = {
+  type: string
+  search: string
+  input: string
+}
+
 export type TNotificationStyle =
   (typeof NOTIFICATION_LIST_STYLE)[keyof typeof NOTIFICATION_LIST_STYLE]
 
