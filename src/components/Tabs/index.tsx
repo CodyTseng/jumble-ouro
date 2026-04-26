@@ -9,6 +9,7 @@ type TabDefinition = {
   value: string
   label: string
   dot?: boolean
+  count?: number
 }
 
 export default function Tabs({
@@ -138,6 +139,9 @@ export default function Tabs({
               }}
             >
               {t(tab.label)}
+              {tab.count != null && tab.count > 0 && (
+                <span className="ml-1 text-xs text-muted-foreground">{tab.count}</span>
+              )}
               {tab.dot && (
                 <span className="absolute right-2 top-2 h-2 w-2 rounded-full bg-primary" />
               )}

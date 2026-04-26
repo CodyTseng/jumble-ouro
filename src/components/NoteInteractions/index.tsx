@@ -1,7 +1,9 @@
 import Tabs from '@/components/Tabs'
 import { SPECIAL_FEED_ID } from '@/constants'
+import { useStuffStatsById } from '@/hooks/useStuffStatsById'
+import { getEventKey } from '@/lib/event'
 import { Event } from 'nostr-tools'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import QuoteList from '../QuoteList'
 import ReactionList from '../ReactionList'
 import ReplyNoteList from '../ReplyNoteList'
@@ -11,16 +13,21 @@ import ZapList from '../ZapList'
 
 type TTabValue = 'replies' | 'quotes' | 'reactions' | 'reposts' | 'zaps'
 
-const TABS = [
-  { value: 'replies', label: 'Replies' },
-  { value: 'zaps', label: 'Zaps' },
-  { value: 'reposts', label: 'Reposts' },
-  { value: 'reactions', label: 'Reactions' },
-  { value: 'quotes', label: 'Quotes' }
-]
-
 export default function NoteInteractions({ event, opPubkey }: { event: Event; opPubkey?: string }) {
   const [type, setType] = useState<TTabValue>('replies')
+  const stuffKey = getEventKey(event)
+  const stats = useStuffStatsById(stuffKey)
+
+  const tabs = useMemo(
+    () => [
+      { value: 'replies', label: 'Replies' },
+      { value: 'zaps', label: 'Zaps', count: stats?.zaps?.length },
+      { value: 'reposts', label: 'Reposts', count: stats?.reposts?.length },
+      { value: 'reactions', label: 'Reactions', count: stats?.likes?.length },
+      { value: 'quotes', label: 'Quotes' }
+    ],
+    [stats]
+  )
 
   let list
   switch (type) {
@@ -46,7 +53,7 @@ export default function NoteInteractions({ event, opPubkey }: { event: Event; op
   return (
     <>
       <Tabs
-        tabs={TABS}
+        tabs={tabs}
         value={type}
         onTabChange={(tab) => setType(tab as TTabValue)}
         options={
