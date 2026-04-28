@@ -8,7 +8,7 @@ import { checkNip43Support } from '@/lib/relay'
 import { normalizeHttpUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
 import { useNostr } from '@/providers/NostrProvider'
-import { Check, Copy, GitBranch, Mail, Share2, SquareCode } from 'lucide-react'
+import { Check, Copy, ExternalLink, GitBranch, Mail, Share2, SquareCode } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -20,6 +20,26 @@ import SaveRelayDropdownMenu from '../SaveRelayDropdownMenu'
 import UserAvatar from '../UserAvatar'
 import Username from '../Username'
 import RelayReviewsPreview from './RelayReviewsPreview'
+
+const NIP_FEATURE_MAP: Record<number, string> = {
+  1: 'Notes',
+  2: 'Contacts',
+  4: 'Encrypted DMs',
+  9: 'Event Deletion',
+  11: 'Relay Info',
+  17: 'Private Messages',
+  28: 'Channels',
+  40: 'Expiration',
+  42: 'Authentication',
+  43: 'Relay Access',
+  45: 'Event Counts',
+  50: 'Search',
+  56: 'Reporting',
+  57: 'Zaps',
+  65: 'Relay Lists',
+  70: 'Protected Events',
+  96: 'File Storage'
+}
 
 export default function RelayInfo({ url, className }: { url: string; className?: string }) {
   const { t } = useTranslation()
@@ -47,12 +67,33 @@ export default function RelayInfo({ url, className }: { url: string; className?:
             </div>
             <RelayControls url={relayInfo.url} />
           </div>
-          {!!relayInfo.tags?.length && (
+          {(!!relayInfo.tags?.length ||
+            relayInfo.limitation?.auth_required ||
+            relayInfo.limitation?.payment_required) && (
             <div className="flex flex-wrap gap-2">
-              {relayInfo.tags.map((tag) => (
-                <Badge variant="secondary">{tag}</Badge>
+              {relayInfo.tags?.map((tag) => (
+                <Badge key={tag} variant="secondary">
+                  {tag}
+                </Badge>
               ))}
+              {relayInfo.limitation?.auth_required && (
+                <Badge variant="outline">{t('Auth Required')}</Badge>
+              )}
+              {relayInfo.limitation?.payment_required && (
+                <Badge variant="outline">{t('Payment Required')}</Badge>
+              )}
             </div>
+          )}
+          {relayInfo.payments_url && (
+            <a
+              href={relayInfo.payments_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex w-fit items-center gap-1 text-sm text-primary hover:underline"
+            >
+              {t('Relay payment page')}
+              <ExternalLink className="h-3 w-3" />
+            </a>
           )}
           {relayInfo.description && (
             <div className="mt-2 select-text whitespace-pre-wrap text-wrap break-words">
@@ -71,6 +112,27 @@ export default function RelayInfo({ url, className }: { url: string; className?:
             {normalizeHttpUrl(relayInfo.url)}
           </a>
         </div>
+
+        {!!relayInfo.supported_nips?.length && (() => {
+          const features = relayInfo.supported_nips
+            .filter((nip) => NIP_FEATURE_MAP[nip])
+            .map((nip) => ({ nip, label: NIP_FEATURE_MAP[nip] }))
+          if (features.length === 0) return null
+          return (
+            <div className="space-y-2">
+              <div className="text-sm font-semibold text-muted-foreground">
+                {t('Supported Features')}
+              </div>
+              <div className="flex flex-wrap gap-2">
+                {features.map(({ nip, label }) => (
+                  <Badge key={nip} variant="secondary">
+                    {t(label)}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          )
+        })()}
 
         <ScrollArea className="overflow-x-auto">
           <div className="flex gap-8 pb-2">
