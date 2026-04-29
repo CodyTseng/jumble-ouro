@@ -861,5 +861,6 @@ export default {
     'Relay Lists': 'قوائم المرحلات',
     'Protected Events': 'أحداث محمية',
     'File Storage': 'تخزين الملفات',
+    'Trending Topics': 'المواضيع الرائجة',
   }
 }

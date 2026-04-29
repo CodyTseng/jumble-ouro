@@ -880,5 +880,6 @@ export default {
     'Relay Lists': 'Liste relay',
     'Protected Events': 'Eventi protetti',
     'File Storage': 'Archiviazione file',
+    'Trending Topics': 'Argomenti di tendenza',
   }
 }

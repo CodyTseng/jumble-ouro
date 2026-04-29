@@ -876,5 +876,6 @@ export default {
     'Relay Lists': 'रिले सूचियाँ',
     'Protected Events': 'सुरक्षित इवेंट',
     'File Storage': 'फ़ाइल संग्रहण',
+    'Trending Topics': 'ट्रेंडिंग विषय',
   }
 }

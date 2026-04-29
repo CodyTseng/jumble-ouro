@@ -888,5 +888,6 @@ export default {
     'Relay Lists': 'Relay-Listen',
     'Protected Events': 'Geschützte Events',
     'File Storage': 'Dateispeicher',
+    'Trending Topics': 'Trendthemen',
   }
 }

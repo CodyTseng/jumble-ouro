@@ -874,5 +874,6 @@ export default {
     'Relay Lists': 'リレーリスト',
     'Protected Events': '保護されたイベント',
     'File Storage': 'ファイルストレージ',
+    'Trending Topics': 'トレンドトピック',
   }
 }
