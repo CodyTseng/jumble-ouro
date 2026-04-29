@@ -849,5 +849,6 @@ export default {
     'Relay Lists': '中继列表',
     'Protected Events': '受保护事件',
     'File Storage': '文件存储',
+    'Trending Topics': '热门话题',
   }
 }

@@ -5,6 +5,7 @@ import NoteList from '@/components/NoteList'
 import SearchBar, { TSearchBarRef } from '@/components/SearchBar'
 import SearchResult from '@/components/SearchResult'
 import Tabs from '@/components/Tabs'
+import TrendingHashtags from '@/components/TrendingHashtags'
 import TrendingNotes from '@/components/TrendingNotes'
 import { ExtendedKind } from '@/constants'
 import PrimaryPageLayout, { TPrimaryPageLayoutRef } from '@/layouts/PrimaryPageLayout'
@@ -78,7 +79,12 @@ const SearchPage = forwardRef<TPageRef>((_, ref) => {
   const tabContent = useMemo(() => {
     switch (tab) {
       case 'trending':
-        return <TrendingNotes />
+        return (
+          <>
+            <TrendingHashtags />
+            <TrendingNotes />
+          </>
+        )
       case 'explore':
         return <Explore />
       case 'reviews':

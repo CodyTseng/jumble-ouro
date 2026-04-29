@@ -862,5 +862,6 @@ export default {
     'Relay Lists': 'รายการรีเลย์',
     'Protected Events': 'อีเวนต์ที่ได้รับการป้องกัน',
     'File Storage': 'จัดเก็บไฟล์',
+    'Trending Topics': 'หัวข้อที่กำลังมาแรง',
   }
 }

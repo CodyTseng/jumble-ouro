@@ -844,5 +844,6 @@ export default {
     'Relay Lists': '中繼列表',
     'Protected Events': '受保護事件',
     'File Storage': '檔案儲存',
+    'Trending Topics': '熱門話題',
   }
 }

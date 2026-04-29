@@ -868,5 +868,6 @@ export default {
     'Relay Lists': '릴레이 목록',
     'Protected Events': '보호된 이벤트',
     'File Storage': '파일 저장소',
+    'Trending Topics': '인기 주제',
   }
 }

@@ -880,5 +880,6 @@ export default {
     'Relay Lists': 'Списки реле',
     'Protected Events': 'Защищённые события',
     'File Storage': 'Хранилище файлов',
+    'Trending Topics': 'Актуальные темы',
   }
 }

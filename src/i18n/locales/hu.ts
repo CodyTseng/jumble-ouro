@@ -871,5 +871,6 @@ export default {
     'Relay Lists': 'Relay listák',
     'Protected Events': 'Védett események',
     'File Storage': 'Fájltárolás',
+    'Trending Topics': 'Felkapott témák',
   }
 }

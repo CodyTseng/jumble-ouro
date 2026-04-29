@@ -879,5 +879,6 @@ export default {
     'Relay Lists': 'Listas de relays',
     'Protected Events': 'Eventos protegidos',
     'File Storage': 'Armazenamento de arquivos',
+    'Trending Topics': 'Assuntos em alta',
   }
 }

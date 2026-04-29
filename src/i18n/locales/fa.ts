@@ -875,5 +875,6 @@ export default {
     'Relay Lists': 'لیست رله‌ها',
     'Protected Events': 'رویدادهای محافظت شده',
     'File Storage': 'ذخیره فایل',
+    'Trending Topics': 'موضوعات داغ',
   }
 }
