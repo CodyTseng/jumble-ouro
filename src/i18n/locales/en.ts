@@ -869,5 +869,10 @@ export default {
     'Protected Events': 'Protected Events',
     'File Storage': 'File Storage',
     'Trending Topics': 'Trending Topics',
+    'Share as image': 'Share as image',
+    'Download image': 'Download image',
+    'Share image': 'Share image',
+    'Generating image...': 'Generating image...',
+    'Failed to generate image': 'Failed to generate image',
   }
 }

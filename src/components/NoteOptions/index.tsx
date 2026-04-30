@@ -1,3 +1,4 @@
+import ShareAsImageDialog from '@/components/ShareAsImageDialog'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { Ellipsis } from 'lucide-react'
 import { Event } from 'nostr-tools'
@@ -12,6 +13,7 @@ export default function NoteOptions({ event, className }: { event: Event; classN
   const { isSmallScreen } = useScreenSize()
   const [isRawEventDialogOpen, setIsRawEventDialogOpen] = useState(false)
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false)
+  const [isShareImageDialogOpen, setIsShareImageDialogOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [showSubMenu, setShowSubMenu] = useState(false)
   const [activeSubMenu, setActiveSubMenu] = useState<SubMenuAction[]>([])
@@ -38,6 +40,7 @@ export default function NoteOptions({ event, className }: { event: Event; classN
     showSubMenuActions,
     setIsRawEventDialogOpen,
     setIsReportDialogOpen,
+    setIsShareImageDialogOpen,
     isSmallScreen
   })
 
@@ -77,6 +80,11 @@ export default function NoteOptions({ event, className }: { event: Event; classN
         event={event}
         isOpen={isReportDialogOpen}
         closeDialog={() => setIsReportDialogOpen(false)}
+      />
+      <ShareAsImageDialog
+        event={event}
+        isOpen={isShareImageDialogOpen}
+        closeDialog={() => setIsShareImageDialogOpen(false)}
       />
     </div>
   )

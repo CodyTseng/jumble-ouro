@@ -872,5 +872,10 @@ export default {
     'Protected Events': 'Védett események',
     'File Storage': 'Fájltárolás',
     'Trending Topics': 'Felkapott témák',
+    'Share as image': 'Megosztás képként',
+    'Download image': 'Kép letöltése',
+    'Share image': 'Kép megosztása',
+    'Generating image...': 'Kép generálása...',
+    'Failed to generate image': 'Nem sikerült a kép generálása',
   }
 }

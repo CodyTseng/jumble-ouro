@@ -876,5 +876,10 @@ export default {
     'Protected Events': 'رویدادهای محافظت شده',
     'File Storage': 'ذخیره فایل',
     'Trending Topics': 'موضوعات داغ',
+    'Share as image': 'اشتراک‌گذاری به عنوان تصویر',
+    'Download image': 'دانلود تصویر',
+    'Share image': 'اشتراک‌گذاری تصویر',
+    'Generating image...': 'در حال ایجاد تصویر...',
+    'Failed to generate image': 'ایجاد تصویر ناموفق بود',
   }
 }

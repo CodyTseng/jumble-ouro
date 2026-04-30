@@ -869,5 +869,10 @@ export default {
     'Protected Events': '보호된 이벤트',
     'File Storage': '파일 저장소',
     'Trending Topics': '인기 주제',
+    'Share as image': '이미지로 공유',
+    'Download image': '이미지 다운로드',
+    'Share image': '이미지 공유',
+    'Generating image...': '이미지 생성 중...',
+    'Failed to generate image': '이미지 생성에 실패했습니다',
   }
 }

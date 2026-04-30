@@ -863,5 +863,10 @@ export default {
     'Protected Events': 'อีเวนต์ที่ได้รับการป้องกัน',
     'File Storage': 'จัดเก็บไฟล์',
     'Trending Topics': 'หัวข้อที่กำลังมาแรง',
+    'Share as image': 'แชร์เป็นรูปภาพ',
+    'Download image': 'ดาวน์โหลดรูปภาพ',
+    'Share image': 'แชร์รูปภาพ',
+    'Generating image...': 'กำลังสร้างรูปภาพ...',
+    'Failed to generate image': 'สร้างรูปภาพไม่สำเร็จ',
   }
 }

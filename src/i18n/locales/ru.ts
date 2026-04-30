@@ -881,5 +881,10 @@ export default {
     'Protected Events': 'Защищённые события',
     'File Storage': 'Хранилище файлов',
     'Trending Topics': 'Актуальные темы',
+    'Share as image': 'Поделиться как изображение',
+    'Download image': 'Скачать изображение',
+    'Share image': 'Поделиться изображением',
+    'Generating image...': 'Создание изображения...',
+    'Failed to generate image': 'Не удалось создать изображение',
   }
 }

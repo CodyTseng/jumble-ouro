@@ -877,5 +877,10 @@ export default {
     'Protected Events': 'सुरक्षित इवेंट',
     'File Storage': 'फ़ाइल संग्रहण',
     'Trending Topics': 'ट्रेंडिंग विषय',
+    'Share as image': 'छवि के रूप में साझा करें',
+    'Download image': 'छवि डाउनलोड करें',
+    'Share image': 'छवि साझा करें',
+    'Generating image...': 'छवि बनाई जा रही है...',
+    'Failed to generate image': 'छवि बनाने में विफल',
   }
 }
