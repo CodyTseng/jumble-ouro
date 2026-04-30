@@ -14,6 +14,7 @@ import {
   BellOff,
   Code,
   Copy,
+  ImageDown,
   Pin,
   PinOff,
   SatelliteDish,
@@ -49,6 +50,7 @@ interface UseMenuActionsProps {
   showSubMenuActions: (subMenu: SubMenuAction[], title: string) => void
   setIsRawEventDialogOpen: (open: boolean) => void
   setIsReportDialogOpen: (open: boolean) => void
+  setIsShareImageDialogOpen: (open: boolean) => void
   isSmallScreen: boolean
 }
 
@@ -58,6 +60,7 @@ export function useMenuActions({
   showSubMenuActions,
   setIsRawEventDialogOpen,
   setIsReportDialogOpen,
+  setIsShareImageDialogOpen,
   isSmallScreen
 }: UseMenuActionsProps) {
   const { t } = useTranslation()
@@ -201,6 +204,14 @@ export function useMenuActions({
           navigator.clipboard.writeText(shareUrl)
           toast.success(t('Copied'))
           closeDrawer()
+        }
+      },
+      {
+        icon: ImageDown,
+        label: t('Share as image'),
+        onClick: () => {
+          closeDrawer()
+          setIsShareImageDialogOpen(true)
         }
       },
       {

@@ -850,5 +850,10 @@ export default {
     'Protected Events': '受保护事件',
     'File Storage': '文件存储',
     'Trending Topics': '热门话题',
+    'Share as image': '分享为图片',
+    'Download image': '下载图片',
+    'Share image': '分享图片',
+    'Generating image...': '正在生成图片...',
+    'Failed to generate image': '生成图片失败',
   }
 }

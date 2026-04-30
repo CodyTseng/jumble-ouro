@@ -862,5 +862,10 @@ export default {
     'Protected Events': 'أحداث محمية',
     'File Storage': 'تخزين الملفات',
     'Trending Topics': 'المواضيع الرائجة',
+    'Share as image': 'مشاركة كصورة',
+    'Download image': 'تحميل الصورة',
+    'Share image': 'مشاركة الصورة',
+    'Generating image...': 'جارٍ إنشاء الصورة...',
+    'Failed to generate image': 'فشل في إنشاء الصورة',
   }
 }

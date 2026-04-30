@@ -845,5 +845,10 @@ export default {
     'Protected Events': '受保護事件',
     'File Storage': '檔案儲存',
     'Trending Topics': '熱門話題',
+    'Share as image': '分享為圖片',
+    'Download image': '下載圖片',
+    'Share image': '分享圖片',
+    'Generating image...': '正在產生圖片...',
+    'Failed to generate image': '產生圖片失敗',
   }
 }

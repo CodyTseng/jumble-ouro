@@ -885,5 +885,10 @@ export default {
     'Protected Events': 'Événements protégés',
     'File Storage': 'Stockage de fichiers',
     'Trending Topics': 'Sujets tendance',
+    'Share as image': 'Partager en image',
+    'Download image': "Télécharger l'image",
+    'Share image': "Partager l'image",
+    'Generating image...': "Génération de l'image...",
+    'Failed to generate image': "Échec de la génération de l'image",
   }
 }
