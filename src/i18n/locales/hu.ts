@@ -877,5 +877,7 @@ export default {
     'Share image': 'Kép megosztása',
     'Generating image...': 'Kép generálása...',
     'Failed to generate image': 'Nem sikerült a kép generálása',
+    'More from': 'Több tőle:',
+    'View profile': 'Profil megtekintése',
   }
 }

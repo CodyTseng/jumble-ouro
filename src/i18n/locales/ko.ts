@@ -874,5 +874,7 @@ export default {
     'Share image': '이미지 공유',
     'Generating image...': '이미지 생성 중...',
     'Failed to generate image': '이미지 생성에 실패했습니다',
+    'More from': '더 보기:',
+    'View profile': '프로필 보기',
   }
 }

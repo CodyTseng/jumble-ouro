@@ -874,5 +874,7 @@ export default {
     'Share image': 'Share image',
     'Generating image...': 'Generating image...',
     'Failed to generate image': 'Failed to generate image',
+    'More from': 'More from',
+    'View profile': 'View profile',
   }
 }

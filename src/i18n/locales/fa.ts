@@ -881,5 +881,7 @@ export default {
     'Share image': 'اشتراک‌گذاری تصویر',
     'Generating image...': 'در حال ایجاد تصویر...',
     'Failed to generate image': 'ایجاد تصویر ناموفق بود',
+    'More from': 'بیشتر از',
+    'View profile': 'مشاهده پروفایل',
   }
 }

@@ -894,5 +894,7 @@ export default {
     'Share image': 'Bild teilen',
     'Generating image...': 'Bild wird erstellt...',
     'Failed to generate image': 'Bild konnte nicht erstellt werden',
+    'More from': 'Mehr von',
+    'View profile': 'Profil anzeigen',
   }
 }
