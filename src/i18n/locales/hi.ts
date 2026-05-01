@@ -882,5 +882,7 @@ export default {
     'Share image': 'छवि साझा करें',
     'Generating image...': 'छवि बनाई जा रही है...',
     'Failed to generate image': 'छवि बनाने में विफल',
+    'More from': 'और अधिक',
+    'View profile': 'प्रोफ़ाइल देखें',
   }
 }

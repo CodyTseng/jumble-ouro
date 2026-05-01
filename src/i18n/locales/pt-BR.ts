@@ -885,5 +885,7 @@ export default {
     'Share image': 'Compartilhar imagem',
     'Generating image...': 'Gerando imagem...',
     'Failed to generate image': 'Falha ao gerar imagem',
+    'More from': 'Mais de',
+    'View profile': 'Ver perfil',
   }
 }

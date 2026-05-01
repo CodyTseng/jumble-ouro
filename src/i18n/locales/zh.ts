@@ -855,5 +855,7 @@ export default {
     'Share image': '分享图片',
     'Generating image...': '正在生成图片...',
     'Failed to generate image': '生成图片失败',
+    'More from': '更多来自',
+    'View profile': '查看资料',
   }
 }

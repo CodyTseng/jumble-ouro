@@ -880,5 +880,7 @@ export default {
     'Share image': '画像を共有',
     'Generating image...': '画像を生成中...',
     'Failed to generate image': '画像の生成に失敗しました',
+    'More from': 'さらに表示：',
+    'View profile': 'プロフィールを見る',
   }
 }

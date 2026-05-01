@@ -867,5 +867,7 @@ export default {
     'Share image': 'مشاركة الصورة',
     'Generating image...': 'جارٍ إنشاء الصورة...',
     'Failed to generate image': 'فشل في إنشاء الصورة',
+    'More from': 'المزيد من',
+    'View profile': 'عرض الملف الشخصي',
   }
 }

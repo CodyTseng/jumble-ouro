@@ -868,5 +868,7 @@ export default {
     'Share image': 'แชร์รูปภาพ',
     'Generating image...': 'กำลังสร้างรูปภาพ...',
     'Failed to generate image': 'สร้างรูปภาพไม่สำเร็จ',
+    'More from': 'เพิ่มเติมจาก',
+    'View profile': 'ดูโปรไฟล์',
   }
 }
