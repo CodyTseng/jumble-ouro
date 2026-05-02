@@ -876,5 +876,6 @@ export default {
     'Failed to generate image': 'Failed to generate image',
     'More from': 'More from',
     'View profile': 'View profile',
+    'Copy profile link': 'Copy profile link',
   }
 }

@@ -882,5 +882,6 @@ export default {
     'Failed to generate image': '画像の生成に失敗しました',
     'More from': 'さらに表示：',
     'View profile': 'プロフィールを見る',
+    'Copy profile link': 'プロフィールリンクをコピー',
   }
 }

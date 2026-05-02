@@ -6,13 +6,15 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
+import { toJumbleProfile } from '@/lib/link'
 import { pubkeyToNpub } from '@/lib/pubkey'
 import { useMuteList } from '@/providers/MuteListProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
-import { Bell, BellOff, Copy, Ellipsis } from 'lucide-react'
+import { Bell, BellOff, Copy, Ellipsis, Link, Share2 } from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 export default function ProfileOptions({
   pubkey,
@@ -29,8 +31,36 @@ export default function ProfileOptions({
   const { mutePubkeySet, mutePubkeyPrivately, mutePubkeyPublicly, unmutePubkey } = useMuteList()
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const isMuted = useMemo(() => mutePubkeySet.has(pubkey), [mutePubkeySet, pubkey])
+  const isSelf = pubkey === accountPubkey
 
-  if (pubkey === accountPubkey) return null
+  const handleShare = async () => {
+    setIsDrawerOpen(false)
+    const shareUrl = toJumbleProfile(pubkey)
+    if (navigator.share) {
+      try {
+        await navigator.share({ url: shareUrl })
+        return
+      } catch (err) {
+        if (err instanceof Error && err.name === 'AbortError') {
+          return
+        }
+      }
+    }
+    navigator.clipboard.writeText(shareUrl)
+    toast.success(t('Copied'))
+  }
+
+  const handleCopyProfileLink = () => {
+    setIsDrawerOpen(false)
+    navigator.clipboard.writeText(toJumbleProfile(pubkey))
+    toast.success(t('Copied'))
+  }
+
+  const handleCopyUserId = () => {
+    setIsDrawerOpen(false)
+    navigator.clipboard.writeText(pubkeyToNpub(pubkey) ?? '')
+    toast.success(t('Copied'))
+  }
 
   const trigger = (
     <Button
@@ -56,17 +86,30 @@ export default function ProfileOptions({
           <DrawerContent hideOverlay>
             <div className="py-2">
               <Button
-                onClick={() => {
-                  setIsDrawerOpen(false)
-                  navigator.clipboard.writeText(pubkeyToNpub(pubkey) ?? '')
-                }}
+                onClick={handleShare}
+                className="w-full justify-start gap-4 p-6 text-lg [&_svg]:size-5"
+                variant="ghost"
+              >
+                <Share2 />
+                {t('Share')}
+              </Button>
+              <Button
+                onClick={handleCopyProfileLink}
+                className="w-full justify-start gap-4 p-6 text-lg [&_svg]:size-5"
+                variant="ghost"
+              >
+                <Link />
+                {t('Copy profile link')}
+              </Button>
+              <Button
+                onClick={handleCopyUserId}
                 className="w-full justify-start gap-4 p-6 text-lg [&_svg]:size-5"
                 variant="ghost"
               >
                 <Copy />
                 {t('Copy user ID')}
               </Button>
-              {accountPubkey ? (
+              {accountPubkey && !isSelf ? (
                 isMuted ? (
                   <Button
                     onClick={() => {
@@ -117,11 +160,19 @@ export default function ProfileOptions({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{trigger}</DropdownMenuTrigger>
       <DropdownMenuContent>
-        <DropdownMenuItem onClick={() => navigator.clipboard.writeText(pubkeyToNpub(pubkey) ?? '')}>
+        <DropdownMenuItem onClick={handleShare}>
+          <Share2 />
+          {t('Share')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleCopyProfileLink}>
+          <Link />
+          {t('Copy profile link')}
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleCopyUserId}>
           <Copy />
           {t('Copy user ID')}
         </DropdownMenuItem>
-        {accountPubkey ? (
+        {accountPubkey && !isSelf ? (
           isMuted ? (
             <DropdownMenuItem
               onClick={() => unmutePubkey(pubkey)}

@@ -870,5 +870,6 @@ export default {
     'Failed to generate image': 'สร้างรูปภาพไม่สำเร็จ',
     'More from': 'เพิ่มเติมจาก',
     'View profile': 'ดูโปรไฟล์',
+    'Copy profile link': 'คัดลอกลิงก์โปรไฟล์',
   }
 }

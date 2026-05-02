@@ -896,5 +896,6 @@ export default {
     'Failed to generate image': 'Bild konnte nicht erstellt werden',
     'More from': 'Mehr von',
     'View profile': 'Profil anzeigen',
+    'Copy profile link': 'Profillink kopieren',
   }
 }
