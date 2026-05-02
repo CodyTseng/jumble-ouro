@@ -887,5 +887,6 @@ export default {
     'Failed to generate image': 'Falha ao gerar imagem',
     'More from': 'Mais de',
     'View profile': 'Ver perfil',
+    'Copy profile link': 'Copiar link do perfil',
   }
 }

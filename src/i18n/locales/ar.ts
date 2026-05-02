@@ -869,5 +869,6 @@ export default {
     'Failed to generate image': 'فشل في إنشاء الصورة',
     'More from': 'المزيد من',
     'View profile': 'عرض الملف الشخصي',
+    'Copy profile link': 'نسخ رابط الملف الشخصي',
   }
 }

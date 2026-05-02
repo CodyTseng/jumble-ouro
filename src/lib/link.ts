@@ -11,6 +11,9 @@ export const toNote = (eventOrId: Event | string) => {
 export const toJumbleNote = (eventOrId: Event | string) => {
   return `https://jumble.social${toNote(eventOrId)}`
 }
+export const toJumbleProfile = (pubkey: string) => {
+  return `https://jumble.social${toProfile(pubkey)}`
+}
 export const toNoteList = ({
   hashtag,
   search,

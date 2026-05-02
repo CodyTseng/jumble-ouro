@@ -876,5 +876,6 @@ export default {
     'Failed to generate image': '이미지 생성에 실패했습니다',
     'More from': '더 보기:',
     'View profile': '프로필 보기',
+    'Copy profile link': '프로필 링크 복사',
   }
 }

@@ -884,5 +884,6 @@ export default {
     'Failed to generate image': 'छवि बनाने में विफल',
     'More from': 'और अधिक',
     'View profile': 'प्रोफ़ाइल देखें',
+    'Copy profile link': 'प्रोफ़ाइल लिंक कॉपी करें',
   }
 }

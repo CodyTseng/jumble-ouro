@@ -888,5 +888,6 @@ export default {
     'Failed to generate image': 'Error al generar la imagen',
     'More from': 'Más de',
     'View profile': 'Ver perfil',
+    'Copy profile link': 'Copiar enlace del perfil',
   }
 }

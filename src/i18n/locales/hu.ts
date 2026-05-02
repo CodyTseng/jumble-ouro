@@ -879,5 +879,6 @@ export default {
     'Failed to generate image': 'Nem sikerült a kép generálása',
     'More from': 'Több tőle:',
     'View profile': 'Profil megtekintése',
+    'Copy profile link': 'Profil link másolása',
   }
 }

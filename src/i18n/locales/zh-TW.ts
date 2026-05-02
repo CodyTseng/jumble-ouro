@@ -852,5 +852,6 @@ export default {
     'Failed to generate image': '產生圖片失敗',
     'More from': '更多來自',
     'View profile': '查看資料',
+    'Copy profile link': '複製個人資料連結',
   }
 }

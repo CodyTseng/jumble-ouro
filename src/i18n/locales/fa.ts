@@ -883,5 +883,6 @@ export default {
     'Failed to generate image': 'ایجاد تصویر ناموفق بود',
     'More from': 'بیشتر از',
     'View profile': 'مشاهده پروفایل',
+    'Copy profile link': 'کپی لینک پروفایل',
   }
 }

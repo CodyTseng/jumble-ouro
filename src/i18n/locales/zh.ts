@@ -857,5 +857,6 @@ export default {
     'Failed to generate image': '生成图片失败',
     'More from': '更多来自',
     'View profile': '查看资料',
+    'Copy profile link': '复制资料链接',
   }
 }
