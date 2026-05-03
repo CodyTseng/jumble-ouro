@@ -877,5 +877,9 @@ export default {
     'More from': '더 보기:',
     'View profile': '프로필 보기',
     'Copy profile link': '프로필 링크 복사',
+    'Next note': '다음 노트',
+    'Previous note': '이전 노트',
+    'Open note': '노트 열기',
+    or: '또는',
   }
 }

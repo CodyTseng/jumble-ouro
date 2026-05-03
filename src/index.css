@@ -234,3 +234,8 @@
     transform: translate(-1px, -1px) rotate(-1deg);
   }
 }
+
+.note-keyboard-focus {
+  @apply ring-2 rounded-sm;
+  --tw-ring-color: hsl(var(--primary) / 0.3);
+}

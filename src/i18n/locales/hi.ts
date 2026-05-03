@@ -885,5 +885,9 @@ export default {
     'More from': 'और अधिक',
     'View profile': 'प्रोफ़ाइल देखें',
     'Copy profile link': 'प्रोफ़ाइल लिंक कॉपी करें',
+    'Next note': 'अगला नोट',
+    'Previous note': 'पिछला नोट',
+    'Open note': 'नोट खोलें',
+    or: 'या',
   }
 }

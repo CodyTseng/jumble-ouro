@@ -884,5 +884,9 @@ export default {
     'More from': 'بیشتر از',
     'View profile': 'مشاهده پروفایل',
     'Copy profile link': 'کپی لینک پروفایل',
+    'Next note': 'یادداشت بعدی',
+    'Previous note': 'یادداشت قبلی',
+    'Open note': 'باز کردن یادداشت',
+    or: 'یا',
   }
 }

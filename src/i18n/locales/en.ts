@@ -877,5 +877,9 @@ export default {
     'More from': 'More from',
     'View profile': 'View profile',
     'Copy profile link': 'Copy profile link',
+    'Next note': 'Next note',
+    'Previous note': 'Previous note',
+    'Open note': 'Open note',
+    or: 'or',
   }
 }

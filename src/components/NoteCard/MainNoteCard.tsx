@@ -28,6 +28,7 @@ export default function MainNoteCard({
 
   return (
     <div
+      data-note-card
       className={className}
       onClick={(e) => {
         e.stopPropagation()

@@ -853,5 +853,9 @@ export default {
     'More from': '更多來自',
     'View profile': '查看資料',
     'Copy profile link': '複製個人資料連結',
+    'Next note': '下一則筆記',
+    'Previous note': '上一則筆記',
+    'Open note': '開啟筆記',
+    or: '或',
   }
 }

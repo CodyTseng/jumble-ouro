@@ -880,5 +880,9 @@ export default {
     'More from': 'Több tőle:',
     'View profile': 'Profil megtekintése',
     'Copy profile link': 'Profil link másolása',
+    'Next note': 'Következő jegyzet',
+    'Previous note': 'Előző jegyzet',
+    'Open note': 'Jegyzet megnyitása',
+    or: 'vagy',
   }
 }

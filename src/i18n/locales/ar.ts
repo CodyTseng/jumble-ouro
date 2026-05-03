@@ -870,5 +870,9 @@ export default {
     'More from': 'المزيد من',
     'View profile': 'عرض الملف الشخصي',
     'Copy profile link': 'نسخ رابط الملف الشخصي',
+    'Next note': 'الملاحظة التالية',
+    'Previous note': 'الملاحظة السابقة',
+    'Open note': 'فتح الملاحظة',
+    or: 'أو',
   }
 }
