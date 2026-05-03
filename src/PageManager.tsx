@@ -88,12 +88,20 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
   const [shortcutsDialogOpen, setShortcutsDialogOpen] = useState(false)
   const pendingPrefixRef = useRef<string | null>(null)
   const prefixTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const focusedNoteRef = useRef<HTMLElement | null>(null)
 
   const clearPendingPrefix = useCallback(() => {
     pendingPrefixRef.current = null
     if (prefixTimeoutRef.current) {
       clearTimeout(prefixTimeoutRef.current)
       prefixTimeoutRef.current = null
+    }
+  }, [])
+
+  const clearNoteFocus = useCallback(() => {
+    if (focusedNoteRef.current) {
+      focusedNoteRef.current.classList.remove('note-keyboard-focus')
+      focusedNoteRef.current = null
     }
   }, [])
 
@@ -155,6 +163,52 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
             pendingPrefixRef.current = null
           }, 1000)
           break
+        case 'j': {
+          e.preventDefault()
+          const cards = Array.from(
+            document.querySelectorAll<HTMLElement>('[data-note-card]')
+          ).filter((el) => el.offsetParent !== null)
+          if (cards.length === 0) break
+          const currentIdx = focusedNoteRef.current
+            ? cards.indexOf(focusedNoteRef.current)
+            : -1
+          let nextIdx: number
+          if (currentIdx === -1) {
+            nextIdx = cards.findIndex((card) => card.getBoundingClientRect().top >= 0)
+            if (nextIdx === -1) nextIdx = 0
+          } else {
+            nextIdx = Math.min(currentIdx + 1, cards.length - 1)
+          }
+          clearNoteFocus()
+          cards[nextIdx].classList.add('note-keyboard-focus')
+          cards[nextIdx].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          focusedNoteRef.current = cards[nextIdx]
+          break
+        }
+        case 'k': {
+          e.preventDefault()
+          const cards = Array.from(
+            document.querySelectorAll<HTMLElement>('[data-note-card]')
+          ).filter((el) => el.offsetParent !== null)
+          if (cards.length === 0) break
+          const currentIdx = focusedNoteRef.current
+            ? cards.indexOf(focusedNoteRef.current)
+            : -1
+          if (currentIdx <= 0) break
+          clearNoteFocus()
+          cards[currentIdx - 1].classList.add('note-keyboard-focus')
+          cards[currentIdx - 1].scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+          focusedNoteRef.current = cards[currentIdx - 1]
+          break
+        }
+        case 'o':
+        case 'Enter': {
+          if (!focusedNoteRef.current) break
+          e.preventDefault()
+          focusedNoteRef.current.click()
+          clearNoteFocus()
+          break
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown)
@@ -162,7 +216,14 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
       window.removeEventListener('keydown', handleKeyDown)
       clearPendingPrefix()
     }
-  }, [isSmallScreen, clearPendingPrefix])
+  }, [isSmallScreen, clearPendingPrefix, clearNoteFocus])
+
+  useEffect(() => {
+    if (isSmallScreen) return
+    const handleMouseDown = () => clearNoteFocus()
+    window.addEventListener('mousedown', handleMouseDown)
+    return () => window.removeEventListener('mousedown', handleMouseDown)
+  }, [isSmallScreen, clearNoteFocus])
 
   useEffect(() => {
     if (['/npub1', '/nprofile1'].some((prefix) => window.location.pathname.startsWith(prefix))) {
@@ -290,6 +351,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
   }, [])
 
   const navigatePrimaryPage = (page: TPrimaryPageName, props?: any) => {
+    clearNoteFocus()
     const needScrollToTop = page === currentPrimaryPage
     setPrimaryPages((prev) => {
       const exists = prev.find((p) => p.name === page)

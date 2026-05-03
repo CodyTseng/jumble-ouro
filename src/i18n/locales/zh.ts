@@ -858,5 +858,9 @@ export default {
     'More from': '更多来自',
     'View profile': '查看资料',
     'Copy profile link': '复制资料链接',
+    'Next note': '下一条笔记',
+    'Previous note': '上一条笔记',
+    'Open note': '打开笔记',
+    or: '或',
   }
 }

@@ -123,6 +123,25 @@ export default function KeyboardShortcutsDialog({
           </div>
           <div>
             <h3 className="mb-2 text-sm font-medium text-muted-foreground">
+              {t('Feed')}
+            </h3>
+            <div className="space-y-0.5">
+              <ShortcutRow keys={<Kbd>j</Kbd>} label={t('Next note')} />
+              <ShortcutRow keys={<Kbd>k</Kbd>} label={t('Previous note')} />
+              <ShortcutRow
+                keys={
+                  <>
+                    <Kbd>Enter</Kbd>
+                    <span className="text-xs text-muted-foreground">{t('or')}</span>
+                    <Kbd>o</Kbd>
+                  </>
+                }
+                label={t('Open note')}
+              />
+            </div>
+          </div>
+          <div>
+            <h3 className="mb-2 text-sm font-medium text-muted-foreground">
               {t('Actions')}
             </h3>
             <div className="space-y-0.5">

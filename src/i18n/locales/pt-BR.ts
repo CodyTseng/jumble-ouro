@@ -888,5 +888,9 @@ export default {
     'More from': 'Mais de',
     'View profile': 'Ver perfil',
     'Copy profile link': 'Copiar link do perfil',
+    'Next note': 'Próxima nota',
+    'Previous note': 'Nota anterior',
+    'Open note': 'Abrir nota',
+    or: 'ou',
   }
 }

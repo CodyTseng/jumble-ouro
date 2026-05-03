@@ -871,5 +871,9 @@ export default {
     'More from': 'เพิ่มเติมจาก',
     'View profile': 'ดูโปรไฟล์',
     'Copy profile link': 'คัดลอกลิงก์โปรไฟล์',
+    'Next note': 'โน้ตถัดไป',
+    'Previous note': 'โน้ตก่อนหน้า',
+    'Open note': 'เปิดโน้ต',
+    or: 'หรือ',
   }
 }

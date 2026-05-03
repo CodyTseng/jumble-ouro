@@ -883,5 +883,9 @@ export default {
     'More from': 'さらに表示：',
     'View profile': 'プロフィールを見る',
     'Copy profile link': 'プロフィールリンクをコピー',
+    'Next note': '次のノート',
+    'Previous note': '前のノート',
+    'Open note': 'ノートを開く',
+    or: 'または',
   }
 }
