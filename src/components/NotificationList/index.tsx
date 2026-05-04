@@ -35,6 +35,32 @@ import { NotificationSkeleton } from './NotificationItem/Notification'
 const LIMIT = 100
 const SHOW_COUNT = 30
 
+type TTimeGroup = 'today' | 'yesterday' | 'this_week' | 'earlier'
+
+function getTimeGroup(timestamp: number): TTimeGroup {
+  const now = dayjs()
+  const ts = dayjs(timestamp * 1000)
+  if (ts.isSame(now, 'day')) return 'today'
+  if (ts.isSame(now.subtract(1, 'day'), 'day')) return 'yesterday'
+  if (ts.isSame(now, 'week')) return 'this_week'
+  return 'earlier'
+}
+
+const TIME_GROUP_LABELS: Record<TTimeGroup, string> = {
+  today: 'Today',
+  yesterday: 'Yesterday',
+  this_week: 'This Week',
+  earlier: 'Earlier'
+}
+
+function DateGroupHeader({ group, t }: { group: TTimeGroup; t: (key: string) => string }) {
+  return (
+    <div className="px-4 py-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+      {t(TIME_GROUP_LABELS[group])}
+    </div>
+  )
+}
+
 const NotificationList = forwardRef((_, ref) => {
   const { t } = useTranslation()
   const { current, display } = usePrimaryPage()
@@ -260,13 +286,26 @@ const NotificationList = forwardRef((_, ref) => {
     <div>
       {initialLoading && shouldShowLoadingIndicator && <LoadingBar />}
       <div className={notificationListStyle === NOTIFICATION_LIST_STYLE.COMPACT ? 'mb-2' : ''} />
-      {visibleItems.map((notification) => (
-        <NotificationItem
-          key={notification.id}
-          notification={notification}
-          isNew={notification.created_at > lastReadTime}
-        />
-      ))}
+      {(() => {
+        const hasMultipleGroups =
+          visibleItems.length > 1 &&
+          getTimeGroup(visibleItems[0].created_at) !==
+            getTimeGroup(visibleItems[visibleItems.length - 1].created_at)
+        return visibleItems.map((notification, index) => {
+          const group = getTimeGroup(notification.created_at)
+          const prevGroup = index > 0 ? getTimeGroup(visibleItems[index - 1].created_at) : null
+          const showHeader = hasMultipleGroups && group !== prevGroup
+          return (
+            <div key={notification.id}>
+              {showHeader && <DateGroupHeader group={group} t={t} />}
+              <NotificationItem
+                notification={notification}
+                isNew={notification.created_at > lastReadTime}
+              />
+            </div>
+          )
+        })
+      })()}
       <div ref={bottomRef} />
       <div className="text-center text-sm text-muted-foreground">
         {!!until || shouldShowLoadingIndicator ? (

@@ -887,5 +887,8 @@ export default {
     'Previous note': '前のノート',
     'Open note': 'ノートを開く',
     or: 'または',
+    Today: '今日',
+    'This Week': '今週',
+    Earlier: 'それ以前',
   }
 }

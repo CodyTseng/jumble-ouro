@@ -875,5 +875,8 @@ export default {
     'Previous note': 'โน้ตก่อนหน้า',
     'Open note': 'เปิดโน้ต',
     or: 'หรือ',
+    Today: 'วันนี้',
+    'This Week': 'สัปดาห์นี้',
+    Earlier: 'ก่อนหน้านี้',
   }
 }

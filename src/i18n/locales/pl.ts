@@ -893,5 +893,8 @@ export default {
     'Previous note': 'Poprzednia notatka',
     'Open note': 'Otwórz notatkę',
     or: 'lub',
+    Today: 'Dzisiaj',
+    'This Week': 'W tym tygodniu',
+    Earlier: 'Wcześniej',
   }
 }

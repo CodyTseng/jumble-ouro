@@ -888,5 +888,8 @@ export default {
     'Previous note': 'یادداشت قبلی',
     'Open note': 'باز کردن یادداشت',
     or: 'یا',
+    Today: 'امروز',
+    'This Week': 'این هفته',
+    Earlier: 'قبل‌تر',
   }
 }

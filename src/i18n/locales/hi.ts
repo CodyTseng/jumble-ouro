@@ -889,5 +889,8 @@ export default {
     'Previous note': 'पिछला नोट',
     'Open note': 'नोट खोलें',
     or: 'या',
+    Today: 'आज',
+    'This Week': 'इस सप्ताह',
+    Earlier: 'पहले',
   }
 }

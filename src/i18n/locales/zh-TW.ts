@@ -857,5 +857,8 @@ export default {
     'Previous note': '上一則筆記',
     'Open note': '開啟筆記',
     or: '或',
+    Today: '今天',
+    'This Week': '本週',
+    Earlier: '更早',
   }
 }
