@@ -884,5 +884,8 @@ export default {
     'Previous note': 'Előző jegyzet',
     'Open note': 'Jegyzet megnyitása',
     or: 'vagy',
+    Today: 'Ma',
+    'This Week': 'Ezen a héten',
+    Earlier: 'Korábbi',
   }
 }

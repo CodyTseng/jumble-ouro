@@ -881,5 +881,8 @@ export default {
     'Previous note': 'Previous note',
     'Open note': 'Open note',
     or: 'or',
+    Today: 'Today',
+    'This Week': 'This Week',
+    Earlier: 'Earlier',
   }
 }

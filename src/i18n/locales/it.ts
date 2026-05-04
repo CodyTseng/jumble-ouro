@@ -893,5 +893,8 @@ export default {
     'Previous note': 'Nota precedente',
     'Open note': 'Apri nota',
     or: 'o',
+    Today: 'Oggi',
+    'This Week': 'Questa settimana',
+    Earlier: 'Precedenti',
   }
 }

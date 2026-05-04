@@ -862,5 +862,8 @@ export default {
     'Previous note': '上一条笔记',
     'Open note': '打开笔记',
     or: '或',
+    Today: '今天',
+    'This Week': '本周',
+    Earlier: '更早',
   }
 }

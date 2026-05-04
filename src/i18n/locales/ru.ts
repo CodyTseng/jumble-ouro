@@ -893,5 +893,8 @@ export default {
     'Previous note': 'Предыдущая заметка',
     'Open note': 'Открыть заметку',
     or: 'или',
+    Today: 'Сегодня',
+    'This Week': 'На этой неделе',
+    Earlier: 'Ранее',
   }
 }

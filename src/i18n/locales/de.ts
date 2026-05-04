@@ -901,5 +901,8 @@ export default {
     'Previous note': 'Vorherige Notiz',
     'Open note': 'Notiz öffnen',
     or: 'oder',
+    Today: 'Heute',
+    'This Week': 'Diese Woche',
+    Earlier: 'Früher',
   }
 }

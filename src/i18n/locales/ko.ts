@@ -881,5 +881,8 @@ export default {
     'Previous note': '이전 노트',
     'Open note': '노트 열기',
     or: '또는',
+    Today: '오늘',
+    'This Week': '이번 주',
+    Earlier: '이전',
   }
 }

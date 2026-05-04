@@ -874,5 +874,8 @@ export default {
     'Previous note': 'الملاحظة السابقة',
     'Open note': 'فتح الملاحظة',
     or: 'أو',
+    Today: 'اليوم',
+    'This Week': 'هذا الأسبوع',
+    Earlier: 'سابقاً',
   }
 }
