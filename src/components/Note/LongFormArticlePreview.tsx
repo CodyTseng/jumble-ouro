@@ -1,10 +1,12 @@
 import { getLongFormArticleMetadataFromEvent } from '@/lib/event-metadata'
 import { toNoteList } from '@/lib/link'
+import { estimateReadingMinutes } from '@/lib/reading-time'
 import { useSecondaryPage } from '@/PageManager'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { Event, kinds } from 'nostr-tools'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import Image from '../Image'
 
 export default function LongFormArticlePreview({
@@ -14,12 +16,21 @@ export default function LongFormArticlePreview({
   event: Event
   className?: string
 }) {
+  const { t } = useTranslation()
   const { isSmallScreen } = useScreenSize()
   const { push } = useSecondaryPage()
   const { autoLoadMedia } = useContentPolicy()
   const metadata = useMemo(() => getLongFormArticleMetadataFromEvent(event), [event])
+  const readingMinutes = useMemo(() => estimateReadingMinutes(event.content), [event.content])
 
-  const titleComponent = <div className="line-clamp-2 text-xl font-semibold">{metadata.title}</div>
+  const titleComponent = (
+    <div>
+      <div className="line-clamp-2 text-xl font-semibold">{metadata.title}</div>
+      <div className="text-xs text-muted-foreground">
+        {t('~{{count}} min read', { count: readingMinutes })}
+      </div>
+    </div>
+  )
 
   const tagsComponent = metadata.tags.length > 0 && (
     <div className="flex flex-wrap gap-1">
