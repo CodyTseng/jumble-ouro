@@ -1,6 +1,7 @@
 import { useSecondaryPage } from '@/PageManager'
 import ContentPreview from '@/components/ContentPreview'
 import MoreFromAuthor from '@/components/MoreFromAuthor'
+import ReadingProgressBar from '@/components/ReadingProgressBar'
 import Note from '@/components/Note'
 import NoteInteractions from '@/components/NoteInteractions'
 import StuffStats from '@/components/StuffStats'
@@ -22,14 +23,15 @@ import { toExternalContent, toNote } from '@/lib/link'
 import { tagNameEquals } from '@/lib/tag'
 import { cn } from '@/lib/utils'
 import { Ellipsis } from 'lucide-react'
-import { Event } from 'nostr-tools'
-import { forwardRef, useMemo } from 'react'
+import { Event, kinds } from 'nostr-tools'
+import { forwardRef, useMemo, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import NotFound from './NotFound'
 
 const NotePage = forwardRef(({ id, index }: { id?: string; index?: number }, ref) => {
   const { t } = useTranslation()
   const { event, isFetching } = useFetchEvent(id)
+  const articleContentRef = useRef<HTMLDivElement>(null)
   const parentEventId = useMemo(() => getParentBech32Id(event), [event])
   const rootEventId = useMemo(() => getRootBech32Id(event), [event])
   const rootITag = useMemo(
@@ -76,7 +78,10 @@ const NotePage = forwardRef(({ id, index }: { id?: string; index?: number }, ref
 
   return (
     <SecondaryPageLayout ref={ref} index={index} title={t('Note')} displayScrollToTopButton>
-      <div className="px-4 pt-3">
+      {event.kind === kinds.LongFormArticle && (
+        <ReadingProgressBar contentRef={articleContentRef} />
+      )}
+      <div ref={articleContentRef} className="px-4 pt-3">
         {rootITag && <ExternalRoot value={rootITag[1]} />}
         {rootEventId && rootEventId !== parentEventId && (
           <ParentNote
