@@ -1,24 +1,30 @@
 import { Favicon } from '@/components/Favicon'
 import NormalFeed from '@/components/NormalFeed'
+import PostEditor from '@/components/PostEditor'
 import { Button } from '@/components/ui/button'
 import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
 import { toProfileList } from '@/lib/link'
 import { fetchPubkeysFromDomain, getWellKnownNip05Url } from '@/lib/nip05'
 import { getDefaultRelayUrls, getSearchRelayUrls } from '@/lib/relay'
 import { useSecondaryPage } from '@/PageManager'
+import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import client from '@/services/client.service'
 import { TFeedSubRequest } from '@/types'
-import { UserRound } from 'lucide-react'
-import React, { forwardRef, useEffect, useState } from 'react'
+import { Bell, BellOff, PencilLine, UserRound } from 'lucide-react'
+import React, { forwardRef, useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 
 const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
   const { t } = useTranslation()
   const { push } = useSecondaryPage()
-  const { pubkey } = useNostr()
+  const { pubkey, checkLogin } = useNostr()
+  const { mutedWords, setMutedWords } = useContentPolicy()
   const [title, setTitle] = useState<React.ReactNode>(null)
   const [controls, setControls] = useState<React.ReactNode>(null)
+  const [hashtag, setHashtag] = useState<string | null>(null)
+  const [postEditorOpen, setPostEditorOpen] = useState(false)
   const [data, setData] = useState<
     | {
         type: 'hashtag' | 'search'
@@ -33,6 +39,11 @@ const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
   >(null)
   const [subRequests, setSubRequests] = useState<TFeedSubRequest[]>([])
 
+  const isHashtagMuted = useMemo(
+    () => !!hashtag && mutedWords.includes(hashtag.toLowerCase()),
+    [hashtag, mutedWords]
+  )
+
   useEffect(() => {
     const init = async () => {
       const searchParams = new URLSearchParams(window.location.search)
@@ -40,13 +51,14 @@ const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
         .getAll('k')
         .map((k) => parseInt(k))
         .filter((k) => !isNaN(k))
-      const hashtag = searchParams.get('t')
-      if (hashtag) {
+      const hashtagParam = searchParams.get('t')
+      if (hashtagParam) {
         setData({ type: 'hashtag' })
-        setTitle(`# ${hashtag}`)
+        setHashtag(hashtagParam)
+        setTitle(`# ${hashtagParam}`)
         setSubRequests([
           {
-            filter: { '#t': [hashtag], ...(kinds.length > 0 ? { kinds } : {}) },
+            filter: { '#t': [hashtagParam], ...(kinds.length > 0 ? { kinds } : {}) },
             urls: getDefaultRelayUrls()
           }
         ])
@@ -125,15 +137,51 @@ const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
     )
   }
 
+  const hashtagControls = hashtag ? (
+    <div className="flex items-center gap-1">
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8"
+        onClick={() => {
+          if (isHashtagMuted) {
+            setMutedWords(mutedWords.filter((w) => w !== hashtag.toLowerCase()))
+            toast.success(t('Hashtag unmuted'))
+          } else {
+            setMutedWords([...mutedWords, hashtag.toLowerCase()])
+            toast.success(t('Hashtag muted'))
+          }
+        }}
+      >
+        {isHashtagMuted ? <Bell className="h-4 w-4" /> : <BellOff className="h-4 w-4" />}
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="h-8 w-8"
+        onClick={() => checkLogin(() => setPostEditorOpen(true))}
+      >
+        <PencilLine className="h-4 w-4" />
+      </Button>
+    </div>
+  ) : null
+
   return (
     <SecondaryPageLayout
       ref={ref}
       index={index}
       title={title}
-      controls={controls}
+      controls={hashtag ? hashtagControls : controls}
       displayScrollToTopButton
     >
       {content}
+      {hashtag && (
+        <PostEditor
+          open={postEditorOpen}
+          setOpen={setPostEditorOpen}
+          defaultContent={`\n#${hashtag} `}
+        />
+      )}
     </SecondaryPageLayout>
   )
 })

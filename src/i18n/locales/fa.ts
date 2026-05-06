@@ -891,5 +891,7 @@ export default {
     Today: 'امروز',
     'This Week': 'این هفته',
     Earlier: 'قبل‌تر',
+    'Hashtag muted': 'هشتگ بی‌صدا شد',
+    'Hashtag unmuted': 'هشتگ از حالت بی‌صدا خارج شد',
   }
 }

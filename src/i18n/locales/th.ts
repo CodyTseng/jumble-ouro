@@ -878,5 +878,7 @@ export default {
     Today: 'วันนี้',
     'This Week': 'สัปดาห์นี้',
     Earlier: 'ก่อนหน้านี้',
+    'Hashtag muted': 'ปิดเสียงแฮชแท็กแล้ว',
+    'Hashtag unmuted': 'เปิดเสียงแฮชแท็กแล้ว',
   }
 }

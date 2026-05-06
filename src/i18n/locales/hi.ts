@@ -892,5 +892,7 @@ export default {
     Today: 'आज',
     'This Week': 'इस सप्ताह',
     Earlier: 'पहले',
+    'Hashtag muted': 'हैशटैग म्यूट किया गया',
+    'Hashtag unmuted': 'हैशटैग अनम्यूट किया गया',
   }
 }
