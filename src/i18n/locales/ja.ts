@@ -890,5 +890,7 @@ export default {
     Today: '今日',
     'This Week': '今週',
     Earlier: 'それ以前',
+    'Hashtag muted': 'ハッシュタグをミュートしました',
+    'Hashtag unmuted': 'ハッシュタグのミュートを解除しました',
   }
 }

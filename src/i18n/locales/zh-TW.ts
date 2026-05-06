@@ -860,5 +860,7 @@ export default {
     Today: '今天',
     'This Week': '本週',
     Earlier: '更早',
+    'Hashtag muted': '已靜音該主題標籤',
+    'Hashtag unmuted': '已取消靜音該主題標籤',
   }
 }

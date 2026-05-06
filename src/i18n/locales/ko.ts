@@ -884,5 +884,7 @@ export default {
     Today: '오늘',
     'This Week': '이번 주',
     Earlier: '이전',
+    'Hashtag muted': '해시태그가 음소거되었습니다',
+    'Hashtag unmuted': '해시태그 음소거가 해제되었습니다',
   }
 }

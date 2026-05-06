@@ -896,5 +896,7 @@ export default {
     Today: 'Сегодня',
     'This Week': 'На этой неделе',
     Earlier: 'Ранее',
+    'Hashtag muted': 'Хэштег заглушён',
+    'Hashtag unmuted': 'Хэштег разглушён',
   }
 }

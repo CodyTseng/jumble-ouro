@@ -884,5 +884,7 @@ export default {
     Today: 'Today',
     'This Week': 'This Week',
     Earlier: 'Earlier',
+    'Hashtag muted': 'Hashtag muted',
+    'Hashtag unmuted': 'Hashtag unmuted',
   }
 }

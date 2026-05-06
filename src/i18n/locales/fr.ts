@@ -900,5 +900,7 @@ export default {
     Today: "Aujourd'hui",
     'This Week': 'Cette semaine',
     Earlier: 'Plus ancien',
+    'Hashtag muted': 'Hashtag masqué',
+    'Hashtag unmuted': 'Hashtag démasqué',
   }
 }

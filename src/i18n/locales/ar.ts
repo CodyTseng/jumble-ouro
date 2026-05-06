@@ -877,5 +877,7 @@ export default {
     Today: 'اليوم',
     'This Week': 'هذا الأسبوع',
     Earlier: 'سابقاً',
+    'Hashtag muted': 'تم كتم الوسم',
+    'Hashtag unmuted': 'تم إلغاء كتم الوسم',
   }
 }

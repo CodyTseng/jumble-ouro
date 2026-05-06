@@ -896,5 +896,7 @@ export default {
     Today: 'Hoy',
     'This Week': 'Esta semana',
     Earlier: 'Anteriores',
+    'Hashtag muted': 'Hashtag silenciado',
+    'Hashtag unmuted': 'Hashtag desilenciado',
   }
 }

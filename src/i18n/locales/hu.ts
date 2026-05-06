@@ -887,5 +887,7 @@ export default {
     Today: 'Ma',
     'This Week': 'Ezen a héten',
     Earlier: 'Korábbi',
+    'Hashtag muted': 'Hashtag némítva',
+    'Hashtag unmuted': 'Hashtag némítás feloldva',
   }
 }

@@ -865,5 +865,7 @@ export default {
     Today: '今天',
     'This Week': '本周',
     Earlier: '更早',
+    'Hashtag muted': '已屏蔽该话题标签',
+    'Hashtag unmuted': '已取消屏蔽该话题标签',
   }
 }
