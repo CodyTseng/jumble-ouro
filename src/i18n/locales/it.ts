@@ -898,5 +898,6 @@ export default {
     Earlier: 'Precedenti',
     'Hashtag muted': 'Hashtag silenziato',
     'Hashtag unmuted': 'Hashtag riattivato',
+    'Open in...': 'Apri in...',
   }
 }

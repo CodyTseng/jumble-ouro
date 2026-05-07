@@ -906,5 +906,6 @@ export default {
     Earlier: 'Früher',
     'Hashtag muted': 'Hashtag stummgeschaltet',
     'Hashtag unmuted': 'Hashtag-Stummschaltung aufgehoben',
+    'Open in...': 'Öffnen in...',
   }
 }

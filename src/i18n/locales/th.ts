@@ -880,5 +880,6 @@ export default {
     Earlier: 'ก่อนหน้านี้',
     'Hashtag muted': 'ปิดเสียงแฮชแท็กแล้ว',
     'Hashtag unmuted': 'เปิดเสียงแฮชแท็กแล้ว',
+    'Open in...': 'เปิดใน...',
   }
 }

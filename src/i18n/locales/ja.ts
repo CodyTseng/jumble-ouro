@@ -892,5 +892,6 @@ export default {
     Earlier: 'それ以前',
     'Hashtag muted': 'ハッシュタグをミュートしました',
     'Hashtag unmuted': 'ハッシュタグのミュートを解除しました',
+    'Open in...': '別のクライアントで開く...',
   }
 }

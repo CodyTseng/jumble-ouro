@@ -893,5 +893,6 @@ export default {
     Earlier: 'قبل‌تر',
     'Hashtag muted': 'هشتگ بی‌صدا شد',
     'Hashtag unmuted': 'هشتگ از حالت بی‌صدا خارج شد',
+    'Open in...': 'باز کردن در...',
   }
 }
