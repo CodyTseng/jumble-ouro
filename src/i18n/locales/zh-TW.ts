@@ -862,5 +862,6 @@ export default {
     Earlier: '更早',
     'Hashtag muted': '已靜音該主題標籤',
     'Hashtag unmuted': '已取消靜音該主題標籤',
+    'Open in...': '在其他用戶端開啟...',
   }
 }

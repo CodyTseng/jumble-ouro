@@ -886,5 +886,6 @@ export default {
     Earlier: 'Earlier',
     'Hashtag muted': 'Hashtag muted',
     'Hashtag unmuted': 'Hashtag unmuted',
+    'Open in...': 'Open in...',
   }
 }

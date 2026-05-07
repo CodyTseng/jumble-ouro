@@ -14,6 +14,7 @@ import {
   BellOff,
   Code,
   Copy,
+  ExternalLink,
   ImageDown,
   Pin,
   PinOff,
@@ -233,6 +234,29 @@ export function useMenuActions({
         separator: true
       }
     ]
+
+    const bech32Id = getNoteBech32Id(event)
+    const openInClients = [
+      { name: 'njump.me', url: `https://njump.me/${bech32Id}` },
+      { name: 'Primal', url: `https://primal.net/e/${bech32Id}` },
+      { name: 'Snort', url: `https://snort.social/e/${bech32Id}` },
+      { name: 'Nostr.band', url: `https://nostr.band/${bech32Id}` }
+    ]
+    const openInSubMenu: SubMenuAction[] = openInClients.map((c) => ({
+      label: <div className="text-left">{c.name}</div>,
+      onClick: () => {
+        window.open(c.url, '_blank', 'noopener,noreferrer')
+        closeDrawer()
+      }
+    }))
+    actions.push({
+      icon: ExternalLink,
+      label: t('Open in...'),
+      onClick: isSmallScreen
+        ? () => showSubMenuActions(openInSubMenu, t('Open in...'))
+        : undefined,
+      subMenu: isSmallScreen ? undefined : openInSubMenu
+    })
 
     const isProtected = isProtectedEvent(event)
     if (!isProtected || event.pubkey === pubkey) {

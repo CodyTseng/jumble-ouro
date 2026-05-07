@@ -889,5 +889,6 @@ export default {
     Earlier: 'Korábbi',
     'Hashtag muted': 'Hashtag némítva',
     'Hashtag unmuted': 'Hashtag némítás feloldva',
+    'Open in...': 'Megnyitás itt...',
   }
 }

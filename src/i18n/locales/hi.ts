@@ -894,5 +894,6 @@ export default {
     Earlier: 'पहले',
     'Hashtag muted': 'हैशटैग म्यूट किया गया',
     'Hashtag unmuted': 'हैशटैग अनम्यूट किया गया',
+    'Open in...': 'इसमें खोलें...',
   }
 }

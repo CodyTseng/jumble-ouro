@@ -902,5 +902,6 @@ export default {
     Earlier: 'Plus ancien',
     'Hashtag muted': 'Hashtag masqué',
     'Hashtag unmuted': 'Hashtag démasqué',
+    'Open in...': 'Ouvrir dans...',
   }
 }

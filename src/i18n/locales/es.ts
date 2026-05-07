@@ -898,5 +898,6 @@ export default {
     Earlier: 'Anteriores',
     'Hashtag muted': 'Hashtag silenciado',
     'Hashtag unmuted': 'Hashtag desilenciado',
+    'Open in...': 'Abrir en...',
   }
 }

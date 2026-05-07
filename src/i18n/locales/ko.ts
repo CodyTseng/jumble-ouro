@@ -886,5 +886,6 @@ export default {
     Earlier: '이전',
     'Hashtag muted': '해시태그가 음소거되었습니다',
     'Hashtag unmuted': '해시태그 음소거가 해제되었습니다',
+    'Open in...': '다른 곳에서 열기...',
   }
 }

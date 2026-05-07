@@ -898,5 +898,6 @@ export default {
     Earlier: 'Ранее',
     'Hashtag muted': 'Хэштег заглушён',
     'Hashtag unmuted': 'Хэштег разглушён',
+    'Open in...': 'Открыть в...',
   }
 }
