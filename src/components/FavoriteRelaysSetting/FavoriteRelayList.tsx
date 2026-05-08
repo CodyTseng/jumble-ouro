@@ -52,8 +52,8 @@ export default function FavoriteRelayList() {
       >
         <SortableContext items={favoriteRelays} strategy={verticalListSortingStrategy}>
           <div className="grid gap-2">
-            {favoriteRelays.map((relay) => (
-              <RelayItem key={relay} relay={relay} />
+            {favoriteRelays.map((relay, index) => (
+              <RelayItem key={relay} relay={relay} index={index} />
             ))}
           </div>
         </SortableContext>
