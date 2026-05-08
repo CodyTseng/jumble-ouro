@@ -12,14 +12,17 @@ import { CircleX, GripVertical } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
+import RelayHealthDot from '../RelayHealthDot'
 import RelayIcon from '../RelayIcon'
 
 export default function MailboxRelay({
   mailboxRelay,
+  index,
   changeMailboxRelayScope,
   removeMailboxRelay
 }: {
   mailboxRelay: TMailboxRelay
+  index: number
   changeMailboxRelayScope: (url: string, scope: TMailboxRelayScope) => void
   removeMailboxRelay: (url: string) => void
 }) {
@@ -52,6 +55,7 @@ export default function MailboxRelay({
           onClick={() => push(toRelay(mailboxRelay.url))}
         >
           <RelayIcon url={mailboxRelay.url} />
+          <RelayHealthDot url={mailboxRelay.url} index={index} />
           <div className="w-0 flex-1 truncate">{mailboxRelay.url}</div>
         </div>
       </div>

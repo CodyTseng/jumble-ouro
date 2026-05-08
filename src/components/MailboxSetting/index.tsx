@@ -124,10 +124,11 @@ export default function MailboxSetting() {
       >
         <SortableContext items={relays.map((r) => r.url)} strategy={verticalListSortingStrategy}>
           <div className="space-y-2">
-            {relays.map((relay) => (
+            {relays.map((relay, index) => (
               <MailboxRelay
                 key={relay.url}
                 mailboxRelay={relay}
+                index={index}
                 changeMailboxRelayScope={changeMailboxRelayScope}
                 removeMailboxRelay={removeMailboxRelay}
               />

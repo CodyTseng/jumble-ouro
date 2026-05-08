@@ -4,10 +4,11 @@ import { useSecondaryPage } from '@/PageManager'
 import { useSortable } from '@dnd-kit/sortable'
 import { CSS } from '@dnd-kit/utilities'
 import { GripVertical } from 'lucide-react'
+import RelayHealthDot from '../RelayHealthDot'
 import RelayIcon from '../RelayIcon'
 import SaveRelayDropdownMenu from '../SaveRelayDropdownMenu'
 
-export default function RelayItem({ relay }: { relay: string }) {
+export default function RelayItem({ relay, index }: { relay: string; index: number }) {
   const { push } = useSecondaryPage()
   const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
     id: relay
@@ -36,6 +37,7 @@ export default function RelayItem({ relay }: { relay: string }) {
         </div>
         <div className="flex flex-1 items-center gap-2">
           <RelayIcon url={relay} />
+          <RelayHealthDot url={relay} index={index} />
           <div className="w-0 flex-1 truncate font-semibold">{relay}</div>
         </div>
       </div>
