@@ -54,6 +54,41 @@ import { kinds } from 'nostr-tools'
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
+function formatDateSeparator(timestamp: number, t: ReturnType<typeof useTranslation>['t']): string {
+  const msgTime = dayjs.unix(timestamp)
+  const now = dayjs()
+
+  if (msgTime.isSame(now, 'day')) {
+    return t('Today')
+  }
+
+  if (msgTime.isSame(now.subtract(1, 'day'), 'day')) {
+    return t('Yesterday')
+  }
+
+  if (now.diff(msgTime, 'day') < 7) {
+    const weekday = t(`weekday_${msgTime.day()}`)
+    const date = t('{{val, date_short}}', { val: msgTime.toDate() })
+    return `${weekday}, ${date}`
+  }
+
+  if (msgTime.isSame(now, 'year')) {
+    return t('{{val, date_short}}', { val: msgTime.toDate() })
+  }
+
+  return t('{{val, date}}', { val: msgTime.toDate() })
+}
+
+function DateSeparator({ label }: { label: string }) {
+  return (
+    <div className="flex items-center gap-3 py-3">
+      <div className="flex-1 border-t border-border" />
+      <span className="shrink-0 text-xs font-medium text-muted-foreground">{label}</span>
+      <div className="flex-1 border-t border-border" />
+    </div>
+  )
+}
+
 function formatDmTime(timestamp: number, t: ReturnType<typeof useTranslation>['t']): string {
   const msgTime = dayjs.unix(timestamp)
   const now = dayjs()
@@ -388,9 +423,11 @@ export default function DmMessageList({
               showTime: boolean
               timeCreatedAt: number
               isFirst: boolean
+              showDateSeparator: boolean
               items: TDmMessage[]
             }[] = []
 
+            let lastDate: string | null = null
             messages.forEach((message, index) => {
               const isOwn = message.senderPubkey === pubkey
               const showTime =
@@ -399,11 +436,15 @@ export default function DmMessageList({
                 index === 0 || messages[index - 1].senderPubkey !== message.senderPubkey || showTime
 
               if (isGroupStart) {
+                const currentDate = dayjs.unix(message.createdAt).format('YYYY-MM-DD')
+                const showDateSeparator = currentDate !== lastDate
+                lastDate = currentDate
                 groups.push({
                   isOwn,
                   showTime,
                   timeCreatedAt: message.createdAt,
                   isFirst: index === 0,
+                  showDateSeparator,
                   items: []
                 })
               }
@@ -415,8 +456,13 @@ export default function DmMessageList({
               const lastMsgHasReactions = (reactionsMap.get(lastMsgId)?.length ?? 0) > 0
               return (
                 <Fragment key={group.items[0].id}>
+                  {group.showDateSeparator && (
+                    <DateSeparator
+                      label={formatDateSeparator(group.timeCreatedAt, t)}
+                    />
+                  )}
                   {group.showTime && (
-                    <div className={cn('flex justify-center', group.isFirst ? '' : 'mt-3')}>
+                    <div className={cn('flex justify-center', group.isFirst && !group.showDateSeparator ? '' : 'mt-3')}>
                       <span className="text-xs text-muted-foreground">
                         {formatDmTime(group.timeCreatedAt, t)}
                       </span>
