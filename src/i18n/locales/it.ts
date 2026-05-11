@@ -899,5 +899,7 @@ export default {
     'Hashtag muted': 'Hashtag silenziato',
     'Hashtag unmuted': 'Hashtag riattivato',
     'Open in...': 'Apri in...',
+    '{{count}} chars': '{{count}} caratteri',
+    '{{count}} words': '{{count}} parole',
   }
 }

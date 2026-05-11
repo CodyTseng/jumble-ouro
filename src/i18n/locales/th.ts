@@ -881,5 +881,7 @@ export default {
     'Hashtag muted': 'ปิดเสียงแฮชแท็กแล้ว',
     'Hashtag unmuted': 'เปิดเสียงแฮชแท็กแล้ว',
     'Open in...': 'เปิดใน...',
+    '{{count}} chars': '{{count}} ตัวอักษร',
+    '{{count}} words': '{{count}} คำ',
   }
 }

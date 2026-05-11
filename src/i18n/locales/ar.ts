@@ -880,5 +880,7 @@ export default {
     'Hashtag muted': 'تم كتم الوسم',
     'Hashtag unmuted': 'تم إلغاء كتم الوسم',
     'Open in...': 'فتح في...',
+    '{{count}} chars': '{{count}} حرف',
+    '{{count}} words': '{{count}} كلمة',
   }
 }

@@ -895,5 +895,7 @@ export default {
     'Hashtag muted': 'हैशटैग म्यूट किया गया',
     'Hashtag unmuted': 'हैशटैग अनम्यूट किया गया',
     'Open in...': 'इसमें खोलें...',
+    '{{count}} chars': '{{count}} अक्षर',
+    '{{count}} words': '{{count}} शब्द',
   }
 }

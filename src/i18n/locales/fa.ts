@@ -894,5 +894,7 @@ export default {
     'Hashtag muted': 'هشتگ بی‌صدا شد',
     'Hashtag unmuted': 'هشتگ از حالت بی‌صدا خارج شد',
     'Open in...': 'باز کردن در...',
+    '{{count}} chars': '{{count}} نویسه',
+    '{{count}} words': '{{count}} کلمه',
   }
 }

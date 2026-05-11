@@ -893,5 +893,7 @@ export default {
     'Hashtag muted': 'ハッシュタグをミュートしました',
     'Hashtag unmuted': 'ハッシュタグのミュートを解除しました',
     'Open in...': '別のクライアントで開く...',
+    '{{count}} chars': '{{count}} 文字',
+    '{{count}} words': '{{count}} 語',
   }
 }

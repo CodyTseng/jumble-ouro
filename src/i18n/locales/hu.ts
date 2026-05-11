@@ -890,5 +890,7 @@ export default {
     'Hashtag muted': 'Hashtag némítva',
     'Hashtag unmuted': 'Hashtag némítás feloldva',
     'Open in...': 'Megnyitás itt...',
+    '{{count}} chars': '{{count}} karakter',
+    '{{count}} words': '{{count}} szó',
   }
 }
