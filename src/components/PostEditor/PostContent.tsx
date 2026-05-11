@@ -360,6 +360,13 @@ export default function PostContent({
             <Settings />
           </Button>
         </div>
+        {text.length > 0 && (
+          <span className="text-xs text-muted-foreground">
+            {t('{{count}} chars', { count: text.length })}
+            {text.trim().split(/\s+/).filter(Boolean).length >= 100 &&
+              ` · ${t('{{count}} words', { count: text.trim().split(/\s+/).filter(Boolean).length })}`}
+          </span>
+        )}
         <div className="flex items-center gap-2">
           <Mentions
             content={text}

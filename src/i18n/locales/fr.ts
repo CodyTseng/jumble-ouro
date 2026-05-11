@@ -903,5 +903,7 @@ export default {
     'Hashtag muted': 'Hashtag masqué',
     'Hashtag unmuted': 'Hashtag démasqué',
     'Open in...': 'Ouvrir dans...',
+    '{{count}} chars': '{{count}} caractères',
+    '{{count}} words': '{{count}} mots',
   }
 }

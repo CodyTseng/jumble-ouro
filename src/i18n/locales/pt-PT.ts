@@ -900,5 +900,7 @@ export default {
     'Hashtag muted': 'Hashtag silenciada',
     'Hashtag unmuted': 'Hashtag reativada',
     'Open in...': 'Abrir em...',
+    '{{count}} chars': '{{count}} caracteres',
+    '{{count}} words': '{{count}} palavras',
   }
 }

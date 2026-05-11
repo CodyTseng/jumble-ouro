@@ -868,5 +868,7 @@ export default {
     'Hashtag muted': '已屏蔽该话题标签',
     'Hashtag unmuted': '已取消屏蔽该话题标签',
     'Open in...': '在其他客户端打开...',
+    '{{count}} chars': '{{count}} 字符',
+    '{{count}} words': '{{count}} 词',
   }
 }

@@ -887,5 +887,7 @@ export default {
     'Hashtag muted': 'Hashtag muted',
     'Hashtag unmuted': 'Hashtag unmuted',
     'Open in...': 'Open in...',
+    '{{count}} chars': '{{count}} chars',
+    '{{count}} words': '{{count}} words',
   }
 }

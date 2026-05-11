@@ -863,5 +863,7 @@ export default {
     'Hashtag muted': '已靜音該主題標籤',
     'Hashtag unmuted': '已取消靜音該主題標籤',
     'Open in...': '在其他用戶端開啟...',
+    '{{count}} chars': '{{count}} 字元',
+    '{{count}} words': '{{count}} 詞',
   }
 }

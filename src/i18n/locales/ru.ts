@@ -899,5 +899,7 @@ export default {
     'Hashtag muted': 'Хэштег заглушён',
     'Hashtag unmuted': 'Хэштег разглушён',
     'Open in...': 'Открыть в...',
+    '{{count}} chars': '{{count}} симв.',
+    '{{count}} words': '{{count}} слов',
   }
 }

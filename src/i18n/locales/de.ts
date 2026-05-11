@@ -907,5 +907,7 @@ export default {
     'Hashtag muted': 'Hashtag stummgeschaltet',
     'Hashtag unmuted': 'Hashtag-Stummschaltung aufgehoben',
     'Open in...': 'Öffnen in...',
+    '{{count}} chars': '{{count}} Zeichen',
+    '{{count}} words': '{{count}} Wörter',
   }
 }
