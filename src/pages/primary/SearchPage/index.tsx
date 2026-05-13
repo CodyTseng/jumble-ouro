@@ -7,6 +7,7 @@ import SearchResult from '@/components/SearchResult'
 import Tabs from '@/components/Tabs'
 import TrendingHashtags from '@/components/TrendingHashtags'
 import TrendingNotes from '@/components/TrendingNotes'
+import WhoToFollow from '@/components/WhoToFollow'
 import { ExtendedKind } from '@/constants'
 import PrimaryPageLayout, { TPrimaryPageLayoutRef } from '@/layouts/PrimaryPageLayout'
 import { getReplaceableEventIdentifier } from '@/lib/event'
@@ -82,6 +83,7 @@ const SearchPage = forwardRef<TPageRef>((_, ref) => {
         return (
           <>
             <TrendingHashtags />
+            <WhoToFollow />
             <TrendingNotes />
           </>
         )

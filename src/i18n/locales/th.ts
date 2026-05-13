@@ -883,5 +883,6 @@ export default {
     'Open in...': 'เปิดใน...',
     '{{count}} chars': '{{count}} ตัวอักษร',
     '{{count}} words': '{{count}} คำ',
+    'Who to Follow': 'แนะนำให้ติดตาม',
   }
 }

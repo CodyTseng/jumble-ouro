@@ -889,5 +889,6 @@ export default {
     'Open in...': '다른 곳에서 열기...',
     '{{count}} chars': '{{count}}자',
     '{{count}} words': '{{count}}단어',
+    'Who to Follow': '팔로우 추천',
   }
 }

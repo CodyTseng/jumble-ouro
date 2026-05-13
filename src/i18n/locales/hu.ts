@@ -892,5 +892,6 @@ export default {
     'Open in...': 'Megnyitás itt...',
     '{{count}} chars': '{{count}} karakter',
     '{{count}} words': '{{count}} szó',
+    'Who to Follow': 'Kit kövess',
   }
 }
