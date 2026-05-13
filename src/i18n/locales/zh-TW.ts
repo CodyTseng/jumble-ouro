@@ -865,5 +865,6 @@ export default {
     'Open in...': '在其他用戶端開啟...',
     '{{count}} chars': '{{count}} 字元',
     '{{count}} words': '{{count}} 詞',
+    'Who to Follow': '推薦關注',
   }
 }

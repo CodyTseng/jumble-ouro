@@ -895,5 +895,6 @@ export default {
     'Open in...': '別のクライアントで開く...',
     '{{count}} chars': '{{count}} 文字',
     '{{count}} words': '{{count}} 語',
+    'Who to Follow': 'おすすめユーザー',
   }
 }

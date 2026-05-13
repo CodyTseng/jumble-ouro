@@ -896,5 +896,6 @@ export default {
     'Open in...': 'باز کردن در...',
     '{{count}} chars': '{{count}} نویسه',
     '{{count}} words': '{{count}} کلمه',
+    'Who to Follow': 'پیشنهاد دنبال کردن',
   }
 }

@@ -889,5 +889,6 @@ export default {
     'Open in...': 'Open in...',
     '{{count}} chars': '{{count}} chars',
     '{{count}} words': '{{count}} words',
+    'Who to Follow': 'Who to Follow',
   }
 }

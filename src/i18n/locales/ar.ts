@@ -882,5 +882,6 @@ export default {
     'Open in...': 'فتح في...',
     '{{count}} chars': '{{count}} حرف',
     '{{count}} words': '{{count}} كلمة',
+    'Who to Follow': 'من تتابع',
   }
 }

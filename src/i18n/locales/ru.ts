@@ -901,5 +901,6 @@ export default {
     'Open in...': 'Открыть в...',
     '{{count}} chars': '{{count}} симв.',
     '{{count}} words': '{{count}} слов',
+    'Who to Follow': 'Кого читать',
   }
 }

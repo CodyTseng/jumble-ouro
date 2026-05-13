@@ -870,5 +870,6 @@ export default {
     'Open in...': '在其他客户端打开...',
     '{{count}} chars': '{{count}} 字符',
     '{{count}} words': '{{count}} 词',
+    'Who to Follow': '推荐关注',
   }
 }

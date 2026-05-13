@@ -901,5 +901,6 @@ export default {
     'Open in...': 'Otwórz w...',
     '{{count}} chars': '{{count}} znaków',
     '{{count}} words': '{{count}} słów',
+    'Who to Follow': 'Kogo obserwować',
   }
 }
