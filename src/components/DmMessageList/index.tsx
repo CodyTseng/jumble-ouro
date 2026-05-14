@@ -1098,6 +1098,7 @@ function DmContent({
           return (
             <div key={si} className={bubbleClass}>
               <div
+                dir="auto"
                 className={cn(
                   'whitespace-pre-wrap text-wrap break-words text-base',
                   isOwn &&

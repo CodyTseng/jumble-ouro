@@ -890,6 +890,7 @@ export default function DmInput({
         <div
           ref={editableRef}
           contentEditable={!disabled}
+          dir="auto"
           onInput={handleInput}
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}

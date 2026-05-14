@@ -122,7 +122,7 @@ export default function MarkdownContent({
   )
 
   return (
-    <div className="space-y-3 whitespace-normal">
+    <div dir="auto" className="space-y-3 whitespace-normal">
       <Markdown
         remarkPlugins={[remarkGfm, remarkNostr, remarkInlineContent]}
         urlTransform={(url) => {
