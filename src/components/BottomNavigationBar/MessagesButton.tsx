@@ -1,3 +1,4 @@
+import UnreadBadge from '@/components/UnreadBadge'
 import { useDmUnread } from '@/hooks/useDmUnread'
 import { usePrimaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
@@ -7,7 +8,7 @@ import BottomNavigationBarItem from './BottomNavigationBarItem'
 export default function MessagesButton() {
   const { checkLogin } = useNostr()
   const { navigate, current, display } = usePrimaryPage()
-  const { hasUnread } = useDmUnread()
+  const { unreadCount } = useDmUnread()
 
   return (
     <BottomNavigationBarItem
@@ -16,9 +17,7 @@ export default function MessagesButton() {
     >
       <div className="relative">
         <MessageCircle />
-        {hasUnread && (
-          <div className="absolute -top-0.5 right-0.5 h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
-        )}
+        <UnreadBadge count={unreadCount} />
       </div>
     </BottomNavigationBarItem>
   )
