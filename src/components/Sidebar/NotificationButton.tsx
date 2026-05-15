@@ -1,3 +1,4 @@
+import UnreadBadge from '@/components/UnreadBadge'
 import { usePrimaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
 import { useNotification } from '@/providers/NotificationProvider'
@@ -7,7 +8,7 @@ import SidebarItem from './SidebarItem'
 export default function NotificationsButton({ collapse }: { collapse: boolean }) {
   const { checkLogin } = useNostr()
   const { navigate, current, display } = usePrimaryPage()
-  const { hasNewNotification } = useNotification()
+  const { newNotificationCount } = useNotification()
 
   return (
     <SidebarItem
@@ -18,9 +19,7 @@ export default function NotificationsButton({ collapse }: { collapse: boolean })
     >
       <div className="relative">
         <Bell />
-        {hasNewNotification && (
-          <div className="absolute -top-1 right-0 h-2 w-2 rounded-full bg-primary ring-2 ring-background" />
-        )}
+        <UnreadBadge count={newNotificationCount} />
       </div>
     </SidebarItem>
   )
