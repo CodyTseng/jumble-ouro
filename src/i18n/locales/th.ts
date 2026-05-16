@@ -884,5 +884,6 @@ export default {
     '{{count}} chars': '{{count}} ตัวอักษร',
     '{{count}} words': '{{count}} คำ',
     'Who to Follow': 'แนะนำให้ติดตาม',
+    '{{count}} in common': '{{count}} ที่ติดตามร่วมกัน',
   }
 }

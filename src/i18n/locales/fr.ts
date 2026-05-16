@@ -906,5 +906,6 @@ export default {
     '{{count}} chars': '{{count}} caractères',
     '{{count}} words': '{{count}} mots',
     'Who to Follow': 'Suggestions de comptes',
+    '{{count}} in common': '{{count}} en commun',
   }
 }

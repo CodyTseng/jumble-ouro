@@ -890,5 +890,6 @@ export default {
     '{{count}} chars': '{{count}}자',
     '{{count}} words': '{{count}}단어',
     'Who to Follow': '팔로우 추천',
+    '{{count}} in common': '{{count}}명 공통',
   }
 }
