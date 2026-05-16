@@ -883,5 +883,6 @@ export default {
     '{{count}} chars': '{{count}} حرف',
     '{{count}} words': '{{count}} كلمة',
     'Who to Follow': 'من تتابع',
+    '{{count}} in common': '{{count}} مشترك',
   }
 }

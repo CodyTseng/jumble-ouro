@@ -898,5 +898,6 @@ export default {
     '{{count}} chars': '{{count}} अक्षर',
     '{{count}} words': '{{count}} शब्द',
     'Who to Follow': 'किसे फ़ॉलो करें',
+    '{{count}} in common': '{{count}} समान',
   }
 }

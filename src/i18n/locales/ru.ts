@@ -902,5 +902,6 @@ export default {
     '{{count}} chars': '{{count}} симв.',
     '{{count}} words': '{{count}} слов',
     'Who to Follow': 'Кого читать',
+    '{{count}} in common': '{{count}} общих',
   }
 }

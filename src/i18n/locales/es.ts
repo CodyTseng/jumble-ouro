@@ -902,5 +902,6 @@ export default {
     '{{count}} chars': '{{count}} caracteres',
     '{{count}} words': '{{count}} palabras',
     'Who to Follow': 'A quién seguir',
+    '{{count}} in common': '{{count}} en común',
   }
 }

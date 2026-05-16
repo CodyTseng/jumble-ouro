@@ -866,5 +866,6 @@ export default {
     '{{count}} chars': '{{count}} 字元',
     '{{count}} words': '{{count}} 詞',
     'Who to Follow': '推薦關注',
+    '{{count}} in common': '{{count}} 個共同關注',
   }
 }

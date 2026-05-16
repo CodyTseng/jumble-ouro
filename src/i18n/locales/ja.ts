@@ -896,5 +896,6 @@ export default {
     '{{count}} chars': '{{count}} 文字',
     '{{count}} words': '{{count}} 語',
     'Who to Follow': 'おすすめユーザー',
+    '{{count}} in common': '{{count}}人が共通',
   }
 }

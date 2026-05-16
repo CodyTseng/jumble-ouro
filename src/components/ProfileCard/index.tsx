@@ -3,6 +3,7 @@ import { toFollowingList } from '@/lib/link'
 import { userIdToPubkey } from '@/lib/pubkey'
 import { SecondaryPageLink } from '@/PageManager'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
+import { useFollowList } from '@/providers/FollowListProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,11 +21,19 @@ export default function ProfileCard({ userId }: { userId: string }) {
   const { autoLoadProfilePicture } = useContentPolicy()
   const { pubkey: accountPubkey } = useNostr()
   const { followings } = useFetchFollowings(pubkey)
+  const { followingSet } = useFollowList()
   const { username, about, emojis } = profile || {}
 
   const isFollowingYou = useMemo(() => {
     return !!accountPubkey && accountPubkey !== pubkey && followings.includes(accountPubkey)
   }, [followings, pubkey, accountPubkey])
+
+  const mutualFollowings = useMemo(() => {
+    if (!accountPubkey || accountPubkey === pubkey) return []
+    return followings.filter(
+      (p) => followingSet.has(p) && p !== accountPubkey && p !== pubkey
+    )
+  }, [followings, followingSet, accountPubkey, pubkey])
 
   return (
     <div className="not-prose flex w-full flex-col gap-2">
@@ -67,6 +76,19 @@ export default function ProfileCard({ userId }: { userId: string }) {
         >
           {followings.length}
           <span className="text-muted-foreground">{t('Following')}</span>
+        </SecondaryPageLink>
+      )}
+      {mutualFollowings.length > 0 && (
+        <SecondaryPageLink
+          to={toFollowingList(pubkey)}
+          className="flex w-fit items-center gap-1 text-sm text-muted-foreground hover:underline"
+        >
+          <div className="flex -space-x-1.5">
+            {mutualFollowings.slice(0, 3).map((p) => (
+              <SimpleUserAvatar key={p} userId={p} size="xSmall" />
+            ))}
+          </div>
+          {t('{{count}} in common', { count: mutualFollowings.length })}
         </SecondaryPageLink>
       )}
     </div>

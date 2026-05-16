@@ -893,5 +893,6 @@ export default {
     '{{count}} chars': '{{count}} karakter',
     '{{count}} words': '{{count}} szó',
     'Who to Follow': 'Kit kövess',
+    '{{count}} in common': '{{count}} közös',
   }
 }

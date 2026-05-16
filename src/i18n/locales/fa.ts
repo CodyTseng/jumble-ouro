@@ -897,5 +897,6 @@ export default {
     '{{count}} chars': '{{count}} نویسه',
     '{{count}} words': '{{count}} کلمه',
     'Who to Follow': 'پیشنهاد دنبال کردن',
+    '{{count}} in common': '{{count}} مشترک',
   }
 }

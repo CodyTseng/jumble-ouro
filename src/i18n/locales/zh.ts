@@ -871,5 +871,6 @@ export default {
     '{{count}} chars': '{{count}} 字符',
     '{{count}} words': '{{count}} 词',
     'Who to Follow': '推荐关注',
+    '{{count}} in common': '{{count}} 个共同关注',
   }
 }
