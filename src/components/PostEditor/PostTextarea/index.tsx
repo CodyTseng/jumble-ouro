@@ -18,6 +18,8 @@ import { useTranslation } from 'react-i18next'
 import { ClipboardAndDropHandler } from './ClipboardAndDropHandler'
 import Emoji from './Emoji'
 import emojiSuggestion from './Emoji/suggestion'
+import Hashtag from './Hashtag'
+import hashtagSuggestion from './Hashtag/suggestion'
 import Mention from './Mention'
 import mentionSuggestion from './Mention/suggestion'
 import Preview from './Preview'
@@ -77,6 +79,9 @@ const PostTextarea = forwardRef<
         }),
         Mention.configure({
           suggestion: mentionSuggestion
+        }),
+        Hashtag.configure({
+          suggestion: hashtagSuggestion
         }),
         ClipboardAndDropHandler.configure({
           onUploadStart: (file, cancel) => {

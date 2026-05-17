@@ -54,6 +54,8 @@ function _parseEditorJsonToText(node?: JSONContent): string {
       return '\n'
     case 'mention':
       return node.attrs ? `nostr:${node.attrs.id}` : ''
+    case 'hashtag':
+      return node.attrs ? `#${node.attrs.id}` : ''
     case 'emoji':
       return parseEmojiNodeName(node.attrs?.name)
     default:

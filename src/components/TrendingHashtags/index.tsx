@@ -1,5 +1,6 @@
 import { TRENDING_NOTES_RELAY_URLS } from '@/constants'
 import { toNoteList } from '@/lib/link'
+import { setTrendingHashtagsCache } from '@/lib/trending-hashtags-cache'
 import { useSecondaryPage } from '@/PageManager'
 import client from '@/services/client.service'
 import { TrendingUp } from 'lucide-react'
@@ -54,6 +55,7 @@ export default function TrendingHashtags() {
         if (!cancelled) {
           cachedHashtags = sorted
           cachedAt = Date.now()
+          setTrendingHashtagsCache(sorted)
           setHashtags(sorted)
           setLoading(false)
         }
