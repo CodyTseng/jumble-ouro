@@ -8,6 +8,7 @@ import {
   createShortTextNoteDraftEvent,
   deleteDraftEventCache
 } from '@/lib/draft-event'
+import { addHashtagsToHistory } from '@/lib/hashtag-history'
 import { getDefaultRelayUrls } from '@/lib/relay'
 import { isTouchDevice } from '@/lib/utils'
 import { useNostr } from '@/providers/NostrProvider'
@@ -176,6 +177,10 @@ export default function PostContent({
         })
         postEditorCache.clearPostCache({ defaultContent, parentStuff })
         deleteDraftEventCache(draftEvent)
+        const publishedHashtags = newEvent.tags
+          .filter((t) => t[0] === 't' && t[1])
+          .map((t) => t[1])
+        addHashtagsToHistory(publishedHashtags)
         threadService.addRepliesToThread([newEvent])
         toast.success(t('Post successful'), { duration: 2000 })
         close()
