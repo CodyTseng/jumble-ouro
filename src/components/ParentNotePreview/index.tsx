@@ -1,8 +1,11 @@
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useFetchEvent } from '@/hooks'
-import { cn } from '@/lib/utils'
+import { cn, isTouchDevice } from '@/lib/utils'
+import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import ContentPreview from '../ContentPreview'
+import Note from '../Note'
 import UserAvatar, { UserAvatarSkeleton } from '../UserAvatar'
 
 export default function ParentNotePreview({
@@ -21,6 +24,7 @@ export default function ParentNotePreview({
   const { t } = useTranslation()
   const { event, isFetching } = useFetchEvent(eventId)
   const displayLabel = label ?? t('reply to')
+  const supportTouch = useMemo(() => isTouchDevice(), [])
 
   if (externalContent) {
     return (
@@ -58,7 +62,7 @@ export default function ParentNotePreview({
     )
   }
 
-  return (
+  const pill = (
     <div
       className={cn(
         'flex w-fit max-w-full items-center gap-1 rounded-full bg-muted px-2 text-sm text-muted-foreground',
@@ -71,5 +75,21 @@ export default function ParentNotePreview({
       {event && <UserAvatar className="shrink-0" userId={event.pubkey} size="tiny" />}
       <ContentPreview className="truncate" event={event} />
     </div>
+  )
+
+  if (supportTouch || !event) {
+    return pill
+  }
+
+  return (
+    <HoverCard>
+      <HoverCardTrigger asChild>{pill}</HoverCardTrigger>
+      <HoverCardContent className="w-96 p-0">
+        <div className="relative max-h-[300px] overflow-hidden">
+          <Note event={event} size="small" hideParentNotePreview />
+          <div className="pointer-events-none absolute bottom-0 h-10 w-full bg-gradient-to-b from-transparent to-popover" />
+        </div>
+      </HoverCardContent>
+    </HoverCard>
   )
 }
