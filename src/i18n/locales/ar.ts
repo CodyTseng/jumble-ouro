@@ -884,5 +884,6 @@ export default {
     '{{count}} words': '{{count}} كلمة',
     'Who to Follow': 'من تتابع',
     '{{count}} in common': '{{count}} مشترك',
+    'Click to load Spotify': 'انقر لتحميل Spotify',
   }
 }

@@ -867,5 +867,6 @@ export default {
     '{{count}} words': '{{count}} 詞',
     'Who to Follow': '推薦關注',
     '{{count}} in common': '{{count}} 個共同關注',
+    'Click to load Spotify': '點擊載入 Spotify',
   }
 }

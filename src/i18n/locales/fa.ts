@@ -898,5 +898,6 @@ export default {
     '{{count}} words': '{{count}} کلمه',
     'Who to Follow': 'پیشنهاد دنبال کردن',
     '{{count}} in common': '{{count}} مشترک',
+    'Click to load Spotify': 'برای بارگذاری Spotify کلیک کنید',
   }
 }

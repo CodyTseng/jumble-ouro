@@ -891,5 +891,6 @@ export default {
     '{{count}} words': '{{count}} words',
     'Who to Follow': 'Who to Follow',
     '{{count}} in common': '{{count}} in common',
+    'Click to load Spotify': 'Click to load Spotify',
   }
 }

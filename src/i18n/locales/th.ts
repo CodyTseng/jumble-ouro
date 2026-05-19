@@ -885,5 +885,6 @@ export default {
     '{{count}} words': '{{count}} คำ',
     'Who to Follow': 'แนะนำให้ติดตาม',
     '{{count}} in common': '{{count}} ที่ติดตามร่วมกัน',
+    'Click to load Spotify': 'คลิกเพื่อโหลด Spotify',
   }
 }

@@ -903,5 +903,6 @@ export default {
     '{{count}} words': '{{count}} palabras',
     'Who to Follow': 'A quién seguir',
     '{{count}} in common': '{{count}} en común',
+    'Click to load Spotify': 'Haz clic para cargar Spotify',
   }
 }

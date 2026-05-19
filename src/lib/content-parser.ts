@@ -4,6 +4,7 @@ import {
   EMOJI_SHORT_CODE_REGEX,
   HASHTAG_REGEX,
   LN_INVOICE_REGEX,
+  SPOTIFY_URL_REGEX,
   URL_REGEX,
   WS_URL_REGEX,
   X_URL_REGEX,
@@ -26,6 +27,7 @@ export type TEmbeddedNodeType =
   | 'invoice'
   | 'youtube'
   | 'x-post'
+  | 'spotify'
 
 export type TEmbeddedNode =
   | {
@@ -110,6 +112,8 @@ export const EmbeddedUrlParser: TContentParser = (content: string) => {
       type = 'youtube'
     } else if (url.match(X_URL_REGEX)) {
       type = 'x-post'
+    } else if (url.match(SPOTIFY_URL_REGEX)) {
+      type = 'spotify'
     }
 
     // Add the match as specific type

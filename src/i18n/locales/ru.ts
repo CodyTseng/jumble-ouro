@@ -903,5 +903,6 @@ export default {
     '{{count}} words': '{{count}} слов',
     'Who to Follow': 'Кого читать',
     '{{count}} in common': '{{count}} общих',
+    'Click to load Spotify': 'Нажмите, чтобы загрузить Spotify',
   }
 }

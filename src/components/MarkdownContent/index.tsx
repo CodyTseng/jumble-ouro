@@ -1,5 +1,5 @@
 import { SecondaryPageLink } from '@/PageManager'
-import { X_URL_REGEX, YOUTUBE_URL_REGEX } from '@/constants'
+import { SPOTIFY_URL_REGEX, X_URL_REGEX, YOUTUBE_URL_REGEX } from '@/constants'
 import { toNote, toProfile } from '@/lib/link'
 import { getEmojiInfosFromEmojiTags } from '@/lib/tag'
 import { Event } from 'nostr-tools'
@@ -21,6 +21,7 @@ interface Components extends BaseComponents {
   emoji: InlineComponent
   invoice: InlineComponent
 }
+import SpotifyEmbeddedPlayer from '../SpotifyEmbeddedPlayer'
 import XEmbeddedPost from '../XEmbeddedPost'
 import YoutubeEmbeddedPlayer from '../YoutubeEmbeddedPlayer'
 import { remarkInlineContent } from './remarkInlineContent'
@@ -67,6 +68,9 @@ export default function MarkdownContent({
           }
           if (X_URL_REGEX.test(href)) {
             return <XEmbeddedPost url={href} className="mt-2" />
+          }
+          if (SPOTIFY_URL_REGEX.test(href)) {
+            return <SpotifyEmbeddedPlayer url={href} className="mt-2" />
           }
           return (
             <ExternalLink url={href} justOpenLink />
