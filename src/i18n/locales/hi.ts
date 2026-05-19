@@ -899,5 +899,6 @@ export default {
     '{{count}} words': '{{count}} शब्द',
     'Who to Follow': 'किसे फ़ॉलो करें',
     '{{count}} in common': '{{count}} समान',
+    'Click to load Spotify': 'Spotify लोड करने के लिए क्लिक करें',
   }
 }

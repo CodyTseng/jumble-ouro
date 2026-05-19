@@ -891,5 +891,6 @@ export default {
     '{{count}} words': '{{count}}단어',
     'Who to Follow': '팔로우 추천',
     '{{count}} in common': '{{count}}명 공통',
+    'Click to load Spotify': 'Spotify 로드하려면 클릭',
   }
 }

@@ -872,5 +872,6 @@ export default {
     '{{count}} words': '{{count}} 词',
     'Who to Follow': '推荐关注',
     '{{count}} in common': '{{count}} 个共同关注',
+    'Click to load Spotify': '点击加载 Spotify',
   }
 }

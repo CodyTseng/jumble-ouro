@@ -894,5 +894,6 @@ export default {
     '{{count}} words': '{{count}} szó',
     'Who to Follow': 'Kit kövess',
     '{{count}} in common': '{{count}} közös',
+    'Click to load Spotify': 'Kattintson a Spotify betöltéséhez',
   }
 }
