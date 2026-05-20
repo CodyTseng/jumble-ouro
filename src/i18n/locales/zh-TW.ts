@@ -868,5 +868,6 @@ export default {
     'Who to Follow': '推薦關注',
     '{{count}} in common': '{{count}} 個共同關注',
     'Click to load Spotify': '點擊載入 Spotify',
+    'Click to load Wavlake': '點擊載入 Wavlake',
   }
 }

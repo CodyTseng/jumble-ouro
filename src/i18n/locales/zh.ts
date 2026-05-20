@@ -873,5 +873,6 @@ export default {
     'Who to Follow': '推荐关注',
     '{{count}} in common': '{{count}} 个共同关注',
     'Click to load Spotify': '点击加载 Spotify',
+    'Click to load Wavlake': '点击加载 Wavlake',
   }
 }

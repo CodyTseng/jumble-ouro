@@ -895,5 +895,6 @@ export default {
     'Who to Follow': 'Kit kövess',
     '{{count}} in common': '{{count}} közös',
     'Click to load Spotify': 'Kattintson a Spotify betöltéséhez',
+    'Click to load Wavlake': 'Kattintson a Wavlake betöltéséhez',
   }
 }

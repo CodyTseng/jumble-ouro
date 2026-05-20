@@ -900,5 +900,6 @@ export default {
     'Who to Follow': 'किसे फ़ॉलो करें',
     '{{count}} in common': '{{count}} समान',
     'Click to load Spotify': 'Spotify लोड करने के लिए क्लिक करें',
+    'Click to load Wavlake': 'Wavlake लोड करने के लिए क्लिक करें',
   }
 }

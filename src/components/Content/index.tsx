@@ -34,6 +34,7 @@ import MediaPlayer from '../MediaPlayer'
 import PostEditor from '../PostEditor'
 import WebPreview from '../WebPreview'
 import SpotifyEmbeddedPlayer from '../SpotifyEmbeddedPlayer'
+import WavlakeEmbeddedPlayer from '../WavlakeEmbeddedPlayer'
 import XEmbeddedPost from '../XEmbeddedPost'
 import YoutubeEmbeddedPlayer from '../YoutubeEmbeddedPlayer'
 
@@ -239,6 +240,16 @@ export default function Content({
           if (node.type === 'spotify') {
             return (
               <SpotifyEmbeddedPlayer
+                key={index}
+                url={node.data}
+                className="mt-2"
+                mustLoad={mustLoadMedia}
+              />
+            )
+          }
+          if (node.type === 'wavlake') {
+            return (
+              <WavlakeEmbeddedPlayer
                 key={index}
                 url={node.data}
                 className="mt-2"

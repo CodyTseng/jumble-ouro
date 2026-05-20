@@ -904,5 +904,6 @@ export default {
     'Who to Follow': 'Кого читать',
     '{{count}} in common': '{{count}} общих',
     'Click to load Spotify': 'Нажмите, чтобы загрузить Spotify',
+    'Click to load Wavlake': 'Нажмите, чтобы загрузить Wavlake',
   }
 }

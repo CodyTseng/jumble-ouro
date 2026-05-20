@@ -898,5 +898,6 @@ export default {
     'Who to Follow': 'おすすめユーザー',
     '{{count}} in common': '{{count}}人が共通',
     'Click to load Spotify': 'クリックしてSpotifyを読み込む',
+    'Click to load Wavlake': 'クリックしてWavlakeを読み込む',
   }
 }
