@@ -885,5 +885,6 @@ export default {
     'Who to Follow': 'من تتابع',
     '{{count}} in common': '{{count}} مشترك',
     'Click to load Spotify': 'انقر لتحميل Spotify',
+    'Click to load Wavlake': 'انقر لتحميل Wavlake',
   }
 }

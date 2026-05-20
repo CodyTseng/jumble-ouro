@@ -886,5 +886,6 @@ export default {
     'Who to Follow': 'แนะนำให้ติดตาม',
     '{{count}} in common': '{{count}} ที่ติดตามร่วมกัน',
     'Click to load Spotify': 'คลิกเพื่อโหลด Spotify',
+    'Click to load Wavlake': 'คลิกเพื่อโหลด Wavlake',
   }
 }

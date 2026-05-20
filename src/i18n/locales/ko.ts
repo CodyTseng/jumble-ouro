@@ -892,5 +892,6 @@ export default {
     'Who to Follow': '팔로우 추천',
     '{{count}} in common': '{{count}}명 공통',
     'Click to load Spotify': 'Spotify 로드하려면 클릭',
+    'Click to load Wavlake': 'Wavlake 로드하려면 클릭',
   }
 }

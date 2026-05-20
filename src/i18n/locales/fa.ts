@@ -899,5 +899,6 @@ export default {
     'Who to Follow': 'پیشنهاد دنبال کردن',
     '{{count}} in common': '{{count}} مشترک',
     'Click to load Spotify': 'برای بارگذاری Spotify کلیک کنید',
+    'Click to load Wavlake': 'برای بارگذاری Wavlake کلیک کنید',
   }
 }

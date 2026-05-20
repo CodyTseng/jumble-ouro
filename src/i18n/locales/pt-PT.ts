@@ -905,5 +905,6 @@ export default {
     'Who to Follow': 'Quem seguir',
     '{{count}} in common': '{{count}} em comum',
     'Click to load Spotify': 'Clique para carregar o Spotify',
+    'Click to load Wavlake': 'Clique para carregar o Wavlake',
   }
 }

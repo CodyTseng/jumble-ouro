@@ -6,6 +6,7 @@ import {
   LN_INVOICE_REGEX,
   SPOTIFY_URL_REGEX,
   URL_REGEX,
+  WAVLAKE_URL_REGEX,
   WS_URL_REGEX,
   X_URL_REGEX,
   YOUTUBE_URL_REGEX
@@ -28,6 +29,7 @@ export type TEmbeddedNodeType =
   | 'youtube'
   | 'x-post'
   | 'spotify'
+  | 'wavlake'
 
 export type TEmbeddedNode =
   | {
@@ -114,6 +116,8 @@ export const EmbeddedUrlParser: TContentParser = (content: string) => {
       type = 'x-post'
     } else if (url.match(SPOTIFY_URL_REGEX)) {
       type = 'spotify'
+    } else if (url.match(WAVLAKE_URL_REGEX)) {
+      type = 'wavlake'
     }
 
     // Add the match as specific type
