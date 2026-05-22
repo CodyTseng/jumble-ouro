@@ -905,5 +905,9 @@ export default {
     '{{count}} in common': '{{count}} общих',
     'Click to load Spotify': 'Нажмите, чтобы загрузить Spotify',
     'Click to load Wavlake': 'Нажмите, чтобы загрузить Wavlake',
+    'Discard post?': 'Удалить публикацию?',
+    'Your draft will be lost if you discard it.': 'Ваш черновик будет потерян, если вы его удалите.',
+    'Keep editing': 'Продолжить редактирование',
+    Discard: 'Удалить',
   }
 }

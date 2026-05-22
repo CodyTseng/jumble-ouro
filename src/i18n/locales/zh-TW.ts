@@ -869,5 +869,9 @@ export default {
     '{{count}} in common': '{{count}} 個共同關注',
     'Click to load Spotify': '點擊載入 Spotify',
     'Click to load Wavlake': '點擊載入 Wavlake',
+    'Discard post?': '捨棄貼文？',
+    'Your draft will be lost if you discard it.': '如果捨棄，您的草稿將會遺失。',
+    'Keep editing': '繼續編輯',
+    Discard: '捨棄',
   }
 }

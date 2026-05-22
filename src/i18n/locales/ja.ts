@@ -899,5 +899,9 @@ export default {
     '{{count}} in common': '{{count}}人が共通',
     'Click to load Spotify': 'クリックしてSpotifyを読み込む',
     'Click to load Wavlake': 'クリックしてWavlakeを読み込む',
+    'Discard post?': '投稿を破棄しますか？',
+    'Your draft will be lost if you discard it.': '破棄すると下書きが失われます。',
+    'Keep editing': '編集を続ける',
+    Discard: '破棄',
   }
 }
