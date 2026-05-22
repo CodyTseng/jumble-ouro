@@ -900,5 +900,9 @@ export default {
     '{{count}} in common': '{{count}} مشترک',
     'Click to load Spotify': 'برای بارگذاری Spotify کلیک کنید',
     'Click to load Wavlake': 'برای بارگذاری Wavlake کلیک کنید',
+    'Discard post?': 'پست کنار گذاشته شود؟',
+    'Your draft will be lost if you discard it.': 'پیش‌نویس شما در صورت کنار گذاشتن از بین می‌رود.',
+    'Keep editing': 'ادامه ویرایش',
+    Discard: 'کنار گذاشتن',
   }
 }

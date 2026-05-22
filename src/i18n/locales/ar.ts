@@ -886,5 +886,9 @@ export default {
     '{{count}} in common': '{{count}} مشترك',
     'Click to load Spotify': 'انقر لتحميل Spotify',
     'Click to load Wavlake': 'انقر لتحميل Wavlake',
+    'Discard post?': 'تجاهل المنشور؟',
+    'Your draft will be lost if you discard it.': 'ستفقد مسودتك إذا تجاهلتها.',
+    'Keep editing': 'متابعة التحرير',
+    Discard: 'تجاهل',
   }
 }

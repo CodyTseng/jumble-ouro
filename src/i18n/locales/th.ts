@@ -887,5 +887,9 @@ export default {
     '{{count}} in common': '{{count}} ที่ติดตามร่วมกัน',
     'Click to load Spotify': 'คลิกเพื่อโหลด Spotify',
     'Click to load Wavlake': 'คลิกเพื่อโหลด Wavlake',
+    'Discard post?': 'ยกเลิกโพสต์?',
+    'Your draft will be lost if you discard it.': 'แบบร่างของคุณจะหายไปหากคุณยกเลิก',
+    'Keep editing': 'แก้ไขต่อ',
+    Discard: 'ยกเลิก',
   }
 }

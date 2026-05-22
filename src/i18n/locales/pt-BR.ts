@@ -904,5 +904,9 @@ export default {
     '{{count}} in common': '{{count}} em comum',
     'Click to load Spotify': 'Carregar Spotify',
     'Click to load Wavlake': 'Carregar Wavlake',
+    'Discard post?': 'Descartar publicação?',
+    'Your draft will be lost if you discard it.': 'Seu rascunho será perdido se você descartá-lo.',
+    'Keep editing': 'Continuar editando',
+    Discard: 'Descartar',
   }
 }

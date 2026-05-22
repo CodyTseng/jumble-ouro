@@ -37,13 +37,15 @@ export default function PostContent({
   parentStuff,
   close,
   openFrom,
-  highlightedText
+  highlightedText,
+  onDirtyChange
 }: {
   defaultContent?: string
   parentStuff?: Event | string
   close: () => void
   openFrom?: string[]
   highlightedText?: string
+  onDirtyChange?: (dirty: boolean) => void
 }) {
   const { t } = useTranslation()
   const { pubkey, publish, checkLogin } = useNostr()
@@ -140,6 +142,10 @@ export default function PostContent({
       }
     )
   }, [defaultContent, parentStuff, isNsfw, contentWarningReason, isPoll, pollCreateData, addClientTag])
+
+  useEffect(() => {
+    onDirtyChange?.(text.length > 0 || uploadProgresses.length > 0)
+  }, [text, uploadProgresses])
 
   const postingRef = useRef(false)
 

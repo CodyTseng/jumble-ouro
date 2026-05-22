@@ -893,5 +893,9 @@ export default {
     '{{count}} in common': '{{count}}명 공통',
     'Click to load Spotify': 'Spotify 로드하려면 클릭',
     'Click to load Wavlake': 'Wavlake 로드하려면 클릭',
+    'Discard post?': '게시물을 삭제하시겠습니까?',
+    'Your draft will be lost if you discard it.': '삭제하면 초안이 사라집니다.',
+    'Keep editing': '계속 편집',
+    Discard: '삭제',
   }
 }

@@ -901,5 +901,9 @@ export default {
     '{{count}} in common': '{{count}} समान',
     'Click to load Spotify': 'Spotify लोड करने के लिए क्लिक करें',
     'Click to load Wavlake': 'Wavlake लोड करने के लिए क्लिक करें',
+    'Discard post?': 'पोस्ट हटाएं?',
+    'Your draft will be lost if you discard it.': 'यदि आप इसे हटाते हैं तो आपका ड्राफ्ट खो जाएगा।',
+    'Keep editing': 'संपादन जारी रखें',
+    Discard: 'हटाएं',
   }
 }

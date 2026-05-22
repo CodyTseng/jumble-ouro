@@ -896,5 +896,9 @@ export default {
     '{{count}} in common': '{{count}} közös',
     'Click to load Spotify': 'Kattintson a Spotify betöltéséhez',
     'Click to load Wavlake': 'Kattintson a Wavlake betöltéséhez',
+    'Discard post?': 'Bejegyzés elvetése?',
+    'Your draft will be lost if you discard it.': 'A piszkozatod elvész, ha elveted.',
+    'Keep editing': 'Szerkesztés folytatása',
+    Discard: 'Elvetés',
   }
 }
