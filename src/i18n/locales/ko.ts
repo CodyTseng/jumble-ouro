@@ -897,5 +897,6 @@ export default {
     'Your draft will be lost if you discard it.': '삭제하면 초안이 사라집니다.',
     'Keep editing': '계속 편집',
     Discard: '삭제',
+    'Add a reply...': '답글 추가...',
   }
 }

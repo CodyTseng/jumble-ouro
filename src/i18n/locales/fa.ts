@@ -904,5 +904,6 @@ export default {
     'Your draft will be lost if you discard it.': 'پیش‌نویس شما در صورت کنار گذاشتن از بین می‌رود.',
     'Keep editing': 'ادامه ویرایش',
     Discard: 'کنار گذاشتن',
+    'Add a reply...': 'پاسخی اضافه کنید...',
   }
 }

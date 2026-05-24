@@ -917,5 +917,6 @@ export default {
     'Your draft will be lost if you discard it.': 'Dein Entwurf geht verloren, wenn du ihn verwirfst.',
     'Keep editing': 'Weiter bearbeiten',
     Discard: 'Verwerfen',
+    'Add a reply...': 'Antwort hinzufügen...',
   }
 }

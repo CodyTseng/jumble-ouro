@@ -903,5 +903,6 @@ export default {
     'Your draft will be lost if you discard it.': '破棄すると下書きが失われます。',
     'Keep editing': '編集を続ける',
     Discard: '破棄',
+    'Add a reply...': '返信を追加...',
   }
 }

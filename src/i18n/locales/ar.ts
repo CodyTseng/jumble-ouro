@@ -890,5 +890,6 @@ export default {
     'Your draft will be lost if you discard it.': 'ستفقد مسودتك إذا تجاهلتها.',
     'Keep editing': 'متابعة التحرير',
     Discard: 'تجاهل',
+    'Add a reply...': 'أضف ردًا...',
   }
 }

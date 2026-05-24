@@ -878,5 +878,6 @@ export default {
     'Your draft will be lost if you discard it.': '如果丢弃，您的草稿将会丢失。',
     'Keep editing': '继续编辑',
     Discard: '丢弃',
+    'Add a reply...': '添加回复...',
   }
 }

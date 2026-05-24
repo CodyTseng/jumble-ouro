@@ -900,5 +900,6 @@ export default {
     'Your draft will be lost if you discard it.': 'A piszkozatod elvész, ha elveted.',
     'Keep editing': 'Szerkesztés folytatása',
     Discard: 'Elvetés',
+    'Add a reply...': 'Válasz hozzáadása...',
   }
 }

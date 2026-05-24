@@ -1,6 +1,7 @@
 import { useSecondaryPage } from '@/PageManager'
 import ContentPreview from '@/components/ContentPreview'
 import MoreFromAuthor from '@/components/MoreFromAuthor'
+import QuickReplyBar from '@/components/QuickReplyBar'
 import ReadingProgressBar from '@/components/ReadingProgressBar'
 import Note from '@/components/Note'
 import NoteInteractions from '@/components/NoteInteractions'
@@ -114,6 +115,7 @@ const NotePage = forwardRef(({ id, index }: { id?: string; index?: number }, ref
       <NoteInteractions key={`note-interactions-${event.id}`} event={event} opPubkey={event.pubkey} />
       <Separator />
       <MoreFromAuthor key={`more-from-author-${event.id}`} event={event} />
+      <QuickReplyBar event={event} />
     </SecondaryPageLayout>
   )
 })

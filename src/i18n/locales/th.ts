@@ -891,5 +891,6 @@ export default {
     'Your draft will be lost if you discard it.': 'แบบร่างของคุณจะหายไปหากคุณยกเลิก',
     'Keep editing': 'แก้ไขต่อ',
     Discard: 'ยกเลิก',
+    'Add a reply...': 'เพิ่มการตอบกลับ...',
   }
 }
