@@ -909,5 +909,6 @@ export default {
     'Your draft will be lost if you discard it.': 'Ваш черновик будет потерян, если вы его удалите.',
     'Keep editing': 'Продолжить редактирование',
     Discard: 'Удалить',
+    'Add a reply...': 'Добавить ответ...',
   }
 }

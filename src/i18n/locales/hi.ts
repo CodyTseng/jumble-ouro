@@ -905,5 +905,6 @@ export default {
     'Your draft will be lost if you discard it.': 'यदि आप इसे हटाते हैं तो आपका ड्राफ्ट खो जाएगा।',
     'Keep editing': 'संपादन जारी रखें',
     Discard: 'हटाएं',
+    'Add a reply...': 'जवाब दें...',
   }
 }

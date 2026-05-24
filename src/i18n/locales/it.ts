@@ -909,5 +909,6 @@ export default {
     'Your draft will be lost if you discard it.': 'La tua bozza andrà persa se la elimini.',
     'Keep editing': 'Continua a modificare',
     Discard: 'Elimina',
+    'Add a reply...': 'Aggiungi una risposta...',
   }
 }

@@ -913,5 +913,6 @@ export default {
     'Your draft will be lost if you discard it.': 'Votre brouillon sera perdu si vous le supprimez.',
     'Keep editing': 'Continuer à éditer',
     Discard: 'Supprimer',
+    'Add a reply...': 'Ajouter une réponse...',
   }
 }
