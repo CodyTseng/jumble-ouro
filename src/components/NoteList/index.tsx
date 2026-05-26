@@ -467,7 +467,14 @@ const NoteList = forwardRef<
       initialLoading
     })
 
+    const [highlightedIds, setHighlightedIds] = useState<Set<string>>(new Set())
+    const highlightTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
     const showNewEvents = () => {
+      const ids = new Set(newEvents.map((e) => e.id))
+      setHighlightedIds(ids)
+      if (highlightTimeoutRef.current) clearTimeout(highlightTimeoutRef.current)
+      highlightTimeoutRef.current = setTimeout(() => setHighlightedIds(new Set()), 2500)
       setEvents((oldEvents) => mergeTimelines([newEvents, oldEvents]))
       setNewEvents([])
       setTimeout(() => {
@@ -486,6 +493,7 @@ const NoteList = forwardRef<
             event={event}
             filterMutedNotes={filterMutedNotes}
             reposters={reposters}
+            highlighted={highlightedIds.has(event.id)}
           />
         ))}
         <div ref={bottomRef} />
