@@ -15,7 +15,8 @@ export default function MainNoteCard({
   reposters,
   embedded,
   originalNoteId,
-  pinned = false
+  pinned = false,
+  highlighted = false
 }: {
   event: Event
   className?: string
@@ -23,6 +24,7 @@ export default function MainNoteCard({
   embedded?: boolean
   originalNoteId?: string
   pinned?: boolean
+  highlighted?: boolean
 }) {
   const { push } = useSecondaryPage()
 
@@ -38,7 +40,8 @@ export default function MainNoteCard({
       <div
         className={cn(
           'clickable transition-all duration-200',
-          embedded ? 'rounded-xl border bg-card p-3 sm:p-4' : 'py-3 hover:bg-accent/30'
+          embedded ? 'rounded-xl border bg-card p-3 sm:p-4' : 'py-3 hover:bg-accent/30',
+          highlighted && !embedded && 'animate-highlight-new'
         )}
       >
         <Collapsible alwaysExpand={embedded}>

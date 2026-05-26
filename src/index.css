@@ -239,3 +239,16 @@
   @apply ring-2 rounded-sm;
   --tw-ring-color: hsl(var(--primary) / 0.3);
 }
+
+@keyframes highlightNew {
+  from {
+    background-color: hsl(var(--primary) / 0.08);
+  }
+  to {
+    background-color: transparent;
+  }
+}
+
+.animate-highlight-new {
+  animation: highlightNew 2s ease-out forwards;
+}
