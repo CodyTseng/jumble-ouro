@@ -891,5 +891,8 @@ export default {
     'Keep editing': 'متابعة التحرير',
     Discard: 'تجاهل',
     'Add a reply...': 'أضف ردًا...',
+    Expired: 'منتهية الصلاحية',
+    'Expires in {{time}}': 'تنتهي خلال {{time}}',
+    Paid: 'مدفوعة',
   }
 }

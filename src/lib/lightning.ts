@@ -12,18 +12,24 @@ export function getAmountFromInvoice(invoice: string): number {
   }
 }
 
-export function getInvoiceDetails(invoice: string): { amount: number; description: string | null } {
+export function getInvoiceDetails(invoice: string): {
+  amount: number
+  description: string | null
+  expiryDate: Date | null
+} {
   try {
     const _invoice = new Invoice({ pr: invoice })
     return {
       amount: _invoice.satoshi,
-      description: _invoice.description
+      description: _invoice.description,
+      expiryDate: _invoice.expiryDate ?? null
     }
   } catch (error) {
     console.error('Invalid Lightning invoice:', error)
     return {
       amount: 0,
-      description: null
+      description: null,
+      expiryDate: null
     }
   }
 }

@@ -910,5 +910,8 @@ export default {
     'Keep editing': 'Continua a modificare',
     Discard: 'Elimina',
     'Add a reply...': 'Aggiungi una risposta...',
+    Expired: 'Scaduta',
+    'Expires in {{time}}': 'Scade tra {{time}}',
+    Paid: 'Pagata',
   }
 }

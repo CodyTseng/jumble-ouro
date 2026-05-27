@@ -904,5 +904,8 @@ export default {
     'Keep editing': '編集を続ける',
     Discard: '破棄',
     'Add a reply...': '返信を追加...',
+    Expired: '期限切れ',
+    'Expires in {{time}}': 'あと{{time}}で期限切れ',
+    Paid: '支払い済み',
   }
 }

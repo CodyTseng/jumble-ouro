@@ -892,5 +892,8 @@ export default {
     'Keep editing': 'แก้ไขต่อ',
     Discard: 'ยกเลิก',
     'Add a reply...': 'เพิ่มการตอบกลับ...',
+    Expired: 'หมดอายุแล้ว',
+    'Expires in {{time}}': 'หมดอายุใน {{time}}',
+    Paid: 'ชำระแล้ว',
   }
 }

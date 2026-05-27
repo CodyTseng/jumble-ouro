@@ -879,5 +879,8 @@ export default {
     'Keep editing': '继续编辑',
     Discard: '丢弃',
     'Add a reply...': '添加回复...',
+    Expired: '已过期',
+    'Expires in {{time}}': '{{time}}后过期',
+    Paid: '已支付',
   }
 }
