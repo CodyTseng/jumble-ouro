@@ -898,5 +898,8 @@ export default {
     'Keep editing': '계속 편집',
     Discard: '삭제',
     'Add a reply...': '답글 추가...',
+    Expired: '만료됨',
+    'Expires in {{time}}': '{{time}} 후 만료',
+    Paid: '결제 완료',
   }
 }

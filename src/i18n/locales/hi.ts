@@ -906,5 +906,8 @@ export default {
     'Keep editing': 'संपादन जारी रखें',
     Discard: 'हटाएं',
     'Add a reply...': 'जवाब दें...',
+    Expired: 'समय सीमा समाप्त',
+    'Expires in {{time}}': '{{time}} में समाप्त होगा',
+    Paid: 'भुगतान किया गया',
   }
 }

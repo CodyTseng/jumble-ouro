@@ -905,5 +905,8 @@ export default {
     'Keep editing': 'ادامه ویرایش',
     Discard: 'کنار گذاشتن',
     'Add a reply...': 'پاسخی اضافه کنید...',
+    Expired: 'منقضی شده',
+    'Expires in {{time}}': 'انقضا در {{time}}',
+    Paid: 'پرداخت شده',
   }
 }

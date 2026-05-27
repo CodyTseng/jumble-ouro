@@ -901,5 +901,8 @@ export default {
     'Keep editing': 'Szerkesztés folytatása',
     Discard: 'Elvetés',
     'Add a reply...': 'Válasz hozzáadása...',
+    Expired: 'Lejárt',
+    'Expires in {{time}}': 'Lejár {{time}} múlva',
+    Paid: 'Kifizetve',
   }
 }

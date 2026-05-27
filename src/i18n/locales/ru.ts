@@ -910,5 +910,8 @@ export default {
     'Keep editing': 'Продолжить редактирование',
     Discard: 'Удалить',
     'Add a reply...': 'Добавить ответ...',
+    Expired: 'Истёк',
+    'Expires in {{time}}': 'Истекает через {{time}}',
+    Paid: 'Оплачено',
   }
 }
