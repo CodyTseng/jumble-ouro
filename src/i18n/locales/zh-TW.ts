@@ -877,5 +877,7 @@ export default {
     Expired: '已過期',
     'Expires in {{time}}': '{{time}}後過期',
     Paid: '已支付',
+    'Image saved': '圖片已儲存',
+    'Image opened in new tab to save manually': '圖片已在新分頁中開啟，請手動儲存',
   }
 }

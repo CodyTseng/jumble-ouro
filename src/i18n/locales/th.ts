@@ -895,5 +895,7 @@ export default {
     Expired: 'หมดอายุแล้ว',
     'Expires in {{time}}': 'หมดอายุใน {{time}}',
     Paid: 'ชำระแล้ว',
+    'Image saved': 'บันทึกรูปภาพแล้ว',
+    'Image opened in new tab to save manually': 'เปิดรูปภาพในแท็บใหม่เพื่อบันทึกด้วยตนเอง',
   }
 }

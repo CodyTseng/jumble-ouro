@@ -3,10 +3,12 @@ import { cn } from '@/lib/utils'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import modalManager from '@/services/modal-manager.service'
 import { TImetaInfo } from '@/types'
-import { useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTranslation } from 'react-i18next'
+import { toast } from 'sonner'
 import Lightbox from 'yet-another-react-lightbox'
+import Download from 'yet-another-react-lightbox/plugins/download'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 import Image from '../Image'
 
@@ -31,6 +33,28 @@ export default function ImageWithLightbox({
   const { autoLoadMedia } = useContentPolicy()
   const [display, setDisplay] = useState(ignoreAutoLoadPolicy ? true : autoLoadMedia)
   const [index, setIndex] = useState(-1)
+  const handleDownload = useCallback(
+    ({ slide, saveAs }: { slide: { src?: string }; saveAs: (source: Blob, name?: string) => void }) => {
+      const url = slide.src
+      if (!url) return
+      const filename = decodeURIComponent(url.split('/').pop()?.split('?')[0] || 'image')
+      fetch(url)
+        .then((res) => {
+          if (!res.ok) throw new Error('fetch failed')
+          return res.blob()
+        })
+        .then((blob) => {
+          saveAs(blob, filename)
+          toast.success(t('Image saved'))
+        })
+        .catch(() => {
+          window.open(url, '_blank')
+          toast.info(t('Image opened in new tab to save manually'))
+        })
+    },
+    [t]
+  )
+
   useEffect(() => {
     if (index >= 0) {
       modalManager.register(id, () => {
@@ -81,9 +105,10 @@ export default function ImageWithLightbox({
             <Lightbox
               index={index}
               slides={[{ src: image.url, alt: image.alt }]}
-              plugins={[Zoom]}
+              plugins={[Download, Zoom]}
               open={index >= 0}
               close={() => setIndex(-1)}
+              download={{ download: handleDownload }}
               controller={{
                 closeOnBackdropClick: true,
                 closeOnPullUp: true,

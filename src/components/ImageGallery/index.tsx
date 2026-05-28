@@ -4,9 +4,12 @@ import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import blossomService from '@/services/blossom.service'
 import modalManager from '@/services/modal-manager.service'
 import { TImetaInfo } from '@/types'
-import { ReactNode, useEffect, useMemo, useState } from 'react'
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
+import { toast } from 'sonner'
 import Lightbox from 'yet-another-react-lightbox'
+import Download from 'yet-another-react-lightbox/plugins/download'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
 import Image from '../Image'
 import ImageWithLightbox from '../ImageWithLightbox'
@@ -25,6 +28,7 @@ export default function ImageGallery({
   mustLoad?: boolean
 }) {
   const id = useMemo(() => `image-gallery-${randomString()}`, [])
+  const { t } = useTranslation()
   const { autoLoadMedia } = useContentPolicy()
   const [index, setIndex] = useState(-1)
   const [slides, setSlides] = useState<{ src: string; alt?: string }[]>(
@@ -82,6 +86,28 @@ export default function ImageGallery({
 
     loadImages()
   }, [images])
+
+  const handleDownload = useCallback(
+    ({ slide, saveAs }: { slide: { src?: string }; saveAs: (source: Blob, name?: string) => void }) => {
+      const url = slide.src
+      if (!url) return
+      const filename = decodeURIComponent(url.split('/').pop()?.split('?')[0] || 'image')
+      fetch(url)
+        .then((res) => {
+          if (!res.ok) throw new Error('fetch failed')
+          return res.blob()
+        })
+        .then((blob) => {
+          saveAs(blob, filename)
+          toast.success(t('Image saved'))
+        })
+        .catch(() => {
+          window.open(url, '_blank')
+          toast.info(t('Image opened in new tab to save manually'))
+        })
+    },
+    [t]
+  )
 
   const handlePhotoClick = (event: React.MouseEvent, current: number) => {
     event.stopPropagation()
@@ -157,9 +183,10 @@ export default function ImageGallery({
             <Lightbox
               index={index}
               slides={slides}
-              plugins={[Zoom]}
+              plugins={[Download, Zoom]}
               open={index >= 0}
               close={() => setIndex(-1)}
+              download={{ download: handleDownload }}
               controller={{
                 closeOnBackdropClick: true,
                 closeOnPullUp: true,

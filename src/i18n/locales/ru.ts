@@ -913,5 +913,7 @@ export default {
     Expired: 'Истёк',
     'Expires in {{time}}': 'Истекает через {{time}}',
     Paid: 'Оплачено',
+    'Image saved': 'Изображение сохранено',
+    'Image opened in new tab to save manually': 'Изображение открыто в новой вкладке для сохранения вручную',
   }
 }

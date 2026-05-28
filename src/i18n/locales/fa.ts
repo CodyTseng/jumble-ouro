@@ -908,5 +908,7 @@ export default {
     Expired: 'منقضی شده',
     'Expires in {{time}}': 'انقضا در {{time}}',
     Paid: 'پرداخت شده',
+    'Image saved': 'تصویر ذخیره شد',
+    'Image opened in new tab to save manually': 'تصویر در تب جدید برای ذخیره دستی باز شد',
   }
 }

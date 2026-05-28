@@ -901,5 +901,8 @@ export default {
     Expired: 'Expired',
     'Expires in {{time}}': 'Expires in {{time}}',
     Paid: 'Paid',
+    'Image saved': 'Image saved',
+    'Image opened in new tab to save manually':
+      'Image opened in new tab to save manually',
   }
 }

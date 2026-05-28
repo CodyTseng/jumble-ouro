@@ -904,5 +904,7 @@ export default {
     Expired: 'Lejárt',
     'Expires in {{time}}': 'Lejár {{time}} múlva',
     Paid: 'Kifizetve',
+    'Image saved': 'Kép mentve',
+    'Image opened in new tab to save manually': 'Kép megnyitva új lapon a manuális mentéshez',
   }
 }
