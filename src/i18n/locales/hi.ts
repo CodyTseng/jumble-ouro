@@ -909,5 +909,7 @@ export default {
     Expired: 'समय सीमा समाप्त',
     'Expires in {{time}}': '{{time}} में समाप्त होगा',
     Paid: 'भुगतान किया गया',
+    'Image saved': 'छवि सहेजी गई',
+    'Image opened in new tab to save manually': 'छवि मैन्युअल रूप से सहेजने के लिए नए टैब में खोली गई',
   }
 }

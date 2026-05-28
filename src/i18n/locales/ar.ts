@@ -894,5 +894,7 @@ export default {
     Expired: 'منتهية الصلاحية',
     'Expires in {{time}}': 'تنتهي خلال {{time}}',
     Paid: 'مدفوعة',
+    'Image saved': 'تم حفظ الصورة',
+    'Image opened in new tab to save manually': 'تم فتح الصورة في علامة تبويب جديدة للحفظ يدويًا',
   }
 }

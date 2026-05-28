@@ -921,5 +921,7 @@ export default {
     Expired: 'Abgelaufen',
     'Expires in {{time}}': 'Läuft ab in {{time}}',
     Paid: 'Bezahlt',
+    'Image saved': 'Bild gespeichert',
+    'Image opened in new tab to save manually': 'Bild in neuem Tab geöffnet zum manuellen Speichern',
   }
 }

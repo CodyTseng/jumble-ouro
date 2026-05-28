@@ -913,5 +913,7 @@ export default {
     Expired: 'Wygasła',
     'Expires in {{time}}': 'Wygasa za {{time}}',
     Paid: 'Opłacona',
+    'Image saved': 'Obraz zapisany',
+    'Image opened in new tab to save manually': 'Obraz otwarty w nowej karcie do ręcznego zapisania',
   }
 }
