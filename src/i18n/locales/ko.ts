@@ -903,5 +903,7 @@ export default {
     Paid: '결제 완료',
     'Image saved': '이미지 저장됨',
     'Image opened in new tab to save manually': '수동 저장을 위해 새 탭에서 이미지가 열렸습니다',
+    'You are offline': '오프라인 상태입니다',
+    'Back online': '다시 온라인 상태입니다',
   }
 }

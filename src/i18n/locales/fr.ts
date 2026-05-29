@@ -919,5 +919,7 @@ export default {
     Paid: 'Payée',
     'Image saved': 'Image enregistrée',
     'Image opened in new tab to save manually': 'Image ouverte dans un nouvel onglet pour enregistrer manuellement',
+    'You are offline': 'Vous êtes hors ligne',
+    'Back online': 'De retour en ligne',
   }
 }

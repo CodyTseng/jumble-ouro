@@ -879,5 +879,7 @@ export default {
     Paid: '已支付',
     'Image saved': '圖片已儲存',
     'Image opened in new tab to save manually': '圖片已在新分頁中開啟，請手動儲存',
+    'You are offline': '您已離線',
+    'Back online': '已恢復連線',
   }
 }
