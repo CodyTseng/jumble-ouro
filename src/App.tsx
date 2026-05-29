@@ -2,6 +2,7 @@ import 'yet-another-react-lightbox/styles.css'
 import './index.css'
 
 import KeySyncRequestHandler from '@/components/KeySyncRequestDialog'
+import OfflineBanner from '@/components/OfflineBanner'
 import WelcomeModal from '@/components/WelcomeModal'
 import { Toaster } from '@/components/ui/sonner'
 import { BookmarksProvider } from '@/providers/BookmarksProvider'
@@ -47,6 +48,7 @@ export default function App(): JSX.Element {
                                       <MediaUploadServiceProvider>
                                         <KindFilterProvider>
                                           <PageManager />
+                                          <OfflineBanner />
                                           <KeySyncRequestHandler />
                                           <WelcomeModal />
                                           <Toaster />

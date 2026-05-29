@@ -904,5 +904,7 @@ export default {
     'Image saved': 'Image saved',
     'Image opened in new tab to save manually':
       'Image opened in new tab to save manually',
+    'You are offline': 'You are offline',
+    'Back online': 'Back online',
   }
 }

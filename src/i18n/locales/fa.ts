@@ -910,5 +910,7 @@ export default {
     Paid: 'پرداخت شده',
     'Image saved': 'تصویر ذخیره شد',
     'Image opened in new tab to save manually': 'تصویر در تب جدید برای ذخیره دستی باز شد',
+    'You are offline': 'شما آفلاین هستید',
+    'Back online': 'دوباره آنلاین شدید',
   }
 }

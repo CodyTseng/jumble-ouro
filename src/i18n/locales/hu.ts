@@ -906,5 +906,7 @@ export default {
     Paid: 'Kifizetve',
     'Image saved': 'Kép mentve',
     'Image opened in new tab to save manually': 'Kép megnyitva új lapon a manuális mentéshez',
+    'You are offline': 'Nincs internetkapcsolat',
+    'Back online': 'Újra online',
   }
 }
