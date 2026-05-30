@@ -1514,6 +1514,14 @@ class ClientService extends EventTarget {
     return this.fetchReplaceableEvent(pubkey, ExtendedKind.PINNED_USERS)
   }
 
+  async fetchUserStatus(pubkey: string) {
+    const [general, music] = await Promise.all([
+      this.fetchReplaceableEvent(pubkey, 30315, 'general'),
+      this.fetchReplaceableEvent(pubkey, 30315, 'music')
+    ])
+    return { general, music }
+  }
+
   async updateBlossomServerListEventCache(evt: NEvent) {
     await this.updateReplaceableEventCache(evt)
   }

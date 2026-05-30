@@ -7,7 +7,8 @@ import ProfileZapButton from '@/components/ProfileZapButton'
 import PubkeyCopy from '@/components/PubkeyCopy'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
-import { useDmSupport, useFetchFollowings, useFetchProfile } from '@/hooks'
+import UserStatus from '@/components/UserStatus'
+import { useDmSupport, useFetchFollowings, useFetchProfile, useFetchUserStatus } from '@/hooks'
 import { toDmConversation, toMuteList, toProfileEditor } from '@/lib/link'
 import { SecondaryPageLink, useSecondaryPage } from '@/PageManager'
 import { useMuteList } from '@/providers/MuteListProvider'
@@ -39,6 +40,7 @@ export default function Profile({ id }: { id?: string }) {
   const [searchInput, setSearchInput] = useState('')
   const [debouncedInput, setDebouncedInput] = useState(searchInput)
   const { followings } = useFetchFollowings(profile?.pubkey)
+  const { generalStatus, musicStatus } = useFetchUserStatus(profile?.pubkey)
   const { canStartDm, isLoading: isDmSupportLoading } = useDmSupport(profile?.pubkey)
   const isFollowingYou = useMemo(() => {
     return (
@@ -148,6 +150,7 @@ export default function Profile({ id }: { id?: string }) {
               )}
             </div>
             <Nip05 pubkey={pubkey} />
+            <UserStatus generalStatus={generalStatus} musicStatus={musicStatus} />
             {lightningAddress && (
               <div className="flex select-text items-center gap-1 text-sm text-yellow-400">
                 <Zap className="size-4 shrink-0" />
