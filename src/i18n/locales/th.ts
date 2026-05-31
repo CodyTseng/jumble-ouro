@@ -899,5 +899,6 @@ export default {
     'Image opened in new tab to save manually': 'เปิดรูปภาพในแท็บใหม่เพื่อบันทึกด้วยตนเอง',
     'You are offline': 'คุณออฟไลน์อยู่',
     'Back online': 'กลับมาออนไลน์แล้ว',
+    'Table of contents': 'สารบัญ',
   }
 }

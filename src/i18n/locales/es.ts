@@ -917,5 +917,6 @@ export default {
     'Image opened in new tab to save manually': 'Imagen abierta en nueva pestaña para guardar manualmente',
     'You are offline': 'Estás sin conexión',
     'Back online': 'De vuelta en línea',
+    'Table of contents': 'Tabla de contenidos',
   }
 }

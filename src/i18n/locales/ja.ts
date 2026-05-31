@@ -911,5 +911,6 @@ export default {
     'Image opened in new tab to save manually': '新しいタブで画像を開きました。手動で保存してください',
     'You are offline': 'オフラインです',
     'Back online': 'オンラインに戻りました',
+    'Table of contents': '目次',
   }
 }

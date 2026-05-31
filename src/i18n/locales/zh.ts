@@ -886,5 +886,6 @@ export default {
     'Image opened in new tab to save manually': '图片已在新标签页中打开，请手动保存',
     'You are offline': '您已离线',
     'Back online': '已恢复在线',
+    'Table of contents': '目录',
   }
 }

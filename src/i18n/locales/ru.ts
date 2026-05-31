@@ -917,5 +917,6 @@ export default {
     'Image opened in new tab to save manually': 'Изображение открыто в новой вкладке для сохранения вручную',
     'You are offline': 'Вы не в сети',
     'Back online': 'Снова в сети',
+    'Table of contents': 'Содержание',
   }
 }

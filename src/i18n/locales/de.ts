@@ -925,5 +925,6 @@ export default {
     'Image opened in new tab to save manually': 'Bild in neuem Tab geöffnet zum manuellen Speichern',
     'You are offline': 'Du bist offline',
     'Back online': 'Wieder online',
+    'Table of contents': 'Inhaltsverzeichnis',
   }
 }

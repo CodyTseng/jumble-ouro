@@ -913,5 +913,6 @@ export default {
     'Image opened in new tab to save manually': 'छवि मैन्युअल रूप से सहेजने के लिए नए टैब में खोली गई',
     'You are offline': 'आप ऑफ़लाइन हैं',
     'Back online': 'वापस ऑनलाइन',
+    'Table of contents': 'विषय-सूची',
   }
 }

@@ -1,4 +1,5 @@
 import { SecondaryPageLink, useSecondaryPage } from '@/PageManager'
+import { slugifyHeading } from '@/components/ArticleTableOfContents'
 import ImageWithLightbox from '@/components/ImageWithLightbox'
 import HighlightButton from '@/components/HighlightButton'
 import PostEditor from '@/components/PostEditor'
@@ -14,6 +15,17 @@ import remarkGfm from 'remark-gfm'
 import NostrNode from './NostrNode'
 import { remarkNostr } from './remarkNostr'
 import { Components } from './types'
+
+function extractText(node: React.ReactNode): string {
+  if (typeof node === 'string') return node
+  if (typeof node === 'number') return String(node)
+  if (!node) return ''
+  if (Array.isArray(node)) return node.map(extractText).join('')
+  if (typeof node === 'object' && 'props' in node) {
+    return extractText((node as React.ReactElement).props.children)
+  }
+  return ''
+}
 
 export default function LongFormArticle({
   event,
@@ -35,61 +47,84 @@ export default function LongFormArticle({
     setShowHighlightEditor(true)
   }
 
-  const components = useMemo(
-    () =>
-      ({
-        nostr: ({ rawText, bech32Id }) => <NostrNode rawText={rawText} bech32Id={bech32Id} />,
-        a: ({ href, children, ...props }) => {
-          if (!href) {
-            return <span {...props} className="break-words" />
-          }
-          if (href.startsWith('note1') || href.startsWith('nevent1') || href.startsWith('naddr1')) {
-            return (
-              <SecondaryPageLink
-                to={toNote(href)}
-                className="break-words text-foreground underline"
-              >
-                {children}
-              </SecondaryPageLink>
-            )
-          }
-          if (href.startsWith('npub1') || href.startsWith('nprofile1')) {
-            return (
-              <SecondaryPageLink
-                to={toProfile(href)}
-                className="break-words text-foreground underline"
-              >
-                {children}
-              </SecondaryPageLink>
-            )
-          }
+  const components = useMemo(() => {
+    const idCounts = new Map<string, number>()
+    const getHeadingId = (children: React.ReactNode): string => {
+      const text = extractText(children)
+      const baseId = slugifyHeading(text)
+      const count = idCounts.get(baseId) || 0
+      const id = count === 0 ? baseId : `${baseId}-${count}`
+      idCounts.set(baseId, count + 1)
+      return id
+    }
+
+    return {
+      nostr: ({ rawText, bech32Id }) => <NostrNode rawText={rawText} bech32Id={bech32Id} />,
+      h1: ({ children, ...props }) => (
+        <h1 {...props} id={getHeadingId(children)} className="break-words">
+          {children}
+        </h1>
+      ),
+      h2: ({ children, ...props }) => (
+        <h2 {...props} id={getHeadingId(children)} className="break-words">
+          {children}
+        </h2>
+      ),
+      h3: ({ children, ...props }) => (
+        <h3 {...props} id={getHeadingId(children)} className="break-words">
+          {children}
+        </h3>
+      ),
+      a: ({ href, children, ...props }) => {
+        if (!href) {
+          return <span {...props} className="break-words" />
+        }
+        if (href.startsWith('note1') || href.startsWith('nevent1') || href.startsWith('naddr1')) {
           return (
-            <a
-              {...props}
-              href={href}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="inline-flex items-baseline gap-1 break-words"
+            <SecondaryPageLink
+              to={toNote(href)}
+              className="break-words text-foreground underline"
             >
-              {children} <ExternalLink className="size-3" />
-            </a>
+              {children}
+            </SecondaryPageLink>
           )
-        },
-        p: (props) => <p {...props} className="break-words" />,
-        div: (props) => <div {...props} className="break-words" />,
-        code: (props) => <code {...props} className="whitespace-pre-wrap break-words" />,
-        img: (props) => (
-          <ImageWithLightbox
-            image={{ url: props.src || '', pubkey: event.pubkey }}
-            className="my-0 max-h-[80vh] object-contain sm:max-h-[50vh]"
-            classNames={{
-              wrapper: 'w-fit max-w-full'
-            }}
-          />
+        }
+        if (href.startsWith('npub1') || href.startsWith('nprofile1')) {
+          return (
+            <SecondaryPageLink
+              to={toProfile(href)}
+              className="break-words text-foreground underline"
+            >
+              {children}
+            </SecondaryPageLink>
+          )
+        }
+        return (
+          <a
+            {...props}
+            href={href}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="inline-flex items-baseline gap-1 break-words"
+          >
+            {children} <ExternalLink className="size-3" />
+          </a>
         )
-      }) as Components,
-    [event.pubkey]
-  )
+      },
+      p: (props) => <p {...props} className="break-words" />,
+      div: (props) => <div {...props} className="break-words" />,
+      code: (props) => <code {...props} className="whitespace-pre-wrap break-words" />,
+      img: (props) => (
+        <ImageWithLightbox
+          image={{ url: props.src || '', pubkey: event.pubkey }}
+          className="my-0 max-h-[80vh] object-contain sm:max-h-[50vh]"
+          classNames={{
+            wrapper: 'w-fit max-w-full'
+          }}
+        />
+      )
+    } as Components
+  }, [event.pubkey])
 
   return (
     <>
