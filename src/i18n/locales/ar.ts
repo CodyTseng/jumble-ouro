@@ -898,5 +898,6 @@ export default {
     'Image opened in new tab to save manually': 'تم فتح الصورة في علامة تبويب جديدة للحفظ يدويًا',
     'You are offline': 'أنت غير متصل بالإنترنت',
     'Back online': 'عدت متصلاً',
+    'Table of contents': 'جدول المحتويات',
   }
 }

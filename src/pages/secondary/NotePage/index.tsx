@@ -1,4 +1,5 @@
 import { useSecondaryPage } from '@/PageManager'
+import ArticleTableOfContents, { extractHeadings } from '@/components/ArticleTableOfContents'
 import ContentPreview from '@/components/ContentPreview'
 import MoreFromAuthor from '@/components/MoreFromAuthor'
 import QuickReplyBar from '@/components/QuickReplyBar'
@@ -37,6 +38,10 @@ const NotePage = forwardRef(({ id, index }: { id?: string; index?: number }, ref
   const rootEventId = useMemo(() => getRootBech32Id(event), [event])
   const rootITag = useMemo(
     () => (event?.kind === ExtendedKind.COMMENT ? event.tags.find(tagNameEquals('I')) : undefined),
+    [event]
+  )
+  const articleHeadings = useMemo(
+    () => (event?.kind === kinds.LongFormArticle ? extractHeadings(event.content) : []),
     [event]
   )
   const { isFetching: isFetchingRootEvent, event: rootEvent } = useFetchEvent(rootEventId)
@@ -78,7 +83,17 @@ const NotePage = forwardRef(({ id, index }: { id?: string; index?: number }, ref
   }
 
   return (
-    <SecondaryPageLayout ref={ref} index={index} title={t('Note')} displayScrollToTopButton>
+    <SecondaryPageLayout
+      ref={ref}
+      index={index}
+      title={t('Note')}
+      displayScrollToTopButton
+      controls={
+        articleHeadings.length >= 2 ? (
+          <ArticleTableOfContents headings={articleHeadings} contentRef={articleContentRef} />
+        ) : undefined
+      }
+    >
       {event.kind === kinds.LongFormArticle && (
         <ReadingProgressBar contentRef={articleContentRef} />
       )}
