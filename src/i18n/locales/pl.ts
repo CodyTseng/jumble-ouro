@@ -918,5 +918,8 @@ export default {
     'You are offline': 'Jesteś offline',
     'Back online': 'Znów online',
     'Table of contents': 'Spis treści',
+    Shared: 'Wspólne',
+    'Shared Relays': 'Wspólne przekaźniki',
+    'No shared relays': 'Brak wspólnych przekaźników',
   }
 }

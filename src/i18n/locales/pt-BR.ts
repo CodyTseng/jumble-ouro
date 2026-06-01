@@ -917,5 +917,8 @@ export default {
     'You are offline': 'Você está offline',
     'Back online': 'De volta online',
     'Table of contents': 'Índice',
+    Shared: 'Compartilhados',
+    'Shared Relays': 'Relays compartilhados',
+    'No shared relays': 'Nenhum relay compartilhado',
   }
 }

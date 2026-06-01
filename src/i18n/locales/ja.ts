@@ -912,5 +912,8 @@ export default {
     'You are offline': 'オフラインです',
     'Back online': 'オンラインに戻りました',
     'Table of contents': '目次',
+    Shared: '共通',
+    'Shared Relays': '共通リレー',
+    'No shared relays': '共通リレーはありません',
   }
 }

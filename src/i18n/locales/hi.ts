@@ -914,5 +914,8 @@ export default {
     'You are offline': 'आप ऑफ़लाइन हैं',
     'Back online': 'वापस ऑनलाइन',
     'Table of contents': 'विषय-सूची',
+    Shared: 'साझा',
+    'Shared Relays': 'साझा रिले',
+    'No shared relays': 'कोई साझा रिले नहीं',
   }
 }

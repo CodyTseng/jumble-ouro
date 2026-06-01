@@ -918,5 +918,8 @@ export default {
     'You are offline': 'Estás sin conexión',
     'Back online': 'De vuelta en línea',
     'Table of contents': 'Tabla de contenidos',
+    Shared: 'Compartidos',
+    'Shared Relays': 'Relays compartidos',
+    'No shared relays': 'Sin relays compartidos',
   }
 }

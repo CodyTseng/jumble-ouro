@@ -899,5 +899,8 @@ export default {
     'You are offline': 'أنت غير متصل بالإنترنت',
     'Back online': 'عدت متصلاً',
     'Table of contents': 'جدول المحتويات',
+    Shared: 'مشتركة',
+    'Shared Relays': 'المرحّلات المشتركة',
+    'No shared relays': 'لا توجد مرحّلات مشتركة',
   }
 }

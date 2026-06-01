@@ -887,5 +887,8 @@ export default {
     'You are offline': '您已离线',
     'Back online': '已恢复在线',
     'Table of contents': '目录',
+    Shared: '共同',
+    'Shared Relays': '共同中继',
+    'No shared relays': '没有共同中继',
   }
 }

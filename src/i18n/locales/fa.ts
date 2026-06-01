@@ -913,5 +913,8 @@ export default {
     'You are offline': 'شما آفلاین هستید',
     'Back online': 'دوباره آنلاین شدید',
     'Table of contents': 'فهرست مطالب',
+    Shared: 'مشترک',
+    'Shared Relays': 'رله‌های مشترک',
+    'No shared relays': 'رله مشترکی وجود ندارد',
   }
 }

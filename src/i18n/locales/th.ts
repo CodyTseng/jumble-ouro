@@ -900,5 +900,8 @@ export default {
     'You are offline': 'คุณออฟไลน์อยู่',
     'Back online': 'กลับมาออนไลน์แล้ว',
     'Table of contents': 'สารบัญ',
+    Shared: 'ที่ใช้ร่วมกัน',
+    'Shared Relays': 'รีเลย์ที่ใช้ร่วมกัน',
+    'No shared relays': 'ไม่มีรีเลย์ที่ใช้ร่วมกัน',
   }
 }

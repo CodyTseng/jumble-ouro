@@ -29,6 +29,7 @@ import FollowedBy from './FollowedBy'
 import Followings from './Followings'
 import ProfileFeed from './ProfileFeed'
 import Relays from './Relays'
+import SharedRelays from './SharedRelays'
 import SpecialFollowButton from './SpecialFollowButton'
 
 export default function Profile({ id }: { id?: string }) {
@@ -192,6 +193,7 @@ export default function Profile({ id }: { id?: string }) {
               <div className="flex items-center gap-4">
                 <Followings pubkey={pubkey} />
                 <Relays pubkey={pubkey} />
+                {!isSelf && accountPubkey && <SharedRelays pubkey={pubkey} />}
                 {isSelf && (
                   <SecondaryPageLink to={toMuteList()} className="flex w-fit gap-1 hover:underline">
                     {mutePubkeySet.size}

@@ -926,5 +926,8 @@ export default {
     'You are offline': 'Du bist offline',
     'Back online': 'Wieder online',
     'Table of contents': 'Inhaltsverzeichnis',
+    Shared: 'Gemeinsam',
+    'Shared Relays': 'Gemeinsame Relays',
+    'No shared relays': 'Keine gemeinsamen Relays',
   }
 }

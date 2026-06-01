@@ -918,5 +918,8 @@ export default {
     'You are offline': 'Вы не в сети',
     'Back online': 'Снова в сети',
     'Table of contents': 'Содержание',
+    Shared: 'Общие',
+    'Shared Relays': 'Общие реле',
+    'No shared relays': 'Нет общих реле',
   }
 }

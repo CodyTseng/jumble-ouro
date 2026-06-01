@@ -882,5 +882,8 @@ export default {
     'You are offline': '您已離線',
     'Back online': '已恢復連線',
     'Table of contents': '目錄',
+    Shared: '共同',
+    'Shared Relays': '共同中繼',
+    'No shared relays': '沒有共同中繼',
   }
 }
