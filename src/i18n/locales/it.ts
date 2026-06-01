@@ -918,5 +918,8 @@ export default {
     'You are offline': 'Sei offline',
     'Back online': 'Di nuovo online',
     'Table of contents': 'Indice',
+    Shared: 'Condivisi',
+    'Shared Relays': 'Relay condivisi',
+    'No shared relays': 'Nessun relay condiviso',
   }
 }

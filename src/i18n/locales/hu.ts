@@ -909,5 +909,8 @@ export default {
     'You are offline': 'Nincs internetkapcsolat',
     'Back online': 'Újra online',
     'Table of contents': 'Tartalomjegyzék',
+    Shared: 'Közös',
+    'Shared Relays': 'Közös reléi',
+    'No shared relays': 'Nincsenek közös relék',
   }
 }

@@ -906,5 +906,8 @@ export default {
     'You are offline': '오프라인 상태입니다',
     'Back online': '다시 온라인 상태입니다',
     'Table of contents': '목차',
+    Shared: '공유',
+    'Shared Relays': '공유 릴레이',
+    'No shared relays': '공유 릴레이 없음',
   }
 }

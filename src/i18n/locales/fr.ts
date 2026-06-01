@@ -922,5 +922,8 @@ export default {
     'You are offline': 'Vous êtes hors ligne',
     'Back online': 'De retour en ligne',
     'Table of contents': 'Table des matières',
+    Shared: 'Partagés',
+    'Shared Relays': 'Relais partagés',
+    'No shared relays': 'Aucun relais partagé',
   }
 }

@@ -907,5 +907,8 @@ export default {
     'You are offline': 'You are offline',
     'Back online': 'Back online',
     'Table of contents': 'Table of contents',
+    Shared: 'Shared',
+    'Shared Relays': 'Shared Relays',
+    'No shared relays': 'No shared relays',
   }
 }
