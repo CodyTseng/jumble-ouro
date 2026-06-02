@@ -917,5 +917,6 @@ export default {
     Shared: 'साझा',
     'Shared Relays': 'साझा रिले',
     'No shared relays': 'कोई साझा रिले नहीं',
+    'View full profile': 'पूरी प्रोफ़ाइल देखें',
   }
 }

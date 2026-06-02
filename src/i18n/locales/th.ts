@@ -903,5 +903,6 @@ export default {
     Shared: 'ที่ใช้ร่วมกัน',
     'Shared Relays': 'รีเลย์ที่ใช้ร่วมกัน',
     'No shared relays': 'ไม่มีรีเลย์ที่ใช้ร่วมกัน',
+    'View full profile': 'ดูโปรไฟล์ทั้งหมด',
   }
 }

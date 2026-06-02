@@ -921,5 +921,6 @@ export default {
     Shared: 'Condivisi',
     'Shared Relays': 'Relay condivisi',
     'No shared relays': 'Nessun relay condiviso',
+    'View full profile': 'Visualizza profilo completo',
   }
 }

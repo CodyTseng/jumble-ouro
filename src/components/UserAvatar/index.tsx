@@ -9,6 +9,7 @@ import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useMemo } from 'react'
 import Image from '../Image'
 import ProfileCard from '../ProfileCard'
+import ProfilePeek from '../ProfilePeek'
 
 const UserAvatarSizeCnMap = {
   large: 'w-24 h-24',
@@ -44,7 +45,7 @@ export default function UserAvatar({
   )
 
   if (supportTouch) {
-    return trigger
+    return <ProfilePeek userId={userId}>{trigger}</ProfilePeek>
   }
 
   return (

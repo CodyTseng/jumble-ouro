@@ -921,5 +921,6 @@ export default {
     Shared: 'Wspólne',
     'Shared Relays': 'Wspólne przekaźniki',
     'No shared relays': 'Brak wspólnych przekaźników',
+    'View full profile': 'Zobacz pełny profil',
   }
 }

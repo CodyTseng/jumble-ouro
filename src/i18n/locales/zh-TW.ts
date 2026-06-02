@@ -885,5 +885,6 @@ export default {
     Shared: '共同',
     'Shared Relays': '共同中繼',
     'No shared relays': '沒有共同中繼',
+    'View full profile': '查看完整個人檔案',
   }
 }

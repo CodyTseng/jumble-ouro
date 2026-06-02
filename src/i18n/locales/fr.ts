@@ -925,5 +925,6 @@ export default {
     Shared: 'Partagés',
     'Shared Relays': 'Relais partagés',
     'No shared relays': 'Aucun relais partagé',
+    'View full profile': 'Voir le profil complet',
   }
 }

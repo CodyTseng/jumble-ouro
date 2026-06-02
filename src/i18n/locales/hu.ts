@@ -912,5 +912,6 @@ export default {
     Shared: 'Közös',
     'Shared Relays': 'Közös reléi',
     'No shared relays': 'Nincsenek közös relék',
+    'View full profile': 'Teljes profil megtekintése',
   }
 }
