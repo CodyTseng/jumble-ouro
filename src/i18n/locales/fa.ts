@@ -916,5 +916,6 @@ export default {
     Shared: 'مشترک',
     'Shared Relays': 'رله‌های مشترک',
     'No shared relays': 'رله مشترکی وجود ندارد',
+    'View full profile': 'مشاهده پروفایل کامل',
   }
 }

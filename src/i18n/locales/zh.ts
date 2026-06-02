@@ -890,5 +890,6 @@ export default {
     Shared: '共同',
     'Shared Relays': '共同中继',
     'No shared relays': '没有共同中继',
+    'View full profile': '查看完整个人资料',
   }
 }

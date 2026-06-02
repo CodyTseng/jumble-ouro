@@ -915,5 +915,6 @@ export default {
     Shared: '共通',
     'Shared Relays': '共通リレー',
     'No shared relays': '共通リレーはありません',
+    'View full profile': 'プロフィール全体を見る',
   }
 }

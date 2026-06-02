@@ -902,5 +902,6 @@ export default {
     Shared: 'مشتركة',
     'Shared Relays': 'المرحّلات المشتركة',
     'No shared relays': 'لا توجد مرحّلات مشتركة',
+    'View full profile': 'عرض الملف الشخصي الكامل',
   }
 }

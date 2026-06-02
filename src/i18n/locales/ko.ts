@@ -909,5 +909,6 @@ export default {
     Shared: '공유',
     'Shared Relays': '공유 릴레이',
     'No shared relays': '공유 릴레이 없음',
+    'View full profile': '전체 프로필 보기',
   }
 }

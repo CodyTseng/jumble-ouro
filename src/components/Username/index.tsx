@@ -5,6 +5,7 @@ import { toProfile } from '@/lib/link'
 import { cn, isTouchDevice } from '@/lib/utils'
 import { SecondaryPageLink } from '@/PageManager'
 import ProfileCard from '../ProfileCard'
+import ProfilePeek from '../ProfilePeek'
 import TextWithEmojis from '../TextWithEmojis'
 import { useMemo } from 'react'
 
@@ -46,7 +47,7 @@ export default function Username({
   )
 
   if (supportTouch) {
-    return trigger
+    return <ProfilePeek userId={userId}>{trigger}</ProfilePeek>
   }
 
   return (
