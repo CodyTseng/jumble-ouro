@@ -42,9 +42,17 @@ export default function LongFormArticle({
   const [showHighlightEditor, setShowHighlightEditor] = useState(false)
   const [selectedText, setSelectedText] = useState('')
 
+  const [showQuoteEditor, setShowQuoteEditor] = useState(false)
+  const [quoteText, setQuoteText] = useState('')
+
   const handleHighlight = (text: string) => {
     setSelectedText(text)
     setShowHighlightEditor(true)
+  }
+
+  const handleQuote = (text: string) => {
+    setQuoteText(text)
+    setShowQuoteEditor(true)
   }
 
   const components = useMemo(() => {
@@ -177,12 +185,18 @@ export default function LongFormArticle({
           </div>
         )}
       </div>
-      <HighlightButton onHighlight={handleHighlight} containerRef={contentRef} />
+      <HighlightButton onHighlight={handleHighlight} onQuote={handleQuote} containerRef={contentRef} />
       <PostEditor
         highlightedText={selectedText}
         parentStuff={event}
         open={showHighlightEditor}
         setOpen={setShowHighlightEditor}
+      />
+      <PostEditor
+        defaultContent={`> ${quoteText.replace(/\n/g, '\n> ')}\n\n`}
+        parentStuff={event}
+        open={showQuoteEditor}
+        setOpen={setShowQuoteEditor}
       />
     </>
   )

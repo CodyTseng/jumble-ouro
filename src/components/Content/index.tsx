@@ -127,9 +127,17 @@ export default function Content({
     return emojiCount > 0 && emojiCount <= 3
   }, [nodes])
 
+  const [showQuoteEditor, setShowQuoteEditor] = useState(false)
+  const [quoteText, setQuoteText] = useState('')
+
   const handleHighlight = (text: string) => {
     setSelectedText(text)
     setShowHighlightEditor(true)
+  }
+
+  const handleQuote = (text: string) => {
+    setQuoteText(text)
+    setShowQuoteEditor(true)
   }
 
   if (!resolvedContent) {
@@ -143,7 +151,7 @@ export default function Content({
           <MarkdownContent content={resolvedContent} event={event} />
         </div>
         {enableHighlight && (
-          <HighlightButton onHighlight={handleHighlight} containerRef={contentRef} />
+          <HighlightButton onHighlight={handleHighlight} onQuote={event ? handleQuote : undefined} containerRef={contentRef} />
         )}
         {enableHighlight && (
           <PostEditor
@@ -151,6 +159,14 @@ export default function Content({
             parentStuff={event}
             open={showHighlightEditor}
             setOpen={setShowHighlightEditor}
+          />
+        )}
+        {enableHighlight && event && (
+          <PostEditor
+            defaultContent={`> ${quoteText.replace(/\n/g, '\n> ')}\n\n`}
+            parentStuff={event}
+            open={showQuoteEditor}
+            setOpen={setShowQuoteEditor}
           />
         )}
       </>
@@ -262,7 +278,7 @@ export default function Content({
         {lastNormalUrl && <WebPreview className="mt-2" url={lastNormalUrl} />}
       </div>
       {enableHighlight && (
-        <HighlightButton onHighlight={handleHighlight} containerRef={contentRef} />
+        <HighlightButton onHighlight={handleHighlight} onQuote={event ? handleQuote : undefined} containerRef={contentRef} />
       )}
       {enableHighlight && (
         <PostEditor
@@ -270,6 +286,14 @@ export default function Content({
           parentStuff={event}
           open={showHighlightEditor}
           setOpen={setShowHighlightEditor}
+        />
+      )}
+      {enableHighlight && event && (
+        <PostEditor
+          defaultContent={`> ${quoteText.replace(/\n/g, '\n> ')}\n\n`}
+          parentStuff={event}
+          open={showQuoteEditor}
+          setOpen={setShowQuoteEditor}
         />
       )}
     </>
