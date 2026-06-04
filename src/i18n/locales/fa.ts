@@ -917,5 +917,7 @@ export default {
     'Shared Relays': 'رله‌های مشترک',
     'No shared relays': 'رله مشترکی وجود ندارد',
     'View full profile': 'مشاهده پروفایل کامل',
+    'Follow user': 'دنبال کردن کاربر',
+    'Unfollow user': 'لغو دنبال کردن کاربر',
   }
 }

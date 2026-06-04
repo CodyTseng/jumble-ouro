@@ -923,5 +923,7 @@ export default {
     'Shared Relays': 'Relays partilhados',
     'No shared relays': 'Nenhum relay partilhado',
     'View full profile': 'Ver perfil completo',
+    'Follow user': 'Seguir utilizador',
+    'Unfollow user': 'Deixar de seguir utilizador',
   }
 }

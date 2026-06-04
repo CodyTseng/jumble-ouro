@@ -5,6 +5,7 @@ import { pubkeyToNpub } from '@/lib/pubkey'
 import { simplifyUrl } from '@/lib/url'
 import { useCurrentRelays } from '@/providers/CurrentRelaysProvider'
 import { useFavoriteRelays } from '@/providers/FavoriteRelaysProvider'
+import { useFollowList } from '@/providers/FollowListProvider'
 import { useMuteList } from '@/providers/MuteListProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import { usePinList } from '@/providers/PinListProvider'
@@ -21,7 +22,9 @@ import {
   SatelliteDish,
   Share2,
   Trash2,
-  TriangleAlert
+  TriangleAlert,
+  UserMinus,
+  UserPlus
 } from 'lucide-react'
 import { Event, kinds } from 'nostr-tools'
 import { useMemo } from 'react'
@@ -52,6 +55,7 @@ interface UseMenuActionsProps {
   setIsRawEventDialogOpen: (open: boolean) => void
   setIsReportDialogOpen: (open: boolean) => void
   setIsShareImageDialogOpen: (open: boolean) => void
+  setIsUnfollowDialogOpen: (open: boolean) => void
   isSmallScreen: boolean
 }
 
@@ -62,10 +66,12 @@ export function useMenuActions({
   setIsRawEventDialogOpen,
   setIsReportDialogOpen,
   setIsShareImageDialogOpen,
+  setIsUnfollowDialogOpen,
   isSmallScreen
 }: UseMenuActionsProps) {
   const { t } = useTranslation()
-  const { pubkey, attemptDelete } = useNostr()
+  const { pubkey, attemptDelete, checkLogin } = useNostr()
+  const { followingSet, follow } = useFollowList()
   const { relayUrls: currentBrowsingRelayUrls } = useCurrentRelays()
   const { relaySets, favoriteRelays } = useFavoriteRelays()
   const relayUrls = useMemo(() => {
@@ -185,6 +191,35 @@ export function useMenuActions({
           closeDrawer()
         }
       },
+      ...(pubkey && event.pubkey !== pubkey
+        ? [
+            followingSet.has(event.pubkey)
+              ? {
+                  icon: UserMinus,
+                  label: t('Unfollow user'),
+                  onClick: () => {
+                    closeDrawer()
+                    setIsUnfollowDialogOpen(true)
+                  },
+                  separator: true
+                }
+              : {
+                  icon: UserPlus,
+                  label: t('Follow user'),
+                  onClick: () => {
+                    checkLogin(async () => {
+                      closeDrawer()
+                      try {
+                        await follow(event.pubkey)
+                      } catch {
+                        // errors handled by FollowListProvider
+                      }
+                    })
+                  },
+                  separator: true
+                }
+          ]
+        : []),
       {
         icon: Share2,
         label: t('Share'),
@@ -355,9 +390,13 @@ export function useMenuActions({
     isSmallScreen,
     broadcastSubMenu,
     pinnedEventHexIdSet,
+    followingSet,
     closeDrawer,
     showSubMenuActions,
     setIsRawEventDialogOpen,
+    setIsUnfollowDialogOpen,
+    follow,
+    checkLogin,
     mutePubkeyPrivately,
     mutePubkeyPublicly,
     unmutePubkey

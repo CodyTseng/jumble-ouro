@@ -910,5 +910,7 @@ export default {
     'Shared Relays': '공유 릴레이',
     'No shared relays': '공유 릴레이 없음',
     'View full profile': '전체 프로필 보기',
+    'Follow user': '사용자 팔로우',
+    'Unfollow user': '사용자 언팔로우',
   }
 }

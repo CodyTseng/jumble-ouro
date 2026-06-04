@@ -886,5 +886,7 @@ export default {
     'Shared Relays': '共同中繼',
     'No shared relays': '沒有共同中繼',
     'View full profile': '查看完整個人檔案',
+    'Follow user': '追蹤使用者',
+    'Unfollow user': '取消追蹤使用者',
   }
 }

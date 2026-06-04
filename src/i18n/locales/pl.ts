@@ -922,5 +922,7 @@ export default {
     'Shared Relays': 'Wspólne przekaźniki',
     'No shared relays': 'Brak wspólnych przekaźników',
     'View full profile': 'Zobacz pełny profil',
+    'Follow user': 'Obserwuj użytkownika',
+    'Unfollow user': 'Przestań obserwować użytkownika',
   }
 }

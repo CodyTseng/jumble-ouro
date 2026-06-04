@@ -7,6 +7,7 @@ import { DesktopMenu } from './DesktopMenu'
 import { MobileMenu } from './MobileMenu'
 import RawEventDialog from './RawEventDialog'
 import ReportDialog from './ReportDialog'
+import UnfollowDialog from './UnfollowDialog'
 import { SubMenuAction, useMenuActions } from './useMenuActions'
 
 export default function NoteOptions({ event, className }: { event: Event; className?: string }) {
@@ -14,6 +15,7 @@ export default function NoteOptions({ event, className }: { event: Event; classN
   const [isRawEventDialogOpen, setIsRawEventDialogOpen] = useState(false)
   const [isReportDialogOpen, setIsReportDialogOpen] = useState(false)
   const [isShareImageDialogOpen, setIsShareImageDialogOpen] = useState(false)
+  const [isUnfollowDialogOpen, setIsUnfollowDialogOpen] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [showSubMenu, setShowSubMenu] = useState(false)
   const [activeSubMenu, setActiveSubMenu] = useState<SubMenuAction[]>([])
@@ -41,6 +43,7 @@ export default function NoteOptions({ event, className }: { event: Event; classN
     setIsRawEventDialogOpen,
     setIsReportDialogOpen,
     setIsShareImageDialogOpen,
+    setIsUnfollowDialogOpen,
     isSmallScreen
   })
 
@@ -85,6 +88,11 @@ export default function NoteOptions({ event, className }: { event: Event; classN
         event={event}
         isOpen={isShareImageDialogOpen}
         closeDialog={() => setIsShareImageDialogOpen(false)}
+      />
+      <UnfollowDialog
+        pubkey={event.pubkey}
+        isOpen={isUnfollowDialogOpen}
+        onClose={() => setIsUnfollowDialogOpen(false)}
       />
     </div>
   )

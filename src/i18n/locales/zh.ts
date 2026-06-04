@@ -891,5 +891,7 @@ export default {
     'Shared Relays': '共同中继',
     'No shared relays': '没有共同中继',
     'View full profile': '查看完整个人资料',
+    'Follow user': '关注用户',
+    'Unfollow user': '取消关注用户',
   }
 }
