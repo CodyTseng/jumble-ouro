@@ -903,5 +903,7 @@ export default {
     'Shared Relays': 'المرحّلات المشتركة',
     'No shared relays': 'لا توجد مرحّلات مشتركة',
     'View full profile': 'عرض الملف الشخصي الكامل',
+    'Follow user': 'متابعة المستخدم',
+    'Unfollow user': 'إلغاء متابعة المستخدم',
   }
 }

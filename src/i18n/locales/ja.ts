@@ -916,5 +916,7 @@ export default {
     'Shared Relays': '共通リレー',
     'No shared relays': '共通リレーはありません',
     'View full profile': 'プロフィール全体を見る',
+    'Follow user': 'ユーザーをフォロー',
+    'Unfollow user': 'ユーザーのフォローを解除',
   }
 }

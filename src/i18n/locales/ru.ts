@@ -922,5 +922,7 @@ export default {
     'Shared Relays': 'Общие реле',
     'No shared relays': 'Нет общих реле',
     'View full profile': 'Просмотреть полный профиль',
+    'Follow user': 'Подписаться на пользователя',
+    'Unfollow user': 'Отписаться от пользователя',
   }
 }
