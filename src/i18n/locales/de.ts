@@ -932,5 +932,9 @@ export default {
     'View full profile': 'Vollständiges Profil anzeigen',
     'Follow user': 'Benutzer folgen',
     'Unfollow user': 'Benutzer entfolgen',
+    'Like note': 'Notiz liken',
+    'Reply to note': 'Auf Notiz antworten',
+    'Repost note': 'Notiz reposten',
+    'Bookmark note': 'Notiz als Lesezeichen speichern',
   }
 }

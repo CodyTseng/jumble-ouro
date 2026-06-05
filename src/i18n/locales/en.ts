@@ -913,5 +913,9 @@ export default {
     'View full profile': 'View full profile',
     'Follow user': 'Follow user',
     'Unfollow user': 'Unfollow user',
+    'Like note': 'Like note',
+    'Reply to note': 'Reply to note',
+    'Repost note': 'Repost note',
+    'Bookmark note': 'Bookmark note',
   }
 }

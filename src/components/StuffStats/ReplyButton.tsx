@@ -19,6 +19,7 @@ export default function ReplyButton({ stuff }: { stuff: Event | string }) {
   return (
     <>
       <button
+        data-action="reply"
         className={cn(
           'flex h-full items-center gap-1 pr-3 enabled:hover:text-blue-400',
           hasReplied ? 'text-blue-400' : 'text-muted-foreground'

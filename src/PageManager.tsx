@@ -209,6 +209,24 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
           clearNoteFocus()
           break
         }
+        case 'l':
+        case 'r':
+        case 't':
+        case 'b': {
+          if (!focusedNoteRef.current) break
+          e.preventDefault()
+          const actionMap: Record<string, string> = {
+            l: 'like',
+            r: 'reply',
+            t: 'repost',
+            b: 'bookmark'
+          }
+          const btn = focusedNoteRef.current.querySelector<HTMLButtonElement>(
+            `[data-action="${actionMap[e.key]}"]`
+          )
+          if (btn && !btn.disabled) btn.click()
+          break
+        }
       }
     }
     window.addEventListener('keydown', handleKeyDown)

@@ -905,5 +905,9 @@ export default {
     'View full profile': 'عرض الملف الشخصي الكامل',
     'Follow user': 'متابعة المستخدم',
     'Unfollow user': 'إلغاء متابعة المستخدم',
+    'Like note': 'إعجاب بالملاحظة',
+    'Reply to note': 'الرد على الملاحظة',
+    'Repost note': 'إعادة نشر الملاحظة',
+    'Bookmark note': 'حفظ الملاحظة',
   }
 }

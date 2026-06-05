@@ -138,6 +138,10 @@ export default function KeyboardShortcutsDialog({
                 }
                 label={t('Open note')}
               />
+              <ShortcutRow keys={<Kbd>l</Kbd>} label={t('Like note')} />
+              <ShortcutRow keys={<Kbd>r</Kbd>} label={t('Reply to note')} />
+              <ShortcutRow keys={<Kbd>t</Kbd>} label={t('Repost note')} />
+              <ShortcutRow keys={<Kbd>b</Kbd>} label={t('Bookmark note')} />
             </div>
           </div>
           <div>

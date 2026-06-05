@@ -918,5 +918,9 @@ export default {
     'View full profile': 'プロフィール全体を見る',
     'Follow user': 'ユーザーをフォロー',
     'Unfollow user': 'ユーザーのフォローを解除',
+    'Like note': 'ノートにいいね',
+    'Reply to note': 'ノートに返信',
+    'Repost note': 'ノートをリポスト',
+    'Bookmark note': 'ノートをブックマーク',
   }
 }
