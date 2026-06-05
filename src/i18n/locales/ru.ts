@@ -924,5 +924,9 @@ export default {
     'View full profile': 'Просмотреть полный профиль',
     'Follow user': 'Подписаться на пользователя',
     'Unfollow user': 'Отписаться от пользователя',
+    'Like note': 'Нравится заметка',
+    'Reply to note': 'Ответить на заметку',
+    'Repost note': 'Репост заметки',
+    'Bookmark note': 'Добавить заметку в закладки',
   }
 }

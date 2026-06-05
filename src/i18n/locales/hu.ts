@@ -915,5 +915,9 @@ export default {
     'View full profile': 'Teljes profil megtekintése',
     'Follow user': 'Felhasználó követése',
     'Unfollow user': 'Felhasználó követésének megszüntetése',
+    'Like note': 'Jegyzet kedvelése',
+    'Reply to note': 'Válasz a jegyzetre',
+    'Repost note': 'Jegyzet újraküldése',
+    'Bookmark note': 'Jegyzet könyvjelzőzése',
   }
 }

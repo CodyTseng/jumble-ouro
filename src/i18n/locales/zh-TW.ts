@@ -888,5 +888,9 @@ export default {
     'View full profile': '查看完整個人檔案',
     'Follow user': '追蹤使用者',
     'Unfollow user': '取消追蹤使用者',
+    'Like note': '喜歡筆記',
+    'Reply to note': '回覆筆記',
+    'Repost note': '轉發筆記',
+    'Bookmark note': '收藏筆記',
   }
 }

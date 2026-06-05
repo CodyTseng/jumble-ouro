@@ -919,5 +919,9 @@ export default {
     'View full profile': 'مشاهده پروفایل کامل',
     'Follow user': 'دنبال کردن کاربر',
     'Unfollow user': 'لغو دنبال کردن کاربر',
+    'Like note': 'پسندیدن یادداشت',
+    'Reply to note': 'پاسخ به یادداشت',
+    'Repost note': 'بازنشر یادداشت',
+    'Bookmark note': 'نشانک‌گذاری یادداشت',
   }
 }

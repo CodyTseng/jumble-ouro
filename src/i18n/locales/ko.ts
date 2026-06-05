@@ -912,5 +912,9 @@ export default {
     'View full profile': '전체 프로필 보기',
     'Follow user': '사용자 팔로우',
     'Unfollow user': '사용자 언팔로우',
+    'Like note': '노트 좋아요',
+    'Reply to note': '노트에 답글',
+    'Repost note': '노트 리포스트',
+    'Bookmark note': '노트 북마크',
   }
 }

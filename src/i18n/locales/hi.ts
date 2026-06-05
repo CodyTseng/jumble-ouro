@@ -920,5 +920,9 @@ export default {
     'View full profile': 'पूरी प्रोफ़ाइल देखें',
     'Follow user': 'उपयोगकर्ता को फ़ॉलो करें',
     'Unfollow user': 'उपयोगकर्ता को अनफ़ॉलो करें',
+    'Like note': 'नोट को लाइक करें',
+    'Reply to note': 'नोट का जवाब दें',
+    'Repost note': 'नोट को रीपोस्ट करें',
+    'Bookmark note': 'नोट को बुकमार्क करें',
   }
 }

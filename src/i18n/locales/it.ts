@@ -924,5 +924,9 @@ export default {
     'View full profile': 'Visualizza profilo completo',
     'Follow user': 'Segui utente',
     'Unfollow user': 'Smetti di seguire utente',
+    'Like note': 'Mi piace alla nota',
+    'Reply to note': 'Rispondi alla nota',
+    'Repost note': 'Ripubblica nota',
+    'Bookmark note': 'Aggiungi nota ai segnalibri',
   }
 }

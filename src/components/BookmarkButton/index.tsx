@@ -59,6 +59,7 @@ export default function BookmarkButton({ stuff }: { stuff: Event | string }) {
 
   return (
     <button
+      data-action="bookmark"
       className={`flex items-center gap-1 ${
         isBookmarked ? 'text-rose-400' : 'text-muted-foreground'
       } h-full px-3 enabled:hover:text-rose-400 disabled:cursor-default disabled:text-muted-foreground/40`}

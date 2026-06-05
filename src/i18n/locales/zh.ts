@@ -893,5 +893,9 @@ export default {
     'View full profile': '查看完整个人资料',
     'Follow user': '关注用户',
     'Unfollow user': '取消关注用户',
+    'Like note': '喜欢笔记',
+    'Reply to note': '回复笔记',
+    'Repost note': '转发笔记',
+    'Bookmark note': '收藏笔记',
   }
 }

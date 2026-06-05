@@ -906,5 +906,9 @@ export default {
     'View full profile': 'ดูโปรไฟล์ทั้งหมด',
     'Follow user': 'ติดตามผู้ใช้',
     'Unfollow user': 'เลิกติดตามผู้ใช้',
+    'Like note': 'ถูกใจโน้ต',
+    'Reply to note': 'ตอบกลับโน้ต',
+    'Repost note': 'รีโพสต์โน้ต',
+    'Bookmark note': 'บุ๊กมาร์กโน้ต',
   }
 }
