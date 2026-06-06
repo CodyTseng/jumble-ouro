@@ -83,6 +83,7 @@ class LocalStorageService {
   private processedSyncRequestIds: string[] = []
   private disableNotificationSync: boolean = false
   private searchHistory: TSearchHistoryItem[] = []
+  private audioPlaybackSpeed: number = 1
 
   constructor() {
     if (!LocalStorageService.instance) {
@@ -467,6 +468,14 @@ class LocalStorageService {
         }
       } catch {
         // Invalid JSON, use default
+      }
+    }
+
+    const audioPlaybackSpeedStr = window.localStorage.getItem(StorageKey.AUDIO_PLAYBACK_SPEED)
+    if (audioPlaybackSpeedStr) {
+      const speed = parseFloat(audioPlaybackSpeedStr)
+      if (!isNaN(speed) && speed > 0) {
+        this.audioPlaybackSpeed = speed
       }
     }
 
@@ -1018,6 +1027,15 @@ class LocalStorageService {
   clearSearchHistory() {
     this.searchHistory = []
     window.localStorage.setItem(StorageKey.SEARCH_HISTORY, JSON.stringify(this.searchHistory))
+  }
+
+  getAudioPlaybackSpeed() {
+    return this.audioPlaybackSpeed
+  }
+
+  setAudioPlaybackSpeed(speed: number) {
+    this.audioPlaybackSpeed = speed
+    window.localStorage.setItem(StorageKey.AUDIO_PLAYBACK_SPEED, speed.toString())
   }
 }
 

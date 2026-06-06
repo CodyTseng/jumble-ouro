@@ -3,10 +3,13 @@ import { Slider } from '@/components/ui/slider'
 import { isInsecureUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
 import { useUserPreferences } from '@/providers/UserPreferencesProvider'
+import storage from '@/services/local-storage.service'
 import mediaManager from '@/services/media-manager.service'
 import { Minimize2, Pause, Play, X } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import ExternalLink from '../ExternalLink'
+
+const PLAYBACK_SPEEDS = [1, 1.25, 1.5, 2, 0.75]
 
 interface AudioPlayerProps {
   src: string
@@ -29,6 +32,7 @@ export default function AudioPlayer({
   const [currentTime, setCurrentTime] = useState(0)
   const [duration, setDuration] = useState(0)
   const [error, setError] = useState(false)
+  const [playbackRate, setPlaybackRate] = useState(() => storage.getAudioPlaybackSpeed())
   const seekTimeoutRef = useRef<ReturnType<typeof setTimeout>>()
   const isSeeking = useRef(false)
   const containerRef = useRef<HTMLDivElement>(null)
@@ -92,6 +96,20 @@ export default function AudioPlayer({
       observer.unobserve(container)
     }
   }, [])
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.playbackRate = playbackRate
+    }
+  }, [playbackRate])
+
+  const cycleSpeed = () => {
+    const currentIndex = PLAYBACK_SPEEDS.indexOf(playbackRate)
+    const nextIndex = (currentIndex + 1) % PLAYBACK_SPEEDS.length
+    const nextSpeed = PLAYBACK_SPEEDS[nextIndex]
+    setPlaybackRate(nextSpeed)
+    storage.setAudioPlaybackSpeed(nextSpeed)
+  }
 
   const togglePlay = () => {
     const audio = audioRef.current
@@ -159,6 +177,14 @@ export default function AudioPlayer({
       <div className="font-mono text-sm text-muted-foreground">
         {formatTime(Math.max(duration - currentTime, 0))}
       </div>
+      <Button
+        variant="ghost"
+        size="icon"
+        className="min-w-8 shrink-0 rounded-full text-xs font-semibold text-muted-foreground"
+        onClick={cycleSpeed}
+      >
+        {playbackRate}x
+      </Button>
       {isMinimized ? (
         <Button
           variant="ghost"
