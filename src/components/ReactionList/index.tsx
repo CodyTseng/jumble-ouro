@@ -3,19 +3,25 @@ import { SPECIAL_TRUST_SCORE_FILTER_ID } from '@/constants'
 import { useStuff } from '@/hooks/useStuff'
 import { useStuffStatsById } from '@/hooks/useStuffStatsById'
 import { toNote } from '@/lib/link'
+import { cn } from '@/lib/utils'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { useUserTrust } from '@/providers/UserTrustProvider'
 import { TEmoji } from '@/types'
 import { Event } from 'nostr-tools'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Emoji from '../Emoji'
 import { FormattedTimestamp } from '../FormattedTimestamp'
 import Nip05 from '../Nip05'
 import UserAvatar from '../UserAvatar'
 import Username from '../Username'
+import { ScrollArea, ScrollBar } from '../ui/scroll-area'
 
 const SHOW_COUNT = 20
+
+function getEmojiKey(emoji: string | TEmoji): string {
+  return typeof emoji === 'string' ? emoji : emoji.url
+}
 
 export default function ReactionList({ stuff }: { stuff: Event | string }) {
   const { t } = useTranslation()
@@ -33,6 +39,7 @@ export default function ReactionList({ stuff }: { stuff: Event | string }) {
       created_at: number
     }>
   >([])
+  const [selectedEmojiKey, setSelectedEmojiKey] = useState<string | null>(null)
 
   useEffect(() => {
     const filterLikes = async () => {
@@ -62,11 +69,34 @@ export default function ReactionList({ stuff }: { stuff: Event | string }) {
     filterLikes()
   }, [noteStats, stuffKey, getMinTrustScore, meetsMinTrustScore])
 
+  const emojiGroups = useMemo(() => {
+    const groups = new Map<string, { emoji: string | TEmoji; count: number }>()
+    filteredLikes.forEach((like) => {
+      const key = getEmojiKey(like.emoji)
+      const existing = groups.get(key)
+      if (existing) {
+        existing.count++
+      } else {
+        groups.set(key, { emoji: like.emoji, count: 1 })
+      }
+    })
+    return Array.from(groups.entries()).sort((a, b) => b[1].count - a[1].count)
+  }, [filteredLikes])
+
+  const displayedLikes = useMemo(() => {
+    if (selectedEmojiKey === null) return filteredLikes
+    return filteredLikes.filter((like) => getEmojiKey(like.emoji) === selectedEmojiKey)
+  }, [filteredLikes, selectedEmojiKey])
+
   const [showCount, setShowCount] = useState(SHOW_COUNT)
   const bottomRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
-    if (!bottomRef.current || filteredLikes.length <= showCount) return
+    setShowCount(SHOW_COUNT)
+  }, [selectedEmojiKey])
+
+  useEffect(() => {
+    if (!bottomRef.current || displayedLikes.length <= showCount) return
     const obs = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) setShowCount((c) => c + SHOW_COUNT)
@@ -75,11 +105,48 @@ export default function ReactionList({ stuff }: { stuff: Event | string }) {
     )
     obs.observe(bottomRef.current)
     return () => obs.disconnect()
-  }, [filteredLikes.length, showCount])
+  }, [displayedLikes.length, showCount])
 
   return (
     <div className="min-h-[80vh]">
-      {filteredLikes.slice(0, showCount).map((like) => (
+      {filteredLikes.length > 0 && emojiGroups.length > 0 && (
+        <div className="border-b px-4 py-2">
+          <ScrollArea>
+            <div className="flex gap-1">
+              <button
+                className={cn(
+                  'flex h-7 shrink-0 items-center gap-1.5 rounded-full border px-2.5 text-sm transition-colors',
+                  selectedEmojiKey === null
+                    ? 'border-primary bg-primary text-primary-foreground'
+                    : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                )}
+                onClick={() => setSelectedEmojiKey(null)}
+              >
+                <span>{t('All')}</span>
+                <span>{filteredLikes.length}</span>
+              </button>
+              {emojiGroups.map(([key, { emoji, count }]) => (
+                <button
+                  key={key}
+                  className={cn(
+                    'flex h-7 shrink-0 items-center gap-1.5 rounded-full border px-2.5 text-sm transition-colors',
+                    selectedEmojiKey === key
+                      ? 'border-primary bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground hover:bg-accent hover:text-accent-foreground'
+                  )}
+                  onClick={() => setSelectedEmojiKey(key)}
+                >
+                  <Emoji emoji={emoji} classNames={{ img: 'size-4' }} />
+                  <span>{count}</span>
+                </button>
+              ))}
+            </div>
+            <ScrollBar orientation="horizontal" />
+          </ScrollArea>
+        </div>
+      )}
+
+      {displayedLikes.slice(0, showCount).map((like) => (
         <div
           key={like.id}
           className="clickable flex items-center gap-3 border-b px-4 py-3 transition-colors"
@@ -117,7 +184,7 @@ export default function ReactionList({ stuff }: { stuff: Event | string }) {
       <div ref={bottomRef} />
 
       <div className="mt-2 text-center text-sm text-muted-foreground">
-        {filteredLikes.length > 0 ? t('No more reactions') : t('No reactions yet')}
+        {displayedLikes.length > 0 ? t('No more reactions') : t('No reactions yet')}
       </div>
     </div>
   )
