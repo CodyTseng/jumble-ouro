@@ -910,5 +910,12 @@ export default {
     'Reply to note': 'ตอบกลับโน้ต',
     'Repost note': 'รีโพสต์โน้ต',
     'Bookmark note': 'บุ๊กมาร์กโน้ต',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'เริ่มต้นด้วยการเรียกดูฟีดรีเลย์เพื่อค้นพบเนื้อหา หรือค้นหาคนที่คุณรู้จัก',
+    'Browse Relay Feeds': 'เรียกดูฟีดรีเลย์',
+    'Explore content from Nostr relays': 'สำรวจเนื้อหาจากรีเลย์ Nostr',
+    'Discover Trending': 'ค้นพบเทรนด์',
+    'See trending topics and popular notes': 'ดูหัวข้อยอดนิยมและโน้ตที่ได้รับความนิยม',
+    'Find and follow people you know': 'ค้นหาและติดตามคนที่คุณรู้จัก',
   }
 }

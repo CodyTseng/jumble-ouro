@@ -928,5 +928,12 @@ export default {
     'Reply to note': 'Ответить на заметку',
     'Repost note': 'Репост заметки',
     'Bookmark note': 'Добавить заметку в закладки',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Начните с просмотра лент ретрансляторов для поиска контента или найдите людей, которых вы знаете.',
+    'Browse Relay Feeds': 'Просмотр лент ретрансляторов',
+    'Explore content from Nostr relays': 'Изучайте контент из ретрансляторов Nostr',
+    'Discover Trending': 'Популярное',
+    'See trending topics and popular notes': 'Смотрите популярные темы и заметки',
+    'Find and follow people you know': 'Найдите и подпишитесь на знакомых',
   }
 }

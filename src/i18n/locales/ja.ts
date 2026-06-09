@@ -922,5 +922,12 @@ export default {
     'Reply to note': 'ノートに返信',
     'Repost note': 'ノートをリポスト',
     'Bookmark note': 'ノートをブックマーク',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'リレーフィードを閲覧してコンテンツを発見するか、知り合いを検索して始めましょう。',
+    'Browse Relay Feeds': 'リレーフィードを閲覧',
+    'Explore content from Nostr relays': 'Nostrリレーのコンテンツを探索',
+    'Discover Trending': 'トレンドを発見',
+    'See trending topics and popular notes': 'トレンドトピックと人気のノートを見る',
+    'Find and follow people you know': '知り合いを見つけてフォロー',
   }
 }

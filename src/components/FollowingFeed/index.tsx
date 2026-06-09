@@ -1,12 +1,11 @@
 import NormalFeed from '@/components/NormalFeed'
-import { Button } from '@/components/ui/button'
 import { SPECIAL_FEED_ID } from '@/constants'
 import { usePrimaryPage } from '@/PageManager'
 import { useFollowList } from '@/providers/FollowListProvider'
 import { useNostr } from '@/providers/NostrProvider'
 import client from '@/services/client.service'
 import { TFeedSubRequest } from '@/types'
-import { Search, UserPlus } from 'lucide-react'
+import { Radio, Search, TrendingUp, UserPlus } from 'lucide-react'
 import { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -50,18 +49,40 @@ export default function FollowingFeed() {
         <h2 className="mb-2 text-2xl font-semibold">{t('Welcome to Jumble!')}</h2>
         <p className="mb-6 max-w-md text-muted-foreground">
           {t(
-            'Your feed is empty because you are not following anyone yet. Start by exploring interesting content and following users you like!'
+            'Start by browsing relay feeds to discover content, or search for people you know.'
           )}
         </p>
-        <div className="flex w-full max-w-md flex-col gap-3 sm:flex-row">
-          <Button size="lg" onClick={() => navigate('search')} className="w-full">
-            <Search className="size-5" />
-            {t('Explore')}
-          </Button>
-          <Button size="lg" variant="outline" onClick={() => navigate('search')} className="w-full">
-            <Search className="size-5" />
-            {t('Search Users')}
-          </Button>
+        <div className="grid w-full max-w-lg gap-3 sm:grid-cols-3">
+          <button
+            onClick={() => navigate('home')}
+            className="flex flex-col items-center gap-2 rounded-xl border-2 border-primary bg-primary/5 p-4 transition-colors hover:bg-primary/10"
+          >
+            <Radio className="size-8 text-primary" />
+            <span className="text-sm font-semibold">{t('Browse Relay Feeds')}</span>
+            <span className="text-xs text-muted-foreground">
+              {t('Explore content from Nostr relays')}
+            </span>
+          </button>
+          <button
+            onClick={() => navigate('search')}
+            className="flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:bg-muted"
+          >
+            <TrendingUp className="size-8 text-muted-foreground" />
+            <span className="text-sm font-semibold">{t('Discover Trending')}</span>
+            <span className="text-xs text-muted-foreground">
+              {t('See trending topics and popular notes')}
+            </span>
+          </button>
+          <button
+            onClick={() => navigate('search')}
+            className="flex flex-col items-center gap-2 rounded-xl border p-4 transition-colors hover:bg-muted"
+          >
+            <Search className="size-8 text-muted-foreground" />
+            <span className="text-sm font-semibold">{t('Search Users')}</span>
+            <span className="text-xs text-muted-foreground">
+              {t('Find and follow people you know')}
+            </span>
+          </button>
         </div>
       </div>
     )

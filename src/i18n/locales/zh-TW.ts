@@ -892,5 +892,12 @@ export default {
     'Reply to note': '回覆筆記',
     'Repost note': '轉發筆記',
     'Bookmark note': '收藏筆記',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      '從瀏覽中繼源開始探索內容，或搜尋你認識的人。',
+    'Browse Relay Feeds': '瀏覽中繼源',
+    'Explore content from Nostr relays': '探索 Nostr 中繼的內容',
+    'Discover Trending': '探索趨勢',
+    'See trending topics and popular notes': '查看熱門話題和熱門筆記',
+    'Find and follow people you know': '尋找並關注你認識的人',
   }
 }

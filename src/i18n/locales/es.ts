@@ -928,5 +928,12 @@ export default {
     'Reply to note': 'Responder a nota',
     'Repost note': 'Republicar nota',
     'Bookmark note': 'Guardar nota',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Comienza explorando los feeds de relays para descubrir contenido, o busca personas que conozcas.',
+    'Browse Relay Feeds': 'Explorar feeds de relays',
+    'Explore content from Nostr relays': 'Descubre contenido de los relays de Nostr',
+    'Discover Trending': 'Descubrir tendencias',
+    'See trending topics and popular notes': 'Ver temas en tendencia y notas populares',
+    'Find and follow people you know': 'Encuentra y sigue a personas que conoces',
   }
 }

@@ -923,5 +923,12 @@ export default {
     'Reply to note': 'پاسخ به یادداشت',
     'Repost note': 'بازنشر یادداشت',
     'Bookmark note': 'نشانک‌گذاری یادداشت',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'با مرور فیدهای رله‌ها برای کشف محتوا شروع کنید، یا افرادی که می‌شناسید را جستجو کنید.',
+    'Browse Relay Feeds': 'مرور فیدهای رله',
+    'Explore content from Nostr relays': 'کاوش محتوا از رله‌های Nostr',
+    'Discover Trending': 'کشف داغ‌ترین‌ها',
+    'See trending topics and popular notes': 'مشاهده موضوعات داغ و یادداشت‌های محبوب',
+    'Find and follow people you know': 'افرادی که می‌شناسید را پیدا کنید و دنبال کنید',
   }
 }
