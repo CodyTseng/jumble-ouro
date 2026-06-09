@@ -909,5 +909,12 @@ export default {
     'Reply to note': 'الرد على الملاحظة',
     'Repost note': 'إعادة نشر الملاحظة',
     'Bookmark note': 'حفظ الملاحظة',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'ابدأ بتصفح موجزات المُرحّلات لاكتشاف المحتوى، أو ابحث عن أشخاص تعرفهم.',
+    'Browse Relay Feeds': 'تصفح موجزات المُرحّلات',
+    'Explore content from Nostr relays': 'استكشف المحتوى من مُرحّلات Nostr',
+    'Discover Trending': 'اكتشف الرائج',
+    'See trending topics and popular notes': 'شاهد المواضيع الرائجة والملاحظات الشائعة',
+    'Find and follow people you know': 'ابحث عن أشخاص تعرفهم وتابعهم',
   }
 }

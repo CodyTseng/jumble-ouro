@@ -917,5 +917,12 @@ export default {
     'Reply to note': 'Reply to note',
     'Repost note': 'Repost note',
     'Bookmark note': 'Bookmark note',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Start by browsing relay feeds to discover content, or search for people you know.',
+    'Browse Relay Feeds': 'Browse Relay Feeds',
+    'Explore content from Nostr relays': 'Explore content from Nostr relays',
+    'Discover Trending': 'Discover Trending',
+    'See trending topics and popular notes': 'See trending topics and popular notes',
+    'Find and follow people you know': 'Find and follow people you know',
   }
 }

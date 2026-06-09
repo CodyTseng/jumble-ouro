@@ -924,5 +924,12 @@ export default {
     'Reply to note': 'नोट का जवाब दें',
     'Repost note': 'नोट को रीपोस्ट करें',
     'Bookmark note': 'नोट को बुकमार्क करें',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'कंटेंट खोजने के लिए रिले फ़ीड ब्राउज़ करके शुरू करें, या जिन लोगों को आप जानते हैं उन्हें खोजें।',
+    'Browse Relay Feeds': 'रिले फ़ीड ब्राउज़ करें',
+    'Explore content from Nostr relays': 'Nostr रिले से कंटेंट खोजें',
+    'Discover Trending': 'ट्रेंडिंग खोजें',
+    'See trending topics and popular notes': 'ट्रेंडिंग विषय और लोकप्रिय नोट्स देखें',
+    'Find and follow people you know': 'जिन लोगों को आप जानते हैं उन्हें खोजें और फ़ॉलो करें',
   }
 }

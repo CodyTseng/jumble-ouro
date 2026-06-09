@@ -897,5 +897,12 @@ export default {
     'Reply to note': '回复笔记',
     'Repost note': '转发笔记',
     'Bookmark note': '收藏笔记',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      '从浏览中继源开始发现内容，或搜索你认识的人。',
+    'Browse Relay Feeds': '浏览中继源',
+    'Explore content from Nostr relays': '探索 Nostr 中继的内容',
+    'Discover Trending': '发现趋势',
+    'See trending topics and popular notes': '查看热门话题和热门笔记',
+    'Find and follow people you know': '查找并关注你认识的人',
   }
 }

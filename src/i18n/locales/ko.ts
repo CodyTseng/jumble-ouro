@@ -916,5 +916,12 @@ export default {
     'Reply to note': '노트에 답글',
     'Repost note': '노트 리포스트',
     'Bookmark note': '노트 북마크',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      '릴레이 피드를 탐색하여 콘텐츠를 발견하거나, 아는 사람을 검색해 보세요.',
+    'Browse Relay Feeds': '릴레이 피드 탐색',
+    'Explore content from Nostr relays': 'Nostr 릴레이의 콘텐츠 탐색',
+    'Discover Trending': '트렌드 발견',
+    'See trending topics and popular notes': '인기 주제와 인기 노트 보기',
+    'Find and follow people you know': '아는 사람을 찾아 팔로우하기',
   }
 }

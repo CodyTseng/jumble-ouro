@@ -919,5 +919,12 @@ export default {
     'Reply to note': 'Válasz a jegyzetre',
     'Repost note': 'Jegyzet újraküldése',
     'Bookmark note': 'Jegyzet könyvjelzőzése',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Kezdd a relay-feedek böngészésével tartalmak felfedezéséhez, vagy keress ismerősöket.',
+    'Browse Relay Feeds': 'Relay-feedek böngészése',
+    'Explore content from Nostr relays': 'Tartalmak felfedezése a Nostr relay-ekről',
+    'Discover Trending': 'Trendek felfedezése',
+    'See trending topics and popular notes': 'Népszerű témák és jegyzelek megtekintése',
+    'Find and follow people you know': 'Találd meg és kövesd az ismerőseidet',
   }
 }

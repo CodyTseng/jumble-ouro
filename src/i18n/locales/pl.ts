@@ -928,5 +928,12 @@ export default {
     'Reply to note': 'Odpowiedz na notatkę',
     'Repost note': 'Udostępnij notatkę ponownie',
     'Bookmark note': 'Dodaj notatkę do zakładek',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Zacznij od przeglądania kanałów przekaźników, aby odkrywać treści, lub wyszukaj osoby, które znasz.',
+    'Browse Relay Feeds': 'Przeglądaj kanały przekaźników',
+    'Explore content from Nostr relays': 'Odkrywaj treści z przekaźników Nostr',
+    'Discover Trending': 'Odkryj popularne',
+    'See trending topics and popular notes': 'Zobacz popularne tematy i notatki',
+    'Find and follow people you know': 'Znajdź i obserwuj osoby, które znasz',
   }
 }

@@ -936,5 +936,12 @@ export default {
     'Reply to note': 'Auf Notiz antworten',
     'Repost note': 'Notiz reposten',
     'Bookmark note': 'Notiz als Lesezeichen speichern',
+    'Start by browsing relay feeds to discover content, or search for people you know.':
+      'Beginne mit dem Durchstöbern von Relay-Feeds, um Inhalte zu entdecken, oder suche nach Personen, die du kennst.',
+    'Browse Relay Feeds': 'Relay-Feeds durchstöbern',
+    'Explore content from Nostr relays': 'Inhalte von Nostr-Relays erkunden',
+    'Discover Trending': 'Trends entdecken',
+    'See trending topics and popular notes': 'Trendthemen und beliebte Notizen ansehen',
+    'Find and follow people you know': 'Finde und folge Personen, die du kennst',
   }
 }
