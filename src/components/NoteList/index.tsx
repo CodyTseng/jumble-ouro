@@ -38,6 +38,32 @@ const LIMIT = 200
 const ALGO_LIMIT = 500
 const SHOW_COUNT = 10
 
+type TTimeGroup = 'today' | 'yesterday' | 'this_week' | 'earlier'
+
+function getTimeGroup(timestamp: number): TTimeGroup {
+  const now = dayjs()
+  const ts = dayjs(timestamp * 1000)
+  if (ts.isSame(now, 'day')) return 'today'
+  if (ts.isSame(now.subtract(1, 'day'), 'day')) return 'yesterday'
+  if (ts.isSame(now, 'week')) return 'this_week'
+  return 'earlier'
+}
+
+const TIME_GROUP_LABELS: Record<TTimeGroup, string> = {
+  today: 'Today',
+  yesterday: 'Yesterday',
+  this_week: 'This Week',
+  earlier: 'Earlier'
+}
+
+function DateGroupHeader({ group, t }: { group: TTimeGroup; t: (key: string) => string }) {
+  return (
+    <div className="px-4 py-2 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+      {t(TIME_GROUP_LABELS[group])}
+    </div>
+  )
+}
+
 export type TNoteListRef = {
   scrollToTop: (behavior?: ScrollBehavior) => void
   refresh: () => void
@@ -486,16 +512,30 @@ const NoteList = forwardRef<
       <div className="min-h-screen">
         {initialLoading && shouldShowLoadingIndicator && <LoadingBar />}
         {pinnedEventIds?.map((id) => <PinnedNoteCard key={id} eventId={id} className="w-full" />)}
-        {visibleItems.map(({ key, event, reposters }) => (
-          <NoteCard
-            key={key}
-            className="w-full"
-            event={event}
-            filterMutedNotes={filterMutedNotes}
-            reposters={reposters}
-            highlighted={highlightedIds.has(event.id)}
-          />
-        ))}
+        {(() => {
+          const hasMultipleGroups =
+            visibleItems.length > 1 &&
+            getTimeGroup(visibleItems[0].event.created_at) !==
+              getTimeGroup(visibleItems[visibleItems.length - 1].event.created_at)
+          return visibleItems.map(({ key, event, reposters }, index) => {
+            const group = getTimeGroup(event.created_at)
+            const prevGroup =
+              index > 0 ? getTimeGroup(visibleItems[index - 1].event.created_at) : null
+            const showHeader = hasMultipleGroups && group !== prevGroup
+            return (
+              <div key={key}>
+                {showHeader && <DateGroupHeader group={group} t={t} />}
+                <NoteCard
+                  className="w-full"
+                  event={event}
+                  filterMutedNotes={filterMutedNotes}
+                  reposters={reposters}
+                  highlighted={highlightedIds.has(event.id)}
+                />
+              </div>
+            )
+          })
+        })()}
         <div ref={bottomRef} />
         {shouldShowLoadingIndicator || filtering || initialLoading ? (
           <NoteCardLoadingSkeleton />
