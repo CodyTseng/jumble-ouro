@@ -923,5 +923,6 @@ export default {
     'Discover Trending': '트렌드 발견',
     'See trending topics and popular notes': '인기 주제와 인기 노트 보기',
     'Find and follow people you know': '아는 사람을 찾아 팔로우하기',
+    'Copy link': '링크 복사',
   }
 }

@@ -924,5 +924,6 @@ export default {
     'Discover Trending': 'Discover Trending',
     'See trending topics and popular notes': 'See trending topics and popular notes',
     'Find and follow people you know': 'Find and follow people you know',
+    'Copy link': 'Copy link',
   }
 }

@@ -917,5 +917,6 @@ export default {
     'Discover Trending': 'ค้นพบเทรนด์',
     'See trending topics and popular notes': 'ดูหัวข้อยอดนิยมและโน้ตที่ได้รับความนิยม',
     'Find and follow people you know': 'ค้นหาและติดตามคนที่คุณรู้จัก',
+    'Copy link': 'คัดลอกลิงก์',
   }
 }

@@ -926,5 +926,6 @@ export default {
     'Discover Trending': 'Trendek felfedezése',
     'See trending topics and popular notes': 'Népszerű témák és jegyzelek megtekintése',
     'Find and follow people you know': 'Találd meg és kövesd az ismerőseidet',
+    'Copy link': 'Link másolása',
   }
 }

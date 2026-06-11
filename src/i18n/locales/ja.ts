@@ -929,5 +929,6 @@ export default {
     'Discover Trending': 'トレンドを発見',
     'See trending topics and popular notes': 'トレンドトピックと人気のノートを見る',
     'Find and follow people you know': '知り合いを見つけてフォロー',
+    'Copy link': 'リンクをコピー',
   }
 }
