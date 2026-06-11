@@ -935,5 +935,6 @@ export default {
     'Discover Trending': 'Популярное',
     'See trending topics and popular notes': 'Смотрите популярные темы и заметки',
     'Find and follow people you know': 'Найдите и подпишитесь на знакомых',
+    'Copy link': 'Копировать ссылку',
   }
 }

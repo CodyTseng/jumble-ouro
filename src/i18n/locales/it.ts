@@ -935,5 +935,6 @@ export default {
     'Discover Trending': 'Scopri le tendenze',
     'See trending topics and popular notes': 'Vedi argomenti di tendenza e note popolari',
     'Find and follow people you know': 'Trova e segui persone che conosci',
+    'Copy link': 'Copia link',
   }
 }

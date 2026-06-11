@@ -916,5 +916,6 @@ export default {
     'Discover Trending': 'اكتشف الرائج',
     'See trending topics and popular notes': 'شاهد المواضيع الرائجة والملاحظات الشائعة',
     'Find and follow people you know': 'ابحث عن أشخاص تعرفهم وتابعهم',
+    'Copy link': 'نسخ الرابط',
   }
 }

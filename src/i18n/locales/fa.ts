@@ -930,5 +930,6 @@ export default {
     'Discover Trending': 'کشف داغ‌ترین‌ها',
     'See trending topics and popular notes': 'مشاهده موضوعات داغ و یادداشت‌های محبوب',
     'Find and follow people you know': 'افرادی که می‌شناسید را پیدا کنید و دنبال کنید',
+    'Copy link': 'کپی لینک',
   }
 }
