@@ -936,5 +936,6 @@ export default {
     'See trending topics and popular notes': 'Смотрите популярные темы и заметки',
     'Find and follow people you know': 'Найдите и подпишитесь на знакомых',
     'Copy link': 'Копировать ссылку',
+    'Could not load relay info': 'Не удалось загрузить информацию о реле',
   }
 }

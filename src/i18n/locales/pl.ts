@@ -936,5 +936,6 @@ export default {
     'See trending topics and popular notes': 'Zobacz popularne tematy i notatki',
     'Find and follow people you know': 'Znajdź i obserwuj osoby, które znasz',
     'Copy link': 'Kopiuj link',
+    'Could not load relay info': 'Nie udało się załadować informacji o przekaźniku',
   }
 }

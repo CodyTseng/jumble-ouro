@@ -944,5 +944,6 @@ export default {
     'See trending topics and popular notes': 'Trendthemen und beliebte Notizen ansehen',
     'Find and follow people you know': 'Finde und folge Personen, die du kennst',
     'Copy link': 'Link kopieren',
+    'Could not load relay info': 'Relay-Informationen konnten nicht geladen werden',
   }
 }
