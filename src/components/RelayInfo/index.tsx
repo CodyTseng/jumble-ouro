@@ -1,6 +1,7 @@
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
+import { Skeleton } from '@/components/ui/skeleton'
 import { IS_COMMUNITY_MODE } from '@/constants'
 import { useFetchRelayInfo } from '@/hooks'
 import { createFakeEvent } from '@/lib/event'
@@ -8,7 +9,16 @@ import { checkNip43Support } from '@/lib/relay'
 import { normalizeHttpUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
 import { useNostr } from '@/providers/NostrProvider'
-import { Check, Copy, ExternalLink, GitBranch, Mail, Share2, SquareCode } from 'lucide-react'
+import {
+  Check,
+  Copy,
+  ExternalLink,
+  GitBranch,
+  Mail,
+  RefreshCw,
+  Share2,
+  SquareCode
+} from 'lucide-react'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { toast } from 'sonner'
@@ -44,14 +54,31 @@ const NIP_FEATURE_MAP: Record<number, string> = {
 export default function RelayInfo({ url, className }: { url: string; className?: string }) {
   const { t } = useTranslation()
   const { checkLogin } = useNostr()
-  const { relayInfo, isFetching } = useFetchRelayInfo(url)
+  const { relayInfo, isFetching, hasError, refetch } = useFetchRelayInfo(url)
   const [open, setOpen] = useState(false)
   const [isMember, setIsMember] = useState(false)
   const supportsNip43 = useMemo(() => checkNip43Support(relayInfo), [relayInfo])
   const shouldShowPostButton = useMemo(() => !supportsNip43 || isMember, [supportsNip43, isMember])
 
-  if (isFetching || !relayInfo) {
-    return null
+  if (isFetching) {
+    return <RelayInfoSkeleton className={className} />
+  }
+
+  if (!relayInfo) {
+    return (
+      <div className={cn('mb-2 space-y-3 px-4', className)}>
+        <div className="text-lg font-semibold break-all">{url}</div>
+        <div className="text-sm text-muted-foreground">
+          {t('Could not load relay info')}
+        </div>
+        {hasError && (
+          <Button variant="outline" size="sm" onClick={refetch}>
+            <RefreshCw className="mr-2 h-4 w-4" />
+            {t('Retry')}
+          </Button>
+        )}
+      </div>
+    )
   }
 
   return (
@@ -197,6 +224,41 @@ export default function RelayInfo({ url, className }: { url: string; className?:
 function formatSoftware(software: string) {
   const parts = software.split('/')
   return parts[parts.length - 1]
+}
+
+function RelayInfoSkeleton({ className }: { className?: string }) {
+  return (
+    <div className={cn('mb-2 space-y-4', className)}>
+      <div className="space-y-4 px-4">
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            <Skeleton className="h-8 w-8 shrink-0 rounded-lg" />
+            <Skeleton className="h-7 w-48" />
+          </div>
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-2/3" />
+        </div>
+        <div className="space-y-2">
+          <Skeleton className="h-4 w-20" />
+          <Skeleton className="h-4 w-56" />
+        </div>
+        <div className="flex gap-8">
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className="h-5 w-24" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className="h-5 w-32" />
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-4 w-16" />
+            <Skeleton className="h-5 w-24" />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 function RelayControls({ url }: { url: string }) {

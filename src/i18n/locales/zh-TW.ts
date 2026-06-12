@@ -900,5 +900,6 @@ export default {
     'See trending topics and popular notes': '查看熱門話題和熱門筆記',
     'Find and follow people you know': '尋找並關注你認識的人',
     'Copy link': '複製連結',
+    'Could not load relay info': '無法載入中繼資訊',
   }
 }

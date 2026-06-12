@@ -931,5 +931,6 @@ export default {
     'See trending topics and popular notes': 'مشاهده موضوعات داغ و یادداشت‌های محبوب',
     'Find and follow people you know': 'افرادی که می‌شناسید را پیدا کنید و دنبال کنید',
     'Copy link': 'کپی لینک',
+    'Could not load relay info': 'بارگذاری اطلاعات رله امکان‌پذیر نبود',
   }
 }

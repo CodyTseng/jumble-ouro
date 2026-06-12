@@ -935,5 +935,6 @@ export default {
     'See trending topics and popular notes': 'Veja tópicos em alta e notas populares',
     'Find and follow people you know': 'Encontre e siga pessoas que você conhece',
     'Copy link': 'Copiar link',
+    'Could not load relay info': 'Não foi possível carregar as informações do relay',
   }
 }

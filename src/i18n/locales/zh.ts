@@ -905,5 +905,6 @@ export default {
     'See trending topics and popular notes': '查看热门话题和热门笔记',
     'Find and follow people you know': '查找并关注你认识的人',
     'Copy link': '复制链接',
+    'Could not load relay info': '无法加载中继信息',
   }
 }

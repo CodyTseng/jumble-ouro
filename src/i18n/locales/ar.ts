@@ -917,5 +917,6 @@ export default {
     'See trending topics and popular notes': 'شاهد المواضيع الرائجة والملاحظات الشائعة',
     'Find and follow people you know': 'ابحث عن أشخاص تعرفهم وتابعهم',
     'Copy link': 'نسخ الرابط',
+    'Could not load relay info': 'تعذّر تحميل معلومات الريلاي',
   }
 }

@@ -927,5 +927,6 @@ export default {
     'See trending topics and popular notes': 'Népszerű témák és jegyzelek megtekintése',
     'Find and follow people you know': 'Találd meg és kövesd az ismerőseidet',
     'Copy link': 'Link másolása',
+    'Could not load relay info': 'Nem sikerült betölteni a relay adatait',
   }
 }
