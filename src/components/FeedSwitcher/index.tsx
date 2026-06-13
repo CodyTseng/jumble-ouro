@@ -1,4 +1,5 @@
 import { IS_COMMUNITY_MODE, COMMUNITY_RELAY_SETS, COMMUNITY_RELAYS } from '@/constants'
+import { useFetchRelayInfo } from '@/hooks/useFetchRelayInfo'
 import { toRelaySettings } from '@/lib/link'
 import { simplifyUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
@@ -50,7 +51,7 @@ export default function FeedSwitcher({ close }: { close?: () => void }) {
           >
             <div className="flex w-full items-center gap-3">
               <RelayIcon url={relay} className="shrink-0" />
-              <div className="w-0 flex-1 truncate">{simplifyUrl(relay)}</div>
+              <RelayFeedLabel url={relay} />
             </div>
           </FeedSwitcherItem>
         ))}
@@ -140,7 +141,7 @@ export default function FeedSwitcher({ close }: { close?: () => void }) {
               >
                 <div className="flex w-full items-center gap-3">
                   <RelayIcon url={relay} className="shrink-0" />
-                  <div className="w-0 flex-1 truncate">{simplifyUrl(relay)}</div>
+                  <RelayFeedLabel url={relay} />
                 </div>
               </FeedSwitcherItem>
             ))}
@@ -190,6 +191,22 @@ function FeedSwitcherItem({
       <div className="flex items-center justify-between gap-2">
         <div className="min-w-0 flex-1 font-medium">{children}</div>
       </div>
+    </div>
+  )
+}
+
+function RelayFeedLabel({ url }: { url: string }) {
+  const { relayInfo } = useFetchRelayInfo(url)
+  const name = relayInfo?.name
+
+  if (!name) {
+    return <div className="w-0 flex-1 truncate">{simplifyUrl(url)}</div>
+  }
+
+  return (
+    <div className="w-0 flex-1">
+      <div className="truncate font-semibold">{name}</div>
+      <div className="truncate text-xs text-muted-foreground">{simplifyUrl(url)}</div>
     </div>
   )
 }

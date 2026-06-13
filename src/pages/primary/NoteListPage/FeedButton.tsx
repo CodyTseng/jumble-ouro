@@ -1,9 +1,9 @@
 import FeedSwitcher from '@/components/FeedSwitcher'
 import RelayIcon from '@/components/RelayIcon'
+import RelayName from '@/components/RelayName'
 import { Drawer, DrawerContent } from '@/components/ui/drawer'
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import { IS_COMMUNITY_MODE, COMMUNITY_RELAY_SETS, COMMUNITY_RELAYS } from '@/constants'
-import { simplifyUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
 import { useFavoriteRelays } from '@/providers/FavoriteRelaysProvider'
 import { useFeed } from '@/providers/FeedProvider'
@@ -94,7 +94,7 @@ const FeedSwitcherTrigger = forwardRef<
       return t('Choose a feed')
     }
     if (feedInfo?.feedType === 'relay') {
-      return simplifyUrl(feedInfo?.id ?? '')
+      return <RelayName url={feedInfo?.id} />
     }
     if (feedInfo?.feedType === 'relays') {
       return feedInfo.name ?? activeRelaySet?.name ?? activeRelaySet?.id
