@@ -937,5 +937,7 @@ export default {
     'Find and follow people you know': 'Найдите и подпишитесь на знакомых',
     'Copy link': 'Копировать ссылку',
     'Could not load relay info': 'Не удалось загрузить информацию о реле',
+    'Load new notes': 'Загрузить новые заметки',
+    'Clear note focus': 'Снять фокус с заметки',
   }
 }

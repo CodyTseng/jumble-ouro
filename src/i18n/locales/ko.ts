@@ -925,5 +925,7 @@ export default {
     'Find and follow people you know': '아는 사람을 찾아 팔로우하기',
     'Copy link': '링크 복사',
     'Could not load relay info': '릴레이 정보를 불러올 수 없습니다',
+    'Load new notes': '새 노트 불러오기',
+    'Clear note focus': '노트 포커스 해제',
   }
 }

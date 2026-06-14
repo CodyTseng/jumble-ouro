@@ -47,6 +47,7 @@ export default function NewNotesButton({
           }}
         >
           <Button
+            data-new-notes-button
             onClick={onClick}
             className="group pointer-events-auto h-fit rounded-full py-2 pl-2 pr-3 hover:bg-primary-hover"
           >

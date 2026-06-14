@@ -941,5 +941,7 @@ export default {
     'Find and follow people you know': 'Trouvez et suivez des personnes que vous connaissez',
     'Copy link': 'Copier le lien',
     'Could not load relay info': 'Impossible de charger les informations du relais',
+    'Load new notes': 'Charger les nouvelles notes',
+    'Clear note focus': 'Effacer le focus de la note',
   }
 }

@@ -933,5 +933,7 @@ export default {
     'Find and follow people you know': 'जिन लोगों को आप जानते हैं उन्हें खोजें और फ़ॉलो करें',
     'Copy link': 'लिंक कॉपी करें',
     'Could not load relay info': 'रिले जानकारी लोड नहीं हो सकी',
+    'Load new notes': 'नई नोट्स लोड करें',
+    'Clear note focus': 'नोट फ़ोकस हटाएं',
   }
 }

@@ -906,5 +906,7 @@ export default {
     'Find and follow people you know': '查找并关注你认识的人',
     'Copy link': '复制链接',
     'Could not load relay info': '无法加载中继信息',
+    'Load new notes': '加载新笔记',
+    'Clear note focus': '清除笔记焦点',
   }
 }
