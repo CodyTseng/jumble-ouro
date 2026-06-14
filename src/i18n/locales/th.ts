@@ -919,5 +919,7 @@ export default {
     'Find and follow people you know': 'ค้นหาและติดตามคนที่คุณรู้จัก',
     'Copy link': 'คัดลอกลิงก์',
     'Could not load relay info': 'ไม่สามารถโหลดข้อมูลรีเลย์ได้',
+    'Load new notes': 'โหลดโน้ตใหม่',
+    'Clear note focus': 'ล้างโฟกัสโน้ต',
   }
 }

@@ -209,6 +209,17 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
           clearNoteFocus()
           break
         }
+        case '.': {
+          e.preventDefault()
+          const btn = document.querySelector<HTMLButtonElement>('[data-new-notes-button]')
+          if (btn) btn.click()
+          break
+        }
+        case 'Escape': {
+          e.preventDefault()
+          clearNoteFocus()
+          break
+        }
         case 'l':
         case 'r':
         case 't':

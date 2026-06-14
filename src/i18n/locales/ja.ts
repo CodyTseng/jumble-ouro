@@ -931,5 +931,7 @@ export default {
     'Find and follow people you know': '知り合いを見つけてフォロー',
     'Copy link': 'リンクをコピー',
     'Could not load relay info': 'リレー情報を読み込めませんでした',
+    'Load new notes': '新しいノートを読み込む',
+    'Clear note focus': 'ノートのフォーカスを解除',
   }
 }

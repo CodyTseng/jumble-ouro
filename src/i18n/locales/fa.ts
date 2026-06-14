@@ -932,5 +932,7 @@ export default {
     'Find and follow people you know': 'افرادی که می‌شناسید را پیدا کنید و دنبال کنید',
     'Copy link': 'کپی لینک',
     'Could not load relay info': 'بارگذاری اطلاعات رله امکان‌پذیر نبود',
+    'Load new notes': 'بارگذاری یادداشت‌های جدید',
+    'Clear note focus': 'حذف فوکوس یادداشت',
   }
 }

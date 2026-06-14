@@ -928,5 +928,7 @@ export default {
     'Find and follow people you know': 'Találd meg és kövesd az ismerőseidet',
     'Copy link': 'Link másolása',
     'Could not load relay info': 'Nem sikerült betölteni a relay adatait',
+    'Load new notes': 'Új bejegyzések betöltése',
+    'Clear note focus': 'Bejegyzés fókusz törlése',
   }
 }

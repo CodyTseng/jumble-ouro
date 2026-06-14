@@ -918,5 +918,7 @@ export default {
     'Find and follow people you know': 'ابحث عن أشخاص تعرفهم وتابعهم',
     'Copy link': 'نسخ الرابط',
     'Could not load relay info': 'تعذّر تحميل معلومات الريلاي',
+    'Load new notes': 'تحميل الملاحظات الجديدة',
+    'Clear note focus': 'إلغاء تركيز الملاحظة',
   }
 }
