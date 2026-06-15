@@ -947,5 +947,9 @@ export default {
     'Could not load relay info': 'Relay-Informationen konnten nicht geladen werden',
     'Load new notes': 'Neue Notizen laden',
     'Clear note focus': 'Notiz-Fokus aufheben',
+    'Select a note, profile, or relay to view here':
+      'Wähle eine Notiz, ein Profil oder ein Relay zur Anzeige hier aus',
+    'Navigate notes': 'Notizen navigieren',
+    'All shortcuts': 'Alle Tastenkürzel',
   }
 }

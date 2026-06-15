@@ -940,5 +940,9 @@ export default {
     'Could not load relay info': 'Não foi possível carregar as informações do relay',
     'Load new notes': 'Carregar novas notas',
     'Clear note focus': 'Limpar foco da nota',
+    'Select a note, profile, or relay to view here':
+      'Selecione uma nota, perfil ou relay para visualizar aqui',
+    'Navigate notes': 'Navegar pelas notas',
+    'All shortcuts': 'Todos os atalhos',
   }
 }

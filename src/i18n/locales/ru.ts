@@ -939,5 +939,9 @@ export default {
     'Could not load relay info': 'Не удалось загрузить информацию о реле',
     'Load new notes': 'Загрузить новые заметки',
     'Clear note focus': 'Снять фокус с заметки',
+    'Select a note, profile, or relay to view here':
+      'Выберите заметку, профиль или реле для просмотра здесь',
+    'Navigate notes': 'Навигация по заметкам',
+    'All shortcuts': 'Все сочетания клавиш',
   }
 }

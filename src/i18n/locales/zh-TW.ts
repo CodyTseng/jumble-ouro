@@ -903,5 +903,9 @@ export default {
     'Could not load relay info': '無法載入中繼資訊',
     'Load new notes': '載入新筆記',
     'Clear note focus': '清除筆記焦點',
+    'Select a note, profile, or relay to view here':
+      '選擇一則筆記、個人資料或中繼來在此查看',
+    'Navigate notes': '瀏覽筆記',
+    'All shortcuts': '所有快捷鍵',
   }
 }

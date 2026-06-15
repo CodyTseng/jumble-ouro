@@ -920,5 +920,9 @@ export default {
     'Could not load relay info': 'تعذّر تحميل معلومات الريلاي',
     'Load new notes': 'تحميل الملاحظات الجديدة',
     'Clear note focus': 'إلغاء تركيز الملاحظة',
+    'Select a note, profile, or relay to view here':
+      'اختر ملاحظة أو ملف شخصي أو ريلاي لعرضه هنا',
+    'Navigate notes': 'التنقل بين الملاحظات',
+    'All shortcuts': 'جميع الاختصارات',
   }
 }
