@@ -935,5 +935,9 @@ export default {
     'Could not load relay info': 'रिले जानकारी लोड नहीं हो सकी',
     'Load new notes': 'नई नोट्स लोड करें',
     'Clear note focus': 'नोट फ़ोकस हटाएं',
+    'Select a note, profile, or relay to view here':
+      'यहाँ देखने के लिए एक नोट, प्रोफ़ाइल या रिले चुनें',
+    'Navigate notes': 'नोट्स नेविगेट करें',
+    'All shortcuts': 'सभी शॉर्टकट',
   }
 }

@@ -927,5 +927,9 @@ export default {
     'Could not load relay info': '릴레이 정보를 불러올 수 없습니다',
     'Load new notes': '새 노트 불러오기',
     'Clear note focus': '노트 포커스 해제',
+    'Select a note, profile, or relay to view here':
+      '여기에서 볼 노트, 프로필 또는 릴레이를 선택하세요',
+    'Navigate notes': '노트 탐색',
+    'All shortcuts': '모든 단축키',
   }
 }

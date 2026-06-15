@@ -934,5 +934,9 @@ export default {
     'Could not load relay info': 'بارگذاری اطلاعات رله امکان‌پذیر نبود',
     'Load new notes': 'بارگذاری یادداشت‌های جدید',
     'Clear note focus': 'حذف فوکوس یادداشت',
+    'Select a note, profile, or relay to view here':
+      'یک یادداشت، پروفایل یا رله را برای مشاهده در اینجا انتخاب کنید',
+    'Navigate notes': 'پیمایش یادداشت‌ها',
+    'All shortcuts': 'همه میانبرها',
   }
 }

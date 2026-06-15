@@ -933,5 +933,9 @@ export default {
     'Could not load relay info': 'リレー情報を読み込めませんでした',
     'Load new notes': '新しいノートを読み込む',
     'Clear note focus': 'ノートのフォーカスを解除',
+    'Select a note, profile, or relay to view here':
+      'ノート、プロフィール、またはリレーを選択してここに表示',
+    'Navigate notes': 'ノートを移動',
+    'All shortcuts': 'すべてのショートカット',
   }
 }

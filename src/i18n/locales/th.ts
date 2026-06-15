@@ -921,5 +921,9 @@ export default {
     'Could not load relay info': 'ไม่สามารถโหลดข้อมูลรีเลย์ได้',
     'Load new notes': 'โหลดโน้ตใหม่',
     'Clear note focus': 'ล้างโฟกัสโน้ต',
+    'Select a note, profile, or relay to view here':
+      'เลือกโน้ต โปรไฟล์ หรือรีเลย์เพื่อดูที่นี่',
+    'Navigate notes': 'เลื่อนดูโน้ต',
+    'All shortcuts': 'ปุ่มลัดทั้งหมด',
   }
 }

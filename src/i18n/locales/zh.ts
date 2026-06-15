@@ -908,5 +908,9 @@ export default {
     'Could not load relay info': '无法加载中继信息',
     'Load new notes': '加载新笔记',
     'Clear note focus': '清除笔记焦点',
+    'Select a note, profile, or relay to view here':
+      '选择一条笔记、个人资料或中继来在此查看',
+    'Navigate notes': '浏览笔记',
+    'All shortcuts': '所有快捷键',
   }
 }

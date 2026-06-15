@@ -939,5 +939,9 @@ export default {
     'Could not load relay info': 'Nie udało się załadować informacji o przekaźniku',
     'Load new notes': 'Załaduj nowe notatki',
     'Clear note focus': 'Usuń fokus notatki',
+    'Select a note, profile, or relay to view here':
+      'Wybierz notatkę, profil lub przekaźnik do wyświetlenia tutaj',
+    'Navigate notes': 'Nawiguj po notatkach',
+    'All shortcuts': 'Wszystkie skróty',
   }
 }

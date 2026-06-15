@@ -1,4 +1,5 @@
 import KeyboardShortcutsDialog from '@/components/KeyboardShortcutsDialog'
+import SecondaryPanelPlaceholder from '@/components/SecondaryPanelPlaceholder'
 import Sidebar from '@/components/Sidebar'
 import { cn } from '@/lib/utils'
 import { CurrentRelaysProvider } from '@/providers/CurrentRelaysProvider'
@@ -615,6 +616,7 @@ export function PageManager({ maxStackSize = 5 }: { maxStackSize?: number }) {
                       secondaryStack.length === 0 ? 'bg-surface' : ''
                     )}
                   >
+                    {secondaryStack.length === 0 && <SecondaryPanelPlaceholder />}
                     {secondaryStack.map((item, index) => (
                       <div
                         key={item.index}
