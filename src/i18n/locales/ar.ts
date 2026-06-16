@@ -924,5 +924,7 @@ export default {
       'اختر ملاحظة أو ملف شخصي أو ريلاي لعرضه هنا',
     'Navigate notes': 'التنقل بين الملاحظات',
     'All shortcuts': 'جميع الاختصارات',
+    'Published to {{count}} relays': 'تم النشر إلى {{count}} ريلايات',
+    'View note': 'عرض الملاحظة',
   }
 }

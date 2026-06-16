@@ -951,5 +951,7 @@ export default {
       'Wähle eine Notiz, ein Profil oder ein Relay zur Anzeige hier aus',
     'Navigate notes': 'Notizen navigieren',
     'All shortcuts': 'Alle Tastenkürzel',
+    'Published to {{count}} relays': 'Veröffentlicht auf {{count}} Relays',
+    'View note': 'Notiz anzeigen',
   }
 }
