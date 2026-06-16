@@ -937,5 +937,7 @@ export default {
       'ノート、プロフィール、またはリレーを選択してここに表示',
     'Navigate notes': 'ノートを移動',
     'All shortcuts': 'すべてのショートカット',
+    'Published to {{count}} relays': '{{count}}個のリレーに公開しました',
+    'View note': 'ノートを表示',
   }
 }

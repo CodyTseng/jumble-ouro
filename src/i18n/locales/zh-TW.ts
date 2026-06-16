@@ -907,5 +907,7 @@ export default {
       '選擇一則筆記、個人資料或中繼來在此查看',
     'Navigate notes': '瀏覽筆記',
     'All shortcuts': '所有快捷鍵',
+    'Published to {{count}} relays': '已發佈到 {{count}} 個中繼',
+    'View note': '查看筆記',
   }
 }

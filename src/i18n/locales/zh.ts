@@ -912,5 +912,7 @@ export default {
       '选择一条笔记、个人资料或中继来在此查看',
     'Navigate notes': '浏览笔记',
     'All shortcuts': '所有快捷键',
+    'Published to {{count}} relays': '已发布到 {{count}} 个中继',
+    'View note': '查看笔记',
   }
 }

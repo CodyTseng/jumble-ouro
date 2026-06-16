@@ -9,9 +9,13 @@ import {
   deleteDraftEventCache
 } from '@/lib/draft-event'
 import { addHashtagsToHistory } from '@/lib/hashtag-history'
+import { toNote } from '@/lib/link'
 import { getDefaultRelayUrls } from '@/lib/relay'
+import { simplifyUrl } from '@/lib/url'
 import { isTouchDevice } from '@/lib/utils'
+import { useSecondaryPage } from '@/PageManager'
 import { useNostr } from '@/providers/NostrProvider'
+import client from '@/services/client.service'
 import postEditorCache from '@/services/post-editor-cache.service'
 import threadService from '@/services/thread.service'
 import { TPollCreateData } from '@/types'
@@ -49,6 +53,7 @@ export default function PostContent({
 }) {
   const { t } = useTranslation()
   const { pubkey, publish, checkLogin } = useNostr()
+  const { push } = useSecondaryPage()
   const [text, setText] = useState('')
   const textareaRef = useRef<TPostTextareaHandle>(null)
   const [posting, setPosting] = useState(false)
@@ -188,7 +193,19 @@ export default function PostContent({
           .map((t) => t[1])
         addHashtagsToHistory(publishedHashtags)
         threadService.addRepliesToThread([newEvent])
-        toast.success(t('Post successful'), { duration: 2000 })
+        const seenRelayUrls = client.getSeenEventRelayUrls(newEvent.id)
+        if (seenRelayUrls.length > 0) {
+          toast.success(t('Published to {{count}} relays', { count: seenRelayUrls.length }), {
+            description: seenRelayUrls.map(simplifyUrl).join(', '),
+            action: {
+              label: t('View note'),
+              onClick: () => push(toNote(newEvent))
+            },
+            duration: 4000
+          })
+        } else {
+          toast.success(t('Post successful'), { duration: 2000 })
+        }
         close()
       } catch (error) {
         const errors = formatError(error)

@@ -943,5 +943,7 @@ export default {
       'Wybierz notatkę, profil lub przekaźnik do wyświetlenia tutaj',
     'Navigate notes': 'Nawiguj po notatkach',
     'All shortcuts': 'Wszystkie skróty',
+    'Published to {{count}} relays': 'Opublikowano na {{count}} przekaźnikach',
+    'View note': 'Zobacz notatkę',
   }
 }

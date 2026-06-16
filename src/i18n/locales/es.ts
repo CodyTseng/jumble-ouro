@@ -943,5 +943,7 @@ export default {
       'Selecciona una nota, perfil o relay para ver aquí',
     'Navigate notes': 'Navegar notas',
     'All shortcuts': 'Todos los atajos',
+    'Published to {{count}} relays': 'Publicado en {{count}} relays',
+    'View note': 'Ver nota',
   }
 }

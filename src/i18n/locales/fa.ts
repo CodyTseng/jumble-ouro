@@ -938,5 +938,7 @@ export default {
       'یک یادداشت، پروفایل یا رله را برای مشاهده در اینجا انتخاب کنید',
     'Navigate notes': 'پیمایش یادداشت‌ها',
     'All shortcuts': 'همه میانبرها',
+    'Published to {{count}} relays': 'در {{count}} رله منتشر شد',
+    'View note': 'مشاهده یادداشت',
   }
 }

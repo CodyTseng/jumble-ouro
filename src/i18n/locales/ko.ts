@@ -931,5 +931,7 @@ export default {
       '여기에서 볼 노트, 프로필 또는 릴레이를 선택하세요',
     'Navigate notes': '노트 탐색',
     'All shortcuts': '모든 단축키',
+    'Published to {{count}} relays': '{{count}}개의 릴레이에 게시됨',
+    'View note': '노트 보기',
   }
 }

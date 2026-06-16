@@ -939,5 +939,7 @@ export default {
       'यहाँ देखने के लिए एक नोट, प्रोफ़ाइल या रिले चुनें',
     'Navigate notes': 'नोट्स नेविगेट करें',
     'All shortcuts': 'सभी शॉर्टकट',
+    'Published to {{count}} relays': '{{count}} रिले पर प्रकाशित',
+    'View note': 'नोट देखें',
   }
 }

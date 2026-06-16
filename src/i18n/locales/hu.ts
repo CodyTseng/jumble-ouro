@@ -934,5 +934,7 @@ export default {
       'Válassz ki egy bejegyzést, profilt vagy relay-t a megtekintéshez',
     'Navigate notes': 'Bejegyzések navigálása',
     'All shortcuts': 'Összes billentyűparancs',
+    'Published to {{count}} relays': 'Közzétéve {{count}} relay-en',
+    'View note': 'Bejegyzés megtekintése',
   }
 }

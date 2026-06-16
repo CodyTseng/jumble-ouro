@@ -925,5 +925,7 @@ export default {
       'เลือกโน้ต โปรไฟล์ หรือรีเลย์เพื่อดูที่นี่',
     'Navigate notes': 'เลื่อนดูโน้ต',
     'All shortcuts': 'ปุ่มลัดทั้งหมด',
+    'Published to {{count}} relays': 'เผยแพร่ไปยัง {{count}} รีเลย์',
+    'View note': 'ดูโน้ต',
   }
 }
