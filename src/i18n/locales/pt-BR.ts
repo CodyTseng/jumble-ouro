@@ -944,5 +944,6 @@ export default {
     'All shortcuts': 'Todos os atalhos',
     'Published to {{count}} relays': 'Publicado em {{count}} relays',
     'View note': 'Ver nota',
+    Related: 'Relacionados',
   }
 }

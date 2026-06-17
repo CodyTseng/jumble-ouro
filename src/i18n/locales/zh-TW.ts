@@ -909,5 +909,6 @@ export default {
     'All shortcuts': '所有快捷鍵',
     'Published to {{count}} relays': '已發佈到 {{count}} 個中繼',
     'View note': '查看筆記',
+    Related: '相關',
   }
 }

@@ -936,5 +936,6 @@ export default {
     'All shortcuts': 'Összes billentyűparancs',
     'Published to {{count}} relays': 'Közzétéve {{count}} relay-en',
     'View note': 'Bejegyzés megtekintése',
+    Related: 'Kapcsolódó',
   }
 }

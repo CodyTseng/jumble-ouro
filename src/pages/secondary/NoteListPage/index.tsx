@@ -1,6 +1,7 @@
 import { Favicon } from '@/components/Favicon'
 import NormalFeed from '@/components/NormalFeed'
 import PostEditor from '@/components/PostEditor'
+import RelatedHashtags from '@/components/RelatedHashtags'
 import { Button } from '@/components/ui/button'
 import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
 import { toProfileList } from '@/lib/link'
@@ -174,6 +175,7 @@ const NoteListPage = forwardRef(({ index }: { index?: number }, ref) => {
       controls={hashtag ? hashtagControls : controls}
       displayScrollToTopButton
     >
+      {hashtag && <RelatedHashtags hashtag={hashtag} />}
       {content}
       {hashtag && (
         <PostEditor

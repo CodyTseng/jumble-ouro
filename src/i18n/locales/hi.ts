@@ -941,5 +941,6 @@ export default {
     'All shortcuts': 'सभी शॉर्टकट',
     'Published to {{count}} relays': '{{count}} रिले पर प्रकाशित',
     'View note': 'नोट देखें',
+    Related: 'संबंधित',
   }
 }
