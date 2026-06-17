@@ -934,5 +934,6 @@ export default {
     'All shortcuts': 'All shortcuts',
     'Published to {{count}} relays': 'Published to {{count}} relays',
     'View note': 'View note',
+    Related: 'Related',
   }
 }

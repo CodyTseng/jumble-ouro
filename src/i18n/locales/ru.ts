@@ -945,5 +945,6 @@ export default {
     'All shortcuts': 'Все сочетания клавиш',
     'Published to {{count}} relays': 'Опубликовано на {{count}} реле',
     'View note': 'Посмотреть заметку',
+    Related: 'Похожие',
   }
 }

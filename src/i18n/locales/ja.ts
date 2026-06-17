@@ -939,5 +939,6 @@ export default {
     'All shortcuts': 'すべてのショートカット',
     'Published to {{count}} relays': '{{count}}個のリレーに公開しました',
     'View note': 'ノートを表示',
+    Related: '関連',
   }
 }

@@ -933,5 +933,6 @@ export default {
     'All shortcuts': '모든 단축키',
     'Published to {{count}} relays': '{{count}}개의 릴레이에 게시됨',
     'View note': '노트 보기',
+    Related: '관련',
   }
 }

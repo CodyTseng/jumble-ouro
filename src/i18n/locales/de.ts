@@ -953,5 +953,6 @@ export default {
     'All shortcuts': 'Alle Tastenkürzel',
     'Published to {{count}} relays': 'Veröffentlicht auf {{count}} Relays',
     'View note': 'Notiz anzeigen',
+    Related: 'Verwandt',
   }
 }

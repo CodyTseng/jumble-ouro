@@ -914,5 +914,6 @@ export default {
     'All shortcuts': '所有快捷键',
     'Published to {{count}} relays': '已发布到 {{count}} 个中继',
     'View note': '查看笔记',
+    Related: '相关',
   }
 }

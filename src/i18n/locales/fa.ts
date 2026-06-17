@@ -940,5 +940,6 @@ export default {
     'All shortcuts': 'همه میانبرها',
     'Published to {{count}} relays': 'در {{count}} رله منتشر شد',
     'View note': 'مشاهده یادداشت',
+    Related: 'مرتبط',
   }
 }

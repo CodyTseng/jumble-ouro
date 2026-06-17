@@ -949,5 +949,6 @@ export default {
     'All shortcuts': 'Tous les raccourcis',
     'Published to {{count}} relays': 'Publié sur {{count}} relais',
     'View note': 'Voir la note',
+    Related: 'Associés',
   }
 }

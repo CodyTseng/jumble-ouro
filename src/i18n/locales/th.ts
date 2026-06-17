@@ -927,5 +927,6 @@ export default {
     'All shortcuts': 'ปุ่มลัดทั้งหมด',
     'Published to {{count}} relays': 'เผยแพร่ไปยัง {{count}} รีเลย์',
     'View note': 'ดูโน้ต',
+    Related: 'ที่เกี่ยวข้อง',
   }
 }

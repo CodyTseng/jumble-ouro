@@ -945,5 +945,6 @@ export default {
     'All shortcuts': 'Tutte le scorciatoie',
     'Published to {{count}} relays': 'Pubblicato su {{count}} relay',
     'View note': 'Visualizza nota',
+    Related: 'Correlati',
   }
 }
