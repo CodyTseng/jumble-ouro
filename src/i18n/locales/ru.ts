@@ -946,5 +946,8 @@ export default {
     'Published to {{count}} relays': 'Опубликовано на {{count}} реле',
     'View note': 'Посмотреть заметку',
     Related: 'Похожие',
+    Bookmarked: 'Добавлено в закладки',
+    'Bookmark removed': 'Закладка удалена',
+    Undo: 'Отменить',
   }
 }

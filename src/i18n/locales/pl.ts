@@ -946,5 +946,8 @@ export default {
     'Published to {{count}} relays': 'Opublikowano na {{count}} przekaźnikach',
     'View note': 'Zobacz notatkę',
     Related: 'Powiązane',
+    Bookmarked: 'Dodano do zakładek',
+    'Bookmark removed': 'Zakładka usunięta',
+    Undo: 'Cofnij',
   }
 }

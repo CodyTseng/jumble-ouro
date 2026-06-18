@@ -937,5 +937,8 @@ export default {
     'Published to {{count}} relays': 'Közzétéve {{count}} relay-en',
     'View note': 'Bejegyzés megtekintése',
     Related: 'Kapcsolódó',
+    Bookmarked: 'Könyvjelzőzve',
+    'Bookmark removed': 'Könyvjelző eltávolítva',
+    Undo: 'Visszavonás',
   }
 }

@@ -927,5 +927,8 @@ export default {
     'Published to {{count}} relays': 'تم النشر إلى {{count}} ريلايات',
     'View note': 'عرض الملاحظة',
     Related: 'ذات صلة',
+    Bookmarked: 'تمت الإضافة للمفضلة',
+    'Bookmark removed': 'تمت إزالة المفضلة',
+    Undo: 'تراجع',
   }
 }
