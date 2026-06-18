@@ -941,5 +941,8 @@ export default {
     'Published to {{count}} relays': 'در {{count}} رله منتشر شد',
     'View note': 'مشاهده یادداشت',
     Related: 'مرتبط',
+    Bookmarked: 'نشانک شد',
+    'Bookmark removed': 'نشانک حذف شد',
+    Undo: 'بازگردانی',
   }
 }

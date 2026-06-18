@@ -910,5 +910,8 @@ export default {
     'Published to {{count}} relays': '已發佈到 {{count}} 個中繼',
     'View note': '查看筆記',
     Related: '相關',
+    Bookmarked: '已收藏',
+    'Bookmark removed': '已取消收藏',
+    Undo: '復原',
   }
 }

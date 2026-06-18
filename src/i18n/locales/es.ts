@@ -946,5 +946,8 @@ export default {
     'Published to {{count}} relays': 'Publicado en {{count}} relays',
     'View note': 'Ver nota',
     Related: 'Relacionados',
+    Bookmarked: 'Marcado',
+    'Bookmark removed': 'Marcador eliminado',
+    Undo: 'Deshacer',
   }
 }

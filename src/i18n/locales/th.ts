@@ -928,5 +928,8 @@ export default {
     'Published to {{count}} relays': 'เผยแพร่ไปยัง {{count}} รีเลย์',
     'View note': 'ดูโน้ต',
     Related: 'ที่เกี่ยวข้อง',
+    Bookmarked: 'บุ๊กมาร์กแล้ว',
+    'Bookmark removed': 'ลบบุ๊กมาร์กแล้ว',
+    Undo: 'เลิกทำ',
   }
 }

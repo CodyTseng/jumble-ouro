@@ -934,5 +934,8 @@ export default {
     'Published to {{count}} relays': '{{count}}개의 릴레이에 게시됨',
     'View note': '노트 보기',
     Related: '관련',
+    Bookmarked: '북마크됨',
+    'Bookmark removed': '북마크 삭제됨',
+    Undo: '실행 취소',
   }
 }

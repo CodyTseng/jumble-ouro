@@ -942,5 +942,8 @@ export default {
     'Published to {{count}} relays': '{{count}} रिले पर प्रकाशित',
     'View note': 'नोट देखें',
     Related: 'संबंधित',
+    Bookmarked: 'बुकमार्क किया गया',
+    'Bookmark removed': 'बुकमार्क हटाया गया',
+    Undo: 'पूर्ववत करें',
   }
 }

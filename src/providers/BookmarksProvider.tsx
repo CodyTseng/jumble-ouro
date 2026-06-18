@@ -55,6 +55,7 @@ export function BookmarksProvider({ children }: { children: React.ReactNode }) {
       errors.forEach((err) => {
         toast.error(`Failed to add bookmark: ${err}`, { duration: 10_000 })
       })
+      throw error
     }
   }
 
@@ -81,6 +82,7 @@ export function BookmarksProvider({ children }: { children: React.ReactNode }) {
       errors.forEach((err) => {
         toast.error(`Failed to remove bookmark: ${err}`, { duration: 10_000 })
       })
+      throw error
     }
   }
 

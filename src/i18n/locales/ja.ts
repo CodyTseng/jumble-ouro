@@ -940,5 +940,8 @@ export default {
     'Published to {{count}} relays': '{{count}}個のリレーに公開しました',
     'View note': 'ノートを表示',
     Related: '関連',
+    Bookmarked: 'ブックマークしました',
+    'Bookmark removed': 'ブックマークを削除しました',
+    Undo: '元に戻す',
   }
 }
