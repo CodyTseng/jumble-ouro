@@ -831,7 +831,7 @@ export default {
     'Do not sync notification read status': 'Benachrichtigungs-Lesestatus nicht synchronisieren',
     'Only update read status locally without publishing to relays':
       'Lesestatus nur lokal aktualisieren, ohne an Relays zu veröffentlichen',
-    'Trending': 'Im Trend',
+    Trending: 'Im Trend',
     'Relay Reviews': 'Relay-Bewertungen',
     'New Message': 'Neue Nachricht',
     'npub, hex key, or username': 'npub, Hex-Schlüssel oder Benutzername',
@@ -914,7 +914,8 @@ export default {
     'Click to load Spotify': 'Klicken, um Spotify zu laden',
     'Click to load Wavlake': 'Klicken, um Wavlake zu laden',
     'Discard post?': 'Beitrag verwerfen?',
-    'Your draft will be lost if you discard it.': 'Dein Entwurf geht verloren, wenn du ihn verwirfst.',
+    'Your draft will be lost if you discard it.':
+      'Dein Entwurf geht verloren, wenn du ihn verwirfst.',
     'Keep editing': 'Weiter bearbeiten',
     Discard: 'Verwerfen',
     'Add a reply...': 'Antwort hinzufügen...',
@@ -922,7 +923,8 @@ export default {
     'Expires in {{time}}': 'Läuft ab in {{time}}',
     Paid: 'Bezahlt',
     'Image saved': 'Bild gespeichert',
-    'Image opened in new tab to save manually': 'Bild in neuem Tab geöffnet zum manuellen Speichern',
+    'Image opened in new tab to save manually':
+      'Bild in neuem Tab geöffnet zum manuellen Speichern',
     'You are offline': 'Du bist offline',
     'Back online': 'Wieder online',
     'Table of contents': 'Inhaltsverzeichnis',
@@ -957,5 +959,6 @@ export default {
     Bookmarked: 'Lesezeichen gesetzt',
     'Bookmark removed': 'Lesezeichen entfernt',
     Undo: 'Rückgängig',
+    'Show less': 'Weniger anzeigen'
   }
 }

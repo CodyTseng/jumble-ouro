@@ -823,7 +823,7 @@ export default {
     'Do not sync notification read status': 'Не синхронизировать статус прочтения уведомлений',
     'Only update read status locally without publishing to relays':
       'Обновлять статус прочтения только локально, не публикуя на реле',
-    'Trending': 'В тренде',
+    Trending: 'В тренде',
     'Relay Reviews': 'Отзывы о реле',
     'New Message': 'Новое сообщение',
     'npub, hex key, or username': 'npub, hex-ключ или имя пользователя',
@@ -906,7 +906,8 @@ export default {
     'Click to load Spotify': 'Нажмите, чтобы загрузить Spotify',
     'Click to load Wavlake': 'Нажмите, чтобы загрузить Wavlake',
     'Discard post?': 'Удалить публикацию?',
-    'Your draft will be lost if you discard it.': 'Ваш черновик будет потерян, если вы его удалите.',
+    'Your draft will be lost if you discard it.':
+      'Ваш черновик будет потерян, если вы его удалите.',
     'Keep editing': 'Продолжить редактирование',
     Discard: 'Удалить',
     'Add a reply...': 'Добавить ответ...',
@@ -914,7 +915,8 @@ export default {
     'Expires in {{time}}': 'Истекает через {{time}}',
     Paid: 'Оплачено',
     'Image saved': 'Изображение сохранено',
-    'Image opened in new tab to save manually': 'Изображение открыто в новой вкладке для сохранения вручную',
+    'Image opened in new tab to save manually':
+      'Изображение открыто в новой вкладке для сохранения вручную',
     'You are offline': 'Вы не в сети',
     'Back online': 'Снова в сети',
     'Table of contents': 'Содержание',
@@ -949,5 +951,6 @@ export default {
     Bookmarked: 'Добавлено в закладки',
     'Bookmark removed': 'Закладка удалена',
     Undo: 'Отменить',
+    'Show less': 'Показать меньше'
   }
 }

@@ -811,7 +811,7 @@ export default {
     'Do not sync notification read status': 'Do not sync notification read status',
     'Only update read status locally without publishing to relays':
       'Only update read status locally without publishing to relays',
-    'Trending': 'Trending',
+    Trending: 'Trending',
     'Relay Reviews': 'Relay Reviews',
     'New Message': 'New Message',
     'npub, hex key, or username': 'npub, hex key, or username',
@@ -902,8 +902,7 @@ export default {
     'Expires in {{time}}': 'Expires in {{time}}',
     Paid: 'Paid',
     'Image saved': 'Image saved',
-    'Image opened in new tab to save manually':
-      'Image opened in new tab to save manually',
+    'Image opened in new tab to save manually': 'Image opened in new tab to save manually',
     'You are offline': 'You are offline',
     'Back online': 'Back online',
     'Table of contents': 'Table of contents',
@@ -938,5 +937,6 @@ export default {
     Bookmarked: 'Bookmarked',
     'Bookmark removed': 'Bookmark removed',
     Undo: 'Undo',
+    'Show less': 'Show less'
   }
 }

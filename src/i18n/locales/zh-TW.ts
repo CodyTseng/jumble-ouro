@@ -787,7 +787,7 @@ export default {
     'Do not sync notification read status': '不同步通知已讀狀態',
     'Only update read status locally without publishing to relays':
       '僅在本地更新已讀狀態，不發佈到中繼伺服器',
-    'Trending': '熱門',
+    Trending: '熱門',
     'Relay Reviews': '中繼評價',
     'New Message': '新訊息',
     'npub, hex key, or username': 'npub、hex key 或使用者名稱',
@@ -903,8 +903,7 @@ export default {
     'Could not load relay info': '無法載入中繼資訊',
     'Load new notes': '載入新筆記',
     'Clear note focus': '清除筆記焦點',
-    'Select a note, profile, or relay to view here':
-      '選擇一則筆記、個人資料或中繼來在此查看',
+    'Select a note, profile, or relay to view here': '選擇一則筆記、個人資料或中繼來在此查看',
     'Navigate notes': '瀏覽筆記',
     'All shortcuts': '所有快捷鍵',
     'Published to {{count}} relays': '已發佈到 {{count}} 個中繼',
@@ -913,5 +912,6 @@ export default {
     Bookmarked: '已收藏',
     'Bookmark removed': '已取消收藏',
     Undo: '復原',
+    'Show less': '收起'
   }
 }

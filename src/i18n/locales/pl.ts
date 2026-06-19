@@ -805,10 +805,12 @@ export default {
     Requests: 'Prośby',
     'dm time date': '{{date}} {{time}}',
     React: 'Reaguj',
-    'Relays used for searching notes (NIP-50)': 'Transmitery używane do wyszukiwania wpisów (NIP-50)',
+    'Relays used for searching notes (NIP-50)':
+      'Transmitery używane do wyszukiwania wpisów (NIP-50)',
     'Protected event (NIP-70)': 'Chronione zdarzenie (NIP-70)',
     Protected: 'Chronione',
-    'Protected event hint': 'Chronione zdarzenia (NIP-70) mogą być publikowane tylko przez autora. Transmitery odrzucą publikację tych zdarzeń przez osoby trzecie, uniemożliwiając innym retransmisję Twoich treści. Uwaga: nie wszystkie transmitery obsługują ochronę zdarzeń.',
+    'Protected event hint':
+      'Chronione zdarzenia (NIP-70) mogą być publikowane tylko przez autora. Transmitery odrzucą publikację tych zdarzeń przez osoby trzecie, uniemożliwiając innym retransmisję Twoich treści. Uwaga: nie wszystkie transmitery obsługują ochronę zdarzeń.',
     'Allow insecure connections': 'Zezwól na niezabezpieczone połączenia',
     'Allow insecure connections description':
       'Zezwól na ładowanie zasobów http:// i łączenie z transmiterami ws://. Może to wywołać ostrzeżenia przeglądarki o mieszanej zawartości.',
@@ -823,7 +825,7 @@ export default {
     'Do not sync notification read status': 'Nie synchronizuj statusu odczytu powiadomień',
     'Only update read status locally without publishing to relays':
       'Aktualizuj status odczytu tylko lokalnie, bez publikowania na przekaźnikach',
-    'Trending': 'Popularne',
+    Trending: 'Popularne',
     'Relay Reviews': 'Recenzje relay',
     'New Message': 'Nowa wiadomość',
     'npub, hex key, or username': 'npub, klucz hex lub nazwa użytkownika',
@@ -906,7 +908,8 @@ export default {
     'Click to load Spotify': 'Kliknij, aby załadować Spotify',
     'Click to load Wavlake': 'Kliknij, aby załadować Wavlake',
     'Discard post?': 'Odrzucić post?',
-    'Your draft will be lost if you discard it.': 'Twój szkic zostanie utracony, jeśli go odrzucisz.',
+    'Your draft will be lost if you discard it.':
+      'Twój szkic zostanie utracony, jeśli go odrzucisz.',
     'Keep editing': 'Kontynuuj edycję',
     Discard: 'Odrzuć',
     'Add a reply...': 'Dodaj odpowiedź...',
@@ -914,7 +917,8 @@ export default {
     'Expires in {{time}}': 'Wygasa za {{time}}',
     Paid: 'Opłacona',
     'Image saved': 'Obraz zapisany',
-    'Image opened in new tab to save manually': 'Obraz otwarty w nowej karcie do ręcznego zapisania',
+    'Image opened in new tab to save manually':
+      'Obraz otwarty w nowej karcie do ręcznego zapisania',
     'You are offline': 'Jesteś offline',
     'Back online': 'Znów online',
     'Table of contents': 'Spis treści',
@@ -949,5 +953,6 @@ export default {
     Bookmarked: 'Dodano do zakładek',
     'Bookmark removed': 'Zakładka usunięta',
     Undo: 'Cofnij',
+    'Show less': 'Pokaż mniej'
   }
 }

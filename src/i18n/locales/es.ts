@@ -823,7 +823,7 @@ export default {
     'Do not sync notification read status': 'No sincronizar el estado de lectura de notificaciones',
     'Only update read status locally without publishing to relays':
       'Solo actualizar el estado de lectura localmente sin publicar en los relays',
-    'Trending': 'Tendencias',
+    Trending: 'Tendencias',
     'Relay Reviews': 'Reseñas de relays',
     'New Message': 'Nuevo mensaje',
     'npub, hex key, or username': 'npub, clave hex o nombre de usuario',
@@ -914,7 +914,8 @@ export default {
     'Expires in {{time}}': 'Expira en {{time}}',
     Paid: 'Pagada',
     'Image saved': 'Imagen guardada',
-    'Image opened in new tab to save manually': 'Imagen abierta en nueva pestaña para guardar manualmente',
+    'Image opened in new tab to save manually':
+      'Imagen abierta en nueva pestaña para guardar manualmente',
     'You are offline': 'Estás sin conexión',
     'Back online': 'De vuelta en línea',
     'Table of contents': 'Tabla de contenidos',
@@ -949,5 +950,6 @@ export default {
     Bookmarked: 'Marcado',
     'Bookmark removed': 'Marcador eliminado',
     Undo: 'Deshacer',
+    'Show less': 'Mostrar menos'
   }
 }

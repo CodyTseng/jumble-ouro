@@ -817,7 +817,7 @@ export default {
     'Do not sync notification read status': '通知の既読状態を同期しない',
     'Only update read status locally without publishing to relays':
       '既読状態をローカルのみで更新し、リレーに公開しない',
-    'Trending': 'トレンド',
+    Trending: 'トレンド',
     'Relay Reviews': 'リレーレビュー',
     'New Message': '新しいメッセージ',
     'npub, hex key, or username': 'npub、hexキー、またはユーザー名',
@@ -908,7 +908,8 @@ export default {
     'Expires in {{time}}': 'あと{{time}}で期限切れ',
     Paid: '支払い済み',
     'Image saved': '画像を保存しました',
-    'Image opened in new tab to save manually': '新しいタブで画像を開きました。手動で保存してください',
+    'Image opened in new tab to save manually':
+      '新しいタブで画像を開きました。手動で保存してください',
     'You are offline': 'オフラインです',
     'Back online': 'オンラインに戻りました',
     'Table of contents': '目次',
@@ -943,5 +944,6 @@ export default {
     Bookmarked: 'ブックマークしました',
     'Bookmark removed': 'ブックマークを削除しました',
     Undo: '元に戻す',
+    'Show less': '折りたたむ'
   }
 }

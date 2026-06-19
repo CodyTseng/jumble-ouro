@@ -819,7 +819,7 @@ export default {
     'Do not sync notification read status': 'सूचना पठन स्थिति सिंक न करें',
     'Only update read status locally without publishing to relays':
       'केवल स्थानीय रूप से पठन स्थिति अपडेट करें, रिले पर प्रकाशित न करें',
-    'Trending': 'ट्रेंडिंग',
+    Trending: 'ट्रेंडिंग',
     'Relay Reviews': 'रिले समीक्षाएँ',
     'New Message': 'नया संदेश',
     'npub, hex key, or username': 'npub, hex कुंजी, या उपयोगकर्ता नाम',
@@ -910,7 +910,8 @@ export default {
     'Expires in {{time}}': '{{time}} में समाप्त होगा',
     Paid: 'भुगतान किया गया',
     'Image saved': 'छवि सहेजी गई',
-    'Image opened in new tab to save manually': 'छवि मैन्युअल रूप से सहेजने के लिए नए टैब में खोली गई',
+    'Image opened in new tab to save manually':
+      'छवि मैन्युअल रूप से सहेजने के लिए नए टैब में खोली गई',
     'You are offline': 'आप ऑफ़लाइन हैं',
     'Back online': 'वापस ऑनलाइन',
     'Table of contents': 'विषय-सूची',
@@ -945,5 +946,6 @@ export default {
     Bookmarked: 'बुकमार्क किया गया',
     'Bookmark removed': 'बुकमार्क हटाया गया',
     Undo: 'पूर्ववत करें',
+    'Show less': 'कम दिखाएं'
   }
 }

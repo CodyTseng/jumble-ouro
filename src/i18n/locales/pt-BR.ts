@@ -822,7 +822,7 @@ export default {
     'Do not sync notification read status': 'Não sincronizar status de leitura de notificações',
     'Only update read status locally without publishing to relays':
       'Atualizar o status de leitura apenas localmente sem publicar nos relays',
-    'Trending': 'Em alta',
+    Trending: 'Em alta',
     'Relay Reviews': 'Avaliações de relays',
     'New Message': 'Nova mensagem',
     'npub, hex key, or username': 'npub, chave hex ou nome de usuário',
@@ -948,5 +948,6 @@ export default {
     Bookmarked: 'Salvo nos favoritos',
     'Bookmark removed': 'Favorito removido',
     Undo: 'Desfazer',
+    'Show less': 'Mostrar menos'
   }
 }

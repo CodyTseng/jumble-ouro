@@ -818,7 +818,7 @@ export default {
     'Do not sync notification read status': 'عدم همگام‌سازی وضعیت خوانده شدن اعلان‌ها',
     'Only update read status locally without publishing to relays':
       'فقط وضعیت خوانده شدن را به صورت محلی به‌روزرسانی کنید بدون انتشار به رله‌ها',
-    'Trending': 'داغ',
+    Trending: 'داغ',
     'Relay Reviews': 'بررسی رله‌ها',
     'New Message': 'پیام جدید',
     'npub, hex key, or username': 'npub، کلید hex یا نام کاربری',
@@ -944,5 +944,6 @@ export default {
     Bookmarked: 'نشانک شد',
     'Bookmark removed': 'نشانک حذف شد',
     Undo: 'بازگردانی',
+    'Show less': 'نمایش کمتر'
   }
 }
