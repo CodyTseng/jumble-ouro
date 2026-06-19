@@ -804,7 +804,7 @@ export default {
     'Do not sync notification read status': 'عدم مزامنة حالة قراءة الإشعارات',
     'Only update read status locally without publishing to relays':
       'تحديث حالة القراءة محليًا فقط دون النشر إلى المرحّلات',
-    'Trending': 'الرائج',
+    Trending: 'الرائج',
     'Relay Reviews': 'مراجعات الريلاي',
     'New Message': 'رسالة جديدة',
     'npub, hex key, or username': 'npub أو مفتاح hex أو اسم المستخدم',
@@ -920,8 +920,7 @@ export default {
     'Could not load relay info': 'تعذّر تحميل معلومات الريلاي',
     'Load new notes': 'تحميل الملاحظات الجديدة',
     'Clear note focus': 'إلغاء تركيز الملاحظة',
-    'Select a note, profile, or relay to view here':
-      'اختر ملاحظة أو ملف شخصي أو ريلاي لعرضه هنا',
+    'Select a note, profile, or relay to view here': 'اختر ملاحظة أو ملف شخصي أو ريلاي لعرضه هنا',
     'Navigate notes': 'التنقل بين الملاحظات',
     'All shortcuts': 'جميع الاختصارات',
     'Published to {{count}} relays': 'تم النشر إلى {{count}} ريلايات',
@@ -930,5 +929,6 @@ export default {
     Bookmarked: 'تمت الإضافة للمفضلة',
     'Bookmark removed': 'تمت إزالة المفضلة',
     Undo: 'تراجع',
+    'Show less': 'عرض أقل'
   }
 }

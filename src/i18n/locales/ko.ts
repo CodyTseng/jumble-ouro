@@ -811,7 +811,7 @@ export default {
     'Do not sync notification read status': '알림 읽음 상태 동기화 안 함',
     'Only update read status locally without publishing to relays':
       '읽음 상태를 릴레이에 게시하지 않고 로컬에서만 업데이트',
-    'Trending': '인기',
+    Trending: '인기',
     'Relay Reviews': '릴레이 리뷰',
     'New Message': '새 메시지',
     'npub, hex key, or username': 'npub, hex 키 또는 사용자 이름',
@@ -937,5 +937,6 @@ export default {
     Bookmarked: '북마크됨',
     'Bookmark removed': '북마크 삭제됨',
     Undo: '실행 취소',
+    'Show less': '접기'
   }
 }

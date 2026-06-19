@@ -99,6 +99,25 @@ export default function Collapsible({
           </div>
         </div>
       )}
+      {shouldCollapse && expanded && (
+        <div className="flex w-full justify-center pb-2 pt-1">
+          <Button
+            variant="ghost"
+            className="text-muted-foreground"
+            onClick={(e) => {
+              e.stopPropagation()
+              const noteCard = containerRef.current?.closest(
+                '[data-note-card]'
+              ) as HTMLElement | null
+              const scrollTarget = noteCard || containerRef.current
+              scrollTarget?.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+              setExpanded(false)
+            }}
+          >
+            {t('Show less')}
+          </Button>
+        </div>
+      )}
     </div>
   )
 }

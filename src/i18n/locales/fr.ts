@@ -824,10 +824,11 @@ export default {
     'Show avatars': 'Afficher les avatars',
     Show: 'Afficher',
     Hide: 'Masquer',
-    'Do not sync notification read status': 'Ne pas synchroniser le statut de lecture des notifications',
+    'Do not sync notification read status':
+      'Ne pas synchroniser le statut de lecture des notifications',
     'Only update read status locally without publishing to relays':
       'Mettre à jour le statut de lecture uniquement en local sans publier sur les relais',
-    'Trending': 'Tendance',
+    Trending: 'Tendance',
     'Relay Reviews': 'Avis sur les relais',
     'New Message': 'Nouveau message',
     'npub, hex key, or username': "npub, clé hex ou nom d'utilisateur",
@@ -910,7 +911,8 @@ export default {
     'Click to load Spotify': 'Cliquez pour charger Spotify',
     'Click to load Wavlake': 'Cliquez pour charger Wavlake',
     'Discard post?': 'Supprimer la publication ?',
-    'Your draft will be lost if you discard it.': 'Votre brouillon sera perdu si vous le supprimez.',
+    'Your draft will be lost if you discard it.':
+      'Votre brouillon sera perdu si vous le supprimez.',
     'Keep editing': 'Continuer à éditer',
     Discard: 'Supprimer',
     'Add a reply...': 'Ajouter une réponse...',
@@ -918,7 +920,8 @@ export default {
     'Expires in {{time}}': 'Expire dans {{time}}',
     Paid: 'Payée',
     'Image saved': 'Image enregistrée',
-    'Image opened in new tab to save manually': 'Image ouverte dans un nouvel onglet pour enregistrer manuellement',
+    'Image opened in new tab to save manually':
+      'Image ouverte dans un nouvel onglet pour enregistrer manuellement',
     'You are offline': 'Vous êtes hors ligne',
     'Back online': 'De retour en ligne',
     'Table of contents': 'Table des matières',
@@ -953,5 +956,6 @@ export default {
     Bookmarked: 'Ajouté aux favoris',
     'Bookmark removed': 'Favori supprimé',
     Undo: 'Annuler',
+    'Show less': 'Afficher moins'
   }
 }

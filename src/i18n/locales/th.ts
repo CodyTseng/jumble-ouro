@@ -805,7 +805,7 @@ export default {
     'Do not sync notification read status': 'ไม่ซิงค์สถานะการอ่านการแจ้งเตือน',
     'Only update read status locally without publishing to relays':
       'อัปเดตสถานะการอ่านในเครื่องเท่านั้น โดยไม่เผยแพร่ไปยังรีเลย์',
-    'Trending': 'มาแรง',
+    Trending: 'มาแรง',
     'Relay Reviews': 'รีวิวรีเลย์',
     'New Message': 'ข้อความใหม่',
     'npub, hex key, or username': 'npub, hex key หรือชื่อผู้ใช้',
@@ -921,8 +921,7 @@ export default {
     'Could not load relay info': 'ไม่สามารถโหลดข้อมูลรีเลย์ได้',
     'Load new notes': 'โหลดโน้ตใหม่',
     'Clear note focus': 'ล้างโฟกัสโน้ต',
-    'Select a note, profile, or relay to view here':
-      'เลือกโน้ต โปรไฟล์ หรือรีเลย์เพื่อดูที่นี่',
+    'Select a note, profile, or relay to view here': 'เลือกโน้ต โปรไฟล์ หรือรีเลย์เพื่อดูที่นี่',
     'Navigate notes': 'เลื่อนดูโน้ต',
     'All shortcuts': 'ปุ่มลัดทั้งหมด',
     'Published to {{count}} relays': 'เผยแพร่ไปยัง {{count}} รีเลย์',
@@ -931,5 +930,6 @@ export default {
     Bookmarked: 'บุ๊กมาร์กแล้ว',
     'Bookmark removed': 'ลบบุ๊กมาร์กแล้ว',
     Undo: 'เลิกทำ',
+    'Show less': 'แสดงน้อยลง'
   }
 }

@@ -814,7 +814,7 @@ export default {
     'Do not sync notification read status': 'Ne szinkronizálja az értesítések olvasási állapotát',
     'Only update read status locally without publishing to relays':
       'Csak helyben frissítse az olvasási állapotot, ne tegye közzé a relékre',
-    'Trending': 'Trendi',
+    Trending: 'Trendi',
     'Relay Reviews': 'Relay vélemények',
     'New Message': 'Új üzenet',
     'npub, hex key, or username': 'npub, hex kulcs vagy felhasználónév',
@@ -940,5 +940,6 @@ export default {
     Bookmarked: 'Könyvjelzőzve',
     'Bookmark removed': 'Könyvjelző eltávolítva',
     Undo: 'Visszavonás',
+    'Show less': 'Kevesebb'
   }
 }
