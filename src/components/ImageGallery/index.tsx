@@ -9,8 +9,12 @@ import { useTranslation } from 'react-i18next'
 import { createPortal } from 'react-dom'
 import { toast } from 'sonner'
 import Lightbox from 'yet-another-react-lightbox'
+import Counter from 'yet-another-react-lightbox/plugins/counter'
 import Download from 'yet-another-react-lightbox/plugins/download'
+import Thumbnails from 'yet-another-react-lightbox/plugins/thumbnails'
 import Zoom from 'yet-another-react-lightbox/plugins/zoom'
+import 'yet-another-react-lightbox/plugins/counter.css'
+import 'yet-another-react-lightbox/plugins/thumbnails.css'
 import Image from '../Image'
 import ImageWithLightbox from '../ImageWithLightbox'
 
@@ -158,6 +162,31 @@ export default function ImageGallery({
         ))}
       </div>
     )
+  } else if (displayImages.length > 4) {
+    const visibleImages = displayImages.slice(0, 4)
+    const remainingCount = displayImages.length - 3
+    imageContent = (
+      <div className="grid w-full grid-cols-2 gap-2">
+        {visibleImages.map((image, i) => (
+          <div key={i} className="relative">
+            <Image
+              className="aspect-square w-full"
+              classNames={{ wrapper: 'cursor-zoom-in border' }}
+              image={image}
+              onClick={(e) => handlePhotoClick(e, i)}
+            />
+            {i === 3 && (
+              <div
+                className="absolute inset-0 flex cursor-zoom-in items-center justify-center bg-black/50"
+                onClick={(e) => handlePhotoClick(e, 3)}
+              >
+                <span className="text-2xl font-bold text-white">+{remainingCount}</span>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    )
   } else {
     imageContent = (
       <div className="grid w-full grid-cols-3 gap-2">
@@ -183,7 +212,7 @@ export default function ImageGallery({
             <Lightbox
               index={index}
               slides={slides}
-              plugins={[Download, Zoom]}
+              plugins={slides.length > 1 ? [Download, Zoom, Counter, Thumbnails] : [Download, Zoom]}
               open={index >= 0}
               close={() => setIndex(-1)}
               download={{ download: handleDownload }}
