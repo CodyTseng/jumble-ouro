@@ -950,6 +950,9 @@ export default {
     Bookmarked: 'Marcado',
     'Bookmark removed': 'Marcador eliminado',
     Undo: 'Deshacer',
-    'Show less': 'Mostrar menos'
+    'Show less': 'Mostrar menos',
+    'Zap presets': 'Preajustes de Zap',
+    'Save presets': 'Guardar preajustes',
+    'Reset to defaults': 'Restablecer valores predeterminados'
   }
 }

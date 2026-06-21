@@ -912,6 +912,9 @@ export default {
     Bookmarked: '已收藏',
     'Bookmark removed': '已取消收藏',
     Undo: '復原',
-    'Show less': '收起'
+    'Show less': '收起',
+    'Zap presets': 'Zap 預設',
+    'Save presets': '儲存預設',
+    'Reset to defaults': '恢復預設'
   }
 }

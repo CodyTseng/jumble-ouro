@@ -83,6 +83,7 @@ class LocalStorageService {
   private processedSyncRequestIds: string[] = []
   private disableNotificationSync: boolean = false
   private searchHistory: TSearchHistoryItem[] = []
+  private customZapPresets: number[] | null = null
   private audioPlaybackSpeed: number = 1
 
   constructor() {
@@ -141,6 +142,18 @@ class LocalStorageService {
     }
     this.defaultZapComment = window.localStorage.getItem(StorageKey.DEFAULT_ZAP_COMMENT) ?? 'Zap!'
     this.quickZap = window.localStorage.getItem(StorageKey.QUICK_ZAP) === 'true'
+
+    const customZapPresetsStr = window.localStorage.getItem(StorageKey.CUSTOM_ZAP_PRESETS)
+    if (customZapPresetsStr) {
+      try {
+        const parsed = JSON.parse(customZapPresetsStr)
+        if (Array.isArray(parsed) && parsed.every((n: unknown) => typeof n === 'number' && n > 0)) {
+          this.customZapPresets = parsed
+        }
+      } catch {
+        // ignore invalid data
+      }
+    }
 
     const accountFeedInfoMapStr =
       window.localStorage.getItem(StorageKey.ACCOUNT_FEED_INFO_MAP) ?? '{}'
@@ -596,6 +609,19 @@ class LocalStorageService {
   setQuickZap(quickZap: boolean) {
     this.quickZap = quickZap
     window.localStorage.setItem(StorageKey.QUICK_ZAP, quickZap.toString())
+  }
+
+  getCustomZapPresets() {
+    return this.customZapPresets
+  }
+
+  setCustomZapPresets(presets: number[] | null) {
+    this.customZapPresets = presets
+    if (presets === null) {
+      window.localStorage.removeItem(StorageKey.CUSTOM_ZAP_PRESETS)
+    } else {
+      window.localStorage.setItem(StorageKey.CUSTOM_ZAP_PRESETS, JSON.stringify(presets))
+    }
   }
 
   getLastReadNotificationTime(pubkey: string) {

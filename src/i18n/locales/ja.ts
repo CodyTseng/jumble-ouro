@@ -944,6 +944,9 @@ export default {
     Bookmarked: 'ブックマークしました',
     'Bookmark removed': 'ブックマークを削除しました',
     Undo: '元に戻す',
-    'Show less': '折りたたむ'
+    'Show less': '折りたたむ',
+    'Zap presets': 'Zapプリセット',
+    'Save presets': 'プリセットを保存',
+    'Reset to defaults': 'デフォルトに戻す'
   }
 }

@@ -28,6 +28,18 @@ import { toast } from 'sonner'
 import UserAvatar from '../UserAvatar'
 import Username from '../Username'
 
+export function formatSatsDisplay(val: number): string {
+  if (val >= 1000000) {
+    const m = val / 1000000
+    return Number.isInteger(m) ? `${m}M` : `${parseFloat(m.toFixed(2))}M`
+  }
+  if (val >= 1000) {
+    const k = val / 1000
+    return Number.isInteger(k) ? `${k}k` : `${parseFloat(k.toFixed(1))}k`
+  }
+  return val.toString()
+}
+
 export default function ZapDialog({
   open,
   setOpen,
@@ -136,12 +148,16 @@ function ZapDialogContent({
 }) {
   const { t, i18n } = useTranslation()
   const { pubkey } = useNostr()
-  const { defaultZapSats, defaultZapComment } = useZap()
+  const { defaultZapSats, defaultZapComment, customZapPresets } = useZap()
   const [sats, setSats] = useState(defaultAmount ?? defaultZapSats)
   const [comment, setComment] = useState(defaultComment ?? defaultZapComment)
   const isSelfZap = useMemo(() => pubkey === recipient, [pubkey, recipient])
   const [zapping, setZapping] = useState(false)
   const presetAmounts = useMemo(() => {
+    if (customZapPresets) {
+      return customZapPresets.map((val) => ({ display: formatSatsDisplay(val), val }))
+    }
+
     if (i18n.language.startsWith('zh')) {
       return [
         { display: '21', val: 21 },
@@ -173,7 +189,7 @@ function ZapDialogContent({
       { display: '100k', val: 100000 },
       { display: '210k', val: 210000 }
     ]
-  }, [i18n.language])
+  }, [i18n.language, customZapPresets])
 
   const handleZap = async () => {
     try {

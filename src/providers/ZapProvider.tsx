@@ -14,6 +14,8 @@ type TZapContext = {
   updateDefaultComment: (comment: string) => void
   quickZap: boolean
   updateQuickZap: (quickZap: boolean) => void
+  customZapPresets: number[] | null
+  updateCustomZapPresets: (presets: number[] | null) => void
 }
 
 const ZapContext = createContext<TZapContext | undefined>(undefined)
@@ -30,6 +32,9 @@ export function ZapProvider({ children }: { children: React.ReactNode }) {
   const [defaultZapSats, setDefaultZapSats] = useState<number>(storage.getDefaultZapSats())
   const [defaultZapComment, setDefaultZapComment] = useState<string>(storage.getDefaultZapComment())
   const [quickZap, setQuickZap] = useState<boolean>(storage.getQuickZap())
+  const [customZapPresets, setCustomZapPresets] = useState<number[] | null>(
+    storage.getCustomZapPresets()
+  )
   const [isWalletConnected, setIsWalletConnected] = useState(false)
   const [provider, setProvider] = useState<WebLNProvider | null>(null)
   const [walletInfo, setWalletInfo] = useState<GetInfoResponse | null>(null)
@@ -69,6 +74,11 @@ export function ZapProvider({ children }: { children: React.ReactNode }) {
     setQuickZap(quickZap)
   }
 
+  const updateCustomZapPresets = (presets: number[] | null) => {
+    storage.setCustomZapPresets(presets)
+    setCustomZapPresets(presets)
+  }
+
   return (
     <ZapContext.Provider
       value={{
@@ -80,7 +90,9 @@ export function ZapProvider({ children }: { children: React.ReactNode }) {
         defaultZapComment,
         updateDefaultComment,
         quickZap,
-        updateQuickZap
+        updateQuickZap,
+        customZapPresets,
+        updateCustomZapPresets
       }}
     >
       {children}

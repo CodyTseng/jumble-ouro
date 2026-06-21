@@ -953,6 +953,9 @@ export default {
     Bookmarked: 'Dodano do zakładek',
     'Bookmark removed': 'Zakładka usunięta',
     Undo: 'Cofnij',
-    'Show less': 'Pokaż mniej'
+    'Show less': 'Pokaż mniej',
+    'Zap presets': 'Predefiniowane kwoty Zap',
+    'Save presets': 'Zapisz ustawienia',
+    'Reset to defaults': 'Przywróć domyślne'
   }
 }

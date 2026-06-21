@@ -950,6 +950,9 @@ export default {
     Bookmarked: 'Aggiunto ai segnalibri',
     'Bookmark removed': 'Segnalibro rimosso',
     Undo: 'Annulla',
-    'Show less': 'Mostra meno'
+    'Show less': 'Mostra meno',
+    'Zap presets': 'Preset di Zap',
+    'Save presets': 'Salva preset',
+    'Reset to defaults': 'Ripristina predefiniti'
   }
 }
