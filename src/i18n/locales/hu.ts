@@ -940,6 +940,9 @@ export default {
     Bookmarked: 'Könyvjelzőzve',
     'Bookmark removed': 'Könyvjelző eltávolítva',
     Undo: 'Visszavonás',
-    'Show less': 'Kevesebb'
+    'Show less': 'Kevesebb',
+    'Zap presets': 'Zap előbeállítások',
+    'Save presets': 'Előbeállítások mentése',
+    'Reset to defaults': 'Alapértékek visszaállítása'
   }
 }

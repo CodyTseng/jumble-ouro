@@ -60,6 +60,7 @@ export const StorageKey = {
   DISABLE_NOTIFICATION_SYNC: 'disableNotificationSync',
   SEARCH_HISTORY: 'searchHistory',
   WELCOME_MODAL_SEEN: 'welcomeModalSeen',
+  CUSTOM_ZAP_PRESETS: 'customZapPresets',
   AUDIO_PLAYBACK_SPEED: 'audioPlaybackSpeed',
   ENABLE_LIVE_FEED: 'enableLiveFeed', // deprecated
   HIDE_UNTRUSTED_NOTES: 'hideUntrustedNotes', // deprecated

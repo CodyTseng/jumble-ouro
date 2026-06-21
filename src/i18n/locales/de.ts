@@ -959,6 +959,9 @@ export default {
     Bookmarked: 'Lesezeichen gesetzt',
     'Bookmark removed': 'Lesezeichen entfernt',
     Undo: 'Rückgängig',
-    'Show less': 'Weniger anzeigen'
+    'Show less': 'Weniger anzeigen',
+    'Zap presets': 'Zap-Voreinstellungen',
+    'Save presets': 'Voreinstellungen speichern',
+    'Reset to defaults': 'Auf Standard zurücksetzen'
   }
 }

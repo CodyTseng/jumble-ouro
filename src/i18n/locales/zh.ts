@@ -917,6 +917,9 @@ export default {
     Bookmarked: '已收藏',
     'Bookmark removed': '已取消收藏',
     Undo: '撤销',
-    'Show less': '收起'
+    'Show less': '收起',
+    'Zap presets': 'Zap 预设',
+    'Save presets': '保存预设',
+    'Reset to defaults': '恢复默认'
   }
 }

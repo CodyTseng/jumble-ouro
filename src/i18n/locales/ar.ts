@@ -929,6 +929,9 @@ export default {
     Bookmarked: 'تمت الإضافة للمفضلة',
     'Bookmark removed': 'تمت إزالة المفضلة',
     Undo: 'تراجع',
-    'Show less': 'عرض أقل'
+    'Show less': 'عرض أقل',
+    'Zap presets': 'إعدادات الزاب المسبقة',
+    'Save presets': 'حفظ الإعدادات',
+    'Reset to defaults': 'إعادة التعيين إلى الافتراضي'
   }
 }

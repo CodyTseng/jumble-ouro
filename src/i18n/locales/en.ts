@@ -937,6 +937,9 @@ export default {
     Bookmarked: 'Bookmarked',
     'Bookmark removed': 'Bookmark removed',
     Undo: 'Undo',
-    'Show less': 'Show less'
+    'Show less': 'Show less',
+    'Zap presets': 'Zap presets',
+    'Save presets': 'Save presets',
+    'Reset to defaults': 'Reset to defaults'
   }
 }

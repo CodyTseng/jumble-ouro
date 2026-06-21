@@ -930,6 +930,9 @@ export default {
     Bookmarked: 'บุ๊กมาร์กแล้ว',
     'Bookmark removed': 'ลบบุ๊กมาร์กแล้ว',
     Undo: 'เลิกทำ',
-    'Show less': 'แสดงน้อยลง'
+    'Show less': 'แสดงน้อยลง',
+    'Zap presets': 'ค่า Zap ที่ตั้งไว้',
+    'Save presets': 'บันทึกค่าที่ตั้งไว้',
+    'Reset to defaults': 'รีเซ็ตเป็นค่าเริ่มต้น'
   }
 }

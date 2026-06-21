@@ -946,6 +946,9 @@ export default {
     Bookmarked: 'बुकमार्क किया गया',
     'Bookmark removed': 'बुकमार्क हटाया गया',
     Undo: 'पूर्ववत करें',
-    'Show less': 'कम दिखाएं'
+    'Show less': 'कम दिखाएं',
+    'Zap presets': 'ज़ैप प्रीसेट',
+    'Save presets': 'प्रीसेट सहेजें',
+    'Reset to defaults': 'डिफ़ॉल्ट पर रीसेट करें'
   }
 }

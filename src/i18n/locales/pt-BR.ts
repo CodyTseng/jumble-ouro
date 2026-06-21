@@ -948,6 +948,9 @@ export default {
     Bookmarked: 'Salvo nos favoritos',
     'Bookmark removed': 'Favorito removido',
     Undo: 'Desfazer',
-    'Show less': 'Mostrar menos'
+    'Show less': 'Mostrar menos',
+    'Zap presets': 'Predefinições de Zap',
+    'Save presets': 'Salvar predefinições',
+    'Reset to defaults': 'Restaurar padrões'
   }
 }

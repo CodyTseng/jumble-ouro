@@ -951,6 +951,9 @@ export default {
     Bookmarked: 'Добавлено в закладки',
     'Bookmark removed': 'Закладка удалена',
     Undo: 'Отменить',
-    'Show less': 'Показать меньше'
+    'Show less': 'Показать меньше',
+    'Zap presets': 'Пресеты Zap',
+    'Save presets': 'Сохранить пресеты',
+    'Reset to defaults': 'Сбросить по умолчанию'
   }
 }

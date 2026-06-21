@@ -937,6 +937,9 @@ export default {
     Bookmarked: '북마크됨',
     'Bookmark removed': '북마크 삭제됨',
     Undo: '실행 취소',
-    'Show less': '접기'
+    'Show less': '접기',
+    'Zap presets': 'Zap 프리셋',
+    'Save presets': '프리셋 저장',
+    'Reset to defaults': '기본값으로 재설정'
   }
 }

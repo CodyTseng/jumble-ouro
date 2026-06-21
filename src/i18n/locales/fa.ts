@@ -944,6 +944,9 @@ export default {
     Bookmarked: 'نشانک شد',
     'Bookmark removed': 'نشانک حذف شد',
     Undo: 'بازگردانی',
-    'Show less': 'نمایش کمتر'
+    'Show less': 'نمایش کمتر',
+    'Zap presets': 'پیش‌تنظیمات زپ',
+    'Save presets': 'ذخیره پیش‌تنظیمات',
+    'Reset to defaults': 'بازنشانی به پیش‌فرض'
   }
 }
