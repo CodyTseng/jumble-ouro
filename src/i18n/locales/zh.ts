@@ -920,6 +920,9 @@ export default {
     'Show less': '收起',
     'Zap presets': 'Zap 预设',
     'Save presets': '保存预设',
-    'Reset to defaults': '恢复默认'
+    'Reset to defaults': '恢复默认',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      '工作量证明：难度 {{difficulty}} — 此笔记通过计算力挖矿生成（NIP-13）'
   }
 }

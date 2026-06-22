@@ -954,6 +954,9 @@ export default {
     'Show less': 'Показать меньше',
     'Zap presets': 'Пресеты Zap',
     'Save presets': 'Сохранить пресеты',
-    'Reset to defaults': 'Сбросить по умолчанию'
+    'Reset to defaults': 'Сбросить по умолчанию',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'Доказательство работы: сложность {{difficulty}} — эта заметка была добыта с помощью вычислительных усилий (NIP-13)'
   }
 }

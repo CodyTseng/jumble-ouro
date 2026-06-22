@@ -940,6 +940,9 @@ export default {
     'Show less': '접기',
     'Zap presets': 'Zap 프리셋',
     'Save presets': '프리셋 저장',
-    'Reset to defaults': '기본값으로 재설정'
+    'Reset to defaults': '기본값으로 재설정',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      '작업 증명: 난이도 {{difficulty}} — 이 노트는 계산 노력으로 채굴되었습니다 (NIP-13)'
   }
 }

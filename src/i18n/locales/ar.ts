@@ -932,6 +932,9 @@ export default {
     'Show less': 'عرض أقل',
     'Zap presets': 'إعدادات الزاب المسبقة',
     'Save presets': 'حفظ الإعدادات',
-    'Reset to defaults': 'إعادة التعيين إلى الافتراضي'
+    'Reset to defaults': 'إعادة التعيين إلى الافتراضي',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'إثبات العمل: الصعوبة {{difficulty}} — تم تعدين هذه الملاحظة بجهد حسابي (NIP-13)'
   }
 }

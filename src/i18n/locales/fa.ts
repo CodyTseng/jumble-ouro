@@ -947,6 +947,9 @@ export default {
     'Show less': 'نمایش کمتر',
     'Zap presets': 'پیش‌تنظیمات زپ',
     'Save presets': 'ذخیره پیش‌تنظیمات',
-    'Reset to defaults': 'بازنشانی به پیش‌فرض'
+    'Reset to defaults': 'بازنشانی به پیش‌فرض',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'اثبات کار: سختی {{difficulty}} — این یادداشت با تلاش محاسباتی استخراج شده است (NIP-13)'
   }
 }

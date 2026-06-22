@@ -933,6 +933,9 @@ export default {
     'Show less': 'แสดงน้อยลง',
     'Zap presets': 'ค่า Zap ที่ตั้งไว้',
     'Save presets': 'บันทึกค่าที่ตั้งไว้',
-    'Reset to defaults': 'รีเซ็ตเป็นค่าเริ่มต้น'
+    'Reset to defaults': 'รีเซ็ตเป็นค่าเริ่มต้น',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'การพิสูจน์งาน: ความยาก {{difficulty}} — โน้ตนี้ถูกขุดด้วยความพยายามในการคำนวณ (NIP-13)'
   }
 }

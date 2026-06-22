@@ -915,6 +915,9 @@ export default {
     'Show less': '收起',
     'Zap presets': 'Zap 預設',
     'Save presets': '儲存預設',
-    'Reset to defaults': '恢復預設'
+    'Reset to defaults': '恢復預設',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      '工作量證明：難度 {{difficulty}} — 此筆記透過計算力挖礦生成（NIP-13）'
   }
 }

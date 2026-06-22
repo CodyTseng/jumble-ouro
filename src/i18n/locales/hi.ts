@@ -949,6 +949,9 @@ export default {
     'Show less': 'कम दिखाएं',
     'Zap presets': 'ज़ैप प्रीसेट',
     'Save presets': 'प्रीसेट सहेजें',
-    'Reset to defaults': 'डिफ़ॉल्ट पर रीसेट करें'
+    'Reset to defaults': 'डिफ़ॉल्ट पर रीसेट करें',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'कार्य का प्रमाण: कठिनाई {{difficulty}} — यह नोट कम्प्यूटेशनल प्रयास से माइन किया गया था (NIP-13)'
   }
 }

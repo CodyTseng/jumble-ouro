@@ -956,6 +956,9 @@ export default {
     'Show less': 'Pokaż mniej',
     'Zap presets': 'Predefiniowane kwoty Zap',
     'Save presets': 'Zapisz ustawienia',
-    'Reset to defaults': 'Przywróć domyślne'
+    'Reset to defaults': 'Przywróć domyślne',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'Dowód pracy: trudność {{difficulty}} — ta notatka została wydobyta z wysiłkiem obliczeniowym (NIP-13)'
   }
 }
