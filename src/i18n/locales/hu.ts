@@ -943,6 +943,9 @@ export default {
     'Show less': 'Kevesebb',
     'Zap presets': 'Zap előbeállítások',
     'Save presets': 'Előbeállítások mentése',
-    'Reset to defaults': 'Alapértékek visszaállítása'
+    'Reset to defaults': 'Alapértékek visszaállítása',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'Munkabizonyíték: nehézség {{difficulty}} — ez a jegyzet számítási erőfeszítéssel lett bányászva (NIP-13)'
   }
 }

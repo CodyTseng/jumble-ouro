@@ -947,6 +947,9 @@ export default {
     'Show less': '折りたたむ',
     'Zap presets': 'Zapプリセット',
     'Save presets': 'プリセットを保存',
-    'Reset to defaults': 'デフォルトに戻す'
+    'Reset to defaults': 'デフォルトに戻す',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'プルーフ・オブ・ワーク：難易度 {{difficulty}} — このノートは計算力を使ってマイニングされました（NIP-13）'
   }
 }

@@ -959,6 +959,9 @@ export default {
     'Show less': 'Afficher moins',
     'Zap presets': 'Préréglages de Zap',
     'Save presets': 'Enregistrer les préréglages',
-    'Reset to defaults': 'Réinitialiser par défaut'
+    'Reset to defaults': 'Réinitialiser par défaut',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'Preuve de travail : difficulté {{difficulty}} — cette note a été minée avec un effort de calcul (NIP-13)'
   }
 }

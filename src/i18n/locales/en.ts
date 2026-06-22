@@ -940,6 +940,9 @@ export default {
     'Show less': 'Show less',
     'Zap presets': 'Zap presets',
     'Save presets': 'Save presets',
-    'Reset to defaults': 'Reset to defaults'
+    'Reset to defaults': 'Reset to defaults',
+    'PoW {{difficulty}}': 'PoW {{difficulty}}',
+    'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
+      'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)'
   }
 }
