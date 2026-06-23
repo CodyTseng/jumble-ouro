@@ -965,6 +965,8 @@ export default {
     'Reset to defaults': 'Auf Standard zurücksetzen',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      'Proof of Work: Schwierigkeit {{difficulty}} — diese Notiz wurde mit Rechenaufwand geschürft (NIP-13)'
+      'Proof of Work: Schwierigkeit {{difficulty}} — diese Notiz wurde mit Rechenaufwand geschürft (NIP-13)',
+    'Look up Nostr address': 'Nostr-Adresse nachschlagen',
+    'NIP-05 address not found': 'NIP-05-Adresse nicht gefunden'
   }
 }

@@ -195,6 +195,7 @@ export type TSearchType =
   | 'hashtag'
   | 'relay'
   | 'externalContent'
+  | 'nip05'
   | 'nak'
 
 export type TSearchParams =

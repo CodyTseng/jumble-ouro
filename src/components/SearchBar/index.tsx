@@ -1,7 +1,8 @@
 import SearchInput from '@/components/SearchInput'
 import { useSearchProfiles } from '@/hooks'
-import { toExternalContent, toNote } from '@/lib/link'
+import { toExternalContent, toNote, toProfile } from '@/lib/link'
 import { formatFeedRequest, parseNakReqCommand } from '@/lib/nak-parser'
+import { isNip05Address, resolveNip05 } from '@/lib/nip05'
 import { randomString } from '@/lib/random'
 import { normalizeUrl } from '@/lib/url'
 import { cn } from '@/lib/utils'
@@ -10,7 +11,7 @@ import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import storage from '@/services/local-storage.service'
 import modalManager from '@/services/modal-manager.service'
 import { TSearchHistoryItem, TSearchParams } from '@/types'
-import { Hash, MessageSquare, Notebook, Search, Server, Terminal, X } from 'lucide-react'
+import { AtSign, Hash, MessageSquare, Notebook, Search, Server, Terminal, X } from 'lucide-react'
 import { nip19 } from 'nostr-tools'
 import {
   forwardRef,
@@ -71,6 +72,23 @@ const SearchBar = forwardRef<
       return undefined
     }
   }, [input])
+  const isNip05 = useMemo(() => isNip05Address(input.trim()), [input])
+  const [resolvedNip05Pubkey, setResolvedNip05Pubkey] = useState<string | null>(null)
+
+  useEffect(() => {
+    setResolvedNip05Pubkey(null)
+    const address = debouncedInput.trim()
+    if (!isNip05Address(address)) return
+
+    let cancelled = false
+    resolveNip05(address).then((pubkey) => {
+      if (!cancelled) setResolvedNip05Pubkey(pubkey)
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [debouncedInput])
+
   const id = useMemo(() => `search-${randomString()}`, [])
 
   useImperativeHandle(ref, () => ({
@@ -115,7 +133,19 @@ const SearchBar = forwardRef<
     setSearchHistory(storage.getSearchHistory())
   }
 
-  const updateSearch = (params: TSearchParams) => {
+  const updateSearch = async (params: TSearchParams) => {
+    if (params.type === 'nip05') {
+      blur()
+      const pubkey = resolvedNip05Pubkey ?? (await resolveNip05(params.search))
+      if (pubkey) {
+        push(toProfile(pubkey))
+      } else {
+        const { toast } = await import('sonner')
+        toast.error(t('NIP-05 address not found'))
+      }
+      return
+    }
+
     saveToHistory(params)
     blur()
 
@@ -201,6 +231,10 @@ const SearchBar = forwardRef<
 
     setSelectableOptions([
       { type: 'notes', search },
+      ...(isNip05 ? [{ type: 'nip05', search }] : []),
+      ...(isNip05 && resolvedNip05Pubkey
+        ? [{ type: 'profile', search: nip19.npubEncode(resolvedNip05Pubkey) }]
+        : []),
       ...(normalizedUrl ? [{ type: 'relay', search: normalizedUrl, input: normalizedUrl }] : []),
       { type: 'externalContent', search, input },
       { type: 'hashtag', search: hashtag, input: `#${hashtag}` },
@@ -211,7 +245,7 @@ const SearchBar = forwardRef<
       })),
       ...(profiles.length >= 5 ? [{ type: 'profiles', search }] : [])
     ] as TSearchParams[])
-  }, [input, debouncedInput, profiles])
+  }, [input, debouncedInput, profiles, isNip05, resolvedNip05Pubkey])
 
   const historyList = useMemo(() => {
     if (searchHistory.length <= 0) return null
@@ -310,6 +344,16 @@ const SearchBar = forwardRef<
               />
             )
           }
+          if (option.type === 'nip05') {
+            return (
+              <Nip05Item
+                key={index}
+                selected={selectedIndex === index}
+                address={option.search}
+                onClick={() => updateSearch(option)}
+              />
+            )
+          }
           if (option.type === 'nak') {
             return (
               <NakItem
@@ -398,8 +442,13 @@ const SearchBar = forwardRef<
         if (selectableOptions.length <= 0) {
           return
         }
-        onSearch(selectableOptions[selectedIndex >= 0 ? selectedIndex : 0])
-        blur()
+        const selected = selectableOptions[selectedIndex >= 0 ? selectedIndex : 0]
+        if (selected.type === 'nip05' || selected.type === 'note' || selected.type === 'externalContent') {
+          updateSearch(selected)
+        } else {
+          onSearch(selected)
+          blur()
+        }
         return
       }
 
@@ -648,6 +697,29 @@ function ExternalContentItem({
       <div className="flex min-w-0 flex-1 flex-col">
         <div className="truncate font-semibold">{search}</div>
         <div className="text-sm text-muted-foreground">{t('View discussions about this')}</div>
+      </div>
+    </Item>
+  )
+}
+
+function Nip05Item({
+  address,
+  onClick,
+  selected
+}: {
+  address: string
+  onClick?: () => void
+  selected?: boolean
+}) {
+  const { t } = useTranslation()
+  return (
+    <Item onClick={onClick} selected={selected}>
+      <div className="flex size-10 items-center justify-center">
+        <AtSign className="flex-shrink-0 text-muted-foreground" />
+      </div>
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div className="truncate font-semibold">{address}</div>
+        <div className="text-sm text-muted-foreground">{t('Look up Nostr address')}</div>
       </div>
     </Item>
   )

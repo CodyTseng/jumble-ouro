@@ -954,6 +954,8 @@ export default {
     'Reset to defaults': 'Restaurar padrões',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      'Prova de Trabalho: dificuldade {{difficulty}} — esta nota foi minerada com esforço computacional (NIP-13)'
+      'Prova de Trabalho: dificuldade {{difficulty}} — esta nota foi minerada com esforço computacional (NIP-13)',
+    'Look up Nostr address': 'Buscar endereço Nostr',
+    'NIP-05 address not found': 'Endereço NIP-05 não encontrado'
   }
 }

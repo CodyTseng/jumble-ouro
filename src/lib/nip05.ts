@@ -1,6 +1,37 @@
 import { LRUCache } from 'lru-cache'
 import { isValidPubkey } from './pubkey'
 
+const NIP05_REGEX = /^[\w.-]+@[\w.-]+\.[a-z]{2,}$/i
+
+export function isNip05Address(input: string): boolean {
+  return NIP05_REGEX.test(input)
+}
+
+const NIP05_NOT_FOUND = ''
+const resolveNip05Cache = new LRUCache<string, string>({ max: 500 })
+
+export async function resolveNip05(address: string): Promise<string | null> {
+  const cached = resolveNip05Cache.get(address)
+  if (cached !== undefined) return cached || null
+
+  const [name, domain] = address.split('@')
+  if (!name || !domain) return null
+
+  try {
+    const res = await fetch(getWellKnownNip05Url(domain, name))
+    const json = await res.json()
+    const pubkey = json.names?.[name]
+    if (typeof pubkey === 'string' && isValidPubkey(pubkey)) {
+      resolveNip05Cache.set(address, pubkey)
+      return pubkey
+    }
+  } catch {
+    // ignore
+  }
+  resolveNip05Cache.set(address, NIP05_NOT_FOUND)
+  return null
+}
+
 type TVerifyNip05Result = {
   isVerified: boolean
   nip05Name: string

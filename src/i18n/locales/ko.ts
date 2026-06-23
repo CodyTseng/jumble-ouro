@@ -943,6 +943,8 @@ export default {
     'Reset to defaults': '기본값으로 재설정',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      '작업 증명: 난이도 {{difficulty}} — 이 노트는 계산 노력으로 채굴되었습니다 (NIP-13)'
+      '작업 증명: 난이도 {{difficulty}} — 이 노트는 계산 노력으로 채굴되었습니다 (NIP-13)',
+    'Look up Nostr address': 'Nostr 주소 조회',
+    'NIP-05 address not found': 'NIP-05 주소를 찾을 수 없습니다'
   }
 }
