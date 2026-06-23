@@ -936,6 +936,8 @@ export default {
     'Reset to defaults': 'รีเซ็ตเป็นค่าเริ่มต้น',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      'การพิสูจน์งาน: ความยาก {{difficulty}} — โน้ตนี้ถูกขุดด้วยความพยายามในการคำนวณ (NIP-13)'
+      'การพิสูจน์งาน: ความยาก {{difficulty}} — โน้ตนี้ถูกขุดด้วยความพยายามในการคำนวณ (NIP-13)',
+    'Look up Nostr address': 'ค้นหาที่อยู่ Nostr',
+    'NIP-05 address not found': 'ไม่พบที่อยู่ NIP-05'
   }
 }

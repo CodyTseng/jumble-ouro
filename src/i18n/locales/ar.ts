@@ -935,6 +935,8 @@ export default {
     'Reset to defaults': 'إعادة التعيين إلى الافتراضي',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      'إثبات العمل: الصعوبة {{difficulty}} — تم تعدين هذه الملاحظة بجهد حسابي (NIP-13)'
+      'إثبات العمل: الصعوبة {{difficulty}} — تم تعدين هذه الملاحظة بجهد حسابي (NIP-13)',
+    'Look up Nostr address': 'البحث عن عنوان Nostr',
+    'NIP-05 address not found': 'لم يتم العثور على عنوان NIP-05'
   }
 }

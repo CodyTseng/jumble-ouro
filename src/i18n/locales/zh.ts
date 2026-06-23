@@ -923,6 +923,8 @@ export default {
     'Reset to defaults': '恢复默认',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      '工作量证明：难度 {{difficulty}} — 此笔记通过计算力挖矿生成（NIP-13）'
+      '工作量证明：难度 {{difficulty}} — 此笔记通过计算力挖矿生成（NIP-13）',
+    'Look up Nostr address': '查找 Nostr 地址',
+    'NIP-05 address not found': '未找到 NIP-05 地址'
   }
 }

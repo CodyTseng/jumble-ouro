@@ -946,6 +946,8 @@ export default {
     'Reset to defaults': 'Alapértékek visszaállítása',
     'PoW {{difficulty}}': 'PoW {{difficulty}}',
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
-      'Munkabizonyíték: nehézség {{difficulty}} — ez a jegyzet számítási erőfeszítéssel lett bányászva (NIP-13)'
+      'Munkabizonyíték: nehézség {{difficulty}} — ez a jegyzet számítási erőfeszítéssel lett bányászva (NIP-13)',
+    'Look up Nostr address': 'Nostr cím keresése',
+    'NIP-05 address not found': 'NIP-05 cím nem található'
   }
 }
