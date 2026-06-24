@@ -5,10 +5,13 @@ import { simplifyUrl } from '@/lib/url'
 import { useSecondaryPage } from '@/PageManager'
 import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import Content from '../Content'
+import NoteKindLabel from '../NoteKindLabel'
 import Stars from '../Stars'
 
 export default function RelayReview({ event, className }: { event: Event; className?: string }) {
+  const { t } = useTranslation()
   const { push } = useSecondaryPage()
   const stars = useMemo(() => getStarsFromRelayReviewEvent(event), [event])
   const url = useMemo(() => getReplaceableEventIdentifier(event), [event])
@@ -16,6 +19,7 @@ export default function RelayReview({ event, className }: { event: Event; classN
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Relay Review')} />
       <div className="mt-2 flex items-center gap-2">
         <Stars stars={stars} />
         <span className="text-sm text-muted-foreground">→</span>

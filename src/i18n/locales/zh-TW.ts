@@ -920,6 +920,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       '工作量證明：難度 {{difficulty}} — 此筆記透過計算力挖礦生成（NIP-13）',
     'Look up Nostr address': '查詢 Nostr 地址',
-    'NIP-05 address not found': '找不到 NIP-05 地址'
+    'NIP-05 address not found': '找不到 NIP-05 地址',
+    'note kind Poll': '投票',
+    'note kind Highlight': '精選',
+    'note kind Relay Review': '中繼評價',
+    'note kind Voice Note': '語音筆記',
+    'note kind Voice Comment': '語音評論',
+    'note kind Emoji Pack': '表情包',
+    'note kind Follow Pack': '追蹤包',
+    'note kind Live': '直播',
+    'note kind Community': '社群',
+    'note kind Group': '群組'
   }
 }

@@ -937,6 +937,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'إثبات العمل: الصعوبة {{difficulty}} — تم تعدين هذه الملاحظة بجهد حسابي (NIP-13)',
     'Look up Nostr address': 'البحث عن عنوان Nostr',
-    'NIP-05 address not found': 'لم يتم العثور على عنوان NIP-05'
+    'NIP-05 address not found': 'لم يتم العثور على عنوان NIP-05',
+    'note kind Poll': 'استطلاع',
+    'note kind Highlight': 'مقتطف',
+    'note kind Relay Review': 'مراجعة مُرحّل',
+    'note kind Voice Note': 'ملاحظة صوتية',
+    'note kind Voice Comment': 'تعليق صوتي',
+    'note kind Emoji Pack': 'حزمة رموز تعبيرية',
+    'note kind Follow Pack': 'حزمة متابعة',
+    'note kind Live': 'بث مباشر',
+    'note kind Community': 'مجتمع',
+    'note kind Group': 'مجموعة'
   }
 }

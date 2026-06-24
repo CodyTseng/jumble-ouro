@@ -11,9 +11,11 @@ import { useTranslation } from 'react-i18next'
 import Content from '../Content'
 import ContentPreview from '../ContentPreview'
 import ExternalLink from '../ExternalLink'
+import NoteKindLabel from '../NoteKindLabel'
 import UserAvatar from '../UserAvatar'
 
 export default function Highlight({ event, className }: { event: Event; className?: string }) {
+  const { t } = useTranslation()
   const translatedEvent = useTranslatedEvent(event.id)
   const comment = useMemo(
     () => (translatedEvent?.tags ?? event.tags).find((tag) => tag[0] === 'comment')?.[1],
@@ -22,6 +24,7 @@ export default function Highlight({ event, className }: { event: Event; classNam
 
   return (
     <div className={cn('space-y-4 whitespace-pre-wrap text-wrap break-words', className)}>
+      <NoteKindLabel label={t('note kind Highlight')} />
       {comment && <Content event={createFakeEvent({ content: comment, tags: event.tags })} />}
       <div className="flex gap-4">
         <div className="my-1 w-1 flex-shrink-0 rounded-md bg-primary/60" />

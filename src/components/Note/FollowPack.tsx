@@ -6,6 +6,7 @@ import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import Image from '../Image'
+import NoteKindLabel from '../NoteKindLabel'
 
 export default function FollowPack({ event, className }: { event: Event; className?: string }) {
   const { t } = useTranslation()
@@ -22,6 +23,7 @@ export default function FollowPack({ event, className }: { event: Event; classNa
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Follow Pack')} />
       <div className="mb-2 flex items-start gap-2">
         {image && (
           <Image

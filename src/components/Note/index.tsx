@@ -31,6 +31,7 @@ import Highlight from './Highlight'
 import LiveEvent from './LiveEvent'
 import LongFormArticle from './LongFormArticle'
 import LongFormArticlePreview from './LongFormArticlePreview'
+import NoteKindLabel from '../NoteKindLabel'
 import MutedNote from './MutedNote'
 import NsfwNote from './NsfwNote'
 import PictureNote from './PictureNote'
@@ -111,12 +112,23 @@ export default function Note({
   } else if (event.kind === ExtendedKind.POLL) {
     content = (
       <>
-        <Content className="mt-2" event={event} />
+        <NoteKindLabel label={t('note kind Poll')} className="mt-2" />
+        <Content className="mt-1" event={event} />
         <Poll className="mt-2" event={event} />
       </>
     )
   } else if (event.kind === ExtendedKind.VOICE || event.kind === ExtendedKind.VOICE_COMMENT) {
-    content = <AudioPlayer className="mt-2" src={event.content} />
+    content = (
+      <>
+        <NoteKindLabel
+          label={t(
+            event.kind === ExtendedKind.VOICE ? 'note kind Voice Note' : 'note kind Voice Comment'
+          )}
+          className="mt-2"
+        />
+        <AudioPlayer className="mt-1" src={event.content} />
+      </>
+    )
   } else if (event.kind === ExtendedKind.PICTURE) {
     content = <PictureNote className="mt-2" event={event} />
   } else if (

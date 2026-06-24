@@ -958,6 +958,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'Proof of Work: difficoltà {{difficulty}} — questa nota è stata minata con sforzo computazionale (NIP-13)',
     'Look up Nostr address': 'Cerca indirizzo Nostr',
-    'NIP-05 address not found': 'Indirizzo NIP-05 non trovato'
+    'NIP-05 address not found': 'Indirizzo NIP-05 non trovato',
+    'note kind Poll': 'Sondaggio',
+    'note kind Highlight': 'In evidenza',
+    'note kind Relay Review': 'Recensione relay',
+    'note kind Voice Note': 'Nota vocale',
+    'note kind Voice Comment': 'Commento vocale',
+    'note kind Emoji Pack': 'Pacchetto emoji',
+    'note kind Follow Pack': 'Pacchetto seguiti',
+    'note kind Live': 'In diretta',
+    'note kind Community': 'Comunità',
+    'note kind Group': 'Gruppo'
   }
 }

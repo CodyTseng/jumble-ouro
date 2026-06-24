@@ -961,6 +961,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'Dowód pracy: trudność {{difficulty}} — ta notatka została wydobyta z wysiłkiem obliczeniowym (NIP-13)',
     'Look up Nostr address': 'Wyszukaj adres Nostr',
-    'NIP-05 address not found': 'Nie znaleziono adresu NIP-05'
+    'NIP-05 address not found': 'Nie znaleziono adresu NIP-05',
+    'note kind Poll': 'Ankieta',
+    'note kind Highlight': 'Wyróżnienie',
+    'note kind Relay Review': 'Recenzja przekaźnika',
+    'note kind Voice Note': 'Notatka głosowa',
+    'note kind Voice Comment': 'Komentarz głosowy',
+    'note kind Emoji Pack': 'Paczka emoji',
+    'note kind Follow Pack': 'Paczka obserwowanych',
+    'note kind Live': 'Na żywo',
+    'note kind Community': 'Społeczność',
+    'note kind Group': 'Grupa'
   }
 }

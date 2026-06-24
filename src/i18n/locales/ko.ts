@@ -945,6 +945,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       '작업 증명: 난이도 {{difficulty}} — 이 노트는 계산 노력으로 채굴되었습니다 (NIP-13)',
     'Look up Nostr address': 'Nostr 주소 조회',
-    'NIP-05 address not found': 'NIP-05 주소를 찾을 수 없습니다'
+    'NIP-05 address not found': 'NIP-05 주소를 찾을 수 없습니다',
+    'note kind Poll': '투표',
+    'note kind Highlight': '하이라이트',
+    'note kind Relay Review': '릴레이 리뷰',
+    'note kind Voice Note': '음성 메모',
+    'note kind Voice Comment': '음성 댓글',
+    'note kind Emoji Pack': '이모지 팩',
+    'note kind Follow Pack': '팔로우 팩',
+    'note kind Live': '라이브',
+    'note kind Community': '커뮤니티',
+    'note kind Group': '그룹'
   }
 }
