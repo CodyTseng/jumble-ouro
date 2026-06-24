@@ -938,6 +938,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'การพิสูจน์งาน: ความยาก {{difficulty}} — โน้ตนี้ถูกขุดด้วยความพยายามในการคำนวณ (NIP-13)',
     'Look up Nostr address': 'ค้นหาที่อยู่ Nostr',
-    'NIP-05 address not found': 'ไม่พบที่อยู่ NIP-05'
+    'NIP-05 address not found': 'ไม่พบที่อยู่ NIP-05',
+    'note kind Poll': 'โพล',
+    'note kind Highlight': 'ไฮไลท์',
+    'note kind Relay Review': 'รีวิวรีเลย์',
+    'note kind Voice Note': 'โน้ตเสียง',
+    'note kind Voice Comment': 'ความเห็นเสียง',
+    'note kind Emoji Pack': 'แพ็คอิโมจิ',
+    'note kind Follow Pack': 'แพ็คติดตาม',
+    'note kind Live': 'สด',
+    'note kind Community': 'ชุมชน',
+    'note kind Group': 'กลุ่ม'
   }
 }

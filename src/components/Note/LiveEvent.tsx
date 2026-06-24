@@ -4,10 +4,13 @@ import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import ClientSelect from '../ClientSelect'
 import Image from '../Image'
+import NoteKindLabel from '../NoteKindLabel'
 
 export default function LiveEvent({ event, className }: { event: Event; className?: string }) {
+  const { t } = useTranslation()
   const { isSmallScreen } = useScreenSize()
 
   const { autoLoadMedia } = useContentPolicy()
@@ -42,6 +45,7 @@ export default function LiveEvent({ event, className }: { event: Event; classNam
   if (isSmallScreen) {
     return (
       <div className={className}>
+        <NoteKindLabel label={t('note kind Live')} />
         {metadata.image && autoLoadMedia && (
           <Image
             image={{ url: metadata.image, pubkey: event.pubkey }}
@@ -62,6 +66,7 @@ export default function LiveEvent({ event, className }: { event: Event; classNam
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Live')} />
       <div className="flex gap-4">
         {metadata.image && autoLoadMedia && (
           <Image

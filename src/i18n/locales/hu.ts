@@ -948,6 +948,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'Munkabizonyíték: nehézség {{difficulty}} — ez a jegyzet számítási erőfeszítéssel lett bányászva (NIP-13)',
     'Look up Nostr address': 'Nostr cím keresése',
-    'NIP-05 address not found': 'NIP-05 cím nem található'
+    'NIP-05 address not found': 'NIP-05 cím nem található',
+    'note kind Poll': 'Szavazás',
+    'note kind Highlight': 'Kiemelés',
+    'note kind Relay Review': 'Relay értékelés',
+    'note kind Voice Note': 'Hangüzenet',
+    'note kind Voice Comment': 'Hang hozzászólás',
+    'note kind Emoji Pack': 'Emoji csomag',
+    'note kind Follow Pack': 'Követési csomag',
+    'note kind Live': 'Élő',
+    'note kind Community': 'Közösség',
+    'note kind Group': 'Csoport'
   }
 }

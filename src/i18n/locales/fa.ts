@@ -952,6 +952,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'اثبات کار: سختی {{difficulty}} — این یادداشت با تلاش محاسباتی استخراج شده است (NIP-13)',
     'Look up Nostr address': 'جستجوی آدرس Nostr',
-    'NIP-05 address not found': 'آدرس NIP-05 یافت نشد'
+    'NIP-05 address not found': 'آدرس NIP-05 یافت نشد',
+    'note kind Poll': 'نظرسنجی',
+    'note kind Highlight': 'برجسته',
+    'note kind Relay Review': 'بررسی رله',
+    'note kind Voice Note': 'یادداشت صوتی',
+    'note kind Voice Comment': 'نظر صوتی',
+    'note kind Emoji Pack': 'بسته ایموجی',
+    'note kind Follow Pack': 'بسته دنبال‌کردن',
+    'note kind Live': 'زنده',
+    'note kind Community': 'انجمن',
+    'note kind Group': 'گروه'
   }
 }

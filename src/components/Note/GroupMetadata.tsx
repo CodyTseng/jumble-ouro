@@ -2,8 +2,10 @@ import { getGroupMetadataFromEvent } from '@/lib/event-metadata'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import ClientSelect from '../ClientSelect'
 import Image from '../Image'
+import NoteKindLabel from '../NoteKindLabel'
 
 export default function GroupMetadata({
   event,
@@ -14,6 +16,7 @@ export default function GroupMetadata({
   originalNoteId?: string
   className?: string
 }) {
+  const { t } = useTranslation()
   const { autoLoadMedia } = useContentPolicy()
   const metadata = useMemo(() => getGroupMetadataFromEvent(event), [event])
 
@@ -27,6 +30,7 @@ export default function GroupMetadata({
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Group')} />
       <div className="flex gap-4">
         {metadata.picture && autoLoadMedia && (
           <Image

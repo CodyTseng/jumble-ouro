@@ -952,6 +952,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'プルーフ・オブ・ワーク：難易度 {{difficulty}} — このノートは計算力を使ってマイニングされました（NIP-13）',
     'Look up Nostr address': 'Nostrアドレスを検索',
-    'NIP-05 address not found': 'NIP-05アドレスが見つかりません'
+    'NIP-05 address not found': 'NIP-05アドレスが見つかりません',
+    'note kind Poll': '投票',
+    'note kind Highlight': 'ハイライト',
+    'note kind Relay Review': 'リレーレビュー',
+    'note kind Voice Note': 'ボイスノート',
+    'note kind Voice Comment': 'ボイスコメント',
+    'note kind Emoji Pack': '絵文字パック',
+    'note kind Follow Pack': 'フォローパック',
+    'note kind Live': 'ライブ',
+    'note kind Community': 'コミュニティ',
+    'note kind Group': 'グループ'
   }
 }

@@ -959,6 +959,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       'Доказательство работы: сложность {{difficulty}} — эта заметка была добыта с помощью вычислительных усилий (NIP-13)',
     'Look up Nostr address': 'Найти Nostr-адрес',
-    'NIP-05 address not found': 'NIP-05 адрес не найден'
+    'NIP-05 address not found': 'NIP-05 адрес не найден',
+    'note kind Poll': 'Опрос',
+    'note kind Highlight': 'Выделение',
+    'note kind Relay Review': 'Обзор реле',
+    'note kind Voice Note': 'Голосовая заметка',
+    'note kind Voice Comment': 'Голосовой комментарий',
+    'note kind Emoji Pack': 'Набор эмодзи',
+    'note kind Follow Pack': 'Набор подписок',
+    'note kind Live': 'Прямой эфир',
+    'note kind Community': 'Сообщество',
+    'note kind Group': 'Группа'
   }
 }

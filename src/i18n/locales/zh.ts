@@ -925,6 +925,16 @@ export default {
     'Proof of Work: difficulty {{difficulty}} — this note was mined with computational effort (NIP-13)':
       '工作量证明：难度 {{difficulty}} — 此笔记通过计算力挖矿生成（NIP-13）',
     'Look up Nostr address': '查找 Nostr 地址',
-    'NIP-05 address not found': '未找到 NIP-05 地址'
+    'NIP-05 address not found': '未找到 NIP-05 地址',
+    'note kind Poll': '投票',
+    'note kind Highlight': '高亮',
+    'note kind Relay Review': '中继评价',
+    'note kind Voice Note': '语音笔记',
+    'note kind Voice Comment': '语音评论',
+    'note kind Emoji Pack': '表情包',
+    'note kind Follow Pack': '关注包',
+    'note kind Live': '直播',
+    'note kind Community': '社区',
+    'note kind Group': '群组'
   }
 }

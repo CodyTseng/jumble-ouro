@@ -2,8 +2,10 @@ import { getCommunityDefinitionFromEvent } from '@/lib/event-metadata'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import ClientSelect from '../ClientSelect'
 import Image from '../Image'
+import NoteKindLabel from '../NoteKindLabel'
 
 export default function CommunityDefinition({
   event,
@@ -12,6 +14,7 @@ export default function CommunityDefinition({
   event: Event
   className?: string
 }) {
+  const { t } = useTranslation()
   const { autoLoadMedia } = useContentPolicy()
   const metadata = useMemo(() => getCommunityDefinitionFromEvent(event), [event])
 
@@ -25,6 +28,7 @@ export default function CommunityDefinition({
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Community')} />
       <div className="flex gap-4">
         {metadata.image && autoLoadMedia && (
           <Image

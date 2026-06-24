@@ -8,6 +8,7 @@ import { Event } from 'nostr-tools'
 import { useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import Image from '../Image'
+import NoteKindLabel from '../NoteKindLabel'
 
 export default function EmojiPack({ event, className }: { event: Event; className?: string }) {
   const { t } = useTranslation()
@@ -44,6 +45,7 @@ export default function EmojiPack({ event, className }: { event: Event; classNam
 
   return (
     <div className={className}>
+      <NoteKindLabel label={t('note kind Emoji Pack')} />
       <div className="mb-2 flex items-center justify-between">
         <h3 className="text-2xl font-semibold">{title}</h3>
         {accountPubkey && (
