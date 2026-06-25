@@ -948,6 +948,8 @@ export default {
     'note kind Follow Pack': 'แพ็คติดตาม',
     'note kind Live': 'สด',
     'note kind Community': 'ชุมชน',
-    'note kind Group': 'กลุ่ม'
+    'note kind Group': 'กลุ่ม',
+    'Content font size': 'ขนาดตัวอักษรเนื้อหา',
+    'Extra Large': 'ใหญ่พิเศษ'
   }
 }

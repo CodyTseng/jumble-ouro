@@ -1,5 +1,6 @@
 import { Event, Filter, VerifiedEvent } from 'nostr-tools'
 import {
+  CONTENT_FONT_SIZE,
   MEDIA_AUTO_LOAD_POLICY,
   NOTIFICATION_LIST_STYLE,
   NSFW_DISPLAY_POLICY,
@@ -233,6 +234,8 @@ export type TProfilePictureAutoLoadPolicy =
   (typeof PROFILE_PICTURE_AUTO_LOAD_POLICY)[keyof typeof PROFILE_PICTURE_AUTO_LOAD_POLICY]
 
 export type TNsfwDisplayPolicy = (typeof NSFW_DISPLAY_POLICY)[keyof typeof NSFW_DISPLAY_POLICY]
+
+export type TContentFontSize = (typeof CONTENT_FONT_SIZE)[keyof typeof CONTENT_FONT_SIZE]
 
 export type TDmConversation = {
   key: string

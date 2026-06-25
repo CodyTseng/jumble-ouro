@@ -1,5 +1,6 @@
+import { CONTENT_FONT_SIZE_VALUES } from '@/constants'
 import storage from '@/services/local-storage.service'
-import { TEmoji, TNotificationStyle } from '@/types'
+import { TContentFontSize, TEmoji, TNotificationStyle } from '@/types'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useScreenSize } from './ScreenSizeProvider'
 
@@ -24,6 +25,9 @@ type TUserPreferencesContext = {
 
   allowInsecureConnection: boolean
   updateAllowInsecureConnection: (allow: boolean) => void
+
+  contentFontSize: TContentFontSize
+  updateContentFontSize: (size: TContentFontSize) => void
 }
 
 const UserPreferencesContext = createContext<TUserPreferencesContext | undefined>(undefined)
@@ -52,6 +56,15 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
   const [allowInsecureConnection, setAllowInsecureConnection] = useState(
     storage.getAllowInsecureConnection()
   )
+
+  const [contentFontSize, setContentFontSize] = useState(storage.getContentFontSize())
+
+  useEffect(() => {
+    document.documentElement.style.setProperty(
+      '--content-font-size',
+      CONTENT_FONT_SIZE_VALUES[contentFontSize] ?? '1rem'
+    )
+  }, [contentFontSize])
 
   useEffect(() => {
     if (!isSmallScreen && enableSingleColumnLayout) {
@@ -91,6 +104,11 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
     storage.setAllowInsecureConnection(allow)
   }
 
+  const updateContentFontSize = (size: TContentFontSize) => {
+    setContentFontSize(size)
+    storage.setContentFontSize(size)
+  }
+
   return (
     <UserPreferencesContext.Provider
       value={{
@@ -107,7 +125,9 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
         quickReactionEmoji,
         updateQuickReactionEmoji,
         allowInsecureConnection,
-        updateAllowInsecureConnection
+        updateAllowInsecureConnection,
+        contentFontSize,
+        updateContentFontSize
       }}
     >
       {children}

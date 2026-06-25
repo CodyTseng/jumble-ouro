@@ -962,6 +962,8 @@ export default {
     'note kind Follow Pack': 'フォローパック',
     'note kind Live': 'ライブ',
     'note kind Community': 'コミュニティ',
-    'note kind Group': 'グループ'
+    'note kind Group': 'グループ',
+    'Content font size': 'コンテンツのフォントサイズ',
+    'Extra Large': '特大'
   }
 }

@@ -969,6 +969,8 @@ export default {
     'note kind Follow Pack': 'Набор подписок',
     'note kind Live': 'Прямой эфир',
     'note kind Community': 'Сообщество',
-    'note kind Group': 'Группа'
+    'note kind Group': 'Группа',
+    'Content font size': 'Размер шрифта контента',
+    'Extra Large': 'Очень большой'
   }
 }

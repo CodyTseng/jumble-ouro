@@ -62,6 +62,7 @@ export const StorageKey = {
   WELCOME_MODAL_SEEN: 'welcomeModalSeen',
   CUSTOM_ZAP_PRESETS: 'customZapPresets',
   AUDIO_PLAYBACK_SPEED: 'audioPlaybackSpeed',
+  CONTENT_FONT_SIZE: 'contentFontSize',
   ENABLE_LIVE_FEED: 'enableLiveFeed', // deprecated
   HIDE_UNTRUSTED_NOTES: 'hideUntrustedNotes', // deprecated
   HIDE_UNTRUSTED_INTERACTIONS: 'hideUntrustedInteractions', // deprecated
@@ -227,6 +228,20 @@ export const NSFW_DISPLAY_POLICY = {
   HIDE_CONTENT: 'hide_content',
   SHOW: 'show'
 } as const
+
+export const CONTENT_FONT_SIZE = {
+  SMALL: 'small',
+  DEFAULT: 'default',
+  LARGE: 'large',
+  XL: 'xl'
+} as const
+
+export const CONTENT_FONT_SIZE_VALUES: Record<string, string> = {
+  small: '0.875rem',
+  default: '1rem',
+  large: '1.125rem',
+  xl: '1.25rem'
+}
 
 export const MAX_PINNED_NOTES = 10
 

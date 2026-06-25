@@ -930,6 +930,8 @@ export default {
     'note kind Follow Pack': '追蹤包',
     'note kind Live': '直播',
     'note kind Community': '社群',
-    'note kind Group': '群組'
+    'note kind Group': '群組',
+    'Content font size': '內容字體大小',
+    'Extra Large': '特大'
   }
 }

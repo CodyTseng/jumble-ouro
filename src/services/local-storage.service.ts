@@ -1,6 +1,7 @@
 import {
   ALLOWED_FILTER_KINDS,
   BIG_RELAY_URLS,
+  CONTENT_FONT_SIZE,
   DEFAULT_FAVICON_URL_TEMPLATE,
   DEFAULT_NIP_96_SERVICE,
   ExtendedKind,
@@ -18,6 +19,7 @@ import { isTorBrowser } from '@/lib/utils'
 import {
   TAccount,
   TAccountPointer,
+  TContentFontSize,
   TEmoji,
   TFeedInfo,
   TMediaAutoLoadPolicy,
@@ -85,6 +87,7 @@ class LocalStorageService {
   private searchHistory: TSearchHistoryItem[] = []
   private customZapPresets: number[] | null = null
   private audioPlaybackSpeed: number = 1
+  private contentFontSize: TContentFontSize = CONTENT_FONT_SIZE.DEFAULT
 
   constructor() {
     if (!LocalStorageService.instance) {
@@ -490,6 +493,14 @@ class LocalStorageService {
       if (!isNaN(speed) && speed > 0) {
         this.audioPlaybackSpeed = speed
       }
+    }
+
+    const contentFontSizeStr = window.localStorage.getItem(StorageKey.CONTENT_FONT_SIZE)
+    if (
+      contentFontSizeStr &&
+      Object.values(CONTENT_FONT_SIZE).includes(contentFontSizeStr as TContentFontSize)
+    ) {
+      this.contentFontSize = contentFontSizeStr as TContentFontSize
     }
 
     // Clean up deprecated data
@@ -1062,6 +1073,15 @@ class LocalStorageService {
   setAudioPlaybackSpeed(speed: number) {
     this.audioPlaybackSpeed = speed
     window.localStorage.setItem(StorageKey.AUDIO_PLAYBACK_SPEED, speed.toString())
+  }
+
+  getContentFontSize() {
+    return this.contentFontSize
+  }
+
+  setContentFontSize(size: TContentFontSize) {
+    this.contentFontSize = size
+    window.localStorage.setItem(StorageKey.CONTENT_FONT_SIZE, size)
   }
 }
 

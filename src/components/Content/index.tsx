@@ -147,7 +147,7 @@ export default function Content({
   if (isMarkdown) {
     return (
       <>
-        <div ref={contentRef} dir="auto" className={cn('text-wrap break-words', className)}>
+        <div ref={contentRef} dir="auto" className={cn('text-wrap break-words', className)} style={{ fontSize: 'var(--content-font-size)' }}>
           <MarkdownContent content={resolvedContent} event={event} />
         </div>
         {enableHighlight && (
@@ -180,7 +180,7 @@ export default function Content({
   let imageIndex = 0
   return (
     <>
-      <div ref={contentRef} dir="auto" className={cn('whitespace-pre-wrap text-wrap break-words', isEmojiOnly && 'flex items-end gap-1', className)}>
+      <div ref={contentRef} dir="auto" className={cn('whitespace-pre-wrap text-wrap break-words', isEmojiOnly && 'flex items-end gap-1', className)} style={isEmojiOnly ? undefined : { fontSize: 'var(--content-font-size)' }}>
         {nodes.map((node, index) => {
           if (node.type === 'text') {
             if (isEmojiOnly) {

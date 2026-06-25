@@ -977,6 +977,8 @@ export default {
     'note kind Follow Pack': 'Folge-Paket',
     'note kind Live': 'Live',
     'note kind Community': 'Community',
-    'note kind Group': 'Gruppe'
+    'note kind Group': 'Gruppe',
+    'Content font size': 'Schriftgröße des Inhalts',
+    'Extra Large': 'Sehr groß'
   }
 }
