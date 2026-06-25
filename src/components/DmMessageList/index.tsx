@@ -1100,11 +1100,12 @@ function DmContent({
               <div
                 dir="auto"
                 className={cn(
-                  'whitespace-pre-wrap text-wrap break-words text-base',
+                  'whitespace-pre-wrap text-wrap break-words',
                   isOwn &&
                     '[&>div]:text-foreground [&_.text-primary]:text-primary-foreground [&_.text-primary]:underline [&_.text-primary]:decoration-primary-foreground/50',
                   '[&_.bg-card:hover]:bg-accent'
                 )}
+                style={{ fontSize: 'var(--content-font-size)' }}
               >
                 {seg.nodes.map((node, ni) => {
                   if (node.type === 'text') return node.data

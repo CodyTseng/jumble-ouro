@@ -966,6 +966,8 @@ export default {
     'note kind Follow Pack': 'Pacote de seguidos',
     'note kind Live': 'Ao vivo',
     'note kind Community': 'Comunidade',
-    'note kind Group': 'Grupo'
+    'note kind Group': 'Grupo',
+    'Content font size': 'Tamanho da fonte do conteúdo',
+    'Extra Large': 'Extra grande'
   }
 }

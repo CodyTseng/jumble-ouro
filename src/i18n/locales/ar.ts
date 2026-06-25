@@ -947,6 +947,8 @@ export default {
     'note kind Follow Pack': 'حزمة متابعة',
     'note kind Live': 'بث مباشر',
     'note kind Community': 'مجتمع',
-    'note kind Group': 'مجموعة'
+    'note kind Group': 'مجموعة',
+    'Content font size': 'حجم خط المحتوى',
+    'Extra Large': 'كبير جداً'
   }
 }

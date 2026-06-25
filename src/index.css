@@ -131,6 +131,7 @@
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.75rem;
+    --content-font-size: 1rem;
   }
   .dark {
     --surface-background: 240 10% 3.9%;

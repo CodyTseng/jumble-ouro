@@ -955,6 +955,8 @@ export default {
     'note kind Follow Pack': '팔로우 팩',
     'note kind Live': '라이브',
     'note kind Community': '커뮤니티',
-    'note kind Group': '그룹'
+    'note kind Group': '그룹',
+    'Content font size': '콘텐츠 글꼴 크기',
+    'Extra Large': '특대'
   }
 }

@@ -99,7 +99,7 @@ export default function ProfileAbout({
 
   return (
     <div>
-      <div dir="auto" className={className}>{aboutNodes}</div>
+      <div dir="auto" className={className} style={{ fontSize: 'var(--content-font-size)' }}>{aboutNodes}</div>
       {needTranslation && (
         <div className="mt-2 text-sm">
           {translating ? (

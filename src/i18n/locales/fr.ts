@@ -974,6 +974,8 @@ export default {
     'note kind Follow Pack': 'Pack d\'abonnements',
     'note kind Live': 'En direct',
     'note kind Community': 'Communauté',
-    'note kind Group': 'Groupe'
+    'note kind Group': 'Groupe',
+    'Content font size': 'Taille de police du contenu',
+    'Extra Large': 'Très grand'
   }
 }

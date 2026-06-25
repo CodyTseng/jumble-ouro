@@ -1,12 +1,17 @@
 import { Label } from '@/components/ui/label'
-import { PRIMARY_COLORS, PROFILE_PICTURE_AUTO_LOAD_POLICY, TPrimaryColor } from '@/constants'
+import {
+  CONTENT_FONT_SIZE,
+  PRIMARY_COLORS,
+  PROFILE_PICTURE_AUTO_LOAD_POLICY,
+  TPrimaryColor
+} from '@/constants'
 import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
 import { cn } from '@/lib/utils'
 import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { useTheme } from '@/providers/ThemeProvider'
 import { useUserPreferences } from '@/providers/UserPreferencesProvider'
-import { TProfilePictureAutoLoadPolicy } from '@/types'
+import { TContentFontSize, TProfilePictureAutoLoadPolicy } from '@/types'
 import { Columns2, LayoutList, List, Monitor, Moon, PanelLeft, Sun } from 'lucide-react'
 import { forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -28,6 +33,13 @@ const NOTIFICATION_STYLES = [
   { key: 'compact', label: 'Compact', icon: <List className="size-5" /> }
 ] as const
 
+const FONT_SIZES = [
+  { key: CONTENT_FONT_SIZE.SMALL, label: 'Small', size: '0.875rem' },
+  { key: CONTENT_FONT_SIZE.DEFAULT, label: 'Default', size: '1rem' },
+  { key: CONTENT_FONT_SIZE.LARGE, label: 'Large', size: '1.125rem' },
+  { key: CONTENT_FONT_SIZE.XL, label: 'Extra Large', size: '1.25rem' }
+] as const
+
 const AppearanceSettingsPage = forwardRef(({ index }: { index?: number }, ref) => {
   const { t } = useTranslation()
   const { isSmallScreen } = useScreenSize()
@@ -37,7 +49,9 @@ const AppearanceSettingsPage = forwardRef(({ index }: { index?: number }, ref) =
     enableSingleColumnLayout,
     updateEnableSingleColumnLayout,
     notificationListStyle,
-    updateNotificationListStyle
+    updateNotificationListStyle,
+    contentFontSize,
+    updateContentFontSize
   } = useUserPreferences()
 
   return (
@@ -136,6 +150,20 @@ const AppearanceSettingsPage = forwardRef(({ index }: { index?: number }, ref) =
             ))}
           </div>
         </div>
+        <div className="flex flex-col gap-2 px-4">
+          <Label className="text-base">{t('Content font size')}</Label>
+          <div className="grid w-full grid-cols-2 gap-4 md:grid-cols-4">
+            {FONT_SIZES.map(({ key, label, size }) => (
+              <FontSizeCard
+                key={key}
+                isSelected={contentFontSize === key}
+                label={t(label)}
+                size={size}
+                onClick={() => updateContentFontSize(key as TContentFontSize)}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </SecondaryPageLayout>
   )
@@ -205,6 +233,36 @@ const OptionButton = ({
     >
       <div className="flex h-8 w-8 items-center justify-center">{icon}</div>
       <span className="text-xs font-medium">{label}</span>
+    </button>
+  )
+}
+
+const FontSizeCard = ({
+  isSelected,
+  onClick,
+  label,
+  size
+}: {
+  isSelected: boolean
+  onClick: () => void
+  label: string
+  size: string
+}) => {
+  return (
+    <button
+      onClick={onClick}
+      className={cn(
+        'flex flex-col gap-2 rounded-lg border-2 px-3 py-4 transition-all',
+        isSelected ? 'border-primary' : 'border-border hover:border-muted-foreground/40'
+      )}
+    >
+      <div className="flex w-full flex-col gap-1">
+        <NoteSkeletonLine className="w-8" />
+        <div style={{ fontSize: size }} className="truncate text-muted-foreground">
+          Aa
+        </div>
+      </div>
+      <span className="self-center text-xs font-medium">{label}</span>
     </button>
   )
 }

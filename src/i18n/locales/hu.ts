@@ -958,6 +958,8 @@ export default {
     'note kind Follow Pack': 'Követési csomag',
     'note kind Live': 'Élő',
     'note kind Community': 'Közösség',
-    'note kind Group': 'Csoport'
+    'note kind Group': 'Csoport',
+    'Content font size': 'Tartalom betűmérete',
+    'Extra Large': 'Extra nagy'
   }
 }

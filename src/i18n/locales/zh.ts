@@ -935,6 +935,8 @@ export default {
     'note kind Follow Pack': '关注包',
     'note kind Live': '直播',
     'note kind Community': '社区',
-    'note kind Group': '群组'
+    'note kind Group': '群组',
+    'Content font size': '内容字体大小',
+    'Extra Large': '特大'
   }
 }

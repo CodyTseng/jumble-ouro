@@ -962,6 +962,8 @@ export default {
     'note kind Follow Pack': 'بسته دنبال‌کردن',
     'note kind Live': 'زنده',
     'note kind Community': 'انجمن',
-    'note kind Group': 'گروه'
+    'note kind Group': 'گروه',
+    'Content font size': 'اندازه فونت محتوا',
+    'Extra Large': 'خیلی بزرگ'
   }
 }

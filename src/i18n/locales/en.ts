@@ -955,6 +955,8 @@ export default {
     'note kind Follow Pack': 'Follow Pack',
     'note kind Live': 'Live',
     'note kind Community': 'Community',
-    'note kind Group': 'Group'
+    'note kind Group': 'Group',
+    'Content font size': 'Content font size',
+    'Extra Large': 'Extra Large'
   }
 }

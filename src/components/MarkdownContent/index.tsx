@@ -126,7 +126,7 @@ export default function MarkdownContent({
   )
 
   return (
-    <div dir="auto" className="space-y-3 whitespace-normal">
+    <div dir="auto" className="space-y-3 whitespace-normal" style={{ fontSize: 'var(--content-font-size)' }}>
       <Markdown
         remarkPlugins={[remarkGfm, remarkNostr, remarkInlineContent]}
         urlTransform={(url) => {
