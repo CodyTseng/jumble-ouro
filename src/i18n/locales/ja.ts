@@ -964,6 +964,9 @@ export default {
     'note kind Community': 'コミュニティ',
     'note kind Group': 'グループ',
     'Content font size': 'コンテンツのフォントサイズ',
-    'Extra Large': '特大'
+    'Extra Large': '特大',
+    'Timestamp format': 'タイムスタンプ形式',
+    'Relative': '相対',
+    'Absolute': '絶対'
   }
 }

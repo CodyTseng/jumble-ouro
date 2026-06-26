@@ -11,6 +11,7 @@ import {
   PROFILE_PICTURE_AUTO_LOAD_POLICY,
   SEARCHABLE_RELAY_URLS,
   StorageKey,
+  TIMESTAMP_FORMAT,
   TPrimaryColor
 } from '@/constants'
 import { isSameAccount } from '@/lib/account'
@@ -31,6 +32,7 @@ import {
   TRelaySet,
   TSearchHistoryItem,
   TThemeSetting,
+  TTimestampFormat,
   TTranslationServiceConfig
 } from '@/types'
 import { kinds } from 'nostr-tools'
@@ -88,6 +90,7 @@ class LocalStorageService {
   private customZapPresets: number[] | null = null
   private audioPlaybackSpeed: number = 1
   private contentFontSize: TContentFontSize = CONTENT_FONT_SIZE.DEFAULT
+  private timestampFormat: TTimestampFormat = TIMESTAMP_FORMAT.RELATIVE
 
   constructor() {
     if (!LocalStorageService.instance) {
@@ -501,6 +504,14 @@ class LocalStorageService {
       Object.values(CONTENT_FONT_SIZE).includes(contentFontSizeStr as TContentFontSize)
     ) {
       this.contentFontSize = contentFontSizeStr as TContentFontSize
+    }
+
+    const timestampFormatStr = window.localStorage.getItem(StorageKey.TIMESTAMP_FORMAT)
+    if (
+      timestampFormatStr &&
+      Object.values(TIMESTAMP_FORMAT).includes(timestampFormatStr as TTimestampFormat)
+    ) {
+      this.timestampFormat = timestampFormatStr as TTimestampFormat
     }
 
     // Clean up deprecated data
@@ -1082,6 +1093,15 @@ class LocalStorageService {
   setContentFontSize(size: TContentFontSize) {
     this.contentFontSize = size
     window.localStorage.setItem(StorageKey.CONTENT_FONT_SIZE, size)
+  }
+
+  getTimestampFormat() {
+    return this.timestampFormat
+  }
+
+  setTimestampFormat(format: TTimestampFormat) {
+    this.timestampFormat = format
+    window.localStorage.setItem(StorageKey.TIMESTAMP_FORMAT, format)
   }
 }
 

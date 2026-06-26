@@ -3,6 +3,7 @@ import {
   CONTENT_FONT_SIZE,
   PRIMARY_COLORS,
   PROFILE_PICTURE_AUTO_LOAD_POLICY,
+  TIMESTAMP_FORMAT,
   TPrimaryColor
 } from '@/constants'
 import SecondaryPageLayout from '@/layouts/SecondaryPageLayout'
@@ -11,8 +12,8 @@ import { useContentPolicy } from '@/providers/ContentPolicyProvider'
 import { useScreenSize } from '@/providers/ScreenSizeProvider'
 import { useTheme } from '@/providers/ThemeProvider'
 import { useUserPreferences } from '@/providers/UserPreferencesProvider'
-import { TContentFontSize, TProfilePictureAutoLoadPolicy } from '@/types'
-import { Columns2, LayoutList, List, Monitor, Moon, PanelLeft, Sun } from 'lucide-react'
+import { TContentFontSize, TProfilePictureAutoLoadPolicy, TTimestampFormat } from '@/types'
+import { CalendarClock, Clock, Columns2, LayoutList, List, Monitor, Moon, PanelLeft, Sun } from 'lucide-react'
 import { forwardRef } from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -33,6 +34,15 @@ const NOTIFICATION_STYLES = [
   { key: 'compact', label: 'Compact', icon: <List className="size-5" /> }
 ] as const
 
+const TIMESTAMP_FORMATS = [
+  { key: TIMESTAMP_FORMAT.RELATIVE, label: 'Relative', icon: <Clock className="size-5" /> },
+  {
+    key: TIMESTAMP_FORMAT.ABSOLUTE,
+    label: 'Absolute',
+    icon: <CalendarClock className="size-5" />
+  }
+] as const
+
 const FONT_SIZES = [
   { key: CONTENT_FONT_SIZE.SMALL, label: 'Small', size: '0.875rem' },
   { key: CONTENT_FONT_SIZE.DEFAULT, label: 'Default', size: '1rem' },
@@ -51,7 +61,9 @@ const AppearanceSettingsPage = forwardRef(({ index }: { index?: number }, ref) =
     notificationListStyle,
     updateNotificationListStyle,
     contentFontSize,
-    updateContentFontSize
+    updateContentFontSize,
+    timestampFormat,
+    updateTimestampFormat
   } = useUserPreferences()
 
   return (
@@ -160,6 +172,20 @@ const AppearanceSettingsPage = forwardRef(({ index }: { index?: number }, ref) =
                 label={t(label)}
                 size={size}
                 onClick={() => updateContentFontSize(key as TContentFontSize)}
+              />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col gap-2 px-4">
+          <Label className="text-base">{t('Timestamp format')}</Label>
+          <div className="grid w-full grid-cols-2 gap-4">
+            {TIMESTAMP_FORMATS.map(({ key, label, icon }) => (
+              <OptionButton
+                key={key}
+                isSelected={timestampFormat === key}
+                icon={icon}
+                label={t(label)}
+                onClick={() => updateTimestampFormat(key as TTimestampFormat)}
               />
             ))}
           </div>

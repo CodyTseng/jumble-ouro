@@ -970,6 +970,9 @@ export default {
     'note kind Community': 'Comunidad',
     'note kind Group': 'Grupo',
     'Content font size': 'Tamaño de fuente del contenido',
-    'Extra Large': 'Extra grande'
+    'Extra Large': 'Extra grande',
+    'Timestamp format': 'Formato de marca de tiempo',
+    'Relative': 'Relativo',
+    'Absolute': 'Absoluto'
   }
 }

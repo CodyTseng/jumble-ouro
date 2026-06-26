@@ -950,6 +950,9 @@ export default {
     'note kind Community': 'ชุมชน',
     'note kind Group': 'กลุ่ม',
     'Content font size': 'ขนาดตัวอักษรเนื้อหา',
-    'Extra Large': 'ใหญ่พิเศษ'
+    'Extra Large': 'ใหญ่พิเศษ',
+    'Timestamp format': 'รูปแบบเวลา',
+    'Relative': 'สัมพัทธ์',
+    'Absolute': 'สัมบูรณ์'
   }
 }

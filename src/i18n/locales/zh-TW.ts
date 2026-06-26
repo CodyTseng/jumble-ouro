@@ -932,6 +932,9 @@ export default {
     'note kind Community': '社群',
     'note kind Group': '群組',
     'Content font size': '內容字體大小',
-    'Extra Large': '特大'
+    'Extra Large': '特大',
+    'Timestamp format': '時間戳格式',
+    'Relative': '相對',
+    'Absolute': '絕對'
   }
 }

@@ -957,6 +957,9 @@ export default {
     'note kind Community': '커뮤니티',
     'note kind Group': '그룹',
     'Content font size': '콘텐츠 글꼴 크기',
-    'Extra Large': '특대'
+    'Extra Large': '특대',
+    'Timestamp format': '타임스탬프 형식',
+    'Relative': '상대적',
+    'Absolute': '절대적'
   }
 }

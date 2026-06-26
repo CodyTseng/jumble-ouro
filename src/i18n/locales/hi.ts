@@ -966,6 +966,9 @@ export default {
     'note kind Community': 'समुदाय',
     'note kind Group': 'समूह',
     'Content font size': 'सामग्री फ़ॉन्ट आकार',
-    'Extra Large': 'अतिरिक्त बड़ा'
+    'Extra Large': 'अतिरिक्त बड़ा',
+    'Timestamp format': 'समय प्रारूप',
+    'Relative': 'सापेक्ष',
+    'Absolute': 'निरपेक्ष'
   }
 }

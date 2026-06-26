@@ -63,6 +63,7 @@ export const StorageKey = {
   CUSTOM_ZAP_PRESETS: 'customZapPresets',
   AUDIO_PLAYBACK_SPEED: 'audioPlaybackSpeed',
   CONTENT_FONT_SIZE: 'contentFontSize',
+  TIMESTAMP_FORMAT: 'timestampFormat',
   ENABLE_LIVE_FEED: 'enableLiveFeed', // deprecated
   HIDE_UNTRUSTED_NOTES: 'hideUntrustedNotes', // deprecated
   HIDE_UNTRUSTED_INTERACTIONS: 'hideUntrustedInteractions', // deprecated
@@ -242,6 +243,11 @@ export const CONTENT_FONT_SIZE_VALUES: Record<string, string> = {
   large: '1.125rem',
   xl: '1.25rem'
 }
+
+export const TIMESTAMP_FORMAT = {
+  RELATIVE: 'relative',
+  ABSOLUTE: 'absolute'
+} as const
 
 export const MAX_PINNED_NOTES = 10
 
