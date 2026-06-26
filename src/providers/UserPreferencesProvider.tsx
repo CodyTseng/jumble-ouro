@@ -1,6 +1,6 @@
 import { CONTENT_FONT_SIZE_VALUES } from '@/constants'
 import storage from '@/services/local-storage.service'
-import { TContentFontSize, TEmoji, TNotificationStyle } from '@/types'
+import { TContentFontSize, TEmoji, TNotificationStyle, TTimestampFormat } from '@/types'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { useScreenSize } from './ScreenSizeProvider'
 
@@ -28,6 +28,9 @@ type TUserPreferencesContext = {
 
   contentFontSize: TContentFontSize
   updateContentFontSize: (size: TContentFontSize) => void
+
+  timestampFormat: TTimestampFormat
+  updateTimestampFormat: (format: TTimestampFormat) => void
 }
 
 const UserPreferencesContext = createContext<TUserPreferencesContext | undefined>(undefined)
@@ -58,6 +61,7 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
   )
 
   const [contentFontSize, setContentFontSize] = useState(storage.getContentFontSize())
+  const [timestampFormat, setTimestampFormat] = useState(storage.getTimestampFormat())
 
   useEffect(() => {
     document.documentElement.style.setProperty(
@@ -109,6 +113,11 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
     storage.setContentFontSize(size)
   }
 
+  const updateTimestampFormat = (format: TTimestampFormat) => {
+    setTimestampFormat(format)
+    storage.setTimestampFormat(format)
+  }
+
   return (
     <UserPreferencesContext.Provider
       value={{
@@ -127,7 +136,9 @@ export function UserPreferencesProvider({ children }: { children: React.ReactNod
         allowInsecureConnection,
         updateAllowInsecureConnection,
         contentFontSize,
-        updateContentFontSize
+        updateContentFontSize,
+        timestampFormat,
+        updateTimestampFormat
       }}
     >
       {children}

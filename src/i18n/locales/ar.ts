@@ -949,6 +949,9 @@ export default {
     'note kind Community': 'مجتمع',
     'note kind Group': 'مجموعة',
     'Content font size': 'حجم خط المحتوى',
-    'Extra Large': 'كبير جداً'
+    'Extra Large': 'كبير جداً',
+    'Timestamp format': 'تنسيق الوقت',
+    'Relative': 'نسبي',
+    'Absolute': 'مطلق'
   }
 }

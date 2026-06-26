@@ -960,6 +960,9 @@ export default {
     'note kind Community': 'Közösség',
     'note kind Group': 'Csoport',
     'Content font size': 'Tartalom betűmérete',
-    'Extra Large': 'Extra nagy'
+    'Extra Large': 'Extra nagy',
+    'Timestamp format': 'Időbélyeg formátum',
+    'Relative': 'Relatív',
+    'Absolute': 'Abszolút'
   }
 }

@@ -5,7 +5,8 @@ import {
   NOTIFICATION_LIST_STYLE,
   NSFW_DISPLAY_POLICY,
   POLL_TYPE,
-  PROFILE_PICTURE_AUTO_LOAD_POLICY
+  PROFILE_PICTURE_AUTO_LOAD_POLICY,
+  TIMESTAMP_FORMAT
 } from '../constants'
 
 export type TSubRequestFilter = Omit<Filter, 'since' | 'until'> & { limit: number }
@@ -236,6 +237,8 @@ export type TProfilePictureAutoLoadPolicy =
 export type TNsfwDisplayPolicy = (typeof NSFW_DISPLAY_POLICY)[keyof typeof NSFW_DISPLAY_POLICY]
 
 export type TContentFontSize = (typeof CONTENT_FONT_SIZE)[keyof typeof CONTENT_FONT_SIZE]
+
+export type TTimestampFormat = (typeof TIMESTAMP_FORMAT)[keyof typeof TIMESTAMP_FORMAT]
 
 export type TDmConversation = {
   key: string

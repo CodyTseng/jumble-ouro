@@ -971,6 +971,9 @@ export default {
     'note kind Community': 'Сообщество',
     'note kind Group': 'Группа',
     'Content font size': 'Размер шрифта контента',
-    'Extra Large': 'Очень большой'
+    'Extra Large': 'Очень большой',
+    'Timestamp format': 'Формат времени',
+    'Relative': 'Относительный',
+    'Absolute': 'Абсолютный'
   }
 }

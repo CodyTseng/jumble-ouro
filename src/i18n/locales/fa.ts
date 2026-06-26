@@ -964,6 +964,9 @@ export default {
     'note kind Community': 'انجمن',
     'note kind Group': 'گروه',
     'Content font size': 'اندازه فونت محتوا',
-    'Extra Large': 'خیلی بزرگ'
+    'Extra Large': 'خیلی بزرگ',
+    'Timestamp format': 'قالب زمان',
+    'Relative': 'نسبی',
+    'Absolute': 'مطلق'
   }
 }

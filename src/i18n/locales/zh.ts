@@ -937,6 +937,9 @@ export default {
     'note kind Community': '社区',
     'note kind Group': '群组',
     'Content font size': '内容字体大小',
-    'Extra Large': '特大'
+    'Extra Large': '特大',
+    'Timestamp format': '时间戳格式',
+    'Relative': '相对',
+    'Absolute': '绝对'
   }
 }
