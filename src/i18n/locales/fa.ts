@@ -967,6 +967,7 @@ export default {
     'Extra Large': 'خیلی بزرگ',
     'Timestamp format': 'قالب زمان',
     'Relative': 'نسبی',
-    'Absolute': 'مطلق'
+    'Absolute': 'مطلق',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'یادداشت موقت — در {{datetime}} منقضی می‌شود (NIP-40)'
   }
 }

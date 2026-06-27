@@ -974,6 +974,7 @@ export default {
     'Extra Large': 'Очень большой',
     'Timestamp format': 'Формат времени',
     'Relative': 'Относительный',
-    'Absolute': 'Абсолютный'
+    'Absolute': 'Абсолютный',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Временная заметка — истекает {{datetime}} (NIP-40)'
   }
 }

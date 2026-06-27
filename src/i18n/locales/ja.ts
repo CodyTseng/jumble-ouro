@@ -967,6 +967,7 @@ export default {
     'Extra Large': '特大',
     'Timestamp format': 'タイムスタンプ形式',
     'Relative': '相対',
-    'Absolute': '絶対'
+    'Absolute': '絶対',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': '一時的なノート — {{datetime}} に期限切れ (NIP-40)'
   }
 }

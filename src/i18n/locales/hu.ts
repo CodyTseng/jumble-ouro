@@ -963,6 +963,7 @@ export default {
     'Extra Large': 'Extra nagy',
     'Timestamp format': 'Időbélyeg formátum',
     'Relative': 'Relatív',
-    'Absolute': 'Abszolút'
+    'Absolute': 'Abszolút',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Ideiglenes jegyzet — lejár: {{datetime}} (NIP-40)'
   }
 }

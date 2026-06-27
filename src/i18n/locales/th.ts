@@ -953,6 +953,7 @@ export default {
     'Extra Large': 'ใหญ่พิเศษ',
     'Timestamp format': 'รูปแบบเวลา',
     'Relative': 'สัมพัทธ์',
-    'Absolute': 'สัมบูรณ์'
+    'Absolute': 'สัมบูรณ์',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'โน้ตชั่วคราว — หมดอายุ {{datetime}} (NIP-40)'
   }
 }

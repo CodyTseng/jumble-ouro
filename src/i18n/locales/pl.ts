@@ -976,6 +976,7 @@ export default {
     'Extra Large': 'Bardzo duży',
     'Timestamp format': 'Format znacznika czasu',
     'Relative': 'Względny',
-    'Absolute': 'Bezwzględny'
+    'Absolute': 'Bezwzględny',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Notatka tymczasowa — wygasa {{datetime}} (NIP-40)'
   }
 }

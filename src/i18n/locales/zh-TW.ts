@@ -935,6 +935,7 @@ export default {
     'Extra Large': '特大',
     'Timestamp format': '時間戳格式',
     'Relative': '相對',
-    'Absolute': '絕對'
+    'Absolute': '絕對',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': '臨時筆記 — 在 {{datetime}} 過期 (NIP-40)'
   }
 }

@@ -974,6 +974,7 @@ export default {
     'Extra Large': 'Extra grande',
     'Timestamp format': 'Formato de data/hora',
     'Relative': 'Relativo',
-    'Absolute': 'Absoluto'
+    'Absolute': 'Absoluto',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Nota efémera — expira em {{datetime}} (NIP-40)'
   }
 }

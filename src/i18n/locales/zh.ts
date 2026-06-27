@@ -940,6 +940,7 @@ export default {
     'Extra Large': '特大',
     'Timestamp format': '时间戳格式',
     'Relative': '相对',
-    'Absolute': '绝对'
+    'Absolute': '绝对',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': '临时笔记 — 在 {{datetime}} 过期 (NIP-40)'
   }
 }
