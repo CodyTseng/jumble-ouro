@@ -969,6 +969,7 @@ export default {
     'Extra Large': 'अतिरिक्त बड़ा',
     'Timestamp format': 'समय प्रारूप',
     'Relative': 'सापेक्ष',
-    'Absolute': 'निरपेक्ष'
+    'Absolute': 'निरपेक्ष',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'अस्थायी नोट — {{datetime}} को समाप्त होगा (NIP-40)'
   }
 }

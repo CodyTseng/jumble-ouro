@@ -952,6 +952,7 @@ export default {
     'Extra Large': 'كبير جداً',
     'Timestamp format': 'تنسيق الوقت',
     'Relative': 'نسبي',
-    'Absolute': 'مطلق'
+    'Absolute': 'مطلق',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'ملاحظة مؤقتة — تنتهي في {{datetime}} (NIP-40)'
   }
 }

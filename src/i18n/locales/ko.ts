@@ -960,6 +960,7 @@ export default {
     'Extra Large': '특대',
     'Timestamp format': '타임스탬프 형식',
     'Relative': '상대적',
-    'Absolute': '절대적'
+    'Absolute': '절대적',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': '임시 노트 — {{datetime}}에 만료 (NIP-40)'
   }
 }

@@ -151,6 +151,11 @@ const NoteList = forwardRef<
       (evt: Event) => {
         if (pinnedEventHexIdSet.has(evt.id)) return true
         if (isEventDeleted(evt)) return true
+        const expirationTag = evt.tags.find((t) => t[0] === 'expiration')
+        if (expirationTag && expirationTag[1]) {
+          const expTs = parseInt(expirationTag[1], 10)
+          if (!isNaN(expTs) && expTs <= Math.floor(Date.now() / 1000)) return true
+        }
         if (filterMutedNotes && mutePubkeySet.has(evt.pubkey)) return true
         if (
           filterMutedNotes &&

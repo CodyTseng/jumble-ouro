@@ -982,6 +982,7 @@ export default {
     'Extra Large': 'Sehr groß',
     'Timestamp format': 'Zeitstempelformat',
     'Relative': 'Relativ',
-    'Absolute': 'Absolut'
+    'Absolute': 'Absolut',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Kurzlebige Notiz — läuft ab am {{datetime}} (NIP-40)'
   }
 }

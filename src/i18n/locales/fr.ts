@@ -979,6 +979,7 @@ export default {
     'Extra Large': 'Très grand',
     'Timestamp format': 'Format d\'horodatage',
     'Relative': 'Relatif',
-    'Absolute': 'Absolu'
+    'Absolute': 'Absolu',
+    'Ephemeral note — expires at {{datetime}} (NIP-40)': 'Note éphémère — expire le {{datetime}} (NIP-40)'
   }
 }
