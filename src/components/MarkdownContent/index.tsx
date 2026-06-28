@@ -6,6 +6,7 @@ import { Event } from 'nostr-tools'
 import { useMemo } from 'react'
 import Markdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
+import CodeBlock from '../CodeBlock'
 import { EmbeddedHashtag, EmbeddedLNInvoice } from '../Embedded'
 import Emoji from '../Emoji'
 import ExternalLink from '../ExternalLink'
@@ -90,9 +91,16 @@ export default function MarkdownContent({
             classNames={{ wrapper: 'w-fit max-w-full mt-2' }}
           />
         ),
-        pre: ({ children }) => (
-          <pre className="overflow-x-auto rounded-md bg-muted p-3 text-sm">{children}</pre>
-        ),
+        pre: ({ children }) => {
+          const child = Array.isArray(children) ? children[0] : children
+          let language: string | undefined
+          if (child && typeof child === 'object' && 'props' in child) {
+            const cls = (child as React.ReactElement<{ className?: string }>).props.className
+            const match = cls?.match(/language-(\S+)/)
+            if (match) language = match[1]
+          }
+          return <CodeBlock language={language}>{children}</CodeBlock>
+        },
         code: ({ children, className }) => {
           if (className) {
             return <code className="whitespace-pre-wrap break-words">{children}</code>
