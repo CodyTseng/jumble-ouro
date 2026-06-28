@@ -1,5 +1,6 @@
 import { SecondaryPageLink, useSecondaryPage } from '@/PageManager'
 import { slugifyHeading } from '@/components/ArticleTableOfContents'
+import CodeBlock from '@/components/CodeBlock'
 import ImageWithLightbox from '@/components/ImageWithLightbox'
 import HighlightButton from '@/components/HighlightButton'
 import PostEditor from '@/components/PostEditor'
@@ -121,6 +122,16 @@ export default function LongFormArticle({
       },
       p: (props) => <p {...props} className="break-words" />,
       div: (props) => <div {...props} className="break-words" />,
+      pre: ({ children }) => {
+        const child = Array.isArray(children) ? children[0] : children
+        let language: string | undefined
+        if (child && typeof child === 'object' && 'props' in child) {
+          const cls = (child as React.ReactElement<{ className?: string }>).props.className
+          const match = cls?.match(/language-(\S+)/)
+          if (match) language = match[1]
+        }
+        return <CodeBlock language={language}>{children}</CodeBlock>
+      },
       code: (props) => <code {...props} className="whitespace-pre-wrap break-words" />,
       img: (props) => (
         <ImageWithLightbox
